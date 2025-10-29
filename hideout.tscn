@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://djwirk4ockuor"]
+
+[ext_resource type="Script" uid="uid://p8xcvrxclv3k" path="res://hideout.gd" id="1_k0s3t"]
+[ext_resource type="PackedScene" uid="uid://dkxlqwov8nqc4" path="res://assets/datsun/datsun.tscn" id="2_w3jne"]
+[ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="3_8vk1q"]
+
+[sub_resource type="Curve3D" id="Curve3D_o1ld7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.83852, -0.813631, -0.188388, 0, 0, 0, 0, 0, 0, -2.09135, -0.695362, 1.28201),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_2ayvv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1.465, 0, 0, -2.57, 0, 0, 0.0758739, 0.00488836, 1.22993, 0, 0, 0, 0, 0, 0, 2.86078, 0.0654704, 2.40347),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0s3t"]
+shading_mode = 0
+albedo_color = Color(0.881604, 0.471382, 0.999999, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w3jne"]
+material = SubResource("StandardMaterial3D_k0s3t")
+
+[node name="Hideout" type="Node3D"]
+script = ExtResource("1_k0s3t")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.812456, -0.105934, 0.573317, -1.11759e-08, 0.983354, 0.181699, -0.583022, 0.147622, -0.798932, 2.1639, 1.5845, -2.12361)
+
+[node name="Datsun" parent="." instance=ExtResource("2_w3jne")]
+transform = Transform3D(-0.998327, 0, 0.0578255, 0, 1, 0, -0.0578255, 0, -0.998327, -1.78549, -0.0123312, 0.958069)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67317, 1.50614, -1.57918)
+curve = SubResource("Curve3D_o1ld7")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.471894, -0.0334398, -0.881011, 3.72527e-09, 0.999267, -0.0379286, 0.881648, -0.0178983, -0.471553, -4.83852, -0.813631, -0.188388)
+
+[node name="Garage" parent="." instance=ExtResource("3_8vk1q")]
+
+[node name="LookAt" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79807, 0.692904, -2.37013)
+curve = SubResource("Curve3D_2ayvv")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="LookAt"]
+transform = Transform3D(-0.998087, -0.000244251, -0.0615711, 1.45517e-11, 0.999979, -0.00396687, 0.0615716, -0.00395935, -0.998079, 0, 0, 0)
+
+[node name="Pointer" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908296, 0)
+mesh = SubResource("SphereMesh_w3jne")
