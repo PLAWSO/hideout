@@ -41,7 +41,10 @@ func _ready() -> void:
 	_target_position = movement_targets[_movement_target_index].target.global_position
 
 func _process(delta: float) -> void:
-	_target_position = movement_targets[_movement_target_index].target.global_position
+	if _movement_target_index == 0:
+		_target_position = movement_targets[_movement_target_index].target.global_position
+	else:
+		_target_position = movement_targets[_movement_target_index].global_position
 	var target_velocity_est = (_target_position - _prev_target_position) / delta
 	_prev_target_position = _target_position
 	
@@ -63,7 +66,11 @@ func _process(delta: float) -> void:
 
 func set_movement_target(index: int) -> void:
 	if index >= 0 and index < movement_targets.size():
-		_target_position = movement_targets[index].global_position
+		if index == 0:
+			_target_position = movement_targets[index].target.global_position
+		else:
+			_target_position = movement_targets[index].global_position
+		_prev_target_position = _target_position
 		_movement_target_index = index
 
 func set_look_target(index: int) -> void:

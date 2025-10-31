@@ -4,7 +4,6 @@ extends Node3D
 
 #region Input Handling
 func _unhandled_input(event: InputEvent) -> void:
-	print("camera_target", )
 	if event.is_action_pressed("camera_0"):
 		camera_controller.set_movement_target(0)
 	if event.is_action_pressed("camera_1"):

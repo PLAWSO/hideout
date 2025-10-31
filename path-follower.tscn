@@ -9,11 +9,11 @@ _data = {
 }
 point_count = 11
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vs4md"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ufxl"]
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_gfj1j"]
-material = SubResource("StandardMaterial3D_vs4md")
+material = SubResource("StandardMaterial3D_0ufxl")
 radius = 0.05
 height = 0.1
 
@@ -22,8 +22,9 @@ curve = SubResource("Curve3D_o1ld7")
 script = ExtResource("1_0ufxl")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="."]
-transform = Transform3D(-0.96722, -0.0996238, 0.237762, -7.45792e-09, 0.923219, 0.386835, -0.257789, 0.373786, -0.892078, 0.670515, 0, 0.759971)
+transform = Transform3D(-0.000319076, 0.000233732, -1.00098, -0.919501, 0.395565, 0.00038547, 0.395565, 0.919501, 8.86152e-05, 3.88914, -1.96799, 4.60474)
+progress = 8.77618
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PathFollow3D"]
+[node name="Pointer" type="MeshInstance3D" parent="PathFollow3D"]
 visible = false
 mesh = SubResource("SphereMesh_gfj1j")
