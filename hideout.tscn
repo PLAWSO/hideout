@@ -39,13 +39,13 @@ f = 0.81
 r = 1.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(0.633594, 0.192846, 0.749246, -0.00719841, 0.969863, -0.243543, -0.773632, 0.148914, 0.615888, 3.05056, 2.33105, 0.825314)
+transform = Transform3D(0.633594, 0.192846, 0.749246, -0.00719841, 0.969863, -0.243543, -0.773632, 0.148914, 0.615888, -0.805867, 0.370528, 2.29973)
 
 [node name="MovementPaths" type="Node3D" parent="CameraController"]
 
 [node name="Loiter" parent="CameraController/MovementPaths" instance=ExtResource("4_w3jne")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61294, 2.3381, -2.30511)
-time_to_finish = 10.0
+time_to_finish = 50.0
 
 [node name="Torch" type="Node3D" parent="CameraController/MovementPaths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06546, 0.4215, -1.59535)
@@ -62,4 +62,5 @@ transform = Transform3D(-0.833848, -0.0939437, 0.543902, -3.72521e-09, 0.985387,
 
 [node name="Pointer" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21317, 2.33811, 0.984435)
+visible = false
 mesh = SubResource("SphereMesh_8vk1q")

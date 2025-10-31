@@ -26,7 +26,7 @@ var _movement_target_index: int = 0
 var _look_target_index: int = 0
 
 func _ready() -> void:
-	if not validate_node_setup():
+	if not _validate_node_setup():
 		return
 
 	# initialize dynamic constants
@@ -37,18 +37,16 @@ func _ready() -> void:
 
 	# initialize calculation state
 	_position = object_to_move.global_position
-	_prev_target_position = movement_targets[_movement_target_index].global_position
-	_target_position = movement_targets[_movement_target_index].target.global_position
+	_target_position = _get_current_target_position()
+	_prev_target_position = _target_position
+
 
 func _process(delta: float) -> void:
-	if _movement_target_index == 0:
-		_target_position = movement_targets[_movement_target_index].target.global_position
-	else:
-		_target_position = movement_targets[_movement_target_index].global_position
+	_target_position = _get_current_target_position()
 	var target_velocity_est = (_target_position - _prev_target_position) / delta
 	_prev_target_position = _target_position
 	
-	# Break delta into smaller integration steps for stability
+	# break delta into smaller integration steps for stability
 	var iterations := int(delta / _t_critical) + 1
 	var step := delta / iterations
 	
@@ -60,16 +58,9 @@ func _process(delta: float) -> void:
 	
 	object_to_move.global_position = _position
 
-	# Align rotation with movement direction (optional but useful)
-	# if velocity.length() > 0.001:
-	# 	object_to_move.look_at(new_position + velocity.normalized(), Vector3.UP)
-
 func set_movement_target(index: int) -> void:
 	if index >= 0 and index < movement_targets.size():
-		if index == 0:
-			_target_position = movement_targets[index].target.global_position
-		else:
-			_target_position = movement_targets[index].global_position
+		_target_position = _get_current_target_position()
 		_prev_target_position = _target_position
 		_movement_target_index = index
 
@@ -77,8 +68,14 @@ func set_look_target(index: int) -> void:
 	if index >= 0 and index < look_targets.size():
 		_look_target_index = index
 
+func _get_current_target_position() -> Vector3:
+	if "target" in movement_targets[_movement_target_index]:
+		return movement_targets[_movement_target_index].target.global_position
+	else:
+		return movement_targets[_movement_target_index].global_position
+
 #region Validate
-func validate_node_setup() -> bool:
+func _validate_node_setup() -> bool:
 	var valid := true
 	if object_to_move == null:
 		push_error("\"Object to Move\" is not assigned.")
