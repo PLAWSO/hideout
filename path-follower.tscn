@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://iiwgd2q06fr6"]
+
+[ext_resource type="Script" uid="uid://ct78bjknmw1kw" path="res://path_follower.gd" id="1_0ufxl"]
+
+[sub_resource type="Curve3D" id="Curve3D_o1ld7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.670515, 0, 0.759971, 0, 0, 0, 0, 0, 0, 0.278, -0.638616, 2.23268, 0, 0, 0, 0, 0, 0, -0.110013, -0.578168, 3.85251, 0, 0, 0, 0, 0, 0, 0.024014, -1.9665, 4.60508, 0, 0, 0, 0, 0, 0, 5.11351, -1.96846, 4.60463, 0, 0, 0, 0, 0, 0, 7.27402, 0, 3.75845, 0, 0, 0, 0, 0, 0, 5.95312, 0, 2.37563, 0, 0, 0, 0, 0, 0, 6.81703, 0, 1.02116, 0, 0, 0, 0, 0, 0, 5.06157, 0, 0.0283656, 0, 0, 0, 0, 0, 0, 3.59677, 0, 1.47502, 0, 0, 0, 0, 0, 0, 0.737334, 0, 0.765337),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 11
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vs4md"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gfj1j"]
+material = SubResource("StandardMaterial3D_vs4md")
+radius = 0.05
+height = 0.1
+
+[node name="Path3D" type="Path3D"]
+curve = SubResource("Curve3D_o1ld7")
+script = ExtResource("1_0ufxl")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+transform = Transform3D(-0.96722, -0.0996238, 0.237762, -7.45792e-09, 0.923219, 0.386835, -0.257789, 0.373786, -0.892078, 0.670515, 0, 0.759971)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PathFollow3D"]
+visible = false
+mesh = SubResource("SphereMesh_gfj1j")
