@@ -25,9 +25,9 @@ func reset_path_follower() -> void:
 	_is_moving = false
 	target.set_progress_ratio(0)
 
-# func _process(delta: float) -> void:
-# 	if Engine.is_editor_hint() and not _is_moving:
-# 		# print("restarting path follower")
-# 		_is_moving = true
-# 		start_path_follower()
-# 	pass
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint() and not _is_moving:
+		# print("restarting path follower")
+		_is_moving = true
+		start_path_follower()
+	pass

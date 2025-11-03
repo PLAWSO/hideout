@@ -1,17 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=13 format=3 uid="uid://djwirk4ockuor"]
 
-[ext_resource type="Script" uid="uid://p8xcvrxclv3k" path="res://hideout.gd" id="1_8vk1q"]
 [ext_resource type="PackedScene" uid="uid://dkxlqwov8nqc4" path="res://assets/datsun/datsun.tscn" id="2_w3jne"]
 [ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="3_8vk1q"]
 [ext_resource type="Script" uid="uid://dygsmwmd0om4g" path="res://second-order-targeting.gd" id="3_k0s3t"]
+[ext_resource type="Script" uid="uid://c1p7v8o74uv7l" path="res://camera_controller.gd" id="4_pc47s"]
 [ext_resource type="PackedScene" uid="uid://iiwgd2q06fr6" path="res://path-follower.tscn" id="4_w3jne"]
-
-[sub_resource type="Curve3D" id="Curve3D_2ayvv"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.259672, 0, 0.348816, 0, 0, 0, 0, 0, 0, -0.303568, -0.176249, 1.19971, 0, 0, 0, 0, 0, 0, -0.468299, -0.828296, 1.95045, 0, 0, 0, 0, 0, 0, 4.67508, -1.05465, 2.21842, 0, 0, 0, 0, 0, 0, -4.87556, 2.2554, -2.84735),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
-}
-point_count = 5
+[ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://meta-path.gd" id="6_31ftd"]
+[ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://path-section.gd" id="7_8borv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vs4md"]
 albedo_color = Color(1, 0, 0, 1)
@@ -21,8 +16,23 @@ material = SubResource("StandardMaterial3D_vs4md")
 radius = 0.05
 height = 0.1
 
+[sub_resource type="Curve3D" id="Curve3D_ql7g8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.590063, 0.0181825, 0.002648, 0.590063, -0.0181825, -0.002648, 1.93642, -1.19209e-07, 0.304037, 0, 0, 0, 0, 0, 0, 2.65918, -1.19209e-07, -0.18422),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_2db5g"]
+
+[sub_resource type="Curve3D" id="Curve3D_esgtm"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.34249, -2.76566e-05, 0.220667, -0.34249, 2.76566e-05, -0.220667, -0.246605, 0, -0.698998, 0, 0, 0, 0, 0, 0, -1.92025, -2.38419e-07, -1.18346),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
 [node name="Hideout" type="Node3D"]
-script = ExtResource("1_8vk1q")
 
 [node name="Datsun" parent="." instance=ExtResource("2_w3jne")]
 transform = Transform3D(-0.998327, 0, 0.0578255, 0, 1, 0, -0.0578255, 0, -0.998327, -1.78549, -0.0123312, 0.958069)
@@ -30,37 +40,85 @@ transform = Transform3D(-0.998327, 0, 0.0578255, 0, 1, 0, -0.0578255, 0, -0.9983
 [node name="Garage" parent="." instance=ExtResource("3_8vk1q")]
 transform = Transform3D(0.999999, 0.00107203, -0.000497484, -0.0010716, 0.999999, 0.000837991, 0.000498402, -0.000837446, 1, 0, 0, 0)
 hideCeiling = true
+hideWalls = true
 
-[node name="CameraController" type="Node" parent="." node_paths=PackedStringArray("object_to_move", "movement_targets")]
-script = ExtResource("3_k0s3t")
-object_to_move = NodePath("Camera3D")
-movement_targets = [NodePath("MovementPaths/Loiter"), NodePath("MovementPaths/Torch")]
-f = 0.81
-r = 1.2
+[node name="CameraController" type="Node" parent="." node_paths=PackedStringArray("position_targeter", "meta_paths")]
+script = ExtResource("4_pc47s")
+position_targeter = NodePath("CameraMovements")
+meta_paths = [NodePath("MetaPath"), NodePath("MetaPath2")]
+
+[node name="Pointer" type="MeshInstance3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21317, 2.33811, 0.984435)
+mesh = SubResource("SphereMesh_8vk1q")
+skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(0.633594, 0.192846, 0.749246, -0.00719841, 0.969863, -0.243543, -0.773632, 0.148914, 0.615888, -0.805867, 0.370528, 2.29973)
+transform = Transform3D(1, 0, 0, 0, 0.853351, 0.521337, 0, -0.521337, 0.853351, 1.94521, 2.11733, 2.22052)
 
-[node name="MovementPaths" type="Node3D" parent="CameraController"]
+[node name="CameraMovements" type="Node" parent="CameraController"]
+script = ExtResource("3_k0s3t")
+f = 2.358
+z = 1.716
+r = 0.726
+metadata/_custom_type_script = "uid://dygsmwmd0om4g"
 
-[node name="Loiter" parent="CameraController/MovementPaths" instance=ExtResource("4_w3jne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.61294, 2.3381, -2.30511)
-time_to_finish = 50.0
+[node name="Loiter" parent="CameraController/CameraMovements" instance=ExtResource("4_w3jne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.20929, 2.57298, -2.21206)
+visible = false
+time_to_finish = 40.0
 
-[node name="Torch" type="Node3D" parent="CameraController/MovementPaths"]
+[node name="Torch" type="Node3D" parent="CameraController/CameraMovements"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06546, 0.4215, -1.59535)
-
-[node name="LookPaths" type="Node3D" parent="CameraController"]
 visible = false
 
-[node name="LookAt" type="Path3D" parent="CameraController/LookPaths"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50865, 1.40966, -1.04208)
-curve = SubResource("Curve3D_2ayvv")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="CameraController/LookPaths/LookAt"]
-transform = Transform3D(-0.833848, -0.0939437, 0.543902, -3.72521e-09, 0.985387, 0.170198, -0.551956, 0.141922, -0.82168, 0.259672, 0, 0.348816)
-
-[node name="Pointer" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21317, 2.33811, 0.984435)
+[node name="LookMovements" type="Node3D" parent="CameraController"]
 visible = false
-mesh = SubResource("SphereMesh_8vk1q")
+
+[node name="Loiter" parent="CameraController/LookMovements" instance=ExtResource("4_w3jne")]
+time_to_finish = 40.0
+
+[node name="Node3D" type="Node3D" parent="CameraController/LookMovements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.70623, 0.656816, -2.20183)
+
+[node name="Node3D2" type="Node3D" parent="CameraController/LookMovements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.16324, 1.04518, -2.44272)
+
+[node name="MetaPath" type="Node" parent="CameraController"]
+script = ExtResource("6_31ftd")
+
+[node name="PathSection" type="Path3D" parent="CameraController/MetaPath" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20419, 0)
+curve = SubResource("Curve3D_ql7g8")
+script = ExtResource("7_8borv")
+speed = 2.0
+object_to_track = NodePath("../../../Datsun")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection2" type="Path3D" parent="CameraController/MetaPath" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.659, 1.204, -0.184)
+curve = SubResource("Curve3D_2db5g")
+script = ExtResource("7_8borv")
+time_to_finish = 4.0
+object_to_track = NodePath("../../LookMovements/Node3D")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection3" type="Path3D" parent="CameraController/MetaPath" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.659, 1.204, -0.184)
+curve = SubResource("Curve3D_esgtm")
+script = ExtResource("7_8borv")
+speed = 2.0
+object_to_track = NodePath("../../LookMovements/Node3D2")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="MetaPath2" type="Node" parent="CameraController"]
+script = ExtResource("6_31ftd")
+
+[node name="PathSection" type="Path3D" parent="CameraController/MetaPath2" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9606, 0.907509, -1.40647)
+curve = SubResource("Curve3D_2db5g")
+script = ExtResource("7_8borv")
+time_to_finish = 4.0
+object_to_track = NodePath("../../LookMovements/Node3D")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
