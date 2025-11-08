@@ -6,7 +6,6 @@ var section_index: int = 0
 var tween: Tween = null
 
 
-
 func _ready() -> void:
 	var children = get_children()
 	for child in children:
@@ -31,11 +30,9 @@ func start_path_sequence() -> void:
 
 
 func _move_to_next_section() -> void:
-	print("Starting next section")
 
 	section_index = (section_index + 1) % path_sections.size()
 	if section_index == 0:
-		print("Restarting path sequence")
 		_reset_path_sections()
 
 func _reset_path_sections() -> void:
@@ -50,16 +47,15 @@ func _start_section_movement() -> void:
 
 	var section = path_sections[section_index]
 
-	print("Moving along section ", section_index, " with time to finish: ", section.time_to_finish)
-
 	if !section.zero_length:
 		tween = create_tween()
 		tween.tween_property(section.target, "progress_ratio", 1, section.time_to_finish)
-		tween.tween_callback(_on_section_complete).set_delay(section.time_to_finish + 0.001)
+		tween.tween_callback(_on_section_complete).set_delay(0.001)
 	else:
 		var timer = get_tree().create_timer(section.time_to_finish)
 		timer.connect("timeout", Callable(self, "_on_section_complete"))
 
 func _on_section_complete() -> void:
+	print("Section ", section_index, " complete.")
 	_move_to_next_section()
 	_start_section_movement()

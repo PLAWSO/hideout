@@ -2,9 +2,9 @@
 class_name SecondOrderTargeting extends Node
 
 @export_group("Dynamic Constants")
-@export var f := 1.0 # natural frequency (cycles/sec)
-@export var z := 1.0 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
-@export var r := 2.0 # response factor (>1 overshoots, =1 matches, <1 anticipates)
+@export var f := 2.0 # natural frequency (cycles/sec)
+@export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
+@export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
 
 var _k1: float
 var _k2: float
