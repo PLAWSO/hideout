@@ -1,0 +1,242 @@
+[gd_scene load_steps=25 format=3 uid="uid://djwirk4ockuor"]
+
+[ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
+[ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="2_7v8ca"]
+[ext_resource type="Script" uid="uid://pkwdcfxgso1q" path="res://cinna_cam/camera_movement/cinna_cam.gd" id="3_ura2u"]
+[ext_resource type="Script" uid="uid://bf4wol320c205" path="res://cinna_cam/camera_movement/planar-system.gd" id="4_eegbv"]
+[ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="5_x1t0x"]
+[ext_resource type="PackedScene" uid="uid://c3jw42gxogjji" path="res://assets/direction-cube/direction-cube.tscn" id="6_60i1o"]
+[ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="7_embkr"]
+[ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
+[ext_resource type="PackedScene" uid="uid://cwst0m7ws210c" path="res://assets/arcade-cabinet/arcade-cabinet.glb" id="9_x3ijg"]
+
+[sub_resource type="Resource" id="Resource_leb7k"]
+script = ExtResource("4_eegbv")
+f = 7.75
+z = 1.8
+r = 0.8
+metadata/_custom_type_script = "uid://dygsmwmd0om4g"
+
+[sub_resource type="Resource" id="Resource_au00d"]
+script = ExtResource("5_x1t0x")
+f = 8.0
+z = 1.8
+r = 0.6
+metadata/_custom_type_script = "uid://bi740sq5wwli2"
+
+[sub_resource type="Resource" id="Resource_xbpu6"]
+script = ExtResource("5_x1t0x")
+f = 8.0
+z = 1.8
+r = 0.6
+metadata/_custom_type_script = "uid://bi740sq5wwli2"
+
+[sub_resource type="Curve3D" id="Curve3D_pc47s"]
+
+[sub_resource type="Curve3D" id="Curve3D_8vk1q"]
+
+[sub_resource type="Curve3D" id="Curve3D_2db5g"]
+_data = {
+"points": PackedVector3Array(-0.0396929, -1.43051e-06, -0.36534, 0.0396929, 1.43051e-06, 0.36534, 0.102434, 0, 0.0292667, -0.775057, 0, 0.0583352, 0.775057, 0, -0.0583352, 0.969838, 1.43051e-06, 0.923184, -0.00537491, 1.43051e-06, 0.523955, 0.00537491, -1.43051e-06, -0.523955, 1.81943, 0, 0.0365838, 0.658267, 1.43051e-06, 0.0233429, -0.658267, -1.43051e-06, -0.0233429, 0.952917, 0, -0.841419, -0.0249248, 1.43051e-06, -0.393171, 0.0249248, -1.43051e-06, 0.393171, 0.0912006, 0, 0.0146333),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve3D" id="Curve3D_31ftd"]
+
+[sub_resource type="Curve3D" id="Curve3D_8borv"]
+
+[sub_resource type="Curve3D" id="Curve3D_ql7g8"]
+_data = {
+"points": PackedVector3Array(2.6226e-05, -0.00925529, -0.837998, -2.6226e-05, 0.00925529, 0.837998, 0, 0, -1.43, 0.0175779, 0.185844, -0.428259, -0.0175779, -0.185844, 0.428259, -0.0124905, 0, -0.217157, -0.112086, 0.0220382, -0.00136924, 0.112086, -0.0220382, 0.00136924, 0.57439, -1.30772, 0.245664, 0, 0, 0, 0, 0, 0, 0.886321, -1.31587, 0.247037),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_esgtm"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.7248, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_psd4u"]
+_data = {
+"points": PackedVector3Array(-1.44796, 0.0132656, 0.0890958, 1.44796, -0.0132656, -0.0890958, 0, 0, 0, -0.0893455, -0.00735193, 0.474401, 0.0893455, 0.00735193, -0.474401, 1.66376, 0, -1.24446, 0.551873, 2.77162e-05, 0.35828, -0.551873, -2.77162e-05, -0.35828, 1.12786, 0, -3.29451, 0, 0, 0, 0, 0, 0, 0.270847, 0, -3.69876),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_leb7k"]
+_data = {
+"points": PackedVector3Array(0.699537, 0.00992507, 1.10865e-05, -0.699537, -0.00992507, -1.10865e-05, 0, 0, 0, 0.93592, -0.0111766, 0, -0.93592, 0.0111766, 0, -1.63232, 1.17636, -0.370494, 0.41241, 2.7895e-05, -0.33597, -0.41241, -2.7895e-05, 0.33597, -3.40246, 1.17978, 0.778531, -0.0847788, -0.070676, -0.860172, 0.0847788, 0.070676, 0.860172, -4.91294, 1.31094, 1.96712),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_au00d"]
+
+[sub_resource type="Curve3D" id="Curve3D_xbpu6"]
+
+[sub_resource type="Curve3D" id="Curve3D_8grru"]
+
+[node name="Hideout" type="Node3D"]
+
+[node name="Datsun" parent="." instance=ExtResource("1_xndaa")]
+transform = Transform3D(-0.783687, 0, 0.0453929, 0, 0.785, 0, -0.0453929, 0, -0.783687, -1.785, 0.560544, 0.958)
+
+[node name="Garage" parent="." node_paths=PackedStringArray("cinna_cam") instance=ExtResource("2_7v8ca")]
+cinna_cam = NodePath("../CameraController")
+hideCeiling = true
+hideWalls = true
+
+[node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
+script = ExtResource("3_ura2u")
+camera = NodePath("Camera3D")
+meta_paths = [NodePath("Torch"), NodePath("Datsun"), NodePath("Toolbox"), NodePath("Loiter"), NodePath("ArcadeCabinet"), NodePath("Left"), NodePath("Right")]
+position_targeter = SubResource("Resource_leb7k")
+x_look_targeter = SubResource("Resource_au00d")
+y_look_targeter = SubResource("Resource_xbpu6")
+metadata/_custom_type_script = "uid://pkwdcfxgso1q"
+
+[node name="Pointer2" parent="CameraController" instance=ExtResource("6_60i1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
+
+[node name="Pointer" type="MeshInstance3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21317, 2.33811, 0.984435)
+visible = false
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.728789, 0.684738, 0, -0.684738, 0.728789, 3.17915, 2.65254, 1.33812)
+
+[node name="Torch" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+
+[node name="PathSection" type="Path3D" parent="CameraController/Torch" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130612, 1.90057, -1.67301)
+curve = SubResource("Curve3D_pc47s")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../TorchLookAt")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="TorchLookAt" type="Node3D" parent="CameraController/Torch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42096, 0.570701, -2.55487)
+
+[node name="RotationTest" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+
+[node name="PathSection" type="Path3D" parent="CameraController/RotationTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20545, 2.34236, 0.991116)
+curve = SubResource("Curve3D_8vk1q")
+script = ExtResource("8_seky7")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="LookCircle" type="Node" parent="CameraController/RotationTest"]
+
+[node name="PathSection2" type="Path3D" parent="CameraController/RotationTest/LookCircle"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.2515, 2.36951, 0.941092)
+curve = SubResource("Curve3D_2db5g")
+script = ExtResource("8_seky7")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="Datsun" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Datsun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.624603, 0.418565, -0.579682)
+curve = SubResource("Curve3D_31ftd")
+script = ExtResource("8_seky7")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="Toolbox" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Toolbox" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94792, 0.808367, -0.571222)
+curve = SubResource("Curve3D_8borv")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../ToolboxLookAt")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="ToolboxLookAt" type="Node3D" parent="CameraController/Toolbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39713, 1.05918, -2.69962)
+
+[node name="Loiter" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Loiter" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48862, 1.65758, 2.09525)
+curve = SubResource("Curve3D_ql7g8")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../DatsunBack")
+speed = 0.5
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection2" type="Path3D" parent="CameraController/Loiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57232, 0.34215, 2.34322)
+curve = SubResource("Curve3D_esgtm")
+script = ExtResource("8_seky7")
+speed = 0.5
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection3" type="Path3D" parent="CameraController/Loiter" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19203, 0.342868, 2.34327)
+curve = SubResource("Curve3D_psd4u")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../../Toolbox/ToolboxLookAt")
+speed = 0.5
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection4" type="Path3D" parent="CameraController/Loiter" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43364, 0.347417, -1.36718)
+curve = SubResource("Curve3D_leb7k")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../ArcadeCabinetLookAt")
+speed = 0.5
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="DatsunBack" type="Node3D" parent="CameraController/Loiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70578, 0.58476, 0.95633)
+
+[node name="ArcadeCabinetLookAt" type="Node3D" parent="CameraController/Loiter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02, 1.92, -1.97)
+
+[node name="ArcadeCabinet" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/ArcadeCabinet" node_paths=PackedStringArray("object_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7957, 1.977, -1.71922)
+curve = SubResource("Curve3D_au00d")
+script = ExtResource("8_seky7")
+object_to_track = NodePath("../../Loiter/ArcadeCabinetLookAt")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="Left" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1113, 0.556746, 2.54171)
+curve = SubResource("Curve3D_xbpu6")
+script = ExtResource("8_seky7")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="Right" type="Node" parent="CameraController"]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82345, 0.638209, -0.491495)
+curve = SubResource("Curve3D_8grru")
+script = ExtResource("8_seky7")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="ArcadeCabinet" parent="." instance=ExtResource("9_x3ijg")]
+transform = Transform3D(0.6651, 0, -0.746754, 0, 1, 0, 0.746754, 0, 0.6651, -2.38328, 1.16391, -1.25852)
+
+[connection signal="ready" from="CameraController" to="Garage" method="_on_camera_controller_ready"]

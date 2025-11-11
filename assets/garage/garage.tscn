@@ -11,7 +11,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fl4n"]
 resource_name = "concrete"
 cull_mode = 2
-shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("4_ve0hq")
 texture_filter = 2
@@ -450,11 +450,12 @@ mesh = SubResource("ArrayMesh_58u45")
 skeleton = NodePath("")
 
 [node name="Cylinder" type="MeshInstance3D" parent="Props"]
-transform = Transform3D(0.733923, 0, 0.679233, 0, 1, 0, -0.679233, 0, 0.733923, -2.81796, 0.482433, -2.09458)
+transform = Transform3D(0.775383, 0, -0.631492, 0, 1, 0, 0.631492, 0, 0.775383, 1.22417, 0.482433, -2.52716)
 mesh = SubResource("ArrayMesh_0j7ep")
 skeleton = NodePath("")
 
 [node name="Walls" type="Node3D" parent="."]
+top_level = true
 
 [node name="Cinderblock" type="MeshInstance3D" parent="Walls"]
 mesh = SubResource("ArrayMesh_em678")
@@ -473,3 +474,33 @@ skeleton = NodePath("")
 [node name="Door" type="MeshInstance3D" parent="Walls"]
 mesh = SubResource("ArrayMesh_k3ys0")
 skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55889, 2.64247, 1.48146)
+light_energy = 1.124
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55889, 2.64247, -1.42693)
+light_energy = 1.124
+shadow_enabled = true
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00215769, 2.64247, 1.48146)
+light_energy = 1.124
+shadow_enabled = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00215769, 2.64247, -1.42693)
+light_energy = 1.124
+shadow_enabled = true
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.73428, 2.64247, 1.48146)
+light_energy = 1.124
+shadow_enabled = true
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.73428, 2.64247, -1.42693)
+light_energy = 1.124
+shadow_enabled = true

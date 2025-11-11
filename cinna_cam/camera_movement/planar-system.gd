@@ -1,7 +1,6 @@
 @tool
-class_name SecondOrderTargeting extends Node
+class_name PlanarSystem extends Resource
 
-@export_group("Dynamic Constants")
 @export var f := 2.0 # natural frequency (cycles/sec)
 @export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
 @export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
@@ -18,16 +17,16 @@ var _prev_target_position := Vector3.ZERO
 var _target_position := Vector3.ZERO
 
 func initialize(start_position: Vector3) -> void:
-	_k1 = z / (PI * f)
-	_k2 = 1.0 / pow(2.0 * PI * f, 2)
-	_k3 = r * z / (2.0 * PI * f)
-	_t_critical = 0.8 * f * (sqrt(4.0 * _k2 + _k1 * _k1) - _k1)
-
 	_position = start_position
 	_target_position = start_position
 	_prev_target_position = start_position
 
 func get_next_position(target_position: Vector3, delta: float) -> Vector3:
+	_k1 = z / (PI * f)
+	_k2 = 1.0 / pow(2.0 * PI * f, 2)
+	_k3 = r * z / (2.0 * PI * f)
+	_t_critical = 0.8 * f * (sqrt(4.0 * _k2 + _k1 * _k1) - _k1)
+
 	_target_position = target_position
 	var target_velocity_est = (_target_position - _prev_target_position) / delta
 	_prev_target_position = _target_position

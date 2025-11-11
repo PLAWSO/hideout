@@ -10,7 +10,6 @@ func _ready() -> void:
 	var children = get_children()
 	for child in children:
 		if child is PathSection:
-			child._ready()
 			path_sections.append(child)
 		else:
 			push_warning("MetaPath child is not a PathSection: " + str(child))

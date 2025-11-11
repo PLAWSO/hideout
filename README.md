@@ -1,0 +1,1 @@
+cinna cam class icon courtesy of pixelbazaar - https://www.svgrepo.com/svg/513369/gamepad

@@ -1,15 +1,15 @@
 class_name PathSection extends Path3D
 
+@export var object_to_track: Node3D
+
 @export_group("Speed")
 @export var speed: float = -1.0
 @export var time_to_finish: float = 1.0
 
-@onready var target: PathFollow3D = PathFollow3D.new()
-
-@export var object_to_track: Node3D
-
 var zero_length: bool = false
 var length: float = 0.0
+
+var target: PathFollow3D= PathFollow3D.new()
 
 func _ready() -> void:
 	add_child(target)
