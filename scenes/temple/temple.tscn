@@ -2429,12 +2429,17 @@ metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 script = ExtResource("3_rpe3e")
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
-[node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow" node_paths=PackedStringArray("object_to_track")]
+[node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.712, 1.975, 15.072)
 curve = SubResource("Curve3D_xrfim")
 script = ExtResource("4_8hjng")
-object_to_track = NodePath("../../../Meshes/Body")
 speed = 2.0
+time_to_finish = 22.7911
+tracking_type = 2
+angle_target = Vector3(-2.145, -0.335, 0)
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="Node3D" type="Node3D" parent="CinnaCam/TrailFollow/PathSection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7024, 2.30526, -38.316)
 
 [connection signal="ready" from="CinnaCam" to="." method="_on_cinna_cam_ready"]

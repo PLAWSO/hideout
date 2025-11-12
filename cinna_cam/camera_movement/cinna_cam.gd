@@ -18,13 +18,9 @@ func _ready() -> void:
 func initialize(path_index, section_index) -> void:
 	position_targeter.initialize(camera.global_position)
 
-	var object_to_track = meta_paths[path_index].path_sections[section_index].object_to_track
-
-	var look_direction = camera.global_position.direction_to(object_to_track.global_position).x
-	x_look_targeter.initialize(look_direction)
-
-	look_direction = camera.global_position.direction_to(object_to_track.global_position).y
-	y_look_targeter.initialize(look_direction)
+	var initial_angle = meta_paths[path_index].get_target_angles(camera.global_position)
+	x_look_targeter.initialize(initial_angle.x)
+	y_look_targeter.initialize(initial_angle.y)
 
 
 func _process(delta: float) -> void:
@@ -39,17 +35,11 @@ func move_camera(delta: float) -> void:
 
 
 func rotate_camera(delta: float) -> void:
-	var object_to_track = meta_paths[meta_path_index].path_sections[meta_paths[meta_path_index].section_index].object_to_track
-	if object_to_track:
-		var look_direction = camera.global_position.direction_to(object_to_track.global_position)
-
-		camera.transform.basis = Basis()
-
-		var target_x_angle = atan2(-look_direction.x, -look_direction.z)
-		camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_position(target_x_angle, delta))
-
-		var target_y_angle = atan2(look_direction.y, max(-look_direction.x, -look_direction.z))
-		camera.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_position(target_y_angle, delta))
+	var new_camera_rotation = meta_paths[meta_path_index].get_target_angles(camera.global_position)
+	
+	camera.transform.basis = Basis()
+	camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_position(new_camera_rotation.x, delta))
+	camera.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_position(new_camera_rotation.y, delta))
 
 
 func set_movement_target(index: int) -> void:
