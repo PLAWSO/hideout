@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=22 format=3 uid="uid://djwirk4ockuor"]
 
 [ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
 [ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="2_7v8ca"]
@@ -30,8 +30,6 @@ f = 8.0
 z = 1.8
 r = 0.6
 metadata/_custom_type_script = "uid://bi740sq5wwli2"
-
-[sub_resource type="Curve3D" id="Curve3D_pc47s"]
 
 [sub_resource type="Curve3D" id="Curve3D_8vk1q"]
 
@@ -76,10 +74,6 @@ point_count = 4
 
 [sub_resource type="Curve3D" id="Curve3D_au00d"]
 
-[sub_resource type="Curve3D" id="Curve3D_xbpu6"]
-
-[sub_resource type="Curve3D" id="Curve3D_8grru"]
-
 [node name="Hideout" type="Node3D"]
 
 [node name="Datsun" parent="." instance=ExtResource("1_xndaa")]
@@ -93,7 +87,7 @@ hideWalls = true
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
 camera = NodePath("Camera3D")
-meta_paths = [NodePath("Torch"), NodePath("Datsun"), NodePath("Toolbox"), NodePath("Loiter"), NodePath("ArcadeCabinet"), NodePath("Left"), NodePath("Right")]
+meta_paths = [NodePath("Datsun"), NodePath("Toolbox"), NodePath("Loiter"), NodePath("ArcadeCabinet")]
 position_targeter = SubResource("Resource_leb7k")
 x_look_targeter = SubResource("Resource_au00d")
 y_look_targeter = SubResource("Resource_xbpu6")
@@ -109,19 +103,6 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.728789, 0.684738, 0, -0.684738, 0.728789, 3.17915, 2.65254, 1.33812)
-
-[node name="Torch" type="Node" parent="CameraController"]
-script = ExtResource("7_embkr")
-
-[node name="PathSection" type="Path3D" parent="CameraController/Torch"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130612, 1.90057, -1.67301)
-curve = SubResource("Curve3D_pc47s")
-script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="TorchLookAt" type="Node3D" parent="CameraController/Torch"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42096, 0.570701, -2.55487)
 
 [node name="RotationTest" type="Node" parent="CameraController"]
 script = ExtResource("7_embkr")
@@ -150,7 +131,7 @@ metadata/_custom_type_script = "uid://c3pfswfcml75e"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.624603, 0.418565, -0.579682)
 curve = SubResource("Curve3D_31ftd")
 script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
+follow_target_node = NodePath("../../../Datsun")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Toolbox" type="Node" parent="CameraController"]
@@ -161,7 +142,7 @@ metadata/_custom_type_script = "uid://c3pfswfcml75e"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.94792, 0.808367, -0.571222)
 curve = SubResource("Curve3D_8borv")
 script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
+follow_target_node = NodePath("../ToolboxLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="ToolboxLookAt" type="Node3D" parent="CameraController/Toolbox"]
@@ -177,7 +158,7 @@ curve = SubResource("Curve3D_ql7g8")
 script = ExtResource("8_seky7")
 speed = 0.5
 time_to_finish = 6.23686
-follow_target_node = NodePath("")
+follow_target_node = NodePath("../DatsunBack")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="PathSection2" type="Path3D" parent="CameraController/Loiter"]
@@ -186,7 +167,10 @@ curve = SubResource("Curve3D_esgtm")
 script = ExtResource("8_seky7")
 speed = 0.5
 time_to_finish = 7.4496
-follow_target_node = NodePath("")
+tracking_type = 2
+angle_target_degrees_x = 39.0
+angle_target_degrees_y = 9.5
+relative_to_travel_direction = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="PathSection3" type="Path3D" parent="CameraController/Loiter"]
@@ -195,7 +179,7 @@ curve = SubResource("Curve3D_psd4u")
 script = ExtResource("8_seky7")
 speed = 0.5
 time_to_finish = 10.9217
-follow_target_node = NodePath("")
+follow_target_node = NodePath("../../Toolbox/ToolboxLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="PathSection4" type="Path3D" parent="CameraController/Loiter"]
@@ -204,7 +188,7 @@ curve = SubResource("Curve3D_leb7k")
 script = ExtResource("8_seky7")
 speed = 0.5
 time_to_finish = 12.8314
-follow_target_node = NodePath("")
+follow_target_node = NodePath("../ArcadeCabinetLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="DatsunBack" type="Node3D" parent="CameraController/Loiter"]
@@ -218,32 +202,13 @@ script = ExtResource("7_embkr")
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/ArcadeCabinet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7957, 1.977, -1.71922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.796, 1.943, -1.719)
 curve = SubResource("Curve3D_au00d")
 script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="Left" type="Node" parent="CameraController"]
-script = ExtResource("7_embkr")
-metadata/_custom_type_script = "uid://c3pfswfcml75e"
-
-[node name="PathSection" type="Path3D" parent="CameraController/Left"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1113, 0.556746, 2.54171)
-curve = SubResource("Curve3D_xbpu6")
-script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="Right" type="Node" parent="CameraController"]
-script = ExtResource("7_embkr")
-metadata/_custom_type_script = "uid://c3pfswfcml75e"
-
-[node name="PathSection" type="Path3D" parent="CameraController/Right"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82345, 0.638209, -0.491495)
-curve = SubResource("Curve3D_8grru")
-script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
+tracking_type = 2
+angle_target_degrees_x = 41.5
+angle_target_degrees_y = -13.0
+relative_to_travel_direction = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="ArcadeCabinet" parent="." instance=ExtResource("9_x3ijg")]

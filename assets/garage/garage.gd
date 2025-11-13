@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_camera_controller_ready() -> void:
-	cinna_cam.meta_paths[3].start_path_sequence()
+	cinna_cam.meta_paths[2].start_path_sequence()
 
 #region Input Handling
 func _unhandled_input(event: InputEvent) -> void:
