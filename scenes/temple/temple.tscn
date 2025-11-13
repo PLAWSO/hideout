@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=4 uid="uid://sj3wt5u1le7l"]
+[gd_scene load_steps=25 format=4 uid="uid://sj3wt5u1le7l"]
 
 [ext_resource type="Texture2D" uid="uid://b6jfvhaqhfm22" path="res://assets/temple/temple_Ground.png" id="1_7a2ri"]
 [ext_resource type="Script" uid="uid://bgx7i7dy8eyhq" path="res://scenes/temple/temple.gd" id="1_8hjng"]
 [ext_resource type="Script" uid="uid://pkwdcfxgso1q" path="res://cinna_cam/camera_movement/cinna_cam.gd" id="2_5eyw8"]
 [ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="3_rpe3e"]
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="4_8hjng"]
+[ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="4_fkpan"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x078"]
 resource_name = "Trunk"
@@ -181,12 +182,43 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pobk3")
 
+[sub_resource type="Resource" id="Resource_yd1wb"]
+script = ExtResource("4_fkpan")
+f = 3.0
+z = 1.8
+r = 0.8
+metadata/_custom_type_script = "uid://cep4n5ilt5opf"
+
+[sub_resource type="Resource" id="Resource_fkpan"]
+script = ExtResource("4_fkpan")
+f = 3.0
+z = 1.8
+r = 0.8
+metadata/_custom_type_script = "uid://cep4n5ilt5opf"
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bfxvm"]
+top_radius = 0.0
+
 [sub_resource type="Curve3D" id="Curve3D_xrfim"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -5.33596, -2.44379e-05, -0.272532, 5.33596, 2.44379e-05, 0.272532, 4.22926, 0, 0.426006, -3.36517, -2.44379e-05, 1.37063, 3.36517, 2.44379e-05, -1.37063, 18.325, 0, -2.03874, -1.90911, -2.44379e-05, 2.22265, 1.90911, 2.44379e-05, -2.22265, 26.1802, 0, -6.23795, 0.403961, -2.44379e-05, 0.962047, -0.403961, 2.44379e-05, -0.962047, 26.1818, 0, -15.2754, 0, 0, 0, 0, 0, 0, 22.7305, 0, -23.0794),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-4.30681, 0, 1.43449, 0, 0, 0, 0, 0, 0, -5.69849, 2.44379e-05, -0.0800689, 5.69849, -2.44379e-05, 0.0800689, 4.65841, -2.44379e-05, 0.180807, -4.30681, 0, 1.43449, 4.30681, 0, -1.43449, 18.3522, -2.44379e-05, -2.06354, -1.52066, 2.44379e-05, 3.03088, 0, 0, 0, 26.366, -2.44379e-05, -7.84033),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
 }
-point_count = 6
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_fkpan"]
+_data = {
+"points": PackedVector3Array(-0.493739, 1.20401e-05, 3.03764, 0.493739, -1.20401e-05, -3.03764, 0, 0, 0, 0.304184, 0, 0.378842, -0.304184, 0, -0.378842, -0.346251, -1.20401e-05, -5.22045),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve3D" id="Curve3D_yd1wb"]
+_data = {
+"points": PackedVector3Array(-1.98579, 0, 0.333894, 1.98579, 0, -0.333894, 21.5042, -2.44379e-05, -3.19059, -0.152138, -3.63798e-12, 0.906612, 0.152138, 3.63798e-12, -0.906612, 26.366, -2.44379e-05, -7.84033),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="Temple" type="Node3D" node_paths=PackedStringArray("cinna_cam")]
 script = ExtResource("1_8hjng")
@@ -2421,9 +2453,16 @@ shadow_enabled = true
 script = ExtResource("2_5eyw8")
 camera = NodePath("Camera3D")
 meta_paths = [NodePath("TrailFollow")]
+x_look_targeter = SubResource("Resource_yd1wb")
+y_look_targeter = SubResource("Resource_fkpan")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
+[node name="FakeCamera" type="MeshInstance3D" parent="CinnaCam"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.355, 3.04, 12.14)
+mesh = SubResource("CylinderMesh_bfxvm")
+
 [node name="Camera3D" type="Camera3D" parent="CinnaCam"]
+transform = Transform3D(0.768485, -0.477408, 0.426043, 0, 0.66583, 0.746104, -0.639868, -0.573369, 0.51168, 12.7092, 10.2683, 16.6404)
 
 [node name="TrailFollow" type="Node" parent="CinnaCam"]
 script = ExtResource("3_rpe3e")
@@ -2431,15 +2470,56 @@ metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.712, 1.975, 15.072)
+visible = false
 curve = SubResource("Curve3D_xrfim")
 script = ExtResource("4_8hjng")
-speed = 2.0
-time_to_finish = 22.7911
+speed = 8.0
+time_to_finish = 5.35309
 tracking_type = 2
-angle_target = Vector3(-2.145, -0.335, 0)
+angle_target_degrees_x = 0.0
+angle_target_degrees_y = 4.0
+relative_to_travel_direction = true
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
-[node name="Node3D" type="Node3D" parent="CinnaCam/TrailFollow/PathSection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7024, 2.30526, -38.316)
+[node name="PathSection2" type="Path3D" parent="CinnaCam/TrailFollow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6716, 1.97572, 7.20138)
+visible = false
+curve = SubResource("Curve3D_fkpan")
+script = ExtResource("4_8hjng")
+speed = 4.0
+time_to_finish = 3.50487
+follow_target_node = NodePath("ItemMarker")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="ItemMarker" type="Node3D" parent="CinnaCam/TrailFollow/PathSection2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66544, 4.08841, -25.1538)
+
+[node name="TrailFollow2" type="Node" parent="CinnaCam"]
+script = ExtResource("3_rpe3e")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.712, 1.975, 15.072)
+curve = SubResource("Curve3D_yd1wb")
+script = ExtResource("4_8hjng")
+speed = 5.41
+time_to_finish = 5.35309
+tracking_type = 2
+angle_target_degrees_x = 0.0
+angle_target_degrees_y = 4.0
+relative_to_travel_direction = true
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection2" type="Path3D" parent="CinnaCam/TrailFollow2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6716, 1.97572, 7.20138)
+curve = SubResource("Curve3D_fkpan")
+script = ExtResource("4_8hjng")
+speed = 4.0
+time_to_finish = 3.50487
+follow_target_node = NodePath("ItemMarker")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="ItemMarker" type="Node3D" parent="CinnaCam/TrailFollow2/PathSection2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66544, 4.08841, -25.1538)
 
 [connection signal="ready" from="CinnaCam" to="." method="_on_cinna_cam_ready"]

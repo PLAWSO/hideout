@@ -1,3 +1,4 @@
+@tool
 class_name MetaPath extends Node
 
 var path_sections: Array[PathSection] = []
@@ -26,7 +27,15 @@ func get_target_angles(origin: Vector3) -> Vector2:
 	var path_section = path_sections[section_index]
 
 	if path_section.tracking_type == PathSection.TrackingType.ANGLE:
-		return Vector2(path_section.angle_target.x, path_section.angle_target.y)
+		var path_length = path_section.curve.get_baked_length()
+		var target_x_angle = 0.0
+		if path_section.relative_to_travel_direction:
+			var rear_point = path_section.curve.sample_baked((path_section.target.progress_ratio - 0.005) * path_length, true) + path_section.global_position
+			var front_point = path_section.curve.sample_baked((path_section.target.progress_ratio + 0.005) * path_length, true) + path_section.global_position
+			var travel_direction = rear_point.direction_to(front_point)
+			target_x_angle = atan2(-travel_direction.x, -travel_direction.z)
+
+		return Vector2(target_x_angle + path_section.angle_target.x, path_section.angle_target.y)
 
 	if path_section.tracking_type == PathSection.TrackingType.FOLLOW:
 		var object_to_track = path_section.follow_target
@@ -74,6 +83,6 @@ func _start_section_movement() -> void:
 
 
 func _on_section_complete() -> void:
-	print("Section ", section_index, " complete.")
+	# print("Section ", section_index, " complete.")
 	_move_to_next_section()
 	_start_section_movement()

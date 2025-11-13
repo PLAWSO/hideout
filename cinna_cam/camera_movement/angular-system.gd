@@ -1,4 +1,3 @@
-@tool
 class_name AngularSystem extends Resource
 
 @export var f := 4.0 # natural frequency (cycles/sec)
@@ -27,7 +26,7 @@ func initialize(start_angle: float) -> void:
 	_prev_target_angle = start_angle
 
 
-func get_next_position(target_angle: float, delta: float) -> float:
+func get_next_angle(target_angle: float, delta: float) -> float:
 	_k1 = z / (PI * f)
 	_k2 = 1.0 / pow(2.0 * PI * f, 2)
 	_k3 = r * z / (2.0 * PI * f)
@@ -55,21 +54,22 @@ func get_next_position(target_angle: float, delta: float) -> float:
 	return _angle
 
 
-func get_next_constrained_position(target_angle: float, delta: float) -> float:
+func get_next_constrained_angle(target_angle: float, delta: float) -> float:
 	_k1 = z / (PI * f)
 	_k2 = 1.0 / pow(2.0 * PI * f, 2)
 	_k3 = r * z / (2.0 * PI * f)
 	_t_critical = 0.8 * f * (sqrt(4.0 * _k2 + _k1 * _k1) - _k1)
 	_target_angle = clamp(target_angle, _bottom_angle_limit, _top_angle_limit)
 
-	var target_velocity_est = (_target_angle - _prev_target_angle) / delta
+	# var target_velocity_est = (_target_angle - _prev_target_angle) / delta
 	_prev_target_angle = _target_angle
 
 	var iterations := int(delta / _t_critical) + 1
 	var step := delta / iterations
 
 	for i in range(iterations):
-		var accel = (_target_angle + _k3 * target_velocity_est - _angle - _k1 * _velocity) / _k2
+		# replaced target_velocity_est with 0.0 bc it seems smoother
+		var accel = (_target_angle + _k3 * 0.0 - _angle - _k1 * _velocity) / _k2
 		_velocity += accel * step
 		_angle += _velocity * step
 

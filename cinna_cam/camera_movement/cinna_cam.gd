@@ -1,7 +1,9 @@
+
+
 @icon("res://icons/camera_controller_icon.svg")
 class_name CinnaCam extends Node3D
 
-@export var camera: Camera3D
+@export var camera: Node3D
 @export var meta_paths: Array[MetaPath] = []
 
 @export var position_targeter: PlanarSystem = PlanarSystem.new()
@@ -38,8 +40,8 @@ func rotate_camera(delta: float) -> void:
 	var new_camera_rotation = meta_paths[meta_path_index].get_target_angles(camera.global_position)
 	
 	camera.transform.basis = Basis()
-	camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_position(new_camera_rotation.x, delta))
-	camera.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_position(new_camera_rotation.y, delta))
+	camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_angle(new_camera_rotation.x, delta))
+	camera.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_angle(new_camera_rotation.y, delta))
 
 
 func set_movement_target(index: int) -> void:

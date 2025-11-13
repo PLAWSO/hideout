@@ -13,11 +13,38 @@ enum TrackingType { FOLLOW, STATIONARY, ANGLE }
 		tracking_type = value
 		notify_property_list_changed() # tells the inspector to rebuild
 
+# FOLLOW TrackingType
+var follow_target: Node3D = null
+var follow_target_node: NodePath = NodePath()
+
+# ANGLE TrackingType
+var angle_target: Vector2
+var relative_to_travel_direction: bool = true
+var angle_target_degrees_x: float = 0.0:
+	set(value):
+		angle_target_degrees_x = value
+		angle_target.x = deg_to_rad(value)
+
+var angle_target_degrees_y: float = 0.0:
+	set(value):
+		angle_target_degrees_y = value
+		angle_target.y = deg_to_rad(value)
+
+var zero_length: bool = false
+var length: float = 0.0
+var target: PathFollow3D = PathFollow3D.new()
+
 func _get_property_list():
 	var props = []
 
 	match tracking_type:
 		TrackingType.FOLLOW:
+			props.append({
+				name = "Follow Target",
+				type = TYPE_NIL,
+				hint_string = "follow_target_",
+				usage = PROPERTY_USAGE_SUBGROUP
+			})
 			props.append({
 				"name": "follow_target_node",
 				"type": TYPE_NODE_PATH,
@@ -27,20 +54,29 @@ func _get_property_list():
 			})
 		TrackingType.ANGLE:
 			props.append({
-				"name": "angle_target",
-				"type": TYPE_VECTOR3
+				name = "Angle Target",
+				type = TYPE_NIL,
+				hint_string = "angle_target_",
+				usage = PROPERTY_USAGE_SUBGROUP
+			})
+			props.append({
+				"name": "angle_target_degrees_x",
+				"type": TYPE_FLOAT,
+				"hint": PROPERTY_HINT_RANGE,
+				"hint_string": "-180,180,0.1",
+			})
+			props.append({
+				"name": "angle_target_degrees_y",
+				"type": TYPE_FLOAT,
+				"hint": PROPERTY_HINT_RANGE,
+				"hint_string": "-90,90,0.1"
+			})
+			props.append({
+				"name": "relative_to_travel_direction",
+				"type": TYPE_BOOL
 			})
 
 	return props
-
-var follow_target: Node3D = null
-var follow_target_node: NodePath = NodePath()
-var angle_target: Vector3 = Vector3.ZERO
-
-var zero_length: bool = false
-var length: float = 0.0
-
-var target: PathFollow3D= PathFollow3D.new()
 
 func _ready() -> void:
 	add_child(target)
@@ -52,25 +88,3 @@ func _ready() -> void:
 
 	if length == 0.0:
 		zero_length = true
-
-	
-	
-
-func _get(property: StringName):
-	match property:
-		"follow_target_node":
-			return follow_target_node
-		"angle_target":
-			return angle_target
-	return null
-
-func _set(property: StringName, value) -> bool:
-	print("Setting property: " + str(property) + " to value: " + str(value))
-	match property:
-		"follow_target_node":
-			follow_target_node = value
-			return true
-		"angle_target":
-			angle_target = value
-			return true
-	return false
