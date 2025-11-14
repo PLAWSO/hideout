@@ -2466,6 +2466,7 @@ transform = Transform3D(0.768485, -0.477408, 0.426043, 0, 0.66583, 0.746104, -0.
 
 [node name="TrailFollow" type="Node" parent="CinnaCam"]
 script = ExtResource("3_rpe3e")
+crossfade_time = null
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow"]
@@ -2496,6 +2497,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66544, 4.08841, -25.1538)
 
 [node name="TrailFollow2" type="Node" parent="CinnaCam"]
 script = ExtResource("3_rpe3e")
+crossfade_time = null
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CinnaCam/TrailFollow2"]

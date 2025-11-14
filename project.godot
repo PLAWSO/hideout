@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="portfolio"
-run/main_scene="uid://sj3wt5u1le7l"
+run/main_scene="uid://djwirk4ockuor"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [debug_draw_3d]

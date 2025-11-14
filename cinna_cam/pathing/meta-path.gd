@@ -4,6 +4,7 @@ class_name MetaPath extends Node
 #region Properties
 
 @export_tool_button("Make Continuous", "VisualShaderNodeCurveXYZTexture") var make_continuous_action = make_continuous
+@export_range(0, 1, 0.01) var crossfade_time: float = 0.01
 @export var is_looped: bool = true
 
 var path_sections: Array[PathSection] = []
@@ -95,7 +96,7 @@ func get_target_angles(origin: Vector3) -> Vector2:
 		
 		var look_direction = origin.direction_to(object_to_track.global_position)
 		var target_x_angle = atan2(-look_direction.x, -look_direction.z)
-		var target_y_angle = atan2(look_direction.y, max(-look_direction.x, -look_direction.z))
+		var target_y_angle = asin(look_direction.y)
 
 		return Vector2(target_x_angle, target_y_angle)
 
@@ -110,7 +111,8 @@ func get_target_angles(origin: Vector3) -> Vector2:
 		
 		var look_direction = path_section.global_position.direction_to(object_to_track.global_position)
 		var target_x_angle = atan2(-look_direction.x, -look_direction.z)
-		var target_y_angle = atan2(look_direction.y, max(-look_direction.x, -look_direction.z))
+		var target_y_angle = asin(look_direction.y)
+
 
 		return Vector2(target_x_angle, target_y_angle)
 	return Vector2.ZERO
@@ -146,7 +148,9 @@ func _start_section_movement() -> void:
 	if !section.zero_length:
 		tween = create_tween()
 		tween.tween_property(section.target, "progress_ratio", 1, section.time_to_finish)
-		tween.tween_callback(_on_section_complete).set_delay(0.001)
+		var timer = get_tree().create_timer(section.time_to_finish - crossfade_time)
+		timer.connect("timeout", Callable(self, "_on_section_complete"))
+		# tween.tween_callback(_on_section_complete).set_delay(1e-6)
 	else:
 		var timer = get_tree().create_timer(section.time_to_finish)
 		timer.connect("timeout", Callable(self, "_on_section_complete"))
