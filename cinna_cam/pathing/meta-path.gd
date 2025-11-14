@@ -15,22 +15,46 @@ var tween: Tween = null
 #region Curve Change Handling
 
 func make_continuous():
-	for i in range(path_sections.size() if is_looped else path_sections.size() - 1):
-		var current_section = path_sections[i]
+	collect_path_sections()
+
+	var last_valid_start_point = path_sections[0].global_position
+	var last_section_was_zero_length = false
+	for i in range(path_sections.size()):
+		print("Adjusting PathSection ", i)
+		var current_section = path_sections[i % path_sections.size()]
 		var next_section = path_sections[(i + 1) % path_sections.size()]
 
-		var end_point = current_section.curve.get_point_position(current_section.curve.get_point_count() - 1)
-		var global_end_point = current_section.to_global(end_point)
+		if current_section.zero_length:
+			current_section.global_position = last_valid_start_point
+			last_section_was_zero_length = true
+			if is_looped and i == path_sections.size() - 1:
+				print("Looping back to first section for zero-length adjustment.")
+				var next_next_section = path_sections[(i + 2) % path_sections.size()]
+				next_section.global_position = last_valid_start_point
+				next_section.curve.set_point_position(next_section.curve.get_point_count() - 1, next_section.to_local(next_next_section.global_position))
+			continue
+		
+		if last_section_was_zero_length:
+			current_section.global_position = last_valid_start_point
+			last_section_was_zero_length = false
+		
+		last_valid_start_point = next_section.global_position
 
-		var local_start_point = next_section.to_local(global_end_point)
-
-		next_section.curve.set_point_position(0, local_start_point)
+		if not is_looped and i == path_sections.size() - 1:
+			continue
+		
+		var new_local_end_point = current_section.to_local(last_valid_start_point)
+		current_section.curve.set_point_position(current_section.curve.get_point_count() - 1, new_local_end_point)
 
 #endregion
 
 #region Lifecycle
 
 func _ready() -> void:
+	collect_path_sections()
+
+func collect_path_sections() -> void:
+	path_sections.clear()
 	var children = get_children()
 	for child in children:
 		if child is PathSection:
@@ -65,13 +89,30 @@ func get_target_angles(origin: Vector3) -> Vector2:
 
 	if path_section.tracking_type == PathSection.TrackingType.FOLLOW:
 		var object_to_track = path_section.follow_target
+		
 		if object_to_track == null:
 			return Vector2.ZERO
+		
 		var look_direction = origin.direction_to(object_to_track.global_position)
 		var target_x_angle = atan2(-look_direction.x, -look_direction.z)
 		var target_y_angle = atan2(look_direction.y, max(-look_direction.x, -look_direction.z))
+
 		return Vector2(target_x_angle, target_y_angle)
 
+	if path_section.tracking_type == PathSection.TrackingType.LOCK_AT_PREVIOUS:
+		var previous_index = section_index - 1 % path_sections.size()
+
+		var previous_section = path_sections[previous_index]
+		var object_to_track = previous_section.follow_target
+		
+		if object_to_track == null:
+			return Vector2.ZERO
+		
+		var look_direction = path_section.global_position.direction_to(object_to_track.global_position)
+		var target_x_angle = atan2(-look_direction.x, -look_direction.z)
+		var target_y_angle = atan2(look_direction.y, max(-look_direction.x, -look_direction.z))
+
+		return Vector2(target_x_angle, target_y_angle)
 	return Vector2.ZERO
 
 #endregion

@@ -1,7 +1,7 @@
 @tool
 class_name PathSection extends Path3D
 
-enum TrackingType { FOLLOW, STATIONARY, ANGLE }
+enum TrackingType { FOLLOW, STATIONARY, ANGLE, LOCK_AT_PREVIOUS }
 
 @export_group("Speed")
 @export var speed: float = -1.0
