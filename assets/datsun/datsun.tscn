@@ -59,20 +59,13 @@ void fragment() {
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
 
-	// Calculate distance from camera to this fragment
-	float distanceToCamera = length(world_position - CAMERA_POSITION_WORLD);
-	
-	// Create fade effect based on distance
-	// Object starts fading when closer than fadeStart, becomes transparent at fadeDistance
-	float fadeAlpha = smoothstep(fadeDistance, fadeStart, distanceToCamera);
-	ALPHA = fadeAlpha;
-
-	//float adjustedFade = (fadeRange * 2.0 - 1.0) * 0.25;
-	//COLOR = albedo.a;
-	//float noiseValue = texture(screenFadeTexture, SCREEN_UV).r - adjustedFade;
-	//ALPHA = alpha;
-	//ALBEDO = step(125.9, alpha);
-	//ALPHA = 1.0;//round(noiseValue);
+	//// Calculate distance from camera to this fragment
+	//float distanceToCamera = length(world_position - CAMERA_POSITION_WORLD);
+	//
+	//// Create fade effect based on distance
+	//// Object starts fading when closer than fadeStart, becomes transparent at fadeDistance
+	//float fadeAlpha = smoothstep(fadeDistance, fadeStart, distanceToCamera);
+	//ALPHA = fadeAlpha;
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3yug0"]

@@ -1,11 +1,34 @@
 @tool
 class_name MetaPath extends Node
 
+#region Properties
+
+@export_tool_button("Make Continuous", "VisualShaderNodeCurveXYZTexture") var make_continuous_action = make_continuous
+@export var is_looped: bool = true
+
 var path_sections: Array[PathSection] = []
 var section_index: int = 0
 
 var tween: Tween = null
 
+
+#region Curve Change Handling
+
+func make_continuous():
+	for i in range(path_sections.size() if is_looped else path_sections.size() - 1):
+		var current_section = path_sections[i]
+		var next_section = path_sections[(i + 1) % path_sections.size()]
+
+		var end_point = current_section.curve.get_point_position(current_section.curve.get_point_count() - 1)
+		var global_end_point = current_section.to_global(end_point)
+
+		var local_start_point = next_section.to_local(global_end_point)
+
+		next_section.curve.set_point_position(0, local_start_point)
+
+#endregion
+
+#region Lifecycle
 
 func _ready() -> void:
 	var children = get_children()
@@ -14,10 +37,13 @@ func _ready() -> void:
 			path_sections.append(child)
 		else:
 			push_warning("MetaPath child is not a PathSection: " + str(child))
-	
+
 	if path_sections.size() == 0:
 		push_error("No path sections defined in MetaPath.")
 
+#endregion
+
+#region Target Retrieval
 
 func get_target_location() -> Vector3:
 	return path_sections[section_index].target.global_position
@@ -48,6 +74,9 @@ func get_target_angles(origin: Vector3) -> Vector2:
 
 	return Vector2.ZERO
 
+#endregion
+
+#region Path Movement Control
 
 func start_path_sequence() -> void:
 	section_index = 0
@@ -67,7 +96,7 @@ func _reset_path_sections() -> void:
 			section.target.progress_ratio = 0.0
 
 
-func _start_section_movement() -> void: 
+func _start_section_movement() -> void:
 	if tween:
 		tween.kill()
 
@@ -86,3 +115,5 @@ func _on_section_complete() -> void:
 	# print("Section ", section_index, " complete.")
 	_move_to_next_section()
 	_start_section_movement()
+
+#endregion
