@@ -1,5 +1,5 @@
 @tool
-class_name MetaPath extends Node
+class_name MetaPath extends Node3D
 
 #region Properties
 
@@ -12,6 +12,7 @@ var section_index: int = 0
 
 var tween: Tween = null
 
+#endregion
 
 #region Curve Change Handling
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="portfolio"
-run/main_scene="uid://djwirk4ockuor"
+run/main_scene="uid://sj3wt5u1le7l"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [debug_draw_3d]
@@ -80,3 +80,4 @@ camera_1={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

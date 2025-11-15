@@ -2,6 +2,11 @@
 extends Node3D
 
 @export var cinna_cam: CinnaCam = null
+@export var camera: Node3D = null:
+	get:
+		return cinna_cam.camera
+	set(value):
+		cinna_cam.camera = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
