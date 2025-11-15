@@ -61,8 +61,8 @@ func collect_path_sections() -> void:
 	for child in children:
 		if child is PathSection:
 			path_sections.append(child)
-		else:
-			push_warning("MetaPath child is not a PathSection: " + str(child))
+		# else:
+		# 	push_warning("MetaPath child is not a PathSection: " + str(child))
 
 	if path_sections.size() == 0:
 		push_error("No path sections defined in MetaPath.")

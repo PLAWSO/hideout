@@ -24,6 +24,8 @@ uniform vec3 uv2_offset;
 uniform float fadeRange : hint_range(0., 1.0) = 0.5;
 uniform float fadeDistance : hint_range(0.1, 10.0) = 2.0;
 uniform float fadeStart : hint_range(0.1, 20.0) = 5.0;
+uniform sampler2D noiseTexture: source_color;
+uniform sampler2D screenFadeTexture : source_color;
 
 varying vec3 world_position;
 
@@ -46,12 +48,11 @@ void fragment() {
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
 
-	// Calculate distance from camera to this fragment
-	float distanceToCamera = length(world_position - CAMERA_POSITION_WORLD);
-
-	// Create fade effect based on distance
-	// Object starts fading when closer than fadeStart, becomes transparent at fadeDistance
-	float fadeAlpha = smoothstep(fadeDistance, fadeStart, distanceToCamera);
-	ALPHA = fadeAlpha;
-
+	//// Calculate distance from camera to this fragment
+	//float distanceToCamera = length(world_position - CAMERA_POSITION_WORLD);
+	//
+	//// Create fade effect based on distance
+	//// Object starts fading when closer than fadeStart, becomes transparent at fadeDistance
+	//float fadeAlpha = smoothstep(fadeDistance, fadeStart, distanceToCamera);
+	//ALPHA = fadeAlpha;
 }

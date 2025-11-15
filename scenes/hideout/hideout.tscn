@@ -121,7 +121,7 @@ size = Vector2i(480, 320)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.163825, 0, 0.986489, 0, 1, 0, -0.986489, 0, 0.163825, 5.3256, 1.62922, 0)
+transform = Transform3D(0.261397, 0, -0.965231, 0, 1, 0, 0.965231, 0, 0.261397, 35.3883, 1.62922, -45.2752)
 far = 100.0
 
 [node name="Sprite3D" type="Sprite3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport"]
@@ -138,11 +138,11 @@ x_look_targeter = SubResource("Resource_au00d")
 y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
-[node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
-
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.728789, 0.684738, 0, -0.684738, 0.728789, 3.17915, 2.65254, 1.33812)
+
+[node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
 
 [node name="RotationTest" type="Node3D" parent="CameraController"]
 script = ExtResource("7_embkr")

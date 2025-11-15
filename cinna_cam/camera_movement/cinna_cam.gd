@@ -14,10 +14,12 @@ var meta_path_index: int = 0
 
 func _ready() -> void:
 	# Engine.time_scale = 0.1
-	initialize(0, 0)
+	initialize(0)
 
 
-func initialize(path_index, section_index) -> void:
+func initialize(path_index) -> void:
+	if camera == null:
+		return
 	position_targeter.initialize(camera.global_position)
 
 	var initial_angle = meta_paths[path_index].get_target_angles(camera.global_position)
@@ -26,6 +28,8 @@ func initialize(path_index, section_index) -> void:
 
 
 func _process(delta: float) -> void:
+	if camera == null:
+		return
 	move_camera(delta)
 	rotate_camera(delta)
 
@@ -34,6 +38,7 @@ func move_camera(delta: float) -> void:
 	var current_target_pos = meta_paths[meta_path_index].get_target_location()
 	var new_camera_pos = position_targeter.get_next_position(current_target_pos, delta)
 	camera.global_position = new_camera_pos
+	print(new_camera_pos)
 
 
 func rotate_camera(delta: float) -> void:

@@ -11,7 +11,7 @@ func _set_floor_visibility() -> void:
 	$Props.visible = !hideProps
 	$Walls.visible = !hideWalls
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		_set_floor_visibility()
 	pass
