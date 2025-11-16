@@ -1,4 +1,4 @@
 # LIVE DEMO
-https://vercel.com/plawsos-projects/hideout
+https://hideout-one.vercel.app/
 
 cinna cam class icon courtesy of pixelbazaar - https://www.svgrepo.com/svg/513369/gamepad
