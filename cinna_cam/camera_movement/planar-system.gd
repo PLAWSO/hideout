@@ -5,40 +5,78 @@ class_name PlanarSystem extends Resource
 @export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
 @export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
 
-var _k1: float
-var _k2: float
-var _k3: float
-var _t_critical: float
-
 var _position := Vector3.ZERO
 var _velocity := Vector3.ZERO
-
-var _prev_target_position := Vector3.ZERO
-var _target_position := Vector3.ZERO
+var _prev_target := Vector3.ZERO
 
 func initialize(start_position: Vector3) -> void:
 	_position = start_position
-	_target_position = start_position
-	_prev_target_position = start_position
+	_velocity = Vector3.ZERO
+	_prev_target = start_position
 
-func get_next_position(target_position: Vector3, delta: float) -> Vector3:
-	_k1 = z / (PI * f)
-	_k2 = 1.0 / pow(2.0 * PI * f, 2)
-	_k3 = r * z / (2.0 * PI * f)
-	_t_critical = 0.8 * f * (sqrt(4.0 * _k2 + _k1 * _k1) - _k1)
 
-	_target_position = target_position
-	var target_velocity_est = (_target_position - _prev_target_position) / delta
-	_prev_target_position = _target_position
-	
-	# break delta into smaller integration steps for stability
-	var iterations := int(delta / _t_critical) + 1
-	var step := delta / iterations
-	
-	for i in range(iterations):
-		# can also use Vector3.ZERO for target_velocity_est for no velocity compensation
-		var accel = (_target_position + _k3 * target_velocity_est - _position - _k1 * _velocity) / _k2
-		_velocity += accel * step
-		_position += _velocity * step
-	
-	return _position
+func get_next_position(target: Vector3, delta: float) -> Vector3:
+	var omega = TAU * f   # natural angular frequency
+
+	# target velocity estimate (can be zero if you don't want anticipation)
+	var y = target
+	var y_dot = (y - _prev_target) / delta
+	_prev_target = y
+
+	# Damp depending on regime
+	var e = exp(-z * omega * delta)
+
+	if z < 1.0:
+		# underdamped
+		var c = sqrt(1.0 - z * z)
+		var omega_d = omega * c
+
+		var cos_calc = cos(omega_d * delta)
+		var sin_calc = sin(omega_d * delta)
+
+		var A = e * (cos_calc + (z / c) * sin_calc)
+		var B = e * (sin_calc / (omega_d))
+
+		var x = _position - y
+		var v = _velocity - r * y_dot
+
+		var new_x = A * x + B * v
+		var new_v = -omega_d * e * sin_calc * x + e * (cos_calc - (z / c) * sin_calc) * v
+
+		_position = new_x + y
+		_velocity = new_v + r * y_dot
+		return _position
+
+	elif z == 1.0:
+		# critically damped
+		var A = e * (1.0 + omega * delta)
+		var B = e * delta
+
+		var x = _position - y
+		var v = _velocity - r * y_dot
+
+		var new_x = A * x + B * v
+		var new_v = e * (v - omega * x - omega * v * delta)
+
+		_position = new_x + y
+		_velocity = new_v + r * y_dot
+		return _position
+
+	else:
+		# overdamped
+		var s = sqrt(z * z - 1.0)
+		var lambda1 = -omega * (z - s)
+		var lambda2 = -omega * (z + s)
+
+		var e1 = exp(lambda1 * delta)
+		var e2 = exp(lambda2 * delta)
+
+		var x = _position - y
+		var v = _velocity - r * y_dot
+
+		var new_x = (e1 * (lambda2 * x - v) - e2 * (lambda1 * x - v)) / (lambda2 - lambda1)
+		var new_v = (e1 * lambda1 * (lambda2 * x - v) - e2 * lambda2 * (lambda1 * x - v)) / (lambda2 - lambda1)
+
+		_position = new_x + y
+		_velocity = new_v + r * y_dot
+		return _position
