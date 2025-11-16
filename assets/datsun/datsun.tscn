@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://dcyafnr4rlbt6"]
 
 [ext_resource type="Texture2D" uid="uid://c15dbbs65v7x6" path="res://assets/datsun/datsun_baked-body-texture.png" id="1_6iig6"]
-[ext_resource type="Shader" uid="uid://dm5ij8mmroekx" path="res://assets/datsun/datsun.gdshader" id="1_vw26h"]
+[ext_resource type="Shader" uid="uid://300ieq7dqvtv" path="res://assets/datsun/datsun.gdshader" id="1_vw26h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqrha"]
 resource_name = "Glass"

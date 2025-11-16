@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=31 format=3 uid="uid://djwirk4ockuor"]
 
 [ext_resource type="Script" uid="uid://puedae26ukqg" path="res://scenes/hideout/hideout.gd" id="1_ura2u"]
 [ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
 [ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="2_7v8ca"]
+[ext_resource type="Shader" uid="uid://bafs2pth5iv6y" path="res://scenes/hideout/viewport-buffer.tres" id="2_eegbv"]
 [ext_resource type="Script" uid="uid://pkwdcfxgso1q" path="res://cinna_cam/camera_movement/cinna_cam.gd" id="3_ura2u"]
 [ext_resource type="Script" uid="uid://bf4wol320c205" path="res://cinna_cam/camera_movement/planar-system.gd" id="4_eegbv"]
 [ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="5_x1t0x"]
@@ -11,9 +12,18 @@
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
 [ext_resource type="PackedScene" uid="uid://cwst0m7ws210c" path="res://assets/arcade-cabinet/arcade-cabinet.glb" id="9_x3ijg"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
+[ext_resource type="Script" uid="uid://2j378cfp4am" path="res://scenes/hideout/fps_counter.gd" id="13_x1t0x"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xndaa"]
-viewport_path = NodePath("ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_60i1o"]
+viewport_path = NodePath("ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ura2u"]
+resource_local_to_scene = true
+shader = ExtResource("2_eegbv")
+shader_parameter/Texture2DParameter = SubResource("ViewportTexture_60i1o")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_eegbv"]
+viewport_path = NodePath("RenderBuffer")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
@@ -97,6 +107,20 @@ point_count = 3
 script = ExtResource("1_ura2u")
 cinna_cam = NodePath("CameraController")
 
+[node name="RenderBuffer" type="SubViewport" parent="."]
+size = Vector2i(720, 360)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="RenderBuffer"]
+material = SubResource("ShaderMaterial_ura2u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Datsun" parent="." instance=ExtResource("1_xndaa")]
 transform = Transform3D(-0.783687, 0, 0.0453929, 0, 0.785, 0, -0.0453929, 0, -0.783687, -1.785, 0.560544, 0.958)
 
@@ -105,7 +129,13 @@ hideCeiling = true
 hideWalls = true
 
 [node name="ArcadeCabinet" parent="." instance=ExtResource("9_x3ijg")]
-transform = Transform3D(0.6651, 0, -0.746754, 0, 1, 0, 0.746754, 0, 0.6651, -2.38328, 1.16391, -1.25852)
+transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -2.38328, 1.16391, -1.25852)
+
+[node name="Sprite3D" type="Sprite3D" parent="ArcadeCabinet"]
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 0, 0, 1, -0.995216, 0.689265, 0.000669122)
+pixel_size = 0.0013
+axis = 0
+texture = SubResource("ViewportTexture_eegbv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ArcadeCabinet"]
 follow_viewport_enabled = true
@@ -115,19 +145,13 @@ follow_viewport_scale = 7.905
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SubViewport" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer"]
+[node name="AuxCam" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(480, 320)
+size = Vector2i(720, 360)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.261397, 0, -0.965231, 0, 1, 0, 0.965231, 0, 0.261397, 35.3883, 1.62922, -45.2752)
-far = 100.0
-
-[node name="Sprite3D" type="Sprite3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(0.756217, -0.139099, 0.639365, 0.0189417, 0.981387, 0.191105, -0.654047, -0.132406, 0.744776, -3.02922, 1.85645, -1.99874)
-pixel_size = 0.0012
-texture = SubResource("ViewportTexture_xndaa")
+[node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam"]
+transform = Transform3D(0.145582, 0, -0.989346, 0, 1, 0, 0.989346, 0, 0.145582, 39.2843, 1.85929, -45.3984)
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -140,6 +164,7 @@ metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.728789, 0.684738, 0, -0.684738, 0.728789, 3.17915, 2.65254, 1.33812)
+current = true
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
@@ -273,6 +298,19 @@ metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Temple" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4022, 0, -61.4187)
-camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/SubViewport/Camera3D")
+camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/Camera3D")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="FPSCounter" type="Label" parent="Control/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("13_x1t0x")
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]

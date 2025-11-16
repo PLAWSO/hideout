@@ -22,7 +22,6 @@ func make_continuous():
 	var last_valid_start_point = path_sections[0].global_position
 	var last_section_was_zero_length = false
 	for i in range(path_sections.size()):
-		print("Adjusting PathSection ", i)
 		var current_section = path_sections[i % path_sections.size()]
 		var next_section = path_sections[(i + 1) % path_sections.size()]
 
@@ -30,7 +29,6 @@ func make_continuous():
 			current_section.global_position = last_valid_start_point
 			last_section_was_zero_length = true
 			if is_looped and i == path_sections.size() - 1:
-				print("Looping back to first section for zero-length adjustment.")
 				var next_next_section = path_sections[(i + 2) % path_sections.size()]
 				next_section.global_position = last_valid_start_point
 				next_section.curve.set_point_position(next_section.curve.get_point_count() - 1, next_section.to_local(next_next_section.global_position))

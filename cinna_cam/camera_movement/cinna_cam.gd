@@ -38,7 +38,6 @@ func move_camera(delta: float) -> void:
 	var current_target_pos = meta_paths[meta_path_index].get_target_location()
 	var new_camera_pos = position_targeter.get_next_position(current_target_pos, delta)
 	camera.global_position = new_camera_pos
-	print(new_camera_pos)
 
 
 func rotate_camera(delta: float) -> void:

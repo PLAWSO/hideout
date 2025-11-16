@@ -20,6 +20,7 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [display]
 
+window/size/mode=2
 window/size/always_on_top=true
 
 [importer_defaults]
