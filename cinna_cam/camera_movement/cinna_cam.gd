@@ -18,8 +18,6 @@ func _ready() -> void:
 
 
 func initialize(path_index) -> void:
-	if camera == null:
-		return
 	position_targeter.initialize(camera.global_position)
 
 	var initial_angle = meta_paths[path_index].get_target_angles(camera.global_position)
@@ -27,11 +25,9 @@ func initialize(path_index) -> void:
 	y_look_targeter.initialize(initial_angle.y)
 
 
-func _process(delta: float) -> void:
-	if camera == null:
-		return
-	move_camera(delta)
-	rotate_camera(delta)
+# func _process(delta: float) -> void:
+	# move_camera(delta)
+	# rotate_camera(delta)
 
 
 func move_camera(delta: float) -> void:
