@@ -163,7 +163,7 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 0.728789, 0.684738, 0, -0.684738, 0.728789, 3.17915, 2.65254, 1.33812)
+transform = Transform3D(0.827198, -0.384761, 0.409514, 0, 0.728789, 0.684738, -0.56191, -0.566414, 0.602853, 3.17915, 2.65254, 1.33812)
 current = true
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
