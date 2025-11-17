@@ -16,67 +16,67 @@ func initialize(start_position: Vector3) -> void:
 
 
 func get_next_position(target: Vector3, delta: float) -> Vector3:
-	var omega = TAU * f   # natural angular frequency
+	var angular_frequency = TAU * f   # natural angular frequency
 
 	# target velocity estimate (can be zero if you don't want anticipation)
 	var y = target
-	var y_dot = (y - _prev_target) / delta
+	var target_velocity = (y - _prev_target) / delta
 	_prev_target = y
 
 	# Damp depending on regime
-	var e = exp(-z * omega * delta)
+	var damping_factor = exp(-z * angular_frequency * delta)
 
 	if z < 1.0:
 		# underdamped
 		var c = sqrt(1.0 - z * z)
-		var omega_d = omega * c
+		var omega_d = angular_frequency * c
 
 		var cos_calc = cos(omega_d * delta)
 		var sin_calc = sin(omega_d * delta)
 
-		var A = e * (cos_calc + (z / c) * sin_calc)
-		var B = e * (sin_calc / (omega_d))
+		var A = damping_factor * (cos_calc + (z / c) * sin_calc)
+		var B = damping_factor * (sin_calc / (omega_d))
 
 		var x = _position - y
-		var v = _velocity - r * y_dot
+		var v = _velocity - r * target_velocity
 
 		var new_x = A * x + B * v
-		var new_v = -omega_d * e * sin_calc * x + e * (cos_calc - (z / c) * sin_calc) * v
+		var new_v = -omega_d * damping_factor * sin_calc * x + damping_factor * (cos_calc - (z / c) * sin_calc) * v
 
 		_position = new_x + y
-		_velocity = new_v + r * y_dot
+		_velocity = new_v + r * target_velocity
 		return _position
 
 	elif z == 1.0:
 		# critically damped
-		var A = e * (1.0 + omega * delta)
-		var B = e * delta
+		var position_factor = damping_factor * (1.0 + angular_frequency * delta)
+		var velocity_factor = damping_factor * delta
 
-		var x = _position - y
-		var v = _velocity - r * y_dot
+		var distance_from_target = _position - y
+		var current_velocity = _velocity - r * target_velocity
 
-		var new_x = A * x + B * v
-		var new_v = e * (v - omega * x - omega * v * delta)
+		var new_x = position_factor * distance_from_target + velocity_factor * current_velocity
+		var new_v = damping_factor * (current_velocity - angular_frequency * distance_from_target - angular_frequency * current_velocity * delta)
 
 		_position = new_x + y
-		_velocity = new_v + r * y_dot
+		_velocity = new_v + r * target_velocity
 		return _position
 
 	else:
 		# overdamped
 		var s = sqrt(z * z - 1.0)
-		var lambda1 = -omega * (z - s)
-		var lambda2 = -omega * (z + s)
+		var lambda1 = -angular_frequency * (z - s)
+		var lambda2 = -angular_frequency * (z + s)
 
 		var e1 = exp(lambda1 * delta)
 		var e2 = exp(lambda2 * delta)
 
 		var x = _position - y
-		var v = _velocity - r * y_dot
+		var v = _velocity - r * target_velocity
 
 		var new_x = (e1 * (lambda2 * x - v) - e2 * (lambda1 * x - v)) / (lambda2 - lambda1)
 		var new_v = (e1 * lambda1 * (lambda2 * x - v) - e2 * lambda2 * (lambda1 * x - v)) / (lambda2 - lambda1)
 
 		_position = new_x + y
-		_velocity = new_v + r * y_dot
+		_velocity = new_v + r * target_velocity
 		return _position
