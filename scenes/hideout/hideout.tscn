@@ -194,10 +194,13 @@ script = ExtResource("7_embkr")
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/Datsun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.624603, 0.418565, -0.579682)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12016, 0.658085, -0.484418)
 curve = SubResource("Curve3D_31ftd")
 script = ExtResource("8_seky7")
-follow_target_node = NodePath("../../../Datsun")
+tracking_type = 2
+angle_target_degrees_x = -59.5
+angle_target_degrees_y = 3.0
+relative_to_travel_direction = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Toolbox" type="Node3D" parent="CameraController"]
@@ -212,7 +215,7 @@ follow_target_node = NodePath("../ToolboxLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="ToolboxLookAt" type="Node3D" parent="CameraController/Toolbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94966, 1.05918, -2.69962)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07519, 0.869301, -2.50584)
 
 [node name="Loiter" type="Node3D" parent="CameraController"]
 script = ExtResource("7_embkr")
@@ -269,8 +272,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.796, 1.943, -1.719)
 curve = SubResource("Curve3D_au00d")
 script = ExtResource("8_seky7")
 tracking_type = 2
-angle_target_degrees_x = 70.0
-angle_target_degrees_y = -21.0
+angle_target_degrees_x = 41.5
+angle_target_degrees_y = -13.0
 relative_to_travel_direction = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
@@ -313,4 +316,44 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("13_x1t0x")
 
+[node name="TouchInput" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TouchInput"]
+
+[node name="PreviousCamera" type="Button" parent="TouchInput/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -161.0
+offset_right = -4.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "<"
+
+[node name="NextCamera" type="Button" parent="TouchInput/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -161.0
+offset_right = 71.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = ">"
+
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/PreviousCamera" to="." method="_on_previous_camera_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/NextCamera" to="." method="_on_next_camera_pressed"]
