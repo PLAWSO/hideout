@@ -213,10 +213,9 @@ _data = {
 }
 point_count = 2
 
-[node name="Temple" type="Node3D" node_paths=PackedStringArray("cinna_cam", "camera")]
+[node name="Temple" type="Node3D" node_paths=PackedStringArray("cinna_cam")]
 script = ExtResource("1_8hjng")
 cinna_cam = NodePath("CinnaCam")
-camera = NodePath("CinnaCam/Camera3D")
 
 [node name="Meshes" type="Node3D" parent="."]
 
@@ -2443,9 +2442,8 @@ light_energy = 2.215
 light_specular = 0.0
 shadow_enabled = true
 
-[node name="CinnaCam" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
+[node name="CinnaCam" type="Node3D" parent="." node_paths=PackedStringArray("meta_paths")]
 script = ExtResource("2_5eyw8")
-camera = NodePath("Camera3D")
 meta_paths = [NodePath("TrailFollow")]
 x_look_targeter = SubResource("Resource_yd1wb")
 y_look_targeter = SubResource("Resource_fkpan")

@@ -75,6 +75,10 @@ func _get_property_list():
 				"name": "relative_to_travel_direction",
 				"type": TYPE_BOOL
 			})
+			props.append({
+				"name": "treat_as_point",
+				"type": TYPE_BOOL
+			})
 
 	return props
 
