@@ -24,11 +24,11 @@ var angle_target_degrees_x: float = 0.0:
 	set(value):
 		angle_target_degrees_x = value
 		angle_target.x = deg_to_rad(value)
-
 var angle_target_degrees_y: float = 0.0:
 	set(value):
 		angle_target_degrees_y = value
 		angle_target.y = deg_to_rad(value)
+var treat_as_point: bool = false
 
 var zero_length: bool = false
 var length: float = 0.0

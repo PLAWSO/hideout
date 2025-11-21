@@ -2470,6 +2470,7 @@ tracking_type = 2
 angle_target_degrees_x = 0.0
 angle_target_degrees_y = 4.0
 relative_to_travel_direction = true
+treat_as_point = null
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="PathSection2" type="Path3D" parent="CinnaCam/TrailFollow"]
