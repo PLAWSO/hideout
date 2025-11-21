@@ -152,7 +152,7 @@ size = Vector2i(720, 360)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam"]
-transform = Transform3D(-0.017427, -0.0698301, -0.997407, 0, 0.997558, -0.0698407, 0.999848, -0.00121711, -0.0173844, 40.8346, 1.97499, -46.3837)
+transform = Transform3D(0.920672, 0.0625559, 0.385292, 0, 0.987075, -0.160261, -0.390337, 0.147548, 0.908772, 64.2568, 1.9757, -56.5193)
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -164,7 +164,7 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.512007, 0.27878, 0.812484, 0, 0.94587, -0.324547, -0.858982, 0.16617, 0.484291, -2.19036, 1.52779, -1.31327)
+transform = Transform3D(0.991266, -0.0321022, -0.127911, 0, 0.96992, -0.243423, 0.131878, 0.241297, 0.961449, -3.35312, 1.5348, -0.290634)
 show_preview_mesh = false
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
