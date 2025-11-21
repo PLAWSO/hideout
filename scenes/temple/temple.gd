@@ -8,7 +8,3 @@ extends Node3D
 	set(value):
 		cinna_cam.camera = value
 
-
-func _on_cinna_cam_ready() -> void:
-	cinna_cam.meta_paths[0].start_path_sequence()
-

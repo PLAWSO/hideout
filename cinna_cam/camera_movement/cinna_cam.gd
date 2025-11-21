@@ -1,3 +1,4 @@
+@tool
 @icon("res://icons/camera_controller_icon.svg")
 class_name CinnaCam extends Node3D
 
@@ -29,6 +30,10 @@ func _ready() -> void:
 		return
 	
 	initialize(0)
+
+	for meta_path in meta_paths:
+		if meta_path.auto_start:
+			meta_path.start_path_sequence()
 
 func _physics_process(delta: float) -> void:
 	if not camera:

@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://de5v3t6mb63rh"]
+
+[ext_resource type="PackedScene" uid="uid://cqprp5hu2iu7j" path="res://assets/camera/camera.glb" id="1_doi4a"]
+[ext_resource type="Script" uid="uid://pkwdcfxgso1q" path="res://cinna_cam/camera_movement/cinna_cam.gd" id="2_vrddd"]
+[ext_resource type="Script" uid="uid://bf4wol320c205" path="res://cinna_cam/camera_movement/planar-system.gd" id="3_ork3v"]
+[ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="4_a0rq3"]
+[ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="5_g451t"]
+[ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="6_ioiol"]
+
+[sub_resource type="Resource" id="Resource_d01bh"]
+script = ExtResource("3_ork3v")
+f = 2.0
+z = 1.8
+r = 0.8
+metadata/_custom_type_script = "uid://bf4wol320c205"
+
+[sub_resource type="Resource" id="Resource_mj4xq"]
+script = ExtResource("4_a0rq3")
+f = 4.0
+z = 1.0
+r = 0.8
+metadata/_custom_type_script = "uid://cep4n5ilt5opf"
+
+[sub_resource type="Resource" id="Resource_otg31"]
+script = ExtResource("4_a0rq3")
+f = 4.0
+z = 1.0
+r = 0.8
+metadata/_custom_type_script = "uid://cep4n5ilt5opf"
+
+[sub_resource type="Curve3D" id="Curve3D_q6ea6"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.05202, 0, -1.85933, 0, 0, 0, 0, 0, 0, 2.81225, 0, -4.68135, 0, 0, 0, 0, 0, 0, -0.841914, 0, -5.58742, 0, 0, 0, 0, 0, 0, -3.29939, 0, -4.59447),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.697791, 0.716302, 0, -0.716302, 0.697791, 0, 1.79233, 3.71066)
+current = true
+
+[node name="CinnaCam" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
+script = ExtResource("2_vrddd")
+camera = NodePath("Camera3D")
+meta_paths = [NodePath("MetaPath")]
+position_targeter = SubResource("Resource_d01bh")
+x_look_targeter = SubResource("Resource_mj4xq")
+y_look_targeter = SubResource("Resource_otg31")
+metadata/_custom_type_script = "uid://pkwdcfxgso1q"
+
+[node name="Camera3D" type="Camera3D" parent="CinnaCam"]
+transform = Transform3D(0.401046, -0.368207, 0.8388, 0, 0.915663, 0.401948, -0.916058, -0.1612, 0.367223, 2.32059, 0, -0.0473376)
+
+[node name="camera" parent="CinnaCam/Camera3D" instance=ExtResource("1_doi4a")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="MetaPath" type="Node3D" parent="CinnaCam"]
+script = ExtResource("5_g451t")
+auto_start = true
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CinnaCam/MetaPath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639247, 0, 2.89684)
+curve = SubResource("Curve3D_q6ea6")
+script = ExtResource("6_ioiol")
+speed = 0.5
+time_to_finish = 25.6426
+tracking_type = 2
+angle_target_degrees_x = 61.5
+angle_target_degrees_y = -23.7
+relative_to_travel_direction = true
+treat_as_point = false
+metadata/_custom_type_script = "uid://u8kmj6bobusb"

@@ -2,9 +2,6 @@ extends Node3D
 
 @export var cinna_cam: CinnaCam
 
-func _on_camera_controller_ready() -> void:
-	cinna_cam.meta_paths[0].start_path_sequence()
-
 #region Input Handling
 func _unhandled_input(event: InputEvent) -> void:
 	var current_meta_path_index = cinna_cam.meta_path_index

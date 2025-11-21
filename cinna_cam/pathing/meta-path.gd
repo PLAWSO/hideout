@@ -6,11 +6,24 @@ class_name MetaPath extends Node3D
 @export_tool_button("Make Continuous", "VisualShaderNodeCurveXYZTexture") var make_continuous_action = make_continuous
 @export_range(0, 1, 0.01) var crossfade_time: float = 0.01
 @export var is_looped: bool = true
+@export var auto_start: bool = false:
+	set(value):
+		auto_start = value
+		if not self.is_node_ready():
+			return
+		if Engine.is_editor_hint():
+			if auto_start:
+				start_path_sequence()
+			else:
+				stop_path_sequence()
+			notify_property_list_changed()
 
 var path_sections: Array[PathSection] = []
 var section_index: int = 0
+var running: bool = false
 
 var tween: Tween = null
+var timer: Timer = null
 
 #endregion
 
@@ -18,6 +31,9 @@ var tween: Tween = null
 
 func _ready() -> void:
 	collect_path_sections()
+
+	if not Engine.is_editor_hint() and auto_start:
+		start_path_sequence()
 
 func collect_path_sections() -> void:
 	path_sections.clear()
@@ -136,10 +152,15 @@ func get_target_angles(origin: Vector3) -> Vector2:
 #region Path Movement Control
 
 func start_path_sequence() -> void:
+	running = true
 	section_index = 0
 	_reset_path_sections()
 	_start_section_movement()
 
+func stop_path_sequence() -> void:
+	running = false
+	_reset_path_sections()
+	_kill_timers()
 
 func _move_to_next_section() -> void:
 	section_index = (section_index + 1) % path_sections.size()
@@ -154,24 +175,39 @@ func _reset_path_sections() -> void:
 
 
 func _start_section_movement() -> void:
-	if tween:
-		tween.kill()
+	_kill_timers()
 
 	var section = path_sections[section_index]
 
 	if !section.zero_length:
 		tween = create_tween()
 		tween.tween_property(section.target, "progress_ratio", 1, section.time_to_finish)
-		var timer = get_tree().create_timer(section.time_to_finish - crossfade_time)
+		timer = Timer.new()#get_tree().create_timer(section.time_to_finish + 1e-6)
+		timer.wait_time = section.time_to_finish
+		timer.one_shot = true
+		add_child(timer)
+		timer.start()
 		timer.connect("timeout", Callable(self, "_on_section_complete"))
-		# tween.tween_callback(_on_section_complete).set_delay(1e-6)
 	else:
-		var timer = get_tree().create_timer(section.time_to_finish)
+		timer = Timer.new()#get_tree().create_timer(section.time_to_finish + 1e-6)
+		timer.wait_time = section.time_to_finish
+		timer.one_shot = true
+		add_child(timer)
+		timer.start()
 		timer.connect("timeout", Callable(self, "_on_section_complete"))
 
+func _kill_timers() -> void:
+	if timer:
+		timer.stop()
+		timer = null
+	if tween:
+		tween.kill()
+		tween = null
 
 func _on_section_complete() -> void:
-	# print("Section ", section_index, " complete.")
+	print("Section ", section_index, " complete.")
+	if !running:
+		return
 	_move_to_next_section()
 	_start_section_movement()
 

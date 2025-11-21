@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=32 format=3 uid="uid://djwirk4ockuor"]
 
 [ext_resource type="Script" uid="uid://puedae26ukqg" path="res://scenes/hideout/hideout.gd" id="1_ura2u"]
 [ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c3jw42gxogjji" path="res://assets/direction-cube/direction-cube.tscn" id="6_60i1o"]
 [ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="7_embkr"]
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
+[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://cwst0m7ws210c" path="res://assets/arcade-cabinet/arcade-cabinet.glb" id="9_x3ijg"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
 [ext_resource type="Script" uid="uid://2j378cfp4am" path="res://scenes/hideout/fps_counter.gd" id="13_x1t0x"]
@@ -27,21 +28,21 @@ viewport_path = NodePath("RenderBuffer")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
-f = 8.0
+f = 2.0
 z = 1.8
 r = 0.8
 metadata/_custom_type_script = "uid://dygsmwmd0om4g"
 
 [sub_resource type="Resource" id="Resource_au00d"]
 script = ExtResource("5_x1t0x")
-f = 5.05
+f = 0.5
 z = 1.0
 r = 0.9
 metadata/_custom_type_script = "uid://bi740sq5wwli2"
 
 [sub_resource type="Resource" id="Resource_xbpu6"]
 script = ExtResource("5_x1t0x")
-f = 4.0
+f = 0.5
 z = 1.23
 r = 1.0
 metadata/_custom_type_script = "uid://bi740sq5wwli2"
@@ -151,20 +152,20 @@ size = Vector2i(720, 360)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam"]
-transform = Transform3D(0.145582, 0, -0.989346, 0, 1, 0, 0.989346, 0, 0.145582, 39.2843, 1.85929, -45.3984)
+transform = Transform3D(-0.017427, -0.0698301, -0.997407, 0, 0.997558, -0.0698407, 0.999848, -0.00121711, -0.0173844, 40.8346, 1.97499, -46.3837)
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
-camera = NodePath("Camera3D")
+camera = NodePath("TestCam")
 meta_paths = [NodePath("Loiter"), NodePath("ArcadeCabinet"), NodePath("Datsun"), NodePath("Toolbox")]
 position_targeter = SubResource("Resource_leb7k")
 x_look_targeter = SubResource("Resource_au00d")
 y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17915, 2.65254, 1.33812)
-current = true
+[node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
+transform = Transform3D(0.512007, 0.27878, 0.812484, 0, 0.94587, -0.324547, -0.858982, 0.16617, 0.484291, -2.19036, 1.52779, -1.31327)
+show_preview_mesh = false
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
@@ -220,6 +221,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07519, 0.869301, -2.50584)
 
 [node name="Loiter" type="Node3D" parent="CameraController"]
 script = ExtResource("7_embkr")
+auto_start = true
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/Loiter"]

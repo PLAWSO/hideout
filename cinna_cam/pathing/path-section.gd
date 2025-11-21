@@ -6,8 +6,14 @@ class_name PathSection extends Path3D
 enum TrackingType { FOLLOW, STATIONARY, ANGLE, LOCK_AT_PREVIOUS }
 
 @export_group("Speed")
-@export var speed: float = -1.0
-@export var time_to_finish: float = 1.0
+@export var speed: float = -1.0:
+	set(value):
+		speed = value
+		_compute_constants()
+
+@export var time_to_finish: float = 1.0:
+	set(value):
+		time_to_finish = value
 
 @export_group("Tracking")
 @export var tracking_type: TrackingType = TrackingType.FOLLOW:
@@ -36,6 +42,14 @@ var zero_length: bool = false
 var length: float = 0.0
 var target: PathFollow3D = PathFollow3D.new()
 
+func _compute_constants() -> void:
+	length = self.curve.get_baked_length()
+	if speed > 0:
+		time_to_finish = length / speed
+
+	if length == 0.0:
+		zero_length = true
+
 #endregion
 
 #region Lifecycle
@@ -43,13 +57,7 @@ var target: PathFollow3D = PathFollow3D.new()
 func _ready() -> void:
 	add_child(target)
 	follow_target = get_node_or_null(follow_target_node)
-
-	length = self.curve.get_baked_length()
-	if speed > 0:
-		time_to_finish = length / speed
-
-	if length == 0.0:
-		zero_length = true
+	_compute_constants()
 
 #endregion
 
