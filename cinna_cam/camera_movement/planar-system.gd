@@ -5,74 +5,53 @@ class_name PlanarSystem extends Resource
 @export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
 @export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
 
+var _w: float
+var _d: float
+var _k1: float
+var _k2: float
+var _k3: float
+
 var _position := Vector3.ZERO
 var _velocity := Vector3.ZERO
-var _prev_target_pos := Vector3.ZERO
+var _prev_target := Vector3.ZERO
 
 func initialize(start_position: Vector3) -> void:
 	_position = start_position
 	_velocity = Vector3.ZERO
-	_prev_target_pos = start_position
+	_prev_target = start_position
 
+func _compute_constants() -> void:
+	_w = 2.0 * PI * f
+	_d = _w * sqrt(abs(z * z - 1.0))
+
+	_k1 = z / (PI * f)
+	_k2 = 1.0 / (_w * _w)
+	_k3 = r * z / _w
 
 func get_next_position(target_pos: Vector3, delta: float) -> Vector3:
-	var frequency = TAU * f
+	_compute_constants()
 
-	var target_velocity = (target_pos - _prev_target_pos) / delta
-	_prev_target_pos = target_pos
+	var xd = (target_pos - _prev_target) / delta
+	_prev_target = target_pos
 
-	var damping_factor = exp(-z * frequency * delta)
-
-	if z < 1.0:
-		# underdamped
-		var oscillation_coef = sqrt(1.0 - z * z)
-		var damped_frequency = frequency * oscillation_coef
-		var lambda1 = cos(damped_frequency * delta)
-		var lambda2 = sin(damped_frequency * delta)
-
-		var position_factor = damping_factor * (lambda1 + (z / oscillation_coef) * lambda2)
-		var velocity_factor = damping_factor * (lambda2 / (damped_frequency))
-
-		var distance_from_target = _position - target_pos
-		var velocity_est = _velocity - r * target_velocity
-
-		var new_x = position_factor * distance_from_target + velocity_factor * velocity_est
-		var new_v = -damped_frequency * damping_factor * lambda2 * distance_from_target + damping_factor * (lambda1 - (z / oscillation_coef) * lambda2) * velocity_est
-
-		_position = new_x + target_pos
-		_velocity = new_v + r * target_velocity
-		return _position
-
-	elif z == 1.0:
-		# critically damped
-		var position_factor = damping_factor * (1.0 + frequency * delta)
-		var velocity_factor = damping_factor * delta
-
-		var distance_from_target = _position - target_pos
-		var velocity_est = _velocity - r * target_velocity
-
-		var new_x = position_factor * distance_from_target + velocity_factor * velocity_est
-		var new_v = damping_factor * (velocity_est - frequency * distance_from_target - frequency * velocity_est * delta)
-
-		_position = new_x + target_pos
-		_velocity = new_v + r * target_velocity
-		return _position
-
+	var k1_stable: float
+	var k2_stable: float
+	if (_w * delta) < z:
+		k1_stable = _k1
+		k2_stable = max(_k2, delta * delta / 2.0 + delta * _k1 / 2.0, delta * _k1)
 	else:
-		# overdamped
-		var separation_coefficient = sqrt(z * z - 1.0)
-		var lambda1 = -frequency * (z - separation_coefficient)
-		var lambda2 = -frequency * (z + separation_coefficient)
+		var t1 = exp(-z * _w * delta)
+		var alpha = 2.0 * t1 * cos(_d * delta) if z < 1.0 else cosh(_d * delta)
+		var beta = t1 * t1
+		var t2 = delta / (1.0 + beta - alpha)
+		k1_stable = (1.0 - beta) * t2
+		k2_stable = delta * t2
+	
+	_position = _position + _velocity * delta
+	_velocity = _velocity + delta * (target_pos + _k3 * xd - _position - _k1 * _velocity) / k2_stable
+	return _position
 
-		var e1 = exp(lambda1 * delta)
-		var e2 = exp(lambda2 * delta)
 
-		var distance_from_target = _position - target_pos
-		var velocity_est = _velocity - r * target_velocity
 
-		var new_x = (e1 * (lambda2 * distance_from_target - velocity_est) - e2 * (lambda1 * distance_from_target - velocity_est)) / (lambda2 - lambda1)
-		var new_v = (e1 * lambda1 * (lambda2 * distance_from_target - velocity_est) - e2 * lambda2 * (lambda1 * distance_from_target - velocity_est)) / (lambda2 - lambda1)
 
-		_position = new_x + target_pos
-		_velocity = new_v + r * target_velocity
-		return _position
+

@@ -201,7 +201,7 @@ tracking_type = 2
 angle_target_degrees_x = 127.5
 angle_target_degrees_y = 3.0
 relative_to_travel_direction = false
-treat_as_point = null
+treat_as_point = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Toolbox" type="Node3D" parent="CameraController"]
@@ -301,8 +301,9 @@ time_to_finish = 11.5656
 tracking_type = 3
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
-[node name="Temple" parent="." instance=ExtResource("11_ura2u")]
+[node name="Temple" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4022, 0, -61.4187)
+camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/Camera3D")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
