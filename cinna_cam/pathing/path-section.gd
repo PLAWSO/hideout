@@ -1,6 +1,8 @@
 @tool
 class_name PathSection extends Path3D
 
+#region Properties
+
 enum TrackingType { FOLLOW, STATIONARY, ANGLE, LOCK_AT_PREVIOUS }
 
 @export_group("Speed")
@@ -33,6 +35,25 @@ var treat_as_point: bool = false
 var zero_length: bool = false
 var length: float = 0.0
 var target: PathFollow3D = PathFollow3D.new()
+
+#endregion
+
+#region Lifecycle
+
+func _ready() -> void:
+	add_child(target)
+	follow_target = get_node_or_null(follow_target_node)
+
+	length = self.curve.get_baked_length()
+	if speed > 0:
+		time_to_finish = length / speed
+
+	if length == 0.0:
+		zero_length = true
+
+#endregion
+
+#region Methods
 
 func _get_property_list():
 	var props = []
@@ -81,14 +102,5 @@ func _get_property_list():
 			})
 
 	return props
-
-func _ready() -> void:
-	add_child(target)
-	follow_target = get_node_or_null(follow_target_node)
-
-	length = self.curve.get_baked_length()
-	if speed > 0:
-		time_to_finish = length / speed
-
-	if length == 0.0:
-		zero_length = true
+	
+#endregion

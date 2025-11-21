@@ -1,7 +1,7 @@
-
-
 @icon("res://icons/camera_controller_icon.svg")
 class_name CinnaCam extends Node3D
+
+#region Properties
 
 @export var camera: Node3D
 @export var meta_paths: Array[MetaPath] = []
@@ -12,14 +12,6 @@ class_name CinnaCam extends Node3D
 
 var meta_path_index: int = 0
 
-func _ready() -> void:
-	Engine.time_scale = 1.0
-	if not camera:
-		return
-	
-	initialize(0)
-
-
 func initialize(path_index) -> void:
 	position_targeter.initialize(camera.global_position)
 
@@ -27,6 +19,16 @@ func initialize(path_index) -> void:
 	x_look_targeter.initialize(initial_angle.x)
 	y_look_targeter.initialize(initial_angle.y)
 
+#endregion
+
+#region Lifecycle
+
+func _ready() -> void:
+	Engine.time_scale = 1.0
+	if not camera:
+		return
+	
+	initialize(0)
 
 func _physics_process(delta: float) -> void:
 	if not camera:
@@ -34,12 +36,14 @@ func _physics_process(delta: float) -> void:
 	move_camera(delta)
 	rotate_camera(delta)
 
+#endregion
+
+#region Methods
 
 func move_camera(delta: float) -> void:
 	var current_target_pos = meta_paths[meta_path_index].get_target_location()
 	var new_camera_pos = position_targeter.get_next_position(current_target_pos, delta)
 	camera.global_position = new_camera_pos
-
 
 func rotate_camera(delta: float) -> void:
 	var new_camera_rotation = meta_paths[meta_path_index].get_target_angles(camera.global_position)
@@ -47,8 +51,9 @@ func rotate_camera(delta: float) -> void:
 	camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_angle(new_camera_rotation.x, delta))
 	camera.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_angle(new_camera_rotation.y, delta))
 
-
 func set_movement_target(index: int) -> void:
 	if index >= 0 and index < meta_paths.size():
 		print("Setting movement target to meta path index: " + str(index))
 		meta_path_index = index
+
+#endregion

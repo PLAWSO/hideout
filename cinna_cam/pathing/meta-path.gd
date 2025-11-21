@@ -14,6 +14,23 @@ var tween: Tween = null
 
 #endregion
 
+#region Lifecycle
+
+func _ready() -> void:
+	collect_path_sections()
+
+func collect_path_sections() -> void:
+	path_sections.clear()
+	var children = get_children()
+	for child in children:
+		if child is PathSection:
+			path_sections.append(child)
+
+	if path_sections.size() == 0:
+		push_error("No path sections defined in MetaPath.")
+
+#endregion
+
 #region Curve Change Handling
 
 func make_continuous():
@@ -48,25 +65,6 @@ func make_continuous():
 
 #endregion
 
-#region Lifecycle
-
-func _ready() -> void:
-	collect_path_sections()
-
-func collect_path_sections() -> void:
-	path_sections.clear()
-	var children = get_children()
-	for child in children:
-		if child is PathSection:
-			path_sections.append(child)
-		# else:
-		# 	push_warning("MetaPath child is not a PathSection: " + str(child))
-
-	if path_sections.size() == 0:
-		push_error("No path sections defined in MetaPath.")
-
-#endregion
-
 #region Target Retrieval
 
 func get_target_location() -> Vector3:
@@ -87,19 +85,15 @@ func get_target_angles(origin: Vector3) -> Vector2:
 			return Vector2(target_x_angle + path_section.angle_target.x, path_section.angle_target.y)
 
 		if path_section.treat_as_point:
-			# Convert angle_target to a direction vector
 			var target_direction = Vector3(
 				-sin(path_section.angle_target.x),
 				sin(path_section.angle_target.y),
 				-cos(path_section.angle_target.x)
 			).normalized()
 			
-			# Create a point a little in front of the path section
-			var offset_distance = 1.0  # Adjust this value as needed
+			var offset_distance = 1.0
 			var look_at_point = path_section.global_position + (target_direction * offset_distance)
-			print("look_at_point", look_at_point)
 			
-			# Calculate angles from camera to that point
 			var look_direction = origin.direction_to(look_at_point)
 			var target_x_angle = atan2(-look_direction.x, -look_direction.z)
 			var target_y_angle = asin(look_direction.y)

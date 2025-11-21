@@ -1,6 +1,8 @@
 @tool
 class_name PlanarSystem extends Resource
 
+#region Properties
+
 @export var f := 2.0 # natural frequency (cycles/sec)
 @export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
 @export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
@@ -15,11 +17,6 @@ var _position := Vector3.ZERO
 var _velocity := Vector3.ZERO
 var _prev_target := Vector3.ZERO
 
-func initialize(start_position: Vector3) -> void:
-	_position = start_position
-	_velocity = Vector3.ZERO
-	_prev_target = start_position
-
 func _compute_constants() -> void:
 	_w = 2.0 * PI * f
 	_d = _w * sqrt(abs(z * z - 1.0))
@@ -28,9 +25,22 @@ func _compute_constants() -> void:
 	_k2 = 1.0 / (_w * _w)
 	_k3 = r * z / _w
 
-func get_next_position(target_pos: Vector3, delta: float) -> Vector3:
+#endregion
+
+#region Lifecycle
+
+func initialize(start_position: Vector3) -> void:
+	_position = start_position
+	_velocity = Vector3.ZERO
+	_prev_target = start_position
+
 	_compute_constants()
 
+#endregion
+
+#region Methods
+
+func get_next_position(target_pos: Vector3, delta: float) -> Vector3:
 	var xd = (target_pos - _prev_target) / delta
 	_prev_target = target_pos
 
@@ -51,7 +61,4 @@ func get_next_position(target_pos: Vector3, delta: float) -> Vector3:
 	_velocity = _velocity + delta * (target_pos + _k3 * xd - _position - _k1 * _velocity) / k2_stable
 	return _position
 
-
-
-
-
+#endregion
