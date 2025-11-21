@@ -7,76 +7,72 @@ class_name PlanarSystem extends Resource
 
 var _position := Vector3.ZERO
 var _velocity := Vector3.ZERO
-var _prev_target := Vector3.ZERO
+var _prev_target_pos := Vector3.ZERO
 
 func initialize(start_position: Vector3) -> void:
 	_position = start_position
 	_velocity = Vector3.ZERO
-	_prev_target = start_position
+	_prev_target_pos = start_position
 
 
-func get_next_position(target: Vector3, delta: float) -> Vector3:
-	var angular_frequency = TAU * f   # natural angular frequency
+func get_next_position(target_pos: Vector3, delta: float) -> Vector3:
+	var frequency = TAU * f
 
-	# target velocity estimate (can be zero if you don't want anticipation)
-	var y = target
-	var target_velocity = (y - _prev_target) / delta
-	_prev_target = y
+	var target_velocity = (target_pos - _prev_target_pos) / delta
+	_prev_target_pos = target_pos
 
-	# Damp depending on regime
-	var damping_factor = exp(-z * angular_frequency * delta)
+	var damping_factor = exp(-z * frequency * delta)
 
 	if z < 1.0:
 		# underdamped
-		var c = sqrt(1.0 - z * z)
-		var omega_d = angular_frequency * c
+		var oscillation_coef = sqrt(1.0 - z * z)
+		var damped_frequency = frequency * oscillation_coef
+		var lambda1 = cos(damped_frequency * delta)
+		var lambda2 = sin(damped_frequency * delta)
 
-		var cos_calc = cos(omega_d * delta)
-		var sin_calc = sin(omega_d * delta)
+		var position_factor = damping_factor * (lambda1 + (z / oscillation_coef) * lambda2)
+		var velocity_factor = damping_factor * (lambda2 / (damped_frequency))
 
-		var A = damping_factor * (cos_calc + (z / c) * sin_calc)
-		var B = damping_factor * (sin_calc / (omega_d))
+		var distance_from_target = _position - target_pos
+		var velocity_est = _velocity - r * target_velocity
 
-		var x = _position - y
-		var v = _velocity - r * target_velocity
+		var new_x = position_factor * distance_from_target + velocity_factor * velocity_est
+		var new_v = -damped_frequency * damping_factor * lambda2 * distance_from_target + damping_factor * (lambda1 - (z / oscillation_coef) * lambda2) * velocity_est
 
-		var new_x = A * x + B * v
-		var new_v = -omega_d * damping_factor * sin_calc * x + damping_factor * (cos_calc - (z / c) * sin_calc) * v
-
-		_position = new_x + y
+		_position = new_x + target_pos
 		_velocity = new_v + r * target_velocity
 		return _position
 
 	elif z == 1.0:
 		# critically damped
-		var position_factor = damping_factor * (1.0 + angular_frequency * delta)
+		var position_factor = damping_factor * (1.0 + frequency * delta)
 		var velocity_factor = damping_factor * delta
 
-		var distance_from_target = _position - y
-		var current_velocity = _velocity - r * target_velocity
+		var distance_from_target = _position - target_pos
+		var velocity_est = _velocity - r * target_velocity
 
-		var new_x = position_factor * distance_from_target + velocity_factor * current_velocity
-		var new_v = damping_factor * (current_velocity - angular_frequency * distance_from_target - angular_frequency * current_velocity * delta)
+		var new_x = position_factor * distance_from_target + velocity_factor * velocity_est
+		var new_v = damping_factor * (velocity_est - frequency * distance_from_target - frequency * velocity_est * delta)
 
-		_position = new_x + y
+		_position = new_x + target_pos
 		_velocity = new_v + r * target_velocity
 		return _position
 
 	else:
 		# overdamped
-		var s = sqrt(z * z - 1.0)
-		var lambda1 = -angular_frequency * (z - s)
-		var lambda2 = -angular_frequency * (z + s)
+		var separation_coefficient = sqrt(z * z - 1.0)
+		var lambda1 = -frequency * (z - separation_coefficient)
+		var lambda2 = -frequency * (z + separation_coefficient)
 
 		var e1 = exp(lambda1 * delta)
 		var e2 = exp(lambda2 * delta)
 
-		var x = _position - y
-		var v = _velocity - r * target_velocity
+		var distance_from_target = _position - target_pos
+		var velocity_est = _velocity - r * target_velocity
 
-		var new_x = (e1 * (lambda2 * x - v) - e2 * (lambda1 * x - v)) / (lambda2 - lambda1)
-		var new_v = (e1 * lambda1 * (lambda2 * x - v) - e2 * lambda2 * (lambda1 * x - v)) / (lambda2 - lambda1)
+		var new_x = (e1 * (lambda2 * distance_from_target - velocity_est) - e2 * (lambda1 * distance_from_target - velocity_est)) / (lambda2 - lambda1)
+		var new_v = (e1 * lambda1 * (lambda2 * distance_from_target - velocity_est) - e2 * lambda2 * (lambda1 * distance_from_target - velocity_est)) / (lambda2 - lambda1)
 
-		_position = new_x + y
+		_position = new_x + target_pos
 		_velocity = new_v + r * target_velocity
 		return _position

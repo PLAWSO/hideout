@@ -24,11 +24,11 @@ var angle_target_degrees_x: float = 0.0:
 	set(value):
 		angle_target_degrees_x = value
 		angle_target.x = deg_to_rad(value)
-
 var angle_target_degrees_y: float = 0.0:
 	set(value):
 		angle_target_degrees_y = value
 		angle_target.y = deg_to_rad(value)
+var treat_as_point: bool = false
 
 var zero_length: bool = false
 var length: float = 0.0
@@ -73,6 +73,10 @@ func _get_property_list():
 			})
 			props.append({
 				"name": "relative_to_travel_direction",
+				"type": TYPE_BOOL
+			})
+			props.append({
+				"name": "treat_as_point",
 				"type": TYPE_BOOL
 			})
 

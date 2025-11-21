@@ -1,11 +1,18 @@
 class_name AngularSystem extends Resource
 
 @export var f := 4.0
-@export var z := 1.8
+@export var z := 1.0
 @export var r := 0.8
+
+var _w: float
+var _d: float
+var _k1: float
+var _k2: float
+var _k3: float
 
 var _velocity: float = 0.0
 var _angle: float = 0.0
+var _prev_target: float = 0.0
 
 var float_small := 1e-6
 var _top_angle_limit := 0.5 * PI - float_small
@@ -15,83 +22,51 @@ func initialize(start_angle: float) -> void:
 	_angle = start_angle
 	_velocity = 0.0
 
+func _compute_constants() -> void:
+	_w = 2.0 * PI * f
+	_d = _w * sqrt(abs(z * z - 1.0))
 
-func _compute_closed_form(
-	current: float,
-	velocity: float,
-	target: float,
-	delta: float
-) -> Dictionary:
+	_k1 = z / (PI * f)
+	_k2 = 1.0 / (_w * _w)
+	_k3 = r * z / _w
 
-	var wn = 2.0 * PI * f
-	var k1 = z / (PI * f)
-	var k2 = 1.0 / (wn * wn)
-	var k3 = r * z / wn
+func _compute_closed_form(target_angle: float, delta: float) -> float:
+	_compute_constants()
 
-	# Because you always use target_velocity = 0.0
-	var x = current - target
-	var v = velocity
+	var xd = (target_angle - _prev_target) / delta
+	_prev_target = target_angle
 
-	var d := z
-
-	if d < 1.0:
-		# Underdamped (not your case, but keep complete)
-		var wd = wn * sqrt(1.0 - d * d)
-
-		var e = exp(-d * wn * delta)
-		var c1 = x
-		var c2 = (v + d * wn * x) / wd
-
-		var new_x = e * (c1 * cos(wd * delta) + c2 * sin(wd * delta))
-		var new_v = e * (
-			-c1 * wn * d * cos(wd * delta)
-			- c1 * wd * sin(wd * delta)
-			+ c2 * wd * cos(wd * delta)
-			- c2 * wn * d * sin(wd * delta)
-		)
-
-		return {
-			"pos": target + new_x,
-			"vel": new_v
-		}
-
+	var k1_stable: float
+	var k2_stable: float
+	if (_w * delta) < z:
+		k1_stable = _k1
+		k2_stable = max(_k2, delta * delta / 2.0 + delta * _k1 / 2.0, delta * _k1)
 	else:
-		# Overdamped or critically damped — your actual case (z = 1.8)
-		var r1 = -wn * (d - sqrt(d * d - 1.0))
-		var r2 = -wn * (d + sqrt(d * d - 1.0))
-
-		var c2 = (v - r1 * x) / (r2 - r1)
-
-		var c1 = x - c2
-
-		var new_x = c1 * exp(r1 * delta) + c2 * exp(r2 * delta)
-		var new_v = c1 * r1 * exp(r1 * delta) + c2 * r2 * exp(r2 * delta)
-
-		return {
-			"pos": target + new_x,
-			"vel": new_v
-		}
-
+		var t1 = exp(-z * _w * delta)
+		var alpha = 2.0 * t1 * cos(_d * delta) if z < 1.0 else cosh(_d * delta)
+		var beta = t1 * t1
+		var t2 = delta / (1.0 + beta - alpha)
+		k1_stable = (1.0 - beta) * t2
+		k2_stable = delta * t2
+	
+	_angle = _angle + _velocity * delta
+	_velocity = _velocity + delta * (target_angle + _k3 * xd - _angle - _k1 * _velocity) / k2_stable
+	return _angle
 
 func get_next_angle(target_angle: float, delta: float) -> float:
-	# Your wrap-around logic first
-	if target_angle > 2.8 and _angle < -2.8:
-			_angle += TAU
-	elif target_angle < -2.8 and _angle > 2.8:
+	if _angle > .0:
+		if target_angle < _angle - PI:
 			_angle -= TAU
+			# _prev_target -= TAU
+	elif _angle < .0:
+		if target_angle > _angle + PI:
+			_angle += TAU
+			# _prev_target += TAU
 
-	var result = _compute_closed_form(_angle, _velocity, target_angle, delta)
-	_angle = result.pos
-	_velocity = result.vel
-
-	return _angle
+	return _compute_closed_form(target_angle, delta)
 
 
 func get_next_constrained_angle(target_angle: float, delta: float) -> float:
 	target_angle = clamp(target_angle, _bottom_angle_limit, _top_angle_limit)
 
-	var result = _compute_closed_form(_angle, _velocity, target_angle, delta)
-	_angle = clamp(result.pos, _bottom_angle_limit, _top_angle_limit)
-	_velocity = result.vel
-
-	return _angle
+	return _compute_closed_form(target_angle, delta)

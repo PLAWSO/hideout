@@ -78,14 +78,35 @@ func get_target_angles(origin: Vector3) -> Vector2:
 
 	if path_section.tracking_type == PathSection.TrackingType.ANGLE:
 		var path_length = path_section.curve.get_baked_length()
-		var target_x_angle = 0.0
+
 		if path_section.relative_to_travel_direction:
 			var rear_point = path_section.curve.sample_baked((path_section.target.progress_ratio - 0.005) * path_length, true) + path_section.global_position
 			var front_point = path_section.curve.sample_baked((path_section.target.progress_ratio + 0.005) * path_length, true) + path_section.global_position
 			var travel_direction = rear_point.direction_to(front_point)
-			target_x_angle = atan2(-travel_direction.x, -travel_direction.z)
+			var target_x_angle = atan2(-travel_direction.x, -travel_direction.z)
+			return Vector2(target_x_angle + path_section.angle_target.x, path_section.angle_target.y)
 
-		return Vector2(target_x_angle + path_section.angle_target.x, path_section.angle_target.y)
+		if path_section.treat_as_point:
+			# Convert angle_target to a direction vector
+			var target_direction = Vector3(
+				-sin(path_section.angle_target.x),
+				sin(path_section.angle_target.y),
+				-cos(path_section.angle_target.x)
+			).normalized()
+			
+			# Create a point a little in front of the path section
+			var offset_distance = 1.0  # Adjust this value as needed
+			var look_at_point = path_section.global_position + (target_direction * offset_distance)
+			print("look_at_point", look_at_point)
+			
+			# Calculate angles from camera to that point
+			var look_direction = origin.direction_to(look_at_point)
+			var target_x_angle = atan2(-look_direction.x, -look_direction.z)
+			var target_y_angle = asin(look_direction.y)
+			
+			return Vector2(target_x_angle, target_y_angle)
+
+		return Vector2(path_section.angle_target.x, path_section.angle_target.y)
 
 	if path_section.tracking_type == PathSection.TrackingType.FOLLOW:
 		var object_to_track = path_section.follow_target
