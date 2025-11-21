@@ -1,4 +1,7 @@
+@tool
 class_name AngularSystem extends Resource
+
+#region Properties
 
 @export var f := 4.0
 @export var z := 1.0
@@ -18,10 +21,6 @@ var float_small := 1e-6
 var _top_angle_limit := 0.5 * PI - float_small
 var _bottom_angle_limit := -0.5 * PI + float_small
 
-func initialize(start_angle: float) -> void:
-	_angle = start_angle
-	_velocity = 0.0
-
 func _compute_constants() -> void:
 	_w = 2.0 * PI * f
 	_d = _w * sqrt(abs(z * z - 1.0))
@@ -30,9 +29,21 @@ func _compute_constants() -> void:
 	_k2 = 1.0 / (_w * _w)
 	_k3 = r * z / _w
 
-func _compute_closed_form(target_angle: float, delta: float) -> float:
+#endregion
+
+#region Lifecycle
+
+func initialize(start_angle: float) -> void:
+	_angle = start_angle
+	_velocity = 0.0
+
 	_compute_constants()
 
+#endregion
+
+#region Methods
+
+func _compute_closed_form(target_angle: float, delta: float) -> float:
 	var xd = (target_angle - _prev_target) / delta
 	_prev_target = target_angle
 
@@ -57,11 +68,9 @@ func get_next_angle(target_angle: float, delta: float) -> float:
 	if _angle > .0:
 		if target_angle < _angle - PI:
 			_angle -= TAU
-			# _prev_target -= TAU
 	elif _angle < .0:
 		if target_angle > _angle + PI:
 			_angle += TAU
-			# _prev_target += TAU
 
 	return _compute_closed_form(target_angle, delta)
 
@@ -70,3 +79,5 @@ func get_next_constrained_angle(target_angle: float, delta: float) -> float:
 	target_angle = clamp(target_angle, _bottom_angle_limit, _top_angle_limit)
 
 	return _compute_closed_form(target_angle, delta)
+
+#endregion
