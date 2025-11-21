@@ -3,9 +3,18 @@ class_name PlanarSystem extends Resource
 
 #region Properties
 
-@export var f := 2.0 # natural frequency (cycles/sec)
-@export var z := 1.8 # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
-@export var r := 0.8 # response factor (>1 overshoots, =1 matches, <1 anticipates)
+@export var f := 2.0: # natural frequency (cycles/sec)
+	set(value):
+		f = value
+		_compute_constants()
+@export var z := 1.8: # damping ratio (>1 overdamped, =1 critical, <1 underdamped)
+	set(value):
+		z = value
+		_compute_constants()
+@export var r := 0.8: # response factor (>1 overshoots, =1 matches, <1 anticipates)
+	set(value):
+		r = value
+		_compute_constants()
 
 var _w: float
 var _d: float
