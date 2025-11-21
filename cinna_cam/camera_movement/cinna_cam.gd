@@ -28,7 +28,7 @@ func initialize(path_index) -> void:
 	y_look_targeter.initialize(initial_angle.y)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not camera:
 		return
 	move_camera(delta)
