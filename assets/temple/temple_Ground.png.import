@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6jfvhaqhfm22"
 path.s3tc="res://.godot/imported/temple_Ground.png-d09c413ee201612ec09d2cca66323d51.s3tc.ctex"
+path.etc2="res://.godot/imported/temple_Ground.png-d09c413ee201612ec09d2cca66323d51.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/temple/temple_Ground.png"
-dest_files=["res://.godot/imported/temple_Ground.png-d09c413ee201612ec09d2cca66323d51.s3tc.ctex"]
+dest_files=["res://.godot/imported/temple_Ground.png-d09c413ee201612ec09d2cca66323d51.s3tc.ctex", "res://.godot/imported/temple_Ground.png-d09c413ee201612ec09d2cca66323d51.etc2.ctex"]
 
 [params]
 
