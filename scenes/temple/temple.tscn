@@ -2458,7 +2458,7 @@ y_look_targeter = SubResource("Resource_fkpan")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CinnaCam" instance=ExtResource("6_xdn75")]
-transform = Transform3D(0.264917, -0.0672642, -0.961922, 0, 0.997564, -0.0697565, 0.964271, 0.0184797, 0.264272, 1.45509, 1.97497, 13.9388)
+transform = Transform3D(0.922688, 0.0612282, 0.380655, 0, 0.987309, -0.158808, -0.385548, 0.14653, 0.910978, 12.8481, 1.9757, 5.13287)
 visible = false
 show_preview_mesh = false
 
@@ -2474,7 +2474,7 @@ script = ExtResource("4_8hjng")
 speed = 3.515
 time_to_finish = 8.23904
 tracking_type = 2
-angle_target_degrees_x = 0.0
+angle_target_degrees_x = 4.7
 angle_target_degrees_y = 4.0
 relative_to_travel_direction = true
 treat_as_point = false
