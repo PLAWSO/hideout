@@ -4,13 +4,11 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lhy8"]
 resource_name = "Black Plastic"
-cull_mode = 2
 albedo_color = Color(0.272725, 0.272725, 0.272725, 1)
 roughness = 0.950777
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oe3nt"]
 resource_name = "White Plastic"
-cull_mode = 2
 albedo_color = Color(0.906802, 0.879589, 0.686269, 1)
 roughness = 0.5
 
@@ -70,13 +68,11 @@ shadow_mesh = SubResource("ArrayMesh_2qaat")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgg1u"]
 resource_name = "Black Plastic"
-cull_mode = 2
 albedo_color = Color(0.272725, 0.272725, 0.272725, 1)
 roughness = 0.950777
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnt4e"]
 resource_name = "Recording Light"
-cull_mode = 2
 albedo_color = Color(0.906675, 0.212297, 0.163064, 1)
 roughness = 0.5
 
@@ -135,16 +131,19 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3mo67")
 
 [node name="TestCam" type="Camera3D"]
+cull_mask = 1048063
 script = ExtResource("1_y7r5t")
 
 [node name="PreviewMesh" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Camera" type="MeshInstance3D" parent="PreviewMesh"]
+layers = 512
 mesh = SubResource("ArrayMesh_5aq8d")
 skeleton = NodePath("")
 
 [node name="Accessories" type="MeshInstance3D" parent="PreviewMesh"]
 transform = Transform3D(-1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -3.57628e-07, -1, 4.37114e-08, -1, 3.57628e-07, 0, -0.0584174, -0.044618)
+layers = 512
 mesh = SubResource("ArrayMesh_y7r5t")
 skeleton = NodePath("")
