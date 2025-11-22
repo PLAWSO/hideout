@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=35 format=3 uid="uid://djwirk4ockuor"]
 
 [ext_resource type="Script" uid="uid://puedae26ukqg" path="res://scenes/hideout/hideout.gd" id="1_ura2u"]
 [ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
@@ -23,8 +23,19 @@ resource_local_to_scene = true
 shader = ExtResource("2_eegbv")
 shader_parameter/Texture2DParameter = SubResource("ViewportTexture_60i1o")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_embkr"]
+viewport_path = NodePath("ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_seky7"]
+resource_local_to_scene = true
+shader = ExtResource("2_eegbv")
+shader_parameter/Texture2DParameter = SubResource("ViewportTexture_embkr")
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_eegbv"]
 viewport_path = NodePath("RenderBuffer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_seky7"]
+viewport_path = NodePath("RenderBuffer2")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
@@ -109,7 +120,7 @@ script = ExtResource("1_ura2u")
 cinna_cam = NodePath("CameraController")
 
 [node name="RenderBuffer" type="SubViewport" parent="."]
-size = Vector2i(720, 360)
+size = Vector2i(360, 360)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
@@ -122,18 +133,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="RenderBuffer2" type="SubViewport" parent="."]
+size = Vector2i(360, 360)
+
+[node name="ColorRect" type="ColorRect" parent="RenderBuffer2"]
+material = SubResource("ShaderMaterial_seky7")
+offset_right = 360.0
+offset_bottom = 360.0
+
 [node name="Datsun" parent="." instance=ExtResource("1_xndaa")]
 transform = Transform3D(-0.783687, 0, 0.0453929, 0, 0.785, 0, -0.0453929, 0, -0.783687, -1.785, 0.560544, 0.958)
 
 [node name="Garage" parent="." instance=ExtResource("2_7v8ca")]
-hideCeiling = true
-hideWalls = true
 
 [node name="ArcadeCabinet" parent="." instance=ExtResource("9_x3ijg")]
 transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -2.38328, 1.16391, -1.25852)
 
 [node name="Sprite3D" type="Sprite3D" parent="ArcadeCabinet"]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 0, 0, 1, -0.995216, 0.689265, 0.000669122)
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 0, 0, 1, -0.995216, 0.689265, 0.230392)
 pixel_size = 0.0013
 axis = 0
 texture = SubResource("ViewportTexture_eegbv")
@@ -143,16 +160,39 @@ follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="ArcadeCabinet/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 360.0
+offset_bottom = 360.0
 
 [node name="AuxCam" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(720, 360)
+size = Vector2i(360, 360)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam"]
-transform = Transform3D(0.920672, 0.0625559, 0.385292, 0, 0.987075, -0.160261, -0.390337, 0.147548, 0.908772, 64.2568, 1.9757, -56.5193)
+[node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" instance=ExtResource("9_60i1o")]
+transform = Transform3D(-0.0169308, -0.0698319, -0.997415, 0, 0.997558, -0.0698419, 0.999857, -0.00118248, -0.0168894, 41.1926, 1.97499, -46.3792)
+
+[node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet"]
+transform = Transform3D(0.975554, -0.219761, -2.98023e-08, 0.219761, 0.975554, 0, 0, 7.45058e-09, 1, -0.995216, 0.689265, -0.227953)
+pixel_size = 0.0013
+axis = 0
+texture = SubResource("ViewportTexture_seky7")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="ArcadeCabinet"]
+follow_viewport_enabled = true
+follow_viewport_scale = 7.905
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ArcadeCabinet/CanvasLayer2"]
+offset_left = 360.0
+offset_right = 720.0
+offset_bottom = 360.0
+
+[node name="AuxCam2" type="SubViewport" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2"]
+transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
 
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -164,8 +204,7 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.991266, -0.0321022, -0.127911, 0, 0.96992, -0.243423, 0.131878, 0.241297, 0.961449, -3.35312, 1.5348, -0.290634)
-show_preview_mesh = false
+transform = Transform3D(0.61471, 0.26769, 0.741939, 0, 0.940648, -0.339384, -0.788753, 0.208623, 0.578226, -2.32095, 1.52757, -1.22298)
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
@@ -305,7 +344,7 @@ metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Temple" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.4022, 0, -61.4187)
-camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/Camera3D")
+camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/TestCam")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
