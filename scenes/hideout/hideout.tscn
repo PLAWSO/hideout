@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://djwirk4ockuor"]
+[gd_scene load_steps=31 format=3 uid="uid://djwirk4ockuor"]
 
 [ext_resource type="Script" uid="uid://puedae26ukqg" path="res://scenes/hideout/hideout.gd" id="1_ura2u"]
 [ext_resource type="PackedScene" uid="uid://dcyafnr4rlbt6" path="res://assets/datsun/datsun.tscn" id="1_xndaa"]
@@ -58,15 +58,6 @@ z = 1.23
 r = 1.0
 metadata/_custom_type_script = "uid://bi740sq5wwli2"
 
-[sub_resource type="Curve3D" id="Curve3D_8vk1q"]
-
-[sub_resource type="Curve3D" id="Curve3D_2db5g"]
-_data = {
-"points": PackedVector3Array(-0.0396929, -1.43051e-06, -0.36534, 0.0396929, 1.43051e-06, 0.36534, 0.102434, 0, 0.0292667, -0.775057, 0, 0.0583352, 0.775057, 0, -0.0583352, 0.969838, 1.43051e-06, 0.923184, -0.00537491, 1.43051e-06, 0.523955, 0.00537491, -1.43051e-06, -0.523955, 1.81943, 0, 0.0365838, 0.658267, 1.43051e-06, 0.0233429, -0.658267, -1.43051e-06, -0.0233429, 0.952917, 0, -0.841419, -0.0249248, 1.43051e-06, -0.393171, 0.0249248, -1.43051e-06, 0.393171, 0.0912006, 0, 0.0146333),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
-}
-point_count = 5
-
 [sub_resource type="Curve3D" id="Curve3D_31ftd"]
 
 [sub_resource type="Curve3D" id="Curve3D_8borv"]
@@ -100,20 +91,6 @@ _data = {
 point_count = 4
 
 [sub_resource type="Curve3D" id="Curve3D_au00d"]
-
-[sub_resource type="Curve3D" id="Curve3D_xndaa"]
-_data = {
-"points": PackedVector3Array(0.297846, 0, -1.08842, -0.297846, 0, 1.08842, 0, 0, 0, -0.807653, 0, 1.04606, 0.807653, 0, -1.04606, 3.6571, 0, 1.93522),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_eegbv"]
-_data = {
-"points": PackedVector3Array(-0.793997, 0, 0.701194, 0.793997, 0, -0.701194, 0, 0, 0, 1.08715, 0, 0.418649, -1.08715, 0, -0.418649, -0.539559, 0, -3.18071, 0.239771, 0, -1.15165, -0.239771, 0, 1.15165, -3.6571, 0, -1.93522),
-"tilts": PackedFloat32Array(0, 0, 0)
-}
-point_count = 3
 
 [node name="Hideout" type="Node3D" node_paths=PackedStringArray("cinna_cam")]
 script = ExtResource("1_ura2u")
@@ -169,7 +146,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.938014, 0.0522336, 0.342638, 0, 0.988579, -0.150704, -0.346597, 0.141363, 0.927301, 64.1587, 1.97564, -55.0459)
+transform = Transform3D(-0.017299, -0.0697773, -0.997413, 0, 0.997562, -0.0697877, 0.99985, -0.00120725, -0.0172568, 41.2212, 1.97499, -46.2967)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet"]
 transform = Transform3D(0.975554, -0.219761, -2.98023e-08, 0.219761, 0.975554, 0, 0, 7.45058e-09, 1, -0.995216, 0.689265, -0.227953)
@@ -204,30 +181,10 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.774304, 0.0849388, 0.627087, 0, 0.990951, -0.134224, -0.632814, 0.10393, 0.767297, 0.995247, 0.34283, 2.34327)
+transform = Transform3D(0.99516, 0.059115, -0.0785, 0, 0.798826, 0.601562, 0.0982692, -0.59865, 0.79496, -3.75493, 1.12402, 1.87378)
 
 [node name="Pointer" parent="CameraController" instance=ExtResource("6_60i1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18402, 2.36378, 0.911958)
-
-[node name="RotationTest" type="Node3D" parent="CameraController"]
-script = ExtResource("7_embkr")
-metadata/_custom_type_script = "uid://c3pfswfcml75e"
-
-[node name="PathSection" type="Path3D" parent="CameraController/RotationTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20545, 2.34236, 0.991116)
-curve = SubResource("Curve3D_8vk1q")
-script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="LookCircle" type="Node" parent="CameraController/RotationTest"]
-
-[node name="PathSection2" type="Path3D" parent="CameraController/RotationTest/LookCircle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2515, 2.36951, 0.941092)
-curve = SubResource("Curve3D_2db5g")
-script = ExtResource("8_seky7")
-follow_target_node = NodePath("")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Datsun" type="Node3D" parent="CameraController"]
 script = ExtResource("7_embkr")
@@ -318,28 +275,6 @@ angle_target_degrees_x = 41.6
 angle_target_degrees_y = -13.0
 relative_to_travel_direction = false
 treat_as_point = true
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="MetaPath" type="Node3D" parent="CameraController"]
-script = ExtResource("7_embkr")
-metadata/_custom_type_script = "uid://c3pfswfcml75e"
-
-[node name="PathSection" type="Path3D" parent="CameraController/MetaPath"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.315425, 2.14659, -0.247567)
-curve = SubResource("Curve3D_xndaa")
-script = ExtResource("8_seky7")
-speed = 0.64
-time_to_finish = 7.52038
-follow_target_node = NodePath("../../../Datsun")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="PathSection2" type="Path3D" parent="CameraController/MetaPath"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.34168, 2.14659, 1.68765)
-curve = SubResource("Curve3D_eegbv")
-script = ExtResource("8_seky7")
-speed = 0.64
-time_to_finish = 11.5656
-tracking_type = 3
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Temple" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
