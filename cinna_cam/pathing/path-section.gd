@@ -15,6 +15,9 @@ enum TrackingType { FOLLOW, STATIONARY, ANGLE, LOCK_AT_PREVIOUS }
 	set(value):
 		time_to_finish = value
 
+@export_group("Jump Cut")
+@export var jump_cut_to_next: bool = false
+
 @export_group("Tracking")
 @export var tracking_type: TrackingType = TrackingType.FOLLOW:
 	set(value):

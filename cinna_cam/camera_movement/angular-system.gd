@@ -45,6 +45,7 @@ func _compute_constants() -> void:
 func initialize(start_angle: float) -> void:
 	_angle = start_angle
 	_velocity = 0.0
+	_prev_target = start_angle
 
 	_compute_constants()
 
