@@ -25,6 +25,10 @@ var running: bool = false
 var tween: Tween = null
 var timer: Timer = null
 
+var jump_cut_signal
+
+var meta_path_index: int
+
 #endregion
 
 #region Lifecycle
@@ -94,8 +98,10 @@ func get_target_angles(origin: Vector3) -> Vector2:
 		var path_length = path_section.curve.get_baked_length()
 
 		if path_section.relative_to_travel_direction:
-			var rear_point = path_section.curve.sample_baked((path_section.target.progress_ratio - 0.005) * path_length, true) + path_section.global_position
-			var front_point = path_section.curve.sample_baked((path_section.target.progress_ratio + 0.005) * path_length, true) + path_section.global_position
+			var rear_point = path_section.curve.sample_baked(max(.0, (path_section.target.progress_ratio - 0.005)) * path_length, true) + path_section.global_position
+			var front_point = path_section.curve.sample_baked(min(1.0, (path_section.target.progress_ratio + 0.005)) * path_length, true) + path_section.global_position
+			# DebugDraw2D.set_text("rear_point", rear_point - path_section.global_position, 0, Color.RED)
+			# DebugDraw2D.set_text("front_point", front_point - path_section.global_position, 0, Color.RED)
 			var travel_direction = rear_point.direction_to(front_point)
 			var target_x_angle = atan2(-travel_direction.x, -travel_direction.z)
 			return Vector2(target_x_angle + path_section.angle_target.x, path_section.angle_target.y)
@@ -163,10 +169,14 @@ func stop_path_sequence() -> void:
 	_kill_timers()
 
 func _move_to_next_section() -> void:
+	var old_section_index = section_index
 	section_index = (section_index + 1) % path_sections.size()
+
 	if section_index == 0:
 		_reset_path_sections()
 
+	if path_sections[old_section_index].jump_cut_to_next:
+		jump_cut_signal.emit(meta_path_index)
 
 func _reset_path_sections() -> void:
 	for section in path_sections:
@@ -182,19 +192,13 @@ func _start_section_movement() -> void:
 	if !section.zero_length:
 		tween = create_tween()
 		tween.tween_property(section.target, "progress_ratio", 1, section.time_to_finish)
-		timer = Timer.new()#get_tree().create_timer(section.time_to_finish + 1e-6)
-		timer.wait_time = section.time_to_finish
-		timer.one_shot = true
-		add_child(timer)
-		timer.start()
-		timer.connect("timeout", Callable(self, "_on_section_complete"))
-	else:
-		timer = Timer.new()#get_tree().create_timer(section.time_to_finish + 1e-6)
-		timer.wait_time = section.time_to_finish
-		timer.one_shot = true
-		add_child(timer)
-		timer.start()
-		timer.connect("timeout", Callable(self, "_on_section_complete"))
+
+	timer = Timer.new()
+	timer.wait_time = section.time_to_finish
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
+	timer.connect("timeout", Callable(self, "_on_section_complete"))
 
 func _kill_timers() -> void:
 	if timer:
@@ -205,7 +209,7 @@ func _kill_timers() -> void:
 		tween = null
 
 func _on_section_complete() -> void:
-	print("Section ", section_index, " complete.")
+	# print("Section ", section_index, " complete.")
 	if !running:
 		return
 	_move_to_next_section()

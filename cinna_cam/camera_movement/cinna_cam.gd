@@ -13,6 +13,9 @@ class_name CinnaCam extends Node3D
 
 var meta_path_index: int = 0
 
+signal jump_cut(from_meta_path_index: int)
+
+
 func initialize(path_index) -> void:
 	position_targeter.initialize(camera.global_position)
 
@@ -31,9 +34,13 @@ func _ready() -> void:
 	
 	initialize(0)
 
+	jump_cut.connect(try_jump_cut)
+	
 	for meta_path in meta_paths:
 		if meta_path.auto_start:
 			meta_path.start_path_sequence()
+			meta_path.jump_cut_signal = jump_cut
+			meta_path.meta_path_index = meta_path_index
 
 func _physics_process(delta: float) -> void:
 	if not camera:
@@ -51,6 +58,7 @@ func move_camera(delta: float) -> void:
 	camera.global_position = new_camera_pos
 
 func rotate_camera(delta: float) -> void:
+	# DebugDraw2D.set_text("camera_angle", camera.rotation, 0, Color.WHITE)
 	var new_camera_rotation = meta_paths[meta_path_index].get_target_angles(camera.global_position)
 	camera.transform.basis = Basis()
 	camera.rotate_object_local(Vector3.UP, x_look_targeter.get_next_angle(new_camera_rotation.x, delta))
@@ -58,7 +66,24 @@ func rotate_camera(delta: float) -> void:
 
 func set_movement_target(index: int) -> void:
 	if index >= 0 and index < meta_paths.size():
-		print("Setting movement target to meta path index: " + str(index))
+		# print("Setting movement target to meta path index: " + str(index))
 		meta_path_index = index
+
+func try_jump_cut(from_meta_path_index: int) -> void:
+	if from_meta_path_index != meta_path_index:
+		return
+	var new_target_pos = meta_paths[meta_path_index].get_target_location()
+	position_targeter.initialize(new_target_pos)
+	camera.global_position = new_target_pos
+	# DebugDraw2D.set_text("camera_angle", camera.rotation, 0, Color.WHITE)
+
+	var new_camera_rotation = meta_paths[meta_path_index].get_target_angles(camera.global_position)
+	x_look_targeter.initialize(new_camera_rotation.x)
+	y_look_targeter.initialize(new_camera_rotation.y)
+	
+	camera.basis = Basis()
+	camera.rotate_object_local(Vector3.UP, new_camera_rotation.x)
+	camera.rotate_object_local(Vector3.RIGHT, new_camera_rotation.y)
+
 
 #endregion
