@@ -9,6 +9,8 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oytgg"]
 resource_name = "Body"
 cull_mode = 2
+shading_mode = 2
+specular_mode = 2
 albedo_color = Color(0.565784, 0.214588, 0.906727, 1)
 roughness = 0.763636
 
