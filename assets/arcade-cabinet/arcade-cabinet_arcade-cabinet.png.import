@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfl4rreq8kyjo"
-path.s3tc="res://.godot/imported/direction-cube_cube-direction.png-ede0a6bb2d593c4c2338153ea8328477.s3tc.ctex"
-path.etc2="res://.godot/imported/direction-cube_cube-direction.png-ede0a6bb2d593c4c2338153ea8328477.etc2.ctex"
+uid="uid://b7jiy3npwmnpk"
+path.s3tc="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex"
+path.etc2="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "54098c606283509bc2fc29872e310a5d"
+"md5": "0323741b8298aac8fcbdb7cecffa144d"
 }
 
 [deps]
 
-source_file="res://assets/direction-cube/direction-cube_cube-direction.png"
-dest_files=["res://.godot/imported/direction-cube_cube-direction.png-ede0a6bb2d593c4c2338153ea8328477.s3tc.ctex", "res://.godot/imported/direction-cube_cube-direction.png-ede0a6bb2d593c4c2338153ea8328477.etc2.ctex"]
+source_file="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png"
+dest_files=["res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex", "res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"]
 
 [params]
 
