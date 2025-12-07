@@ -38,9 +38,6 @@ viewport_path = NodePath("RenderBuffer2")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
-f = 2.0
-z = 1.8
-r = 0.8
 metadata/_custom_type_script = "uid://dygsmwmd0om4g"
 
 [sub_resource type="Resource" id="Resource_au00d"]
@@ -145,7 +142,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.17818, 0, -0.983998, 0, 1, 0, 0.983998, 0, 0.17818, 46.0582, 1.976, -46.5486)
+transform = Transform3D(0.007711171, 0, -0.99997026, 0, 1, 0, 0.99997026, 0, 0.007711171, 38.69976, 1.976, -46.484188)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet"]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -180,7 +177,7 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.980836, -0.0207457, -0.19373, 0, 0.994315, -0.106477, 0.194838, 0.104436, 0.97526, -3.86261, 1.62055, 1.04166)
+transform = Transform3D(0.79168105, -0.18430997, -0.5824697, 0, 0.9534076, -0.30168527, 0.6109346, 0.23883851, 0.7547947, 1.8984743, 0.3188471, -1.2504629)
 
 [node name="Bike" type="Node3D" parent="CameraController"]
 script = ExtResource("7_embkr")
@@ -239,7 +236,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19203, 0.342868, 2.34327)
 curve = SubResource("Curve3D_psd4u")
 script = ExtResource("8_seky7")
 speed = 0.5
-time_to_finish = 10.9572
+time_to_finish = 10.9572115
 follow_target_node = NodePath("../../Toolbox/ToolboxLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
@@ -248,7 +245,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43364, 0.347417, -1.36718)
 curve = SubResource("Curve3D_leb7k")
 script = ExtResource("8_seky7")
 speed = 0.5
-time_to_finish = 15.1307
+time_to_finish = 15.130656
 follow_target_node = NodePath("../ArcadeCabinetLookAt")
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
