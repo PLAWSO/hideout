@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw44dj0dplocb"
-path.s3tc="res://.godot/imported/garage_torch.jpg-12fe7a0d762494b32667a7372cfc0783.s3tc.ctex"
-path.etc2="res://.godot/imported/garage_torch.jpg-12fe7a0d762494b32667a7372cfc0783.etc2.ctex"
+uid="uid://dey3vbfejochn"
+path.s3tc="res://.godot/imported/garage_overhead-bin.png-fe9fc8c4a3e5e480faec629e47ad300b.s3tc.ctex"
+path.etc2="res://.godot/imported/garage_overhead-bin.png-fe9fc8c4a3e5e480faec629e47ad300b.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "475f96bf6db1588619baac3704878182"
+"md5": "a0ced61344ec1b9f799467b0d4290a88"
 }
 
 [deps]
 
-source_file="res://assets/garage/garage_torch.jpg"
-dest_files=["res://.godot/imported/garage_torch.jpg-12fe7a0d762494b32667a7372cfc0783.s3tc.ctex", "res://.godot/imported/garage_torch.jpg-12fe7a0d762494b32667a7372cfc0783.etc2.ctex"]
+source_file="res://assets/garage/garage_overhead-bin.png"
+dest_files=["res://.godot/imported/garage_overhead-bin.png-fe9fc8c4a3e5e480faec629e47ad300b.s3tc.ctex", "res://.godot/imported/garage_overhead-bin.png-fe9fc8c4a3e5e480faec629e47ad300b.etc2.ctex"]
 
 [params]
 
