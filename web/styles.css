@@ -27,6 +27,10 @@ p {
 }
 
 @media (max-width: 1200px) {
+	* {
+		font-size: 16px;
+	}
+
 	#loading-container {
 		/* adjust height for mobile (for on-screen controls) */
 		height: calc(100vh - env(safe-area-inset-bottom));
