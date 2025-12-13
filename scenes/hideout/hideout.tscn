@@ -142,7 +142,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.06882547, 0, -0.9976287, 0, 1, 0, 0.9976287, 0, 0.06882547, 42.741665, 1.9759991, -47.51764)
+transform = Transform3D(0.8497257, 0.1476236, 0.5061358, 0, 0.9599997, -0.28000113, -0.527225, 0.23792416, 0.8157364, 61.588913, 1.9759982, -67.86676)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet"]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -177,7 +177,7 @@ y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CameraController" instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.97189975, -0.15780047, 0.17467083, 0, 0.74203235, 0.6703641, -0.23539518, -0.6515267, 0.72118104, -3.7489488, 1.4070606, 1.6894267)
+transform = Transform3D(0.934135, -0.097613774, -0.34331223, 0, 0.961875, -0.2734894, 0.3569198, 0.25547603, 0.8985211, 2.331034, 0.34280205, -0.92988485)
 near = 0.005
 far = 100.0
 
