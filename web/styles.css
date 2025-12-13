@@ -5,6 +5,10 @@
 	font-size: 32px;
 }
 
+body {
+	background-color: black;
+}
+
 p {
 	align-self: flex-end;
 	margin: 20px;
