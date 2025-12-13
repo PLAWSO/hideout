@@ -2,7 +2,7 @@
 	font-family: "VT323", monospace;
 	font-weight: 400;
 	font-style: normal;
-	font-size: 36px;
+	font-size: 32px;
 }
 
 p {
@@ -26,10 +26,10 @@ p {
 	z-index: -1;
 }
 
-@media (max-width: 600px) {
-	p {
-		/* adjust bottom margin for mobile (for on-screen controls) */
-		margin-bottom: env(safe-area-inset-bottom);
+@media (max-width: 1200px) {
+	#loading-container {
+		/* adjust height for mobile (for on-screen controls) */
+		height: calc(100vh - env(safe-area-inset-bottom));
 	}
 
 	/* prevent scrolling on mobile */
