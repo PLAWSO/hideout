@@ -95,5 +95,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 })
 
+function blurCanvas() {
+	document.getElementById("canvas").blur();
+}
 
 
