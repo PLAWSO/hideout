@@ -17,12 +17,12 @@ p {
 }
 
 #loading-container {
-	position: absolute;
+	position: fixed;
 	background: black;
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100dvh;
 	display: flex;
 }
 
@@ -33,11 +33,6 @@ p {
 @media (max-width: 1200px) {
 	* {
 		font-size: 16px;
-	}
-
-	#loading-container {
-		/* adjust height for mobile (for on-screen controls) */
-		height: calc(100vh - env(safe-area-inset-bottom));
 	}
 
 	/* prevent scrolling on mobile */
