@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bohb81o14ve6l"]
+[gd_scene format=4 uid="uid://bohb81o14ve6l"]
 
 [ext_resource type="Texture2D" uid="uid://b7jiy3npwmnpk" path="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png" id="1_7kg8j"]
 
@@ -12,6 +12,7 @@ albedo_color = Color(0, 0, 0, 1)
 resource_name = "Body"
 cull_mode = 2
 shading_mode = 2
+specular_mode = 2
 albedo_texture = ExtResource("1_7kg8j")
 texture_filter = 2
 
@@ -272,39 +273,53 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_pstag")
 
-[node name="ArcadeCabinet" type="Node3D"]
+[node name="ArcadeCabinet" type="Node3D" unique_id=1334575737]
 
-[node name="Body" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="." unique_id=1813635364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.57353)
+layers = 5
 mesh = SubResource("ArrayMesh_rrwmf")
 skeleton = NodePath("")
 
-[node name="Button" type="MeshInstance3D" parent="."]
+[node name="Button" type="MeshInstance3D" parent="." unique_id=295978913]
 transform = Transform3D(0.396943, 0.0923008, 0, -0.0923008, 0.396943, 0, 0, 0, 0.407533, 0.472083, 1.56695, -0.210814)
+layers = 5
 mesh = SubResource("ArrayMesh_ok7qq")
 skeleton = NodePath("")
 
-[node name="Button_001" type="MeshInstance3D" parent="."]
+[node name="Button_001" type="MeshInstance3D" parent="." unique_id=1497834709]
 transform = Transform3D(0.396943, 0.0923008, 0, -0.0923008, 0.396943, 0, 0, 0, 0.407533, 0.450949, 1.57197, -0.0982773)
+layers = 5
 mesh = SubResource("ArrayMesh_bfrgr")
 skeleton = NodePath("")
 
-[node name="Button_002" type="MeshInstance3D" parent="."]
+[node name="Button_002" type="MeshInstance3D" parent="." unique_id=1863407758]
 transform = Transform3D(0.396943, 0.0923008, 0, -0.0923008, 0.396943, 0, 0, 0, 0.407533, 0.428726, 1.57719, -0.141926)
+layers = 5
 mesh = SubResource("ArrayMesh_mcais")
 skeleton = NodePath("")
 
-[node name="Button_003" type="MeshInstance3D" parent="."]
+[node name="Button_003" type="MeshInstance3D" parent="." unique_id=2097793601]
 transform = Transform3D(0.396943, 0.0923008, 0, -0.0923008, 0.396943, 0, 0, 0, 0.407533, 0.44084, 1.57429, -0.177135)
+layers = 5
 mesh = SubResource("ArrayMesh_oohu5")
 skeleton = NodePath("")
 
-[node name="Knob" type="MeshInstance3D" parent="."]
+[node name="Knob" type="MeshInstance3D" parent="." unique_id=1257659487]
 transform = Transform3D(-0.00406956, 0.00456759, 0.000383568, -6.94164e-09, 0.000512923, -0.00610805, -0.00458367, -0.00405529, -0.000340538, 0.467451, 1.6425, 0.183952)
+layers = 5
 mesh = SubResource("ArrayMesh_58tie")
 skeleton = NodePath("")
 
-[node name="Stick" type="MeshInstance3D" parent="."]
+[node name="Stick" type="MeshInstance3D" parent="." unique_id=467275717]
 transform = Transform3D(0.0676319, 0, 0, 0, 0.0676319, 0, 0, 0, 0.0676319, 0.507506, 1.57175, 0.150719)
+layers = 5
 mesh = SubResource("ArrayMesh_2ddvn")
 skeleton = NodePath("")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1742965562]
+transform = Transform3D(-4.0652203e-08, -0.36752406, -0.93001395, -1.6064988e-08, 0.93001395, -0.36752406, 1, 0, -4.371139e-08, -0.024888754, 1.8026605, 0)
+layers = 5
+light_energy = 2.295
+spot_range = 1.08
+spot_angle = 53.0

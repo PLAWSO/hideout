@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dos1kva88hr7q"
-path="res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"
+uid="uid://cfjmgcrcoebw7"
+path="res://.godot/imported/drill.glb-d43f676062822ab58996ed0108ff3182.scn"
 
 [deps]
 
-source_file="res://assets/garage/garage.glb"
-dest_files=["res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"]
+source_file="res://assets/drill/drill.glb"
+dest_files=["res://.godot/imported/drill.glb-d43f676062822ab58996ed0108ff3182.scn"]
 
 [params]
 
@@ -21,14 +21,14 @@ nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
-meshes/ensure_tangents=false
+meshes/ensure_tangents=true
 meshes/generate_lods=false
-meshes/create_shadow_meshes=false
-meshes/light_baking=0
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=false
+animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true

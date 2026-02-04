@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="portfolio"
 run/main_scene="uid://djwirk4ockuor"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=120
 
 [debug_draw_3d]
@@ -30,26 +34,56 @@ window/size/always_on_top=true
 scene={
 "_subresources": {},
 "animation/fps": 30,
-"animation/import": true,
+"animation/import": false,
 "animation/import_rest_as_RESET": false,
 "animation/remove_immutable_tracks": true,
 "animation/trimming": false,
 "gltf/embedded_image_handling": 1,
 "gltf/naming_version": 1,
 "import_script/path": "",
-"meshes/create_shadow_meshes": true,
+"materials/extract": 0,
+"materials/extract_format": 0,
+"materials/extract_path": "",
+"meshes/create_shadow_meshes": false,
 "meshes/ensure_tangents": true,
 "meshes/force_disable_compression": false,
 "meshes/generate_lods": false,
-"meshes/light_baking": 1,
+"meshes/light_baking": 0,
 "meshes/lightmap_texel_size": 0.2,
 "nodes/apply_root_scale": true,
 "nodes/import_as_skeleton_bones": false,
 "nodes/root_name": "",
 "nodes/root_scale": 1.0,
+"nodes/root_script": null,
 "nodes/root_type": "",
+"nodes/use_name_suffixes": true,
 "nodes/use_node_type_suffixes": true,
 "skins/use_named_skins": true
+}
+texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"compress/rdo_quality_loss": 0.0,
+"compress/uastc_level": 0,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
+"process/channel_remap/alpha": 3,
+"process/channel_remap/blue": 2,
+"process/channel_remap/green": 1,
+"process/channel_remap/red": 0,
+"process/fix_alpha_border": true,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
 }
 
 [input]
@@ -86,3 +120,4 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+textures/webp_compression/compression_method=4

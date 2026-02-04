@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7jiy3npwmnpk"
-path.s3tc="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex"
-path.etc2="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"
+uid="uid://b8r2tyuvdfw6c"
+path.s3tc="res://.godot/imported/garage_torch2.jpg-56be22b8a71efcf3cd6461b301005cc3.s3tc.ctex"
+path.etc2="res://.godot/imported/garage_torch2.jpg-56be22b8a71efcf3cd6461b301005cc3.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "0323741b8298aac8fcbdb7cecffa144d"
+"md5": "205c83d8c5ef3ebfe129be09be5bba76"
 }
 
 [deps]
 
-source_file="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png"
-dest_files=["res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex", "res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"]
+source_file="res://assets/garage/garage_torch2.jpg"
+dest_files=["res://.godot/imported/garage_torch2.jpg-56be22b8a71efcf3cd6461b301005cc3.s3tc.ctex", "res://.godot/imported/garage_torch2.jpg-56be22b8a71efcf3cd6461b301005cc3.etc2.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -34,7 +34,7 @@ var relative_to_travel_direction: bool = true
 var angle_target_degrees_x: float = 0.0:
 	set(value):
 		angle_target_degrees_x = value
-		angle_target.x = deg_to_rad(value)
+		angle_target.x = deg_to_rad(value) # -90 should be whatever the global rotation is
 var angle_target_degrees_y: float = 0.0:
 	set(value):
 		angle_target_degrees_y = value
@@ -60,6 +60,8 @@ func _compute_constants() -> void:
 func _ready() -> void:
 	add_child(target)
 	follow_target = get_node_or_null(follow_target_node)
+
+	angle_target.x = angle_target.x + global_rotation.y
 	_compute_constants()
 
 #endregion

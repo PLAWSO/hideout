@@ -2,25 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7jiy3npwmnpk"
-path.s3tc="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex"
-path.etc2="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"
+uid="uid://dvp2jhdffjde0"
+path="res://.godot/imported/drill_drill-texture.jpg-696f7724646024f9bb7da5c489a32411.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
-"md5": "0323741b8298aac8fcbdb7cecffa144d"
+"md5": "d32c0c9206f3cec883a176e7c13dd54c"
 }
 
 [deps]
 
-source_file="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png"
-dest_files=["res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex", "res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"]
+source_file="res://assets/drill/drill_drill-texture.jpg"
+dest_files=["res://.godot/imported/drill_drill-texture.jpg-696f7724646024f9bb7da5c489a32411.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

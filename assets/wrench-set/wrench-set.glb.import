@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dos1kva88hr7q"
-path="res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"
+uid="uid://l0wa15fc2kl5"
+path="res://.godot/imported/wrench-set.glb-364588302a0c69f6ec3873484360c206.scn"
 
 [deps]
 
-source_file="res://assets/garage/garage.glb"
-dest_files=["res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"]
+source_file="res://assets/wrench-set/wrench-set.glb"
+dest_files=["res://.godot/imported/wrench-set.glb-364588302a0c69f6ec3873484360c206.scn"]
 
 [params]
 
@@ -21,10 +21,10 @@ nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
-meshes/ensure_tangents=false
+meshes/ensure_tangents=true
 meshes/generate_lods=false
 meshes/create_shadow_meshes=false
-meshes/light_baking=0
+meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true

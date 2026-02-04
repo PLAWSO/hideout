@@ -2,32 +2,30 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4a37f5jqlby4"
-path.s3tc="res://.godot/imported/garage_cinderblock.jpg-82e2078243c943ec266826f3a9512b1c.s3tc.ctex"
-path.etc2="res://.godot/imported/garage_cinderblock.jpg-82e2078243c943ec266826f3a9512b1c.etc2.ctex"
+uid="uid://c6abljq5suk1j"
+path="res://.godot/imported/garage_desk-texture.png-b1b8ead3a1077530a9483d11ab9be7fb.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
-"md5": "5baac0867cb69e2371d752c6d75f5fed"
+"md5": "814045ac4516dce3e53fb48af9c8991f"
 }
 
 [deps]
 
-source_file="res://assets/garage/garage_cinderblock.jpg"
-dest_files=["res://.godot/imported/garage_cinderblock.jpg-82e2078243c943ec266826f3a9512b1c.s3tc.ctex", "res://.godot/imported/garage_cinderblock.jpg-82e2078243c943ec266826f3a9512b1c.etc2.ctex"]
+source_file="res://assets/garage/garage_desk-texture.png"
+dest_files=["res://.godot/imported/garage_desk-texture.png-b1b8ead3a1077530a9483d11ab9be7fb.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=0
+compress/channel_pack=1
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0

@@ -2,25 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7jiy3npwmnpk"
-path.s3tc="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex"
-path.etc2="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"
+uid="uid://bibjvqjjxn6ga"
+path="res://.godot/imported/wrench-set_wrench.png-fddf7e8bd5a4942e10cc41318358f982.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
-"md5": "0323741b8298aac8fcbdb7cecffa144d"
+"md5": "242442a3887962a75ad8c240d163febd"
 }
 
 [deps]
 
-source_file="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png"
-dest_files=["res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex", "res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"]
+source_file="res://assets/wrench-set/wrench-set_wrench.png"
+dest_files=["res://.godot/imported/wrench-set_wrench.png-fddf7e8bd5a4942e10cc41318358f982.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
