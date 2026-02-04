@@ -77,6 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			textIndex++;
 		},
 	});
+	
 	engine.startGame().then(() => {
 		console.log("Game started successfully");
 
