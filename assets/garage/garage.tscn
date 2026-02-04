@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dey3vbfejochn" path="res://assets/garage/garage_overhead-bin.png" id="9_ve0hq"]
 [ext_resource type="Texture2D" uid="uid://bibjvqjjxn6ga" path="res://assets/wrench-set/wrench-set_wrench.png" id="10_kbdnh"]
 [ext_resource type="Texture2D" uid="uid://j7a23qcntjxm" path="res://assets/wrench-set/wrench-set_cork.png" id="11_k3ys0"]
+[ext_resource type="PackedScene" uid="uid://doocj678x8oy3" path="res://assets/fan/fan.glb" id="12_jtp7c"]
+[ext_resource type="Texture2D" uid="uid://b6d3x1mqnt3k6" path="res://assets/fan/fan_torch.jpg" id="13_csk6h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uslpt"]
 resource_name = "corrugated-steel"
@@ -757,6 +759,48 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yjy2r")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7eas"]
+resource_name = "Basic Steel"
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("13_csk6h")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gswwc"]
+resource_name = "fan_Plane"
+_surfaces = [{
+"aabb": AABB(-0.8329518, -0.120449334, -0.82210785, 1.6622738, 0.39922094, 1.6425743),
+"attribute_data": PackedByteArray("0y62kV48SW5ePLaR0y5JbtMutpFePEluXjy2kdMuSW7TLraRXjxJbl48tpHTLklu0y62kV48SW5ePLaR0y5JbtMutpFePEluXjy2kdMuSW7TLraRXjxJbl48tpHTLklu0y62kV48SW5ePLaR0y5JbtMutpFePEluXjy2kdMuSW7TLraRXjxJbl48tpHTLklu0y62kV48SW5ePLaR0y5JbtMutpFePEluXjy2kdMuSW7TLraRXjxJbl48tpHTLklu0y62kV48SW5ePLaR0y5JbtMutpFePEluXjy2kdMuSW52kzaTdpPyhBOLq4fZm6uH5IXOjgihzo7khZ+XCKGflxOLwZ7Zm8GedpN7oXaTyGzZmz1hCKFfaHaTg14IoTBxE4s9YdmbU3jkhV9odpMMe+SFMHETi1N4RV57of97iZv/e3uhRV6Jm0VeiZv/e5eV/3uJm0Vel5VFXpeV/3ulj/97l5VFXqWPRV6lj/97s4n/e6WPRV6ziUVes4n/e8GD/3uziUVewYNFXsGD/3vPff97wYNFXs99RV7Pff973nf/e899RV7ed0Ve3nf/e+xx/3ved0Ve7HFFXuxx/3v6a/977HFFXvprRV76a/97CGb/e/prRV4IZg=="),
+"format": 34896613399,
+"index_count": 204,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAOAA6ADwAOAA9ADsAOAA8AD4AOAA/AD0AOAA+AEAAOABBAD8AOABAAEIAOABCAEEAQwBEAEUAQwBGAEQAQwBFAEcAQwBIAEYAQwBHAEkAQwBKAEgAQwBJAEsAQwBMAEoAQwBLAE0AQwBNAEwATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMA"),
+"material": SubResource("StandardMaterial3D_q7eas"),
+"name": "Basic Steel",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 118,
+"vertex_data": PackedByteArray("12EawBRxw7tPyOlCtBTDu1+QBQPOgsO7xpn///oCw7tpXhrAcn9qwOyU6UIAAGrA/o8FA7N7asBWY///vgNqwEZhGsDwjVvIsl3pQh0DW8ixjAUDanVbyEcy//+jG1vI52kawN2ZmNLmLOlCdx2Y0hSHBQMecZjSuQ///zZGmNKxdhrAAaFP3poL6UIqSk/eNIAFA51vT94XAv//jXtP3kOFGsAIouvqAADpQuSA6+pYeQUDLnHr6usL//++sevq55IawMGcA/g+DOlCercD+MVzBQOGdQP4YCv//7XeA/gWnRrAKJK3+g8u6ULG47f6hXAFA9Z7t/qfWv//F/q3+umhGsA1hJDtKF/pQov9kO00cAUD84KQ7d2Q///M/pDte6AawH910+BqlulC///T4N9yBQOJidPgBsT///Tr0+AQmRrAw2jj1I/J6UKt6uPUCHgFA1+O49SX6v//EMXj1AqNGsBfYErKE+/pQozBSsq6fgUDj5BKymT9//9bkUrKpX4awOJdzcH//+lCQYzNwbWFBQOxj83B7vj//3JazcGNcBrAw2FmvCv56UK1VGa8rosFA+6LZrwK3v//iipmvEeAIq0ggO8byqoirfFj7xsKsyKtnYLvG02SIq0JUO8b5qcirVWg7xvtciKtgE7vG6CNIq3Ase8bp1giretf7xtAbiKtNrDvG4RNIq2jfe8bxFUirU6c7xtHgAAAIICoxwqzAACdgqjHyqoAAPFjqMfmpwAAVaCox02SAAAJUKjHoI0AAMCxqMftcgAAgE6ox0BuAAA2sKjHp1gAAOtfqMfEVQAATpyox4RNAACjfajHCrMirZ2C1tvKqgAA8WPW2wqzAACdgtbbyqoirfFj1tvKqiKt8WOw7E2SAAAJULDsyqoAAPFjsOxNkiKtCVCw7E2SIq0JUJn+7XIAAIBOmf5NkgAACVCZ/u1yIq2ATpn+7XIirYBOaO+nWAAA619o7+1yAACATmjvp1giretfaO+nWCKt619Q3oRNAACjfVDep1gAAOtfUN6ETSKto31Q3oRNIq2jfWHPxFUAAE6cYc+ETQAAo31hz8RVIq1OnGHPxFUirU6cfsRAbgAANrB+xMRVAABOnH7EQG4irTawfsRAbiKtNrAFwKCNAADAsQXAQG4AADawBcCgjSKtwLEFwKCNIq3AsVTD5qcAAFWgVMOgjQAAwLFUw+anIq1VoFTD5qcirVWgYc0KswAAnYJhzeanAABVoGHNCrMirZ2CYc3Gw0NzxsNDc8bDQ3PGw0NzjMVzYozFc2KMxXNijMVzYhfHx1MXx8dTF8fHUxfHx1M1yGBFNMhgRTXIYEU0yGBFycfLOMnHyzjJx8s4ycfLOHfHLi93xy4vd8cuL3fHLi8wx+gmMMfoJjDH6CYwx+gm+WARuflgEbn5YBG5+WARuT1pV7k9aVe5PWlXuT1pV7nVcqm51XKpudVyqbnVcqm5YH8UumB/FLpgfxS6YH8UumSOg61kjoOtZI6DrWSOg636neGf+p3hn/qd4Z/6neGf3K8+kNyvPpDcrz6Q3K8+kJzNOhuczTobnM06G5zNOhuczTobnM06G5zNOhuczTobnM06G5zNOhuczTobpz6rYKc+q2CnPqtgpz6rYKc+q2CnPqtgpz6rYKc+q2CnPqtgpz6rYKc+q2BNrrBRTa6wUU2usFFNrrBRa7aTSWu2k0lrtpNJa7aTSTu/w0A7v8NAO7/DQDu/w0BOSLC3Tkiwt05IsLdOSLC3a1CTr2tQk69rUJOva1CTr09Zr6ZPWa+mT1mvpk9Zr6aPZW+aj2Vvmo9lb5qPZW+aCn30ggp99IIKffSCCn30guqXFGjqlxRo6pcUaOqXFGgcpeJaHKXiWhyl4locpeJa")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Animation" id="Animation_qmn6h"]
+resource_name = "BladesAction"
+length = 0.5083333
+loop_mode = 1
+step = 0.0083
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Blades")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0, -2.7814184e-07, 0, 1, 0.06666667, 1, 0, -0.8660245, 0, 0.5000018, 0.1, 1, 0, 0.8660264, 0, 0.49999842, 0.13333334, 1, 0, 1.4703139e-06, 0, 1, 0.16666667, 1, 0, -0.866023, 0, 0.5000043, 0.2, 1, 0, 0.8660258, 0, 0.49999946, 0.23333333, 1, 0, 4.172444e-06, 0, 1, 0.26666668, 1, 0, -0.86602163, 0, 0.5000067, 0.3, 1, 0, 0.86602336, 0, 0.50000364, 0.33333334, 1, 0, 1.4503969e-05, 0, 1, 0.36666667, 1, 0, -0.86602414, 0, 0.5000023, 0.4, 1, 0, 0.8660209, 0, 0.50000787, 0.43333334, 1, 0, -5.6820854e-06, 0, 1, 0.46666667, 1, 0, -0.86601895, 0, 0.5000113, 0.5, 1, 0, 0.8660261, 0, 0.49999896, 0.5083333, 1, 0, 5.881255e-06, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqanb"]
+_data = {
+&"BladesAction": SubResource("Animation_qmn6h")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nms20"]
 resource_name = "cinderblock"
 cull_mode = 2
@@ -918,6 +962,7 @@ skeleton = NodePath("")
 
 [node name="CeilingFanProp" type="MeshInstance3D" parent="Props" unique_id=362300501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48832, 4.27326, 5.33373)
+visible = false
 mesh = SubResource("ArrayMesh_t6j5e")
 skeleton = NodePath("")
 
@@ -983,6 +1028,21 @@ skeleton = NodePath("")
 
 [node name="computer-terminal-modified" parent="Props" unique_id=1725402809 instance=ExtResource("9_k3ys0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7948793, 1.8379078, -2.3755403)
+
+[node name="fan" parent="Props" unique_id=656581677 instance=ExtResource("12_jtp7c")]
+visible = false
+
+[node name="Fan" type="Node3D" parent="Props" unique_id=787877229]
+
+[node name="Blades" type="MeshInstance3D" parent="Props/Fan" unique_id=1126367737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1130052, 3.072114, 1.5874777)
+gi_mode = 0
+mesh = SubResource("ArrayMesh_gswwc")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Fan" unique_id=13456575]
+libraries/ = SubResource("AnimationLibrary_sqanb")
+autoplay = &"BladesAction"
 
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=185937465]
 mesh = SubResource("ArrayMesh_kbdnh")
