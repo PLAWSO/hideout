@@ -2,25 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7jiy3npwmnpk"
-path.s3tc="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex"
-path.etc2="res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"
+uid="uid://bh61ee1vi6unm"
+path="res://.godot/imported/computer-terminal-modified_computer-terminal.png-0c0aebd5d6278b5af24235a1a187f43f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
-"md5": "0323741b8298aac8fcbdb7cecffa144d"
+"md5": "721b09cbf9d108f0397ca1c195e3177f"
 }
 
 [deps]
 
-source_file="res://assets/arcade-cabinet/arcade-cabinet_arcade-cabinet.png"
-dest_files=["res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.s3tc.ctex", "res://.godot/imported/arcade-cabinet_arcade-cabinet.png-219178562adcf02fea53443a48e557b4.etc2.ctex"]
+source_file="res://assets/terminal/computer-terminal-modified_computer-terminal.png"
+dest_files=["res://.godot/imported/computer-terminal-modified_computer-terminal.png-0c0aebd5d6278b5af24235a1a187f43f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

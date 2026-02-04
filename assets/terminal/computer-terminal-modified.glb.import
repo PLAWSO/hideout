@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dos1kva88hr7q"
-path="res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"
+uid="uid://d1c0oi81gls67"
+path="res://.godot/imported/computer-terminal-modified.glb-234fbb296c8eaebda9bf9b2f79590bce.scn"
 
 [deps]
 
-source_file="res://assets/garage/garage.glb"
-dest_files=["res://.godot/imported/garage.glb-25adc0a481546b12685aa07f9422a909.scn"]
+source_file="res://assets/terminal/computer-terminal-modified.glb"
+dest_files=["res://.godot/imported/computer-terminal-modified.glb-234fbb296c8eaebda9bf9b2f79590bce.scn"]
 
 [params]
 
@@ -21,17 +21,17 @@ nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
-meshes/ensure_tangents=false
+meshes/ensure_tangents=true
 meshes/generate_lods=false
 meshes/create_shadow_meshes=false
 meshes/light_baking=0
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=false
-animation/fps=30
+animation/import=true
+animation/fps=25.0
 animation/trimming=false
-animation/remove_immutable_tracks=true
+animation/remove_immutable_tracks=false
 animation/import_rest_as_RESET=false
 import_script/path=""
 materials/extract=0

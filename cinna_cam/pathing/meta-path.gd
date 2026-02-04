@@ -98,8 +98,8 @@ func get_target_angles(origin: Vector3) -> Vector2:
 		var path_length = path_section.curve.get_baked_length()
 
 		if path_section.relative_to_travel_direction:
-			var rear_point = path_section.curve.sample_baked(max(.0, (path_section.target.progress_ratio - 0.005)) * path_length, true) + path_section.global_position
-			var front_point = path_section.curve.sample_baked(min(1.0, (path_section.target.progress_ratio + 0.005)) * path_length, true) + path_section.global_position
+			var rear_point = path_section.curve.sample_baked(max(.0, (path_section.target.progress_ratio - 0.005)) * path_length, true) + path_section.global_transform.origin
+			var front_point = path_section.curve.sample_baked(min(1.0, (path_section.target.progress_ratio + 0.005)) * path_length, true) + path_section.global_transform.origin
 			# DebugDraw2D.set_text("rear_point", rear_point - path_section.global_position, 0, Color.RED)
 			# DebugDraw2D.set_text("front_point", front_point - path_section.global_position, 0, Color.RED)
 			var travel_direction = rear_point.direction_to(front_point)
