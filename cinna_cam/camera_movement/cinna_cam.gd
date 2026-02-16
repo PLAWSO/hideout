@@ -48,6 +48,9 @@ func _physics_process(delta: float) -> void:
 	move_camera(delta)
 	rotate_camera(delta)
 
+	# for meta_path in meta_paths:
+	# 	meta_path.move_preview_mesh_to_current_target(delta, x_look_targeter, y_look_targeter)
+
 #endregion
 
 #region Methods

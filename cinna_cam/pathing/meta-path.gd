@@ -29,12 +29,23 @@ var jump_cut_signal
 
 var meta_path_index: int
 
+# @onready var preview_mesh: Node3D = $PreviewMesh
+@export var preview_mesh: Node3D
+@export var show_preview_mesh: bool = true:
+	set(value):
+		show_preview_mesh = value
+		if preview_mesh:
+			preview_mesh.visible = show_preview_mesh
+
 #endregion
 
 #region Lifecycle
 
 func _ready() -> void:
 	collect_path_sections()
+
+	if not Engine.is_editor_hint() and preview_mesh:
+		preview_mesh.visible = show_preview_mesh
 
 	if not Engine.is_editor_hint() and auto_start:
 		start_path_sequence()
@@ -86,6 +97,14 @@ func make_continuous():
 #endregion
 
 #region Target Retrieval
+
+# func move_preview_mesh_to_current_target(delta: float, x_look_targeter: AngularSystem, y_look_targeter: AngularSystem) -> void:
+# 	if preview_mesh and path_sections.size() > 0:
+# 		preview_mesh.global_position = get_target_location()
+# 		var new_camera_rotation = get_target_angles(preview_mesh.global_position)
+# 		preview_mesh.transform.basis = Basis()
+# 		preview_mesh.rotate_object_local(Vector3.UP, x_look_targeter.get_next_angle(new_camera_rotation.x, delta))
+# 		preview_mesh.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_angle(new_camera_rotation.y, delta))
 
 func get_target_location() -> Vector3:
 	return path_sections[section_index].target.global_position

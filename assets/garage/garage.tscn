@@ -8,12 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://d4a37f5jqlby4" path="res://assets/garage/garage_cinderblock.jpg" id="5_d161m"]
 [ext_resource type="Texture2D" uid="uid://cw44dj0dplocb" path="res://assets/garage/garage_torch.jpg" id="5_j76hp"]
 [ext_resource type="Texture2D" uid="uid://q08ljfx3hqyj" path="res://assets/garage/garage_Toolbox.png" id="6_kbdnh"]
-[ext_resource type="PackedScene" uid="uid://d1c0oi81gls67" path="res://assets/terminal/computer-terminal-modified.glb" id="9_k3ys0"]
 [ext_resource type="Texture2D" uid="uid://dey3vbfejochn" path="res://assets/garage/garage_overhead-bin.png" id="9_ve0hq"]
 [ext_resource type="Texture2D" uid="uid://bibjvqjjxn6ga" path="res://assets/wrench-set/wrench-set_wrench.png" id="10_kbdnh"]
+[ext_resource type="PackedScene" uid="uid://btkxj8xo50ojy" path="res://assets/terminal/computer_terminal_modified.tscn" id="11_888oy"]
 [ext_resource type="Texture2D" uid="uid://j7a23qcntjxm" path="res://assets/wrench-set/wrench-set_cork.png" id="11_k3ys0"]
 [ext_resource type="PackedScene" uid="uid://doocj678x8oy3" path="res://assets/fan/fan.glb" id="12_jtp7c"]
 [ext_resource type="Texture2D" uid="uid://b6d3x1mqnt3k6" path="res://assets/fan/fan_torch.jpg" id="13_csk6h"]
+[ext_resource type="PackedScene" uid="uid://c44vhm3nibrmd" path="res://assets/security-camera/security_camera.tscn" id="14_888oy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uslpt"]
 resource_name = "corrugated-steel"
@@ -1026,7 +1027,7 @@ transform = Transform3D(0.8964555, 0, 0.44313377, 0, 1, 0, -0.44313377, 0, 0.896
 mesh = SubResource("ArrayMesh_exyqj")
 skeleton = NodePath("")
 
-[node name="computer-terminal-modified" parent="Props" unique_id=1725402809 instance=ExtResource("9_k3ys0")]
+[node name="Terminal" parent="Props" unique_id=935590628 instance=ExtResource("11_888oy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7948793, 1.8379078, -2.3755403)
 
 [node name="fan" parent="Props" unique_id=656581677 instance=ExtResource("12_jtp7c")]
@@ -1043,6 +1044,8 @@ skeleton = NodePath("")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Fan" unique_id=13456575]
 libraries/ = SubResource("AnimationLibrary_sqanb")
 autoplay = &"BladesAction"
+
+[node name="security-camera" parent="Props" unique_id=265483856 instance=ExtResource("14_888oy")]
 
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=185937465]
 mesh = SubResource("ArrayMesh_kbdnh")

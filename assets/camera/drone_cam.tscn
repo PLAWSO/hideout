@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://fhiawtlmnjm6"]
+
+[ext_resource type="Script" uid="uid://dp0o6ukpb0t3e" path="res://assets/camera/test_cam.gd" id="1_ditho"]
+[ext_resource type="PackedScene" uid="uid://cqrj1ywluhu88" path="res://assets/drone/drone.tscn" id="2_i77ah"]
+
+[node name="DroneCam" type="Camera3D" unique_id=2009845040]
+cull_mask = 1048063
+script = ExtResource("1_ditho")
+
+[node name="PreviewMesh" type="Node3D" parent="." unique_id=1497787666]
+
+[node name="Drone" parent="PreviewMesh" unique_id=1105843968 instance=ExtResource("2_i77ah")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

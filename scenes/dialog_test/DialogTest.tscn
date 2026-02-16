@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bbemfxtwv7dvu"]
+
+[ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="1_c1l08"]
+[ext_resource type="Script" uid="uid://rujejbpkklwb" path="res://scenes/dialog_test/dialog_test.gd" id="1_gcawy"]
+
+[node name="DialogTest" type="Control" unique_id=32028020]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 287.0
+offset_right = 3.0
+offset_bottom = -428.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gcawy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1874848280]
+
+[node name="DialogueLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=825289444]
+custom_minimum_size = Vector2(0, 100.135)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is a test of the current label"
+script = ExtResource("1_c1l08")
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+metadata/_custom_type_script = "uid://g32um0mltv5d"

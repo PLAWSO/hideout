@@ -11,9 +11,28 @@
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
 [ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
+[ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/camera/drone_cam.tscn" id="12_x3ijg"]
+[ext_resource type="Shader" uid="uid://c6ilsug5ax0el" path="res://scenes/hideout/noise.gdshader" id="13_jr4o4"]
 [ext_resource type="Script" uid="uid://2j378cfp4am" path="res://scenes/hideout/fps_counter.gd" id="13_x1t0x"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
+[ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
+[ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
+[ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jr4o4"]
+frequency = 0.956
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m7c5n"]
+width = 44
+height = 44
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_jr4o4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7c5n"]
+shader = ExtResource("13_jr4o4")
+shader_parameter/noise = SubResource("NoiseTexture2D_m7c5n")
+shader_parameter/opacity = 1.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_60i1o"]
 viewport_path = NodePath("ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam")
@@ -56,6 +75,8 @@ r = 1.0
 
 [sub_resource type="Curve3D" id="Curve3D_8borv"]
 
+[sub_resource type="Curve3D" id="Curve3D_au00d"]
+
 [sub_resource type="Curve3D" id="Curve3D_ql7g8"]
 _data = {
 "points": PackedVector3Array(-0.018894, -0.0092901, -0.303669, 0.018894, 0.0092901, 0.303669, 0, 0, 0, -0.137801, 0.104957, -0.0607364, 0.137801, -0.104957, 0.0607364, 0.30401, -1.12525, 0.795865, -0.47103, 0.0288217, 0.00987315, 0.47103, -0.0288217, -0.00987315, 1.29333, -1.31543, 0.963719),
@@ -84,7 +105,12 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="Curve3D" id="Curve3D_au00d"]
+[sub_resource type="Curve3D" id="Curve3D_jr4o4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
 
 [sub_resource type="Gradient" id="Gradient_60i1o"]
 offsets = PackedFloat32Array(0.35218093, 0.40710825, 1)
@@ -116,9 +142,30 @@ ambient_light_color = Color(0, 1, 0, 1)
 ambient_light_energy = 2.65
 reflected_light_source = 1
 
-[node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam")]
+[node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
 cinna_cam = NodePath("CameraController")
+transition = NodePath("StaticContainer/ColorRect")
+
+[node name="StaticContainer" type="CanvasLayer" parent="." unique_id=1965450989]
+
+[node name="ColorRect" type="ColorRect" parent="StaticContainer" unique_id=781680518]
+visible = false
+material = SubResource("ShaderMaterial_m7c5n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 917.0
+offset_bottom = 862.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1649804378]
+transform = Transform3D(0.6636129, -0.3831031, 0.64253396, 0, 0.8589152, 0.5121178, -0.74807614, -0.33984798, 0.56998724, 3.9733453, 2.8558252, 2.1902392)
+
+[node name="TestBalloon" parent="." unique_id=1950969821 instance=ExtResource("16_x3ijg")]
+dialogue_resource = ExtResource("17_x3ijg")
+will_block_other_input = false
 
 [node name="RenderBuffer" type="SubViewport" parent="." unique_id=795163889]
 size = Vector2i(360, 360)
@@ -170,7 +217,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.5309175, 0, -0.8474235, 0, 1, 0, 0.8474235, 0, 0.5309175, 39.592907, 1.9759904, -53.567463)
+transform = Transform3D(0.52921236, -0.25988713, -0.8077085, 0, 0.951937, -0.3062939, 0.8484894, 0.16209452, 0.50377685, 58.573456, 1.9759991, -51.688572)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -197,20 +244,19 @@ transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.
 
 [node name="CameraController" type="Node3D" parent="." unique_id=893909451 node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
-camera = NodePath("TestCam")
-meta_paths = [NodePath("Loiter"), NodePath("ArcadeCabinet"), NodePath("Bike"), NodePath("Toolbox")]
+camera = NodePath("DroneCam")
+meta_paths = [NodePath("MetaPathPreview"), NodePath("Bike"), NodePath("ArcadeCabinet"), NodePath("Toolbox"), NodePath("Terminal")]
 position_targeter = SubResource("Resource_leb7k")
 x_look_targeter = SubResource("Resource_au00d")
 y_look_targeter = SubResource("Resource_xbpu6")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
-[node name="TestCam" parent="CameraController" unique_id=1851120181 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.97328705, 0.17280667, -0.15116261, 0, 0.658398, 0.75267, 0.22959155, -0.732564, 0.6408102, -3.8257143, 1.4781512, 1.6299657)
-near = 0.005
-far = 100.0
+[node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
+transform = Transform3D(0.9656171, -0.02776285, -0.25848168, 0, 0.99428123, -0.10679319, 0.25996837, 0.10312133, 0.960095, 1.601006, 0.33934686, 2.2951307)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
+show_preview_mesh = false
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/Bike" unique_id=890079651]
@@ -226,6 +272,7 @@ metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Toolbox" type="Node3D" parent="CameraController" unique_id=1869333871]
 script = ExtResource("7_embkr")
+show_preview_mesh = false
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/Toolbox" unique_id=1868222646]
@@ -238,55 +285,9 @@ metadata/_custom_type_script = "uid://u8kmj6bobusb"
 [node name="ToolboxLookAt" type="Node3D" parent="CameraController/Toolbox" unique_id=541902913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.07519, 0.869301, -2.50584)
 
-[node name="Loiter" type="Node3D" parent="CameraController" unique_id=743030107]
-script = ExtResource("7_embkr")
-auto_start = true
-metadata/_custom_type_script = "uid://c3pfswfcml75e"
-
-[node name="PathSection" type="Path3D" parent="CameraController/Loiter" unique_id=1760586048]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86565, 1.65758, 1.3795)
-curve = SubResource("Curve3D_ql7g8")
-script = ExtResource("8_seky7")
-speed = 0.5
-time_to_finish = 4.97762
-follow_target_node = NodePath("../BikeBack")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="PathSection2" type="Path3D" parent="CameraController/Loiter" unique_id=555619451]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57232, 0.34215, 2.34322)
-curve = SubResource("Curve3D_esgtm")
-script = ExtResource("8_seky7")
-speed = 0.5
-time_to_finish = 7.5287
-tracking_type = 3
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="PathSection3" type="Path3D" parent="CameraController/Loiter" unique_id=258517744]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19203, 0.342868, 2.34327)
-curve = SubResource("Curve3D_psd4u")
-script = ExtResource("8_seky7")
-speed = 0.5
-time_to_finish = 10.9572115
-follow_target_node = NodePath("../../Toolbox/ToolboxLookAt")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="PathSection4" type="Path3D" parent="CameraController/Loiter" unique_id=744782229]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43364, 0.347417, -1.36718)
-curve = SubResource("Curve3D_leb7k")
-script = ExtResource("8_seky7")
-speed = 0.5
-time_to_finish = 15.130656
-follow_target_node = NodePath("../ArcadeCabinetLookAt")
-metadata/_custom_type_script = "uid://u8kmj6bobusb"
-
-[node name="BikeBack" type="Node3D" parent="CameraController/Loiter" unique_id=666683944]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70578, 0.58476, 0.95633)
-
-[node name="ArcadeCabinetLookAt" type="Node3D" parent="CameraController/Loiter" unique_id=1387129196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.32532, 1.88233, -1.75348)
-
 [node name="ArcadeCabinet" type="Node3D" parent="CameraController" unique_id=1265428754]
 script = ExtResource("7_embkr")
+show_preview_mesh = false
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/ArcadeCabinet" unique_id=629381117]
@@ -298,6 +299,66 @@ angle_target_degrees_x = 41.6
 angle_target_degrees_y = -13.0
 relative_to_travel_direction = false
 treat_as_point = true
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="MetaPathPreview" parent="CameraController" unique_id=252119077 instance=ExtResource("15_y6y6u")]
+show_preview_mesh = false
+
+[node name="PathSection" type="Path3D" parent="CameraController/MetaPathPreview" unique_id=1760586048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86565, 1.65758, 1.3795)
+curve = SubResource("Curve3D_ql7g8")
+script = ExtResource("8_seky7")
+speed = 0.5
+time_to_finish = 4.97762
+follow_target_node = NodePath("../BikeBack")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection2" type="Path3D" parent="CameraController/MetaPathPreview" unique_id=555619451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57232, 0.34215, 2.34322)
+curve = SubResource("Curve3D_esgtm")
+script = ExtResource("8_seky7")
+speed = 0.5
+time_to_finish = 7.5287
+tracking_type = 3
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection3" type="Path3D" parent="CameraController/MetaPathPreview" unique_id=258517744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19203, 0.342868, 2.34327)
+curve = SubResource("Curve3D_psd4u")
+script = ExtResource("8_seky7")
+speed = 0.5
+time_to_finish = 10.9572115
+follow_target_node = NodePath("../../Toolbox/ToolboxLookAt")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="PathSection4" type="Path3D" parent="CameraController/MetaPathPreview" unique_id=744782229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43364, 0.347417, -1.36718)
+curve = SubResource("Curve3D_leb7k")
+script = ExtResource("8_seky7")
+speed = 0.5
+time_to_finish = 15.130656
+follow_target_node = NodePath("../ArcadeCabinetLookAt")
+metadata/_custom_type_script = "uid://u8kmj6bobusb"
+
+[node name="BikeBack" type="Node3D" parent="CameraController/MetaPathPreview" unique_id=666683944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.70578, 0.58476, 0.95633)
+
+[node name="ArcadeCabinetLookAt" type="Node3D" parent="CameraController/MetaPathPreview" unique_id=1387129196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.32532, 1.88233, -1.75348)
+
+[node name="Terminal" type="Node3D" parent="CameraController" unique_id=1422355644]
+script = ExtResource("7_embkr")
+metadata/_custom_type_script = "uid://c3pfswfcml75e"
+
+[node name="PathSection" type="Path3D" parent="CameraController/Terminal" unique_id=148090354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8365336, 1.5682354, -2.1717782)
+curve = SubResource("Curve3D_jr4o4")
+script = ExtResource("8_seky7")
+tracking_type = 2
+angle_target_degrees_x = 180.0
+angle_target_degrees_y = -12.0
+relative_to_travel_direction = true
+treat_as_point = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
 [node name="Temple" parent="." unique_id=326148284 node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
@@ -370,6 +431,8 @@ shadow_opacity = 0.7
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1093680361]
 environment = SubResource("Environment_x3ijg")
+
+[node name="Node" type="Node" parent="." unique_id=1793695943]
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
 [connection signal="pressed" from="TouchInput/CanvasLayer/PreviousCamera" to="." method="_on_previous_camera_pressed"]

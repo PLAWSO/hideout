@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dki0mdwkon07d"]
+
+[ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="1_jfc13"]
+[ext_resource type="PackedScene" uid="uid://cqrj1ywluhu88" path="res://assets/drone/drone.tscn" id="2_at145"]
+
+[node name="MetaPathPreview" type="Node3D" unique_id=252119077 node_paths=PackedStringArray("preview_mesh")]
+script = ExtResource("1_jfc13")
+auto_start = true
+preview_mesh = NodePath("PreviewMesh")
+
+[node name="PreviewMesh" type="Node3D" parent="." unique_id=935730629]
+
+[node name="Drone" parent="PreviewMesh" unique_id=1105843968 instance=ExtResource("2_at145")]
