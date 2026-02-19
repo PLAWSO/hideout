@@ -57,8 +57,55 @@ var loadingTexts = [
 ]
 var textIndex = 0;
 
+let terminalContainer, sections, navButtons;
+
+function navButtonClicked(buttonClicked) {
+  sections.forEach(sec => { sec.style.display = 'none'; });
+  let targetSection = document.getElementById(buttonClicked.id.replace('-button', ''));
+  targetSection.style.display = 'block';
+  
+  navButtons.forEach(btn => { btn.classList.remove('active'); });
+  buttonClicked.classList.add('active');
+}
+
+function setTerminalBounds(x, y, width, height) {
+	terminalContainer.style.left = `${x}px`;
+	terminalContainer.style.top = `${y}px`;
+	terminalContainer.style.width = `${width}px`;
+	terminalContainer.style.maxWidth = `${width}px`;
+	terminalContainer.style.height = `${height}px`;
+}
+
+var opacity = 0.0;
+function setTerminalVisibility(lockedOnTerminal) {
+	console.log(`Setting terminal visibility: ${lockedOnTerminal}`);
+	terminalContainer.style.display = lockedOnTerminal ? "block" : "none";
+
+	if (lockedOnTerminal) {
+		fadeInTerminal(10, opacity);
+	} else {
+		opacity = 0.0;
+		terminalContainer.style.opacity = opacity;
+	}
+}
+
+
+function fadeInTerminal(delay, opacity) {
+	if (opacity >= 1.0) return;
+
+  setTimeout(() => {
+    opacity += 0.04;
+		terminalContainer.style.opacity = opacity;
+
+    fadeInTerminal(delay, opacity);
+  }, delay);
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-	var terminal = document.getElementById("terminal");
+	var loadingScreen = document.getElementById("loading");
+	terminalContainer = document.getElementById("terminal-container");
+	sections = document.querySelectorAll('.section');
+	navButtons = document.querySelectorAll('.nav-button');
 
 	const canvas = document.getElementById("canvas");
 	var engine = new Engine({
@@ -72,7 +119,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			let okayPrevious = textIndex != 0 && loadingTexts[textIndex - 1].ok 
 			let directoryCurrent = loadingTexts[textIndex].directory
-			terminal.innerText += (okayPrevious ? " - OK!\n" : "\n") + (directoryCurrent ? directory : "") + loadingTexts[textIndex].text;
+			loadingScreen.innerText += (okayPrevious ? " - OK!\n" : "\n") + (directoryCurrent ? directory : "") + loadingTexts[textIndex].text;
 
 			textIndex++;
 		},
@@ -81,10 +128,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	engine.startGame().then(() => {
 		console.log("Game started successfully");
 
-		terminal.innerText += " - OK!"
+		loadingScreen.innerText += " - OK!"
 
 		setTimeout(() => {
-			terminal.innerText += "\n\nCONNECTION ESTABLISHED.";
+			loadingScreen.innerText += "\n\nCONNECTION ESTABLISHED.";
 		}, 500)
 
 		setTimeout(() => {

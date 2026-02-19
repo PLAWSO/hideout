@@ -2,6 +2,7 @@ extends Node3D
 
 @export var cinna_cam: CinnaCam
 @export var transition: ColorRect
+@export var skip_dialogue: bool = true
 
 @onready var test_balloon: CanvasLayer = $TestBalloon
 
@@ -28,21 +29,16 @@ func _on_previous_camera_pressed() -> void:
 
 
 func _ready() -> void:
-	# DialogueManager.show_dialogue_balloon_scene()
+	if skip_dialogue:
+		cinna_cam.camera.current = true
+		return
+
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.show_dialogue_balloon_scene(test_balloon, load("res://dialog/test.dialogue"), "start")
-	pass
 
-func _on_dialogue_ended(resource) -> void:
-	print(cinna_cam)
+func _on_dialogue_ended(_resource) -> void:
 	cinna_cam.camera.current = true
 	transition.visible = true
 	var tween = create_tween()
-	# Tween the shader's opacity parameter from 1.0 (opaque) to 0.0 (transparent)
 	tween.tween_property(transition.material, "shader_parameter/opacity", 0.0, 3.0).from(1.0)
-	
-	
-# 	var resource = load("res://dialog/test.dialogue")
-# 	var firstLine = await resource.get_next_dialogue_line("start")
-# 	dialog_test.dialogue_label = firstLine

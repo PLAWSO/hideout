@@ -5,5 +5,4 @@ func _ready():
 	_on_viewport_resized()
 
 func _on_viewport_resized():
-	print("Viewport resized")
 	custom_minimum_size.x = min(get_viewport_rect().size.x, 1200)

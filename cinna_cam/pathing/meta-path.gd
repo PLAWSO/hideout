@@ -228,7 +228,6 @@ func _kill_timers() -> void:
 		tween = null
 
 func _on_section_complete() -> void:
-	# print("Section ", section_index, " complete.")
 	if !running:
 		return
 	_move_to_next_section()

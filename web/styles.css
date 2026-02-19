@@ -1,47 +1,132 @@
-* {
-	font-family: "VT323", monospace;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 32px;
-}
-
-body {
-	background-color: #111111;
-}
-
-p {
-	align-self: flex-end;
-	margin: 20px;
-	color: green;
-	text-shadow: 0 0 10px green;
-}
-
-#loading-container {
-	position: fixed;
-	background: black;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100dvh;
-	display: flex;
-}
+/*#########################
+### GODOT               ###
+#########################*/
 
 #canvas {
 	z-index: -1;
 }
 
+/*#########################
+### SHARED              ###
+#########################*/
+
+* {
+	font-family: "VT323", monospace;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 32px;
+	color: green;
+	text-shadow: 0 0 10px green;
+}
+
+#loading {
+	align-self: flex-end;
+	margin: 20px;
+}
+
+h1 {
+	font-size: 48px;
+}
+
+
 @media (max-width: 1200px) {
-	* {
+	#loading {
 		font-size: 16px;
 	}
 
 	/* prevent scrolling on mobile */
-	html, body, #loading-container, #canvas {
+	html, body, #loading-container, #canvas, #terminal-container {
 		overflow: hidden;
 	}
 }
 
-/* SCANLINE EFFECT */
+/*#########################
+### LOADING             ###
+#########################*/
+
+#loading-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100dvh;
+	
+	background: black;
+	
+	display: flex;
+}
+
+/*#########################
+### TERMINAL            ###
+#########################*/
+
+#terminal-container {
+	position: absolute;
+
+	display: none;
+	opacity: 0.0;
+}
+
+#terminal {
+	margin: 5%;
+	height: 90%;
+	/* align-items: ; */
+	
+  display: flex;
+  gap: 10px;
+}
+
+#navbar {
+	width: 300px;
+  flex-shrink: 0;
+  padding: 10px;
+  
+	border: 2px solid green;
+  border-radius: 5px;
+	
+	display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#content {
+	flex-grow: 1;
+
+	border: 2px solid green;
+	border-radius: 5px;
+}
+
+.section {
+	padding: 20px;
+}
+
+.section > iframe {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+}
+
+.nav-button {
+  all: unset;
+  border: 2px solid green;
+  background-color: darkgreen;
+  color: black;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: green;
+}
+
+.nav-button.active {
+  background-color: green;
+}
+
+
+/*#########################
+### SCANLINE EFFECT     ###
+#########################*/
 
 .scanline {
 	overflow: hidden;

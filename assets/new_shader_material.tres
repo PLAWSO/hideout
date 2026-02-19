@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://coxe6pkjbgg4c"]
+
+[ext_resource type="Shader" uid="uid://c6ilsug5ax0el" path="res://scenes/hideout/noise.gdshader" id="1_aqfkd"]
+[ext_resource type="Texture2D" uid="uid://4jfwq5ujrgw7" path="res://assets/new_noise_texture_2d.tres" id="2_xxlor"]
+
+[resource]
+shader = ExtResource("1_aqfkd")
+shader_parameter/noise = ExtResource("2_xxlor")
+shader_parameter/opacity = 1.0
