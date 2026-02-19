@@ -2895,10 +2895,11 @@ meta_paths = [NodePath("TrailFollow")]
 position_targeter = SubResource("Resource_xdn75")
 x_look_targeter = SubResource("Resource_yd1wb")
 y_look_targeter = SubResource("Resource_fkpan")
+debug = null
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CinnaCam" unique_id=1813028640 instance=ExtResource("6_xdn75")]
-transform = Transform3D(-0.99884635, 0, -0.048020635, 0, 1, 0, 0.048020635, 0, -0.99884635, -10.735382, 1.976, 15.024649)
+transform = Transform3D(0.32998738, 0, -0.94398534, 0, 1, 0, 0.94398534, 0, 0.32998738, 3.358701, 1.9759996, 13.380436)
 visible = false
 show_preview_mesh = false
 

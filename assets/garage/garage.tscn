@@ -1028,7 +1028,7 @@ mesh = SubResource("ArrayMesh_exyqj")
 skeleton = NodePath("")
 
 [node name="Terminal" parent="Props" unique_id=935590628 instance=ExtResource("11_888oy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7948793, 1.8379078, -2.3755403)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9215918, 1.443, -2.6265724)
 
 [node name="fan" parent="Props" unique_id=656581677 instance=ExtResource("12_jtp7c")]
 visible = false

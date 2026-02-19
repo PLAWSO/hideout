@@ -11,7 +11,13 @@ class_name CinnaCam extends Node3D
 @export var x_look_targeter: AngularSystem = AngularSystem.new()
 @export var y_look_targeter: AngularSystem = AngularSystem.new()
 
+@export_range(0.0, 1.0, 0.0001) var stopped_distance_threshold: float = 0.1
+
+@export var debug: bool = false
+
 var meta_path_index: int = 0
+var centered_on_target: bool = false
+var last_camera_pos: Vector3 = Vector3.ZERO
 
 signal jump_cut(from_meta_path_index: int)
 
@@ -47,9 +53,8 @@ func _physics_process(delta: float) -> void:
 		return
 	move_camera(delta)
 	rotate_camera(delta)
+	check_set_centered_on_target()
 
-	# for meta_path in meta_paths:
-	# 	meta_path.move_preview_mesh_to_current_target(delta, x_look_targeter, y_look_targeter)
 
 #endregion
 
@@ -57,6 +62,7 @@ func _physics_process(delta: float) -> void:
 
 func move_camera(delta: float) -> void:
 	var current_target_pos = meta_paths[meta_path_index].get_target_location()
+	last_camera_pos = camera.global_position
 	var new_camera_pos = position_targeter.get_next_position(current_target_pos, delta)
 	camera.global_position = new_camera_pos
 
@@ -87,6 +93,21 @@ func try_jump_cut(from_meta_path_index: int) -> void:
 	camera.basis = Basis()
 	camera.rotate_object_local(Vector3.UP, new_camera_rotation.x)
 	camera.rotate_object_local(Vector3.RIGHT, new_camera_rotation.y)
+
+func check_set_centered_on_target() -> void:
+	var distance_from_target = (meta_paths[meta_path_index].get_target_location() - last_camera_pos).length()
+	if not centered_on_target and distance_from_target < stopped_distance_threshold:
+		if debug and not Engine.is_editor_hint():
+			centered_on_target = true
+			Events.arrived_at_meta_path.emit(meta_path_index)
+
+	if centered_on_target and distance_from_target >= stopped_distance_threshold:
+		if debug and not Engine.is_editor_hint():
+			centered_on_target = false
+			Events.left_meta_path.emit(meta_path_index)
+
+	if not Engine.is_editor_hint():
+		Events.camera_moved.emit()
 
 
 #endregion

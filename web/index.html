@@ -15,7 +15,33 @@
 	</head>
 	<body>
 		<div id="loading-container" class="scanline">
-			<p id="terminal"></p>
+			<p id="loading"></p>
+		</div>
+		<div id="terminal-container">
+			<div id="terminal">
+				<div id="navbar">
+					<button class="nav-button active" id="about-button" onclick="navButtonClicked(this)">About</button>
+					<button class="nav-button" id="contact-button" onclick="navButtonClicked(this)">Contact</button>
+					<button class="nav-button" id="test-button" onclick="navButtonClicked(this)">Test</button>
+				</div>
+		
+				<div id="content">
+					<div id="about" class="section">
+						<h1>About</h1>
+						<p>TODO</p>
+					</div>
+					<div id="contact" class="section" style="display:none;">
+						<h1>Contact</h1>
+						<p>TODO</p>
+						<!-- <iframe src="https://www.youtube-nocookie.com/embed/Ata9cSC2WpM?si=8J0flyHd64mnk2Xo;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+					</div>
+					<div id="test" class="section" style="display:none;">
+						<h1>Test</h1>
+						<p>TODO</p>
+						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+					</div>
+				</div>
+			</div>
 		</div>
 		<canvas id="canvas" onfocus="blurCanvas()"></canvas>
 	</body>

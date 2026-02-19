@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
 [ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/camera/drone_cam.tscn" id="12_x3ijg"]
-[ext_resource type="Shader" uid="uid://c6ilsug5ax0el" path="res://scenes/hideout/noise.gdshader" id="13_jr4o4"]
 [ext_resource type="Script" uid="uid://2j378cfp4am" path="res://scenes/hideout/fps_counter.gd" id="13_x1t0x"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
 [ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
@@ -20,8 +19,22 @@
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
 
+[sub_resource type="Shader" id="Shader_y6y6u"]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise : filter_nearest;
+uniform float opacity : hint_range(0.0, 1.0) = 0.5;
+
+void fragment() {
+	
+	COLOR = texture(noise, vec2(mod(UV.r + (TIME * 50.0), 1.0), UV.g));
+	COLOR.a = opacity;
+}
+"
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jr4o4"]
-frequency = 0.956
+noise_type = 3
+frequency = 0.9855
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m7c5n"]
 width = 44
@@ -29,8 +42,8 @@ height = 44
 generate_mipmaps = false
 noise = SubResource("FastNoiseLite_jr4o4")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7c5n"]
-shader = ExtResource("13_jr4o4")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_id51i"]
+shader = SubResource("Shader_y6y6u")
 shader_parameter/noise = SubResource("NoiseTexture2D_m7c5n")
 shader_parameter/opacity = 1.0
 
@@ -146,12 +159,13 @@ reflected_light_source = 1
 script = ExtResource("1_ura2u")
 cinna_cam = NodePath("CameraController")
 transition = NodePath("StaticContainer/ColorRect")
+skip_dialogue = false
 
 [node name="StaticContainer" type="CanvasLayer" parent="." unique_id=1965450989]
 
 [node name="ColorRect" type="ColorRect" parent="StaticContainer" unique_id=781680518]
 visible = false
-material = SubResource("ShaderMaterial_m7c5n")
+material = SubResource("ShaderMaterial_id51i")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -217,7 +231,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.52921236, -0.25988713, -0.8077085, 0, 0.951937, -0.3062939, 0.8484894, 0.16209452, 0.50377685, 58.573456, 1.9759991, -51.688572)
+transform = Transform3D(0.5285778, -0.24670003, -0.8122466, 0, 0.95683956, -0.2906166, 0.8488849, 0.15361348, 0.5057641, 58.192436, 1.9759991, -51.44263)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -249,10 +263,12 @@ meta_paths = [NodePath("MetaPathPreview"), NodePath("Bike"), NodePath("ArcadeCab
 position_targeter = SubResource("Resource_leb7k")
 x_look_targeter = SubResource("Resource_au00d")
 y_look_targeter = SubResource("Resource_xbpu6")
+stopped_distance_threshold = 0.002
+debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.9656171, -0.02776285, -0.25848168, 0, 0.99428123, -0.10679319, 0.25996837, 0.10312133, 0.960095, 1.601006, 0.33934686, 2.2951307)
+transform = Transform3D(0.7743101, 0.084913336, 0.6270834, 0, 0.99095625, -0.13418534, -0.63280636, 0.103901066, 0.76730746, -0.86274976, 0.34247613, 2.3432424)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -351,12 +367,12 @@ script = ExtResource("7_embkr")
 metadata/_custom_type_script = "uid://c3pfswfcml75e"
 
 [node name="PathSection" type="Path3D" parent="CameraController/Terminal" unique_id=148090354]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8365336, 1.5682354, -2.1717782)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.994, 1.552, -2.232)
 curve = SubResource("Curve3D_jr4o4")
 script = ExtResource("8_seky7")
 tracking_type = 2
 angle_target_degrees_x = 180.0
-angle_target_degrees_y = -12.0
+angle_target_degrees_y = -11.400000000000006
 relative_to_travel_direction = true
 treat_as_point = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
