@@ -19,9 +19,8 @@
 	text-shadow: 0 0 10px green;
 }
 
-#loading {
-	align-self: flex-end;
-	margin: 20px;
+body {
+	background-color: #111111;
 }
 
 h1 {
@@ -43,6 +42,11 @@ h1 {
 /*#########################
 ### LOADING             ###
 #########################*/
+
+#loading {
+	align-self: flex-end;
+	margin: 20px;
+}
 
 #loading-container {
 	position: fixed;
