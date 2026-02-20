@@ -32,15 +32,14 @@ p {
 	margin: 0.25rem 0rem;
 }
 
+/* prevent scrolling on mobile */
+html, body, #loading-container, #canvas, #terminal-container {
+	overflow: hidden;
+}
 
 @media (max-width: 1200px) {
 	#loading {
 		font-size: 16px;
-	}
-
-	/* prevent scrolling on mobile */
-	html, body, #loading-container, #canvas, #terminal-container {
-		overflow: hidden;
 	}
 }
 
