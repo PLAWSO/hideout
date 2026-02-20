@@ -101,6 +101,14 @@ function fadeInTerminal(delay, opacity) {
   }, delay);
 };
 
+function getCanvasWidth() {
+	return document.getElementById("canvas").clientWidth;
+}
+
+function getCanvasHeight() {
+	return document.getElementById("canvas").clientHeight;
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 	var loadingScreen = document.getElementById("loading");
 	terminalContainer = document.getElementById("terminal-container");
