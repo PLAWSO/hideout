@@ -12,9 +12,9 @@ func _ready() -> void:
 	console = JavaScriptBridge.get_interface("window")
 
 func _on_camera_moved() -> void:
-	var screen_verts: PackedVector3Array = screen_2.mesh.get_faces()
+	var screen_verts := screen_2.mesh.get_faces()
 
-	var current_camera = get_viewport().get_camera_3d()
+	var current_camera := get_viewport().get_camera_3d()
 
 	if current_camera.is_position_behind(screen_2.global_transform.origin):
 		return
@@ -23,16 +23,20 @@ func _on_camera_moved() -> void:
 	var p2: Vector2 = Vector2(-INF, -INF)
 
 	for i in range(screen_verts.size()):
-		var unprojected = current_camera.unproject_position(screen_verts[i] + screen_2.global_transform.origin)
+		var unprojected := current_camera.unproject_position(screen_verts[i] + screen_2.global_transform.origin)
 		p1.x = min(p1.x, unprojected.x)
 		p1.y = min(p1.y, unprojected.y)
 		p2.x = max(p2.x, unprojected.x)
 		p2.y = max(p2.y, unprojected.y)
 
-	var size = p2 - p1
-
+	var size := p2 - p1
+	
 	if console:
-		console.setTerminalBounds(p1.x, p1.y, size.x, size.y)
+		var godot_viewport := get_viewport().get_visible_rect().size
+		var scale_x = console.getCanvasWidth() / godot_viewport.x
+		var scale_y = console.getCanvasHeight() / godot_viewport.y
+		
+		console.setTerminalBounds(p1.x * scale_x, p1.y * scale_y, size.x * scale_x, size.y * scale_y)
 
 func _on_arrived_at_meta_path(meta_path_index: int) -> void:
 	if meta_path_index == 4:
