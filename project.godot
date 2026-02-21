@@ -23,6 +23,7 @@ run/max_fps=120
 
 DialogueManager="*uid://c3rodes2l3gxb"
 Events="*res://events/events.gd"
+JSBridge="*uid://b75xjpx1y8l83"
 
 [debug_draw_3d]
 

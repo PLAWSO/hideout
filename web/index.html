@@ -7,11 +7,14 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
 			<link rel="stylesheet" href="styles.css">
-			<script src="./build/godot.js"></script>
-			<script src="script.js"></script>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 			<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+
+			<script src="./build/godot.js"></script>
+			<script src="script.js"></script>
+			
 	</head>
 	<body>
 		<div id="loading-container" class="scanline">
@@ -23,6 +26,9 @@
 					<button class="nav-button active" id="about-button" onclick="navButtonClicked(this)">About</button>
 					<button class="nav-button" id="contact-button" onclick="navButtonClicked(this)">Contact</button>
 					<button class="nav-button" id="test-button" onclick="navButtonClicked(this)">Test</button>
+					<button class="nav-button" id="settings-button" onclick="navButtonClicked(this)">
+						<i class="material-icons">settings</i>
+					</button>
 				</div>
 		
 				<div id="content">
@@ -40,6 +46,13 @@
 						<p>TODO</p>
 						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
 					</div>
+					<div id="settings" class="section" style="display:none;">
+						<h1>Settings</h1>
+						<input type="checkbox" id="show-debug" name="showDebug" value="debug">
+						<label for="show-debug">Show debug info</label><br>
+						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+					</div>
+
 				</div>
 			</div>
 		</div>

@@ -12,13 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
 [ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/camera/drone_cam.tscn" id="12_x3ijg"]
-[ext_resource type="Script" uid="uid://2j378cfp4am" path="res://scenes/hideout/fps_counter.gd" id="13_x1t0x"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
 [ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
-[ext_resource type="Script" uid="uid://b3j1xqv77fsu3" path="res://scenes/hideout/resolution.gd" id="18_jr4o4"]
+[ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://scenes/debug_info/debug_info.tscn" id="18_y6y6u"]
 
 [sub_resource type="Shader" id="Shader_y6y6u"]
 code = "shader_type canvas_item;
@@ -232,7 +231,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.5291937, -0.25985977, -0.8077294, 0, 0.9519487, -0.30625746, 0.848501, 0.16206951, 0.5037653, 58.57183, 1.9759991, -51.687675)
+transform = Transform3D(-0.96324253, 0, -0.26863316, 0, 1, 0, 0.26863316, 0, -0.96324253, 37.451942, 1.976, -60.64622)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -269,7 +268,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.7743042, 0.08493755, 0.6270874, 0, 0.9909513, -0.13422208, -0.6328136, 0.103928715, 0.76729774, 0.07329566, 0.34265462, 2.3432548)
+transform = Transform3D(0.7743364, 0.08486485, 0.62705743, 0, 0.9909657, -0.13411555, -0.6327741, 0.10385055, 0.76734084, -1.1982906, 0.34241226, 2.3432379)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -382,26 +381,6 @@ metadata/_custom_type_script = "uid://u8kmj6bobusb"
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 51.4022, 0, -61.4187)
 camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/TestCam")
 
-[node name="Control" type="Control" parent="." unique_id=243132033]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=1557399481]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer" unique_id=1775795652]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="FPSCounter" type="Label" parent="Control/CanvasLayer/VBoxContainer" unique_id=2123802881]
-layout_mode = 2
-script = ExtResource("13_x1t0x")
-
-[node name="Resolution" type="Label" parent="Control/CanvasLayer/VBoxContainer" unique_id=1293879404]
-layout_mode = 2
-script = ExtResource("18_jr4o4")
-
 [node name="TouchInput" type="Control" parent="." unique_id=842695373]
 layout_mode = 3
 anchors_preset = 0
@@ -457,6 +436,8 @@ shadow_opacity = 0.7
 environment = SubResource("Environment_x3ijg")
 
 [node name="Node" type="Node" parent="." unique_id=1793695943]
+
+[node name="DebugInfo" parent="." unique_id=478141873 instance=ExtResource("18_y6y6u")]
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
 [connection signal="pressed" from="TouchInput/CanvasLayer/PreviousCamera" to="." method="_on_previous_camera_pressed"]

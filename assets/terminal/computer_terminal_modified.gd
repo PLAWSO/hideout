@@ -33,8 +33,8 @@ func _on_camera_moved() -> void:
 	
 	if console:
 		var godot_viewport := get_viewport().get_visible_rect().size
-		var scale_x = console.getCanvasWidth() / godot_viewport.x
-		var scale_y = console.getCanvasHeight() / godot_viewport.y
+		var scale_x = JSBridge.canvas_width / godot_viewport.x
+		var scale_y = JSBridge.canvas_height / godot_viewport.y
 		
 		console.setTerminalBounds(p1.x * scale_x, p1.y * scale_y, size.x * scale_x, size.y * scale_y)
 
