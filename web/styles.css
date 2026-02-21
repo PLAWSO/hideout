@@ -37,19 +37,13 @@ html, body, #loading-container, #canvas, #terminal-container {
 	overflow: hidden;
 }
 
-@media (max-width: 1200px) {
-	#loading {
-		font-size: 16px;
-	}
-}
-
 @media (max-height: 800px) {
 	* {
 		font-size: 24px;
 	}
 }
 
-@media (max-height: 450px) {
+@media (max-height: 550px) {
 	* {
 		font-size: 12px;
 	}
@@ -91,12 +85,16 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 	display: none;
 	opacity: 0.0;
+
+	/* center the terminal container on the page */
+	margin-left: 0.3%;
 }
 
 #terminal {
-	margin: 1rem;
+	/* 3% gets us inside the bezels of the terminal, 0.5rem for font-size scaled margin */
+	margin: calc(3% + 0.5rem);
 	
-	height: calc(100% - 2rem);
+	height: calc(100% - 2 * (3% + 0.5rem));
 	
   display: flex;
   gap: 10px;
