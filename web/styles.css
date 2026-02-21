@@ -149,6 +149,22 @@ html, body, #loading-container, #canvas, #terminal-container {
   background-color: green;
 }
 
+#settings-button {
+	margin-top: auto;
+	margin-left: auto;
+	color: black;
+
+	height: 2rem;
+	width: 2rem;
+
+	padding: 0rem;
+}
+
+#settings-button > i {
+	color: black;
+	font-size: 2rem;
+}
+
 
 /*#########################
 ### SCANLINE EFFECT     ###

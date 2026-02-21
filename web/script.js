@@ -115,6 +115,15 @@ window.addEventListener('DOMContentLoaded', () => {
 	sections = document.querySelectorAll('.section');
 	navButtons = document.querySelectorAll('.nav-button');
 
+	var showDebugCheckBox = document.getElementById("show-debug");
+	showDebugCheckBox.addEventListener('change', function() {
+		if (this.checked) {
+			onShowDebug(true)
+		} else {
+			onShowDebug(false)
+		}
+	})
+
 	const canvas = document.getElementById("canvas");
 	var engine = new Engine({
 		canvas: { element: canvas },
