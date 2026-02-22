@@ -111,6 +111,7 @@ function getCanvasHeight() {
 
 function setWatchedIntro() {
 	localStorage.setItem("watchedIntro", "true");
+	console.log("Intro marked as watched in localStorage.");
 }
 
 function hasWatchedIntro() {
