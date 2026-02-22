@@ -109,6 +109,14 @@ function getCanvasHeight() {
 	return document.getElementById("canvas").clientHeight;
 }
 
+function setWatchedIntro() {
+	localStorage.setItem("watchedIntro", "true");
+}
+
+function hasWatchedIntro() {
+	return localStorage.getItem("watchedIntro") === "true";
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 	var loadingScreen = document.getElementById("loading");
 	terminalContainer = document.getElementById("terminal-container");

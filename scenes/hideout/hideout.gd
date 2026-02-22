@@ -33,11 +33,21 @@ func _ready() -> void:
 		cinna_cam.camera.current = true
 		return
 
+	Events.skipped_intro.connect(_on_skipped_intro)
+
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	DialogueManager.show_dialogue_balloon_scene(test_balloon, load("res://dialog/test.dialogue"), "start")
 
+func _on_skipped_intro() -> void:
+	test_balloon.queue_free()
+	transition_to_drone()
+
 func _on_dialogue_ended(_resource) -> void:
+	transition_to_drone()
+	JSBridge.setWatchedIntro()
+
+func transition_to_drone() -> void:
 	cinna_cam.camera.current = true
 	transition.visible = true
 	var tween = create_tween()
