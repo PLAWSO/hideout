@@ -237,9 +237,13 @@ size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_72ixx")
-response_template = NodePath("ResponseExample")
+response_template = NodePath("MarginContainer/ResponseExample")
 
-[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu" unique_id=532709354]
+[node name="MarginContainer" type="MarginContainer" parent="Balloon/ResponsesMenu" unique_id=435744295]
+layout_mode = 2
+
+[node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu/MarginContainer" unique_id=532709354]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 text = "Response example"
 

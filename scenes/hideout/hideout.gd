@@ -18,16 +18,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		cinna_cam.set_movement_target(current_meta_path_index)
 #endregion
 
-
-func _on_next_camera_pressed() -> void:
-	cinna_cam.set_movement_target((cinna_cam.meta_path_index + 1) % cinna_cam.meta_paths.size())
-	pass # Replace with function body.
-
-func _on_previous_camera_pressed() -> void:
-	cinna_cam.set_movement_target((cinna_cam.meta_path_index - 1 + cinna_cam.meta_paths.size()) % cinna_cam.meta_paths.size())
-	pass # Replace with function body.
-
-
 func _ready() -> void:
 	if skip_dialogue:
 		cinna_cam.camera.current = true
@@ -52,3 +42,19 @@ func transition_to_drone() -> void:
 	transition.visible = true
 	var tween = create_tween()
 	tween.tween_property(transition.material, "shader_parameter/opacity", 0.0, 3.0).from(1.0)
+
+
+func _on_arcade_button_pressed() -> void:
+	cinna_cam.set_movement_target(2)
+
+func _on_loiter_button_pressed() -> void:
+	cinna_cam.set_movement_target(0)
+
+func _on_toolbox_button_pressed() -> void:
+	cinna_cam.set_movement_target(3)
+
+func _on_bike_button_pressed() -> void:
+	cinna_cam.set_movement_target(1)
+
+func _on_terminal_button_pressed() -> void:
+	cinna_cam.set_movement_target(4)
