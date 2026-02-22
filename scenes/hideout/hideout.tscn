@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
+[ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="17_jr4o4"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://scenes/debug_info/debug_info.tscn" id="18_y6y6u"]
 
@@ -218,6 +219,7 @@ axis = 0
 texture = SubResource("ViewportTexture_eegbv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ArcadeCabinet" unique_id=112902397]
+visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -228,10 +230,10 @@ offset_bottom = 360.0
 [node name="AuxCam" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.96324253, 0, -0.26863316, 0, 1, 0, 0.26863316, 0, -0.96324253, 37.451942, 1.976, -60.64622)
+transform = Transform3D(0.5289827, -0.25034562, -0.8108664, 0, 0.9554976, -0.29499882, 0.8486326, 0.15604928, 0.5054417, 58.316322, 1.9759991, -51.520115)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -240,6 +242,7 @@ axis = 0
 texture = SubResource("ViewportTexture_seky7")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="ArcadeCabinet" unique_id=1203993844]
+visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -251,7 +254,7 @@ offset_bottom = 360.0
 [node name="AuxCam2" type="SubViewport" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
 transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
@@ -268,7 +271,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.7743364, 0.08486485, 0.62705743, 0, 0.9909657, -0.13411555, -0.6327741, 0.10385055, 0.76734084, -1.1982906, 0.34241226, 2.3432379)
+transform = Transform3D(0.9888753, -0.017437976, -0.14772083, 0, 0.99310446, -0.11723284, 0.14874652, 0.11592866, 0.9820565, 2.532931, 0.33526728, 1.8560865)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -386,38 +389,76 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("17_jr4o4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="TouchInput" unique_id=1086416257]
 
-[node name="PreviousCamera" type="Button" parent="TouchInput/CanvasLayer" unique_id=1571507544]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="Control" type="Control" parent="TouchInput/CanvasLayer" unique_id=804378672]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -69.0
-offset_top = -161.0
-offset_right = -4.0
-offset_bottom = -16.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 100
-text = "<"
+grow_vertical = 2
+theme = ExtResource("17_jr4o4")
 
-[node name="NextCamera" type="Button" parent="TouchInput/CanvasLayer" unique_id=315796261]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control" unique_id=2023854644]
+layout_mode = 1
+offset_right = 269.0
+offset_bottom = 283.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="TouchInput/CanvasLayer/Control/MarginContainer" unique_id=590874335]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel" unique_id=1644927440]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -161.0
-offset_right = 71.0
-offset_bottom = -16.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 100
-text = ">"
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer" unique_id=1945259881]
+layout_mode = 2
+theme = ExtResource("17_jr4o4")
+
+[node name="LoiterButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1671983425]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("17_jr4o4")
+text = "Loiter"
+
+[node name="ToolboxButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1441518706]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("17_jr4o4")
+text = "Toolbox"
+
+[node name="BikeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=959216760]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("17_jr4o4")
+text = "Bike"
+
+[node name="TerminalButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1679642591]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("17_jr4o4")
+text = "Terminal"
+
+[node name="ArcadeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=400927104]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("17_jr4o4")
+text = "Arcade "
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=165014565]
 transform = Transform3D(0.891916, -0.3669671, 0.2642369, 0.20717743, 0.8510113, 0.48255292, -0.40194955, -0.37565273, 0.8350578, 0, 6.073155, 0)
@@ -438,7 +479,14 @@ environment = SubResource("Environment_x3ijg")
 [node name="Node" type="Node" parent="." unique_id=1793695943]
 
 [node name="DebugInfo" parent="." unique_id=478141873 instance=ExtResource("18_y6y6u")]
+offset_left = 149.0
+offset_top = 22.0
+offset_right = 149.0
+offset_bottom = 22.0
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/PreviousCamera" to="." method="_on_previous_camera_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/NextCamera" to="." method="_on_next_camera_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/LoiterButton" to="." method="_on_loiter_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/ToolboxButton" to="." method="_on_toolbox_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/BikeButton" to="." method="_on_bike_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/TerminalButton" to="." method="_on_terminal_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_pressed"]
