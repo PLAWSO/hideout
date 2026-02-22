@@ -76,6 +76,12 @@ html, body, #loading-container, #canvas, #terminal-container {
 	display: flex;
 }
 
+@media (max-width: 700px) {
+	#loading {
+		font-size: 12px;
+	}
+}
+
 /*#########################
 ### TERMINAL            ###
 #########################*/
