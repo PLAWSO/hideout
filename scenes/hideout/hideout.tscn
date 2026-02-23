@@ -219,7 +219,6 @@ axis = 0
 texture = SubResource("ViewportTexture_eegbv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ArcadeCabinet" unique_id=112902397]
-visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -230,10 +229,10 @@ offset_bottom = 360.0
 [node name="AuxCam" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.5289827, -0.25034562, -0.8108664, 0, 0.9554976, -0.29499882, 0.8486326, 0.15604928, 0.5054417, 58.316322, 1.9759991, -51.520115)
+transform = Transform3D(0.52933884, -0.2595193, -0.80774385, 0, 0.95206726, -0.30588886, 0.8484105, 0.16191885, 0.50396615, 58.571426, 1.9759991, -51.685757)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -242,7 +241,6 @@ axis = 0
 texture = SubResource("ViewportTexture_seky7")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="ArcadeCabinet" unique_id=1203993844]
-visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -254,7 +252,7 @@ offset_bottom = 360.0
 [node name="AuxCam2" type="SubViewport" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
 transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
@@ -271,7 +269,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.9888753, -0.017437976, -0.14772083, 0, 0.99310446, -0.11723284, 0.14874652, 0.11592866, 0.9820565, 2.532931, 0.33526728, 1.8560865)
+transform = Transform3D(0.9813116, -0.019617364, -0.1914227, 0, 0.9947897, -0.10194795, 0.1924253, 0.10004271, 0.97619873, -3.8639214, 1.6270117, 1.1034884)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -404,8 +402,8 @@ theme = ExtResource("17_jr4o4")
 
 [node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control" unique_id=2023854644]
 layout_mode = 1
-offset_right = 269.0
-offset_bottom = 283.0
+offset_right = 280.0
+offset_bottom = 310.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
