@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
 [ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="17_jr4o4"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
+[ext_resource type="Texture2D" uid="uid://b0na6bvjoegr2" path="res://themes/left-arrow-back.svg" id="18_m7c5n"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://scenes/debug_info/debug_info.tscn" id="18_y6y6u"]
 
 [sub_resource type="Shader" id="Shader_y6y6u"]
@@ -232,7 +233,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(0.52933884, -0.2595193, -0.80774385, 0, 0.95206726, -0.30588886, 0.8484105, 0.16191885, 0.50396615, 58.571426, 1.9759991, -51.685757)
+transform = Transform3D(-0.9677285, 0, -0.25199512, 0, 1, 0, 0.25199512, 0, -0.9677285, 37.14636, 1.976, -62.283802)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -269,7 +270,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.9813116, -0.019617364, -0.1914227, 0, 0.9947897, -0.10194795, 0.1924253, 0.10004271, 0.97619873, -3.8639214, 1.6270117, 1.1034884)
+transform = Transform3D(0.9797548, 0.14818226, -0.13461998, 0, 0.6724235, 0.74016666, 0.2002012, -0.7251818, 0.65881014, -3.8128014, 1.4118049, 1.68536)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -402,8 +403,9 @@ theme = ExtResource("17_jr4o4")
 
 [node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control" unique_id=2023854644]
 layout_mode = 1
-offset_right = 280.0
-offset_bottom = 310.0
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 40.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -412,51 +414,70 @@ theme_override_constants/margin_bottom = 10
 [node name="Panel" type="Panel" parent="TouchInput/CanvasLayer/Control/MarginContainer" unique_id=590874335]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel" unique_id=1644927440]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer" unique_id=1644927440]
+layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer" unique_id=1945259881]
+[node name="VBoxContainer" type="VBoxContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer" unique_id=1945259881]
 layout_mode = 2
+size_flags_horizontal = 13
+size_flags_vertical = 0
 theme = ExtResource("17_jr4o4")
 
-[node name="LoiterButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1671983425]
+[node name="LoiterButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1671983425]
+visible = false
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
 theme = ExtResource("17_jr4o4")
 text = "Loiter"
 
-[node name="ToolboxButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1441518706]
+[node name="ToolboxButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1441518706]
+visible = false
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
 theme = ExtResource("17_jr4o4")
 text = "Toolbox"
 
-[node name="BikeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=959216760]
+[node name="BikeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=959216760]
+visible = false
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
 theme = ExtResource("17_jr4o4")
 text = "Bike"
 
-[node name="TerminalButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=1679642591]
+[node name="TerminalButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1679642591]
+visible = false
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
 theme = ExtResource("17_jr4o4")
 text = "Terminal"
 
-[node name="ArcadeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer" unique_id=400927104]
+[node name="ArcadeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=400927104]
+visible = false
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
+size_flags_horizontal = 5
 size_flags_vertical = 3
 theme = ExtResource("17_jr4o4")
 text = "Arcade "
+
+[node name="BackButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1698991955]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+icon = ExtResource("18_m7c5n")
+expand_icon = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=165014565]
 transform = Transform3D(0.891916, -0.3669671, 0.2642369, 0.20717743, 0.8510113, 0.48255292, -0.40194955, -0.37565273, 0.8350578, 0, 6.073155, 0)
@@ -477,14 +498,16 @@ environment = SubResource("Environment_x3ijg")
 [node name="Node" type="Node" parent="." unique_id=1793695943]
 
 [node name="DebugInfo" parent="." unique_id=478141873 instance=ExtResource("18_y6y6u")]
-offset_left = 149.0
-offset_top = 22.0
-offset_right = 149.0
-offset_bottom = 22.0
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.074
+offset_right = -27.114002
+offset_bottom = -25.711998
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/LoiterButton" to="." method="_on_loiter_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/ToolboxButton" to="." method="_on_toolbox_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/BikeButton" to="." method="_on_bike_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/TerminalButton" to="." method="_on_terminal_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/Panel/MarginContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/LoiterButton" to="." method="_on_loiter_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ToolboxButton" to="." method="_on_toolbox_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BikeButton" to="." method="_on_bike_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/TerminalButton" to="." method="_on_terminal_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_pressed"]
+[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

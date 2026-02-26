@@ -4,6 +4,9 @@ extends Node3D
 
 var console
 var tween
+var top: float = 100
+var left: float = 100
+var showAllButtons: bool = true
 
 func _ready() -> void:
 	Events.camera_moved.connect(_on_camera_moved)
@@ -12,6 +15,10 @@ func _ready() -> void:
 	console = JavaScriptBridge.get_interface("window")
 
 func _on_camera_moved() -> void:
+	_set_js_terminal_bounds()
+	_set_visible_movement_buttons()
+
+func _set_js_terminal_bounds() -> void:
 	var screen_verts := screen_2.mesh.get_faces()
 
 	var current_camera := get_viewport().get_camera_3d()
@@ -35,8 +42,20 @@ func _on_camera_moved() -> void:
 		var godot_viewport := get_viewport().get_visible_rect().size
 		var scale_x = JSBridge.canvas_width / godot_viewport.x
 		var scale_y = JSBridge.canvas_height / godot_viewport.y
+
+		left = p1.x * scale_x
+		top = p1.y * scale_y
 		
-		console.setTerminalBounds(p1.x * scale_x, p1.y * scale_y, size.x * scale_x, size.y * scale_y)
+		console.setTerminalBounds(left, top, size.x * scale_x, size.y * scale_y)
+
+func _set_visible_movement_buttons() -> void:
+	if showAllButtons and (left < 245.0 or top < 50.0):
+		Events.switch_visible_movement_buttons.emit(false)
+		showAllButtons = false
+	elif not showAllButtons and left >= 245.0 and top >= 50.0:
+		Events.switch_visible_movement_buttons.emit(true)
+		showAllButtons = true
+
 
 func _on_arrived_at_meta_path(meta_path_index: int) -> void:
 	if meta_path_index == 4:
