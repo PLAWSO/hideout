@@ -71,7 +71,7 @@ func _on_skipped_intro() -> void:
 
 
 # need to rename these functions/signals for clarity
-var has_arrived_at_4: bool = true
+var has_arrived_at_4: bool = false
 
 func switch_visible_movement_buttons(show_all_buttons: bool) -> void:
 	if show_all_buttons:

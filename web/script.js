@@ -124,6 +124,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	sections = document.querySelectorAll('.section');
 	navButtons = document.querySelectorAll('.nav-button');
 
+	// allegedly iOS ignores maximum-scale in the viewport meta tag, so we set it here via JS
+	var viewport = document.querySelector("meta[name=viewport]");
+	viewport.maximumScale = 1.0;
+
 	var showDebugCheckBox = document.getElementById("show-debug");
 	showDebugCheckBox.addEventListener('change', function() {
 		if (this.checked) {
