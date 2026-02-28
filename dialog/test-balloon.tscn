@@ -6,7 +6,27 @@
 [ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="2_haggk"]
 [ext_resource type="Script" uid="uid://bak3xw5ftsjcf" path="res://dialog/grow_to_max_width.gd" id="2_tskr7"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
-[ext_resource type="Texture2D" uid="uid://s3hbvmiq7wn0" path="res://assets/pfp/pfp.png" id="3_ojish"]
+[ext_resource type="Texture2D" uid="uid://b21jrnhq3awun" path="res://robot_animations/0001.png" id="5_8aj35"]
+[ext_resource type="Texture2D" uid="uid://c6brfvkyjsmj4" path="res://robot_animations/0002.png" id="6_4k0ti"]
+[ext_resource type="Texture2D" uid="uid://bp6jyfyaxal26" path="res://robot_animations/0003.png" id="7_hx2wk"]
+[ext_resource type="Texture2D" uid="uid://qdmj7oyl6yt5" path="res://robot_animations/0004.png" id="8_d72dk"]
+[ext_resource type="Texture2D" uid="uid://sg6nhtk45uec" path="res://robot_animations/0005.png" id="9_cf0h1"]
+[ext_resource type="Texture2D" uid="uid://gq34efxthldg" path="res://robot_animations/0006.png" id="10_4xnhr"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_uhfse"]
+frames = 6
+speed_scale = -6.5
+frame_0/texture = ExtResource("5_8aj35")
+frame_1/texture = ExtResource("6_4k0ti")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("7_hx2wk")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("8_d72dk")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("9_cf0h1")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("10_4xnhr")
+frame_5/duration = 1.0
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -126,9 +146,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer/MarginContainer" unique_id=1476616269]
-position = Vector2(114, 116)
-scale = Vector2(6.1015625, 6.1015625)
-texture = ExtResource("3_ojish")
+position = Vector2(114.99999, 115.000015)
+scale = Vector2(3.5312495, 3.5312495)
+texture = SubResource("AnimatedTexture_uhfse")
 
 [node name="TextContainer" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer" unique_id=190521642]
 custom_minimum_size = Vector2(480, 240)
