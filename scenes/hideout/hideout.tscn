@@ -9,15 +9,15 @@
 [ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="5_x1t0x"]
 [ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="7_embkr"]
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
-[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="9_60i1o"]
+[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/preview_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
-[ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/camera/drone_cam.tscn" id="12_x3ijg"]
+[ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/drone/drone_cam.tscn" id="12_x3ijg"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
 [ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
-[ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/test-balloon.tscn" id="16_x3ijg"]
+[ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/dialog_template.tscn" id="16_x3ijg"]
 [ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="17_jr4o4"]
-[ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/test.dialogue" id="17_x3ijg"]
+[ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/intro.dialogue" id="17_x3ijg"]
 [ext_resource type="Texture2D" uid="uid://b0na6bvjoegr2" path="res://themes/left-arrow-back.svg" id="18_m7c5n"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://scenes/debug_info/debug_info.tscn" id="18_y6y6u"]
 
@@ -233,7 +233,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.9677285, 0, -0.25199512, 0, 1, 0, 0.25199512, 0, -0.9677285, 37.14636, 1.976, -62.283802)
+transform = Transform3D(0.115383625, -0.124886185, -0.985439, 0, 0.992065, -0.12572591, 0.993321, 0.014506712, 0.11446806, 43.745743, 1.9759914, -49.120224)
 
 [node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -270,7 +270,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.9797548, 0.14818226, -0.13461998, 0, 0.6724235, 0.74016666, 0.2002012, -0.7251818, 0.65881014, -3.8128014, 1.4118049, 1.68536)
+transform = Transform3D(0.8067336, 0.07515695, 0.58611625, 0, 0.9918787, -0.12718736, -0.59091526, 0.10260631, 0.80018187, -2.515753, 0.34434262, 2.3423383)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
