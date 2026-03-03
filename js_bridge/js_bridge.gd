@@ -1,17 +1,25 @@
 extends Node
 
 var console
-var canvas_width: float
-var canvas_height: float
+var canvas_size: Vector2
+
+var viewport_size: Vector2
+
+var terminal_bounds: Rect2
 
 func _ready() -> void:
 	console = JavaScriptBridge.get_interface("window")
 
-func _process(_delta: float) -> void:
+func setCanvasDimensions() -> void:
 	if console:
-		canvas_width = console.getCanvasWidth()
-		canvas_height = console.getCanvasHeight()
+		canvas_size = Vector2(console.getCanvasWidth(), console.getCanvasHeight())
 
+func setViewportDimensions(size: Vector2) -> void:
+	viewport_size = size
+
+func setTerminalBounds(size: Rect2) -> void:
+	terminal_bounds = size
+	
 func setWatchedIntro() -> void:
 	if console:
 		console.setWatchedIntro()

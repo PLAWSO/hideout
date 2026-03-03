@@ -42,5 +42,5 @@ func update_resolution_label() -> void:
 	resolution_label.text = str("Internal Resolution: " + str(resolution.x) + "x" + str(resolution.y))
 
 func update_canvas_size_label() -> void:
-	var canvas_size = Vector2(JSBridge.canvas_width, JSBridge.canvas_height)
+	var canvas_size = Vector2(JSBridge.canvas_size.x, JSBridge.canvas_size.y)
 	canvas_size_label.text = str("Canvas Size: " + str(canvas_size.x) + "x" + str(canvas_size.y))
