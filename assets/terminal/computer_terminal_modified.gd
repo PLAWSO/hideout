@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var screen_2: MeshInstance3D = $Screen2
+@onready var screen_2: MeshInstance3D = $Screen
 
 var console
 var tween

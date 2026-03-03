@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gq34efxthldg"
-path="res://.godot/imported/0006.png-a5bd5a48e74de0f03efab7647fe64985.ctex"
+path="res://.godot/imported/0006.png-e5446975b5837aabc314134ffde88cf8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://robot_animations/0006.png"
-dest_files=["res://.godot/imported/0006.png-a5bd5a48e74de0f03efab7647fe64985.ctex"]
+source_file="res://robot_animations/nod/0006.png"
+dest_files=["res://.godot/imported/0006.png-e5446975b5837aabc314134ffde88cf8.ctex"]
 
 [params]
 

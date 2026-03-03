@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="4_8hjng"]
 [ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="4_fkpan"]
 [ext_resource type="Script" uid="uid://bf4wol320c205" path="res://cinna_cam/camera_movement/planar-system.gd" id="4_yd1wb"]
-[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/test_cam.tscn" id="6_xdn75"]
+[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/preview_cam.tscn" id="6_xdn75"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4x078"]
 resource_name = "Trunk"
@@ -2895,7 +2895,6 @@ meta_paths = [NodePath("TrailFollow")]
 position_targeter = SubResource("Resource_xdn75")
 x_look_targeter = SubResource("Resource_yd1wb")
 y_look_targeter = SubResource("Resource_fkpan")
-debug = null
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CinnaCam" unique_id=1813028640 instance=ExtResource("6_xdn75")]
