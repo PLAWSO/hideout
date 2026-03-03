@@ -39,12 +39,13 @@ var _previously_focused_item: Control = null
 
 
 func _ready() -> void:
-	visibility_changed.connect(func():
-		if auto_focus_first_item and visible and get_menu_items().size() > 0:
-			var first_item: Control = get_menu_items()[0]
-			if first_item.is_inside_tree():
-				first_item.grab_focus()
-	)
+	# visibility_changed.connect(func():
+	# 	if auto_focus_first_item and visible and get_menu_items().size() > 0:
+	# 		var first_item: Control = get_menu_items()[0]
+	# 		if first_item.is_inside_tree():
+	# 			first_item.grab_focus()
+	# 			pass
+	# )
 
 	if is_instance_valid(response_template):
 		response_template.hide()

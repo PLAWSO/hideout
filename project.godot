@@ -25,10 +25,6 @@ DialogueManager="*uid://c3rodes2l3gxb"
 Events="*res://events/events.gd"
 JSBridge="*uid://b75xjpx1y8l83"
 
-[debug_draw_3d]
-
-settings/addon_root_folder="res://addons/debug_draw_3d"
-
 [dialogue_manager]
 
 runtime/balloon_path="res://dialog/test-balloon.tscn"
