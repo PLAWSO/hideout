@@ -39,20 +39,29 @@ func _set_js_terminal_bounds() -> void:
 	var size := p2 - p1
 	
 	if console:
+		JSBridge.setCanvasDimensions()
+
 		var godot_viewport := get_viewport().get_visible_rect().size
-		var scale_x = JSBridge.canvas_width / godot_viewport.x
-		var scale_y = JSBridge.canvas_height / godot_viewport.y
+
+		JSBridge.setViewportDimensions(godot_viewport)
+
+		var scale_x = JSBridge.canvas_size.x / godot_viewport.x
+		var scale_y = JSBridge.canvas_size.y / godot_viewport.y
 
 		left = p1.x * scale_x
 		top = p1.y * scale_y
-		
+
+		JSBridge.setTerminalBounds(Rect2(left, top, size.x * scale_x, size.y * scale_y))
+
 		console.setTerminalBounds(left, top, size.x * scale_x, size.y * scale_y)
 
 func _set_visible_movement_buttons() -> void:
-	if showAllButtons and (left < 245.0 or top < 50.0):
+	# print("Terminal bounds position: ", JSBridge.terminal_bounds.position)
+	# print("scale: ", JSBridge.canvas_size.x / JSBridge.viewport_size.x)
+	if showAllButtons and (JSBridge.terminal_bounds.position.x < 270.0 * JSBridge.canvas_size.x / JSBridge.viewport_size.x):
 		Events.switch_visible_movement_buttons.emit(false)
 		showAllButtons = false
-	elif not showAllButtons and left >= 245.0 and top >= 50.0:
+	elif not showAllButtons and (JSBridge.terminal_bounds.position.x >= 270.0 * JSBridge.canvas_size.x / JSBridge.viewport_size.x):
 		Events.switch_visible_movement_buttons.emit(true)
 		showAllButtons = true
 
