@@ -2,7 +2,7 @@ extends Button
 
 
 func _ready() -> void:
-	if not JSBridge.hasWatchedIntro():
+	if not JSBridge.get_watched_intro():
 		visible = false
 	pass
 

@@ -2,146 +2,56 @@ extends Node3D
 
 @export var cinna_cam: CinnaCam
 @export var transition: ColorRect
-@export var skip_dialogue: bool = true
 
-@onready var test_balloon: CanvasLayer = $TestBalloon
-
-var movement_buttons: Array[Button] = []
-var back_button: Button
-var last_show_all_buttons: bool = true
+@onready var dialogue_container: CanvasLayer = $GUI/DialogueContainer
 
 
 #region Input Handling
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	var current_meta_path_index = cinna_cam.meta_path_index
-	var meta_path_count = cinna_cam.meta_paths.size()
-	if event.is_action_pressed("left"):
-		current_meta_path_index = (current_meta_path_index - 1 + meta_path_count) % meta_path_count
-		cinna_cam.set_movement_target(current_meta_path_index)
-	if event.is_action_pressed("right"):
-		current_meta_path_index = (current_meta_path_index + 1) % meta_path_count
-		cinna_cam.set_movement_target(current_meta_path_index)
-
+# func _unhandled_input(event: InputEvent) -> void:
+# 	if event.is_action_pressed("left"):
+# 		print("do something")
 
 #endregion
 
 
+#region Lifecycle
+
 func _ready() -> void:
-	var v_box_children = $TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer.get_children()
-	for child in v_box_children:
-		if child is Button:
-			if child.text != "":
-				movement_buttons.append(child)
-				continue
-			back_button = child
-
-	if skip_dialogue:
-		cinna_cam.camera.current = true
-		return
-
-	switch_visible_movement_buttons(true)
-
 	Events.skipped_intro.connect(_on_skipped_intro)
-	Events.switch_visible_movement_buttons.connect(switch_visible_buttons_if_obscured)
-
-	Events.arrived_at_meta_path.connect(_show_last_visible_movement_buttons)
-	Events.left_meta_path.connect(_show_all_movement_buttons)
 
 	await get_tree().create_timer(1.0).timeout
+	_start_intro_sequence()
+
+
+func _physics_process(delta: float) -> void:
+	JSBridge.get_set_javascript_canvas_size()
+	JSBridge.get_set_viewport_size()
+	cinna_cam.run(delta)
+
+#endregion
+
+#region Introduction
+
+func _start_intro_sequence() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	DialogueManager.show_dialogue_balloon_scene(test_balloon, load("res://dialog/trees/intro.dialogue"), "start")
+	DialogueManager.show_dialogue_balloon_scene(dialogue_container, load("res://dialog/trees/intro.dialogue"), "start")
 
 
 func _on_skipped_intro() -> void:
-	test_balloon.queue_free()
-	transition_to_drone()
-
-
-
-
-
-
-
-
-
-
-
-
-
-# need to rename these functions/signals for clarity
-var has_arrived_at_4: bool = false
-
-func switch_visible_movement_buttons(show_all_buttons: bool) -> void:
-	if show_all_buttons:
-		for button in movement_buttons:
-			button.visible = true
-		back_button.visible = false
-	else:
-		for button in movement_buttons:
-			button.visible = false
-		back_button.visible = true
-
-
-func switch_visible_buttons_if_obscured(show_all_buttons: bool) -> void:
-	last_show_all_buttons = show_all_buttons
-	if not has_arrived_at_4:
-		return
-	switch_visible_movement_buttons(show_all_buttons)
-
-
-func _show_last_visible_movement_buttons(_meta_path_index: int) -> void:
-	if cinna_cam.meta_path_index != 4:
-		return
-	has_arrived_at_4 = true
-	switch_visible_movement_buttons(last_show_all_buttons)
-
-
-func _show_all_movement_buttons(_meta_path_index: int) -> void:
-	has_arrived_at_4 = false
-	switch_visible_movement_buttons(true)
-
-
-
-
-
-
-
-
+	dialogue_container.queue_free()
+	_transition_to_drone()
 
 
 func _on_dialogue_ended(_resource) -> void:
-	transition_to_drone()
-	JSBridge.setWatchedIntro()
+	_transition_to_drone()
+	JSBridge.set_watched_intro()
 
 
-func transition_to_drone() -> void:
+func _transition_to_drone() -> void:
 	cinna_cam.camera.current = true
 	transition.visible = true
 	var tween = create_tween()
 	tween.tween_property(transition.material, "shader_parameter/opacity", 0.0, 3.0).from(1.0)
 
-
-func _on_arcade_button_pressed() -> void:
-	cinna_cam.set_movement_target(2)
-
-
-func _on_loiter_button_pressed() -> void:
-	cinna_cam.set_movement_target(0)
-
-
-func _on_toolbox_button_pressed() -> void:
-	cinna_cam.set_movement_target(3)
-
-
-func _on_bike_button_pressed() -> void:
-	cinna_cam.set_movement_target(1)
-
-
-func _on_terminal_button_pressed() -> void:
-	cinna_cam.set_movement_target(4)
-
-
-func _on_back_button_pressed() -> void:
-	cinna_cam.set_movement_target(0)
+#endregion

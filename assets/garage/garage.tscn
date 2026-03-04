@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://q08ljfx3hqyj" path="res://assets/garage/garage_Toolbox.png" id="6_kbdnh"]
 [ext_resource type="Texture2D" uid="uid://dey3vbfejochn" path="res://assets/garage/garage_overhead-bin.png" id="9_ve0hq"]
 [ext_resource type="Texture2D" uid="uid://bibjvqjjxn6ga" path="res://assets/wrench-set/wrench-set_wrench.png" id="10_kbdnh"]
-[ext_resource type="PackedScene" uid="uid://btkxj8xo50ojy" path="res://assets/terminal/computer_terminal_modified.tscn" id="11_888oy"]
 [ext_resource type="Texture2D" uid="uid://j7a23qcntjxm" path="res://assets/wrench-set/wrench-set_cork.png" id="11_k3ys0"]
 [ext_resource type="PackedScene" uid="uid://doocj678x8oy3" path="res://assets/fan/fan.glb" id="12_jtp7c"]
 [ext_resource type="Texture2D" uid="uid://b6d3x1mqnt3k6" path="res://assets/fan/fan_torch.jpg" id="13_csk6h"]
@@ -1026,9 +1025,6 @@ skeleton = NodePath("")
 transform = Transform3D(0.8964555, 0, 0.44313377, 0, 1, 0, -0.44313377, 0, 0.8964555, 2.5123632, 1.6756761, -2.2771237)
 mesh = SubResource("ArrayMesh_exyqj")
 skeleton = NodePath("")
-
-[node name="Terminal" parent="Props" unique_id=935590628 instance=ExtResource("11_888oy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9215918, 1.443, -2.6265724)
 
 [node name="fan" parent="Props" unique_id=656581677 instance=ExtResource("12_jtp7c")]
 visible = false

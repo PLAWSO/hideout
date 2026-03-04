@@ -14,11 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/drone/drone_cam.tscn" id="12_x3ijg"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
 [ext_resource type="PackedScene" uid="uid://dki0mdwkon07d" path="res://cinna_cam/pathing/meta_path_preview.tscn" id="15_y6y6u"]
+[ext_resource type="PackedScene" uid="uid://btkxj8xo50ojy" path="res://assets/terminal/computer_terminal_modified.tscn" id="16_m7c5n"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/gui/dialog_template.tscn" id="16_x3ijg"]
-[ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="17_jr4o4"]
+[ext_resource type="PackedScene" uid="uid://612fduue4mhq" path="res://cinna_cam/gui/location_gui.tscn" id="17_jr4o4"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/trees/intro.dialogue" id="17_x3ijg"]
-[ext_resource type="Texture2D" uid="uid://b0na6bvjoegr2" path="res://themes/left-arrow-back.svg" id="18_m7c5n"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://scenes/debug_info/debug_info.tscn" id="18_y6y6u"]
 
 [sub_resource type="Shader" id="Shader_y6y6u"]
@@ -50,7 +50,7 @@ shader_parameter/noise = SubResource("NoiseTexture2D_m7c5n")
 shader_parameter/opacity = 1.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_60i1o"]
-viewport_path = NodePath("ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam")
+viewport_path = NodePath("Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ura2u"]
 resource_local_to_scene = true
@@ -58,18 +58,12 @@ shader = ExtResource("2_eegbv")
 shader_parameter/Texture2DParameter = SubResource("ViewportTexture_60i1o")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_embkr"]
-viewport_path = NodePath("ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2")
+viewport_path = NodePath("Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_seky7"]
 resource_local_to_scene = true
 shader = ExtResource("2_eegbv")
 shader_parameter/Texture2DParameter = SubResource("ViewportTexture_embkr")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_eegbv"]
-viewport_path = NodePath("RenderBuffer")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_seky7"]
-viewport_path = NodePath("RenderBuffer2")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
@@ -157,11 +151,16 @@ ambient_light_color = Color(0, 1, 0, 1)
 ambient_light_energy = 2.65
 reflected_light_source = 1
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_eegbv"]
+viewport_path = NodePath("StationaryCamRenderBuffer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_seky7"]
+viewport_path = NodePath("DynamicCamRenderBuffer")
+
 [node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
 cinna_cam = NodePath("CameraController")
 transition = NodePath("StaticContainer/ColorRect")
-skip_dialogue = false
 
 [node name="StaticContainer" type="CanvasLayer" parent="." unique_id=1965450989]
 
@@ -176,19 +175,15 @@ offset_bottom = 862.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1649804378]
-transform = Transform3D(0.6636129, -0.3831031, 0.64253396, 0, 0.8589152, 0.5121178, -0.74807614, -0.33984798, 0.56998724, 3.9733453, 2.8558252, 2.1902392)
+[node name="SecurityCamera" type="Camera3D" parent="." unique_id=1649804378]
+transform = Transform3D(0.6636129, -0.38310313, 0.64253396, 0, 0.85891527, 0.5121178, -0.74807614, -0.339848, 0.56998724, 3.9733453, 2.8558252, 2.1902392)
 
-[node name="TestBalloon" parent="." unique_id=1950969821 instance=ExtResource("16_x3ijg")]
-dialogue_resource = ExtResource("17_x3ijg")
-will_block_other_input = false
-
-[node name="RenderBuffer" type="SubViewport" parent="." unique_id=795163889]
+[node name="StationaryCamRenderBuffer" type="SubViewport" parent="." unique_id=795163889]
 size = Vector2i(360, 360)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="RenderBuffer" unique_id=1056464830]
+[node name="ColorRect" type="ColorRect" parent="StationaryCamRenderBuffer" unique_id=1056464830]
 material = SubResource("ShaderMaterial_ura2u")
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,66 +192,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="RenderBuffer2" type="SubViewport" parent="." unique_id=1417350610]
+[node name="DynamicCamRenderBuffer" type="SubViewport" parent="." unique_id=1417350610]
 size = Vector2i(360, 360)
 
-[node name="ColorRect" type="ColorRect" parent="RenderBuffer2" unique_id=1274268457]
+[node name="ColorRect" type="ColorRect" parent="DynamicCamRenderBuffer" unique_id=1274268457]
 material = SubResource("ShaderMaterial_seky7")
 offset_right = 360.0
 offset_bottom = 360.0
-
-[node name="Garage" parent="." unique_id=28143282 instance=ExtResource("2_7v8ca")]
-
-[node name="Bike" parent="." unique_id=1435548934 instance=ExtResource("16_seky7")]
-transform = Transform3D(-0.997038, 0, 0.0769104, 0, 1, 0, -0.0769104, 0, -0.997038, -1.855, 0, 1.03464)
-
-[node name="ArcadeCabinet" parent="." unique_id=688671305 instance=ExtResource("5_60i1o")]
-transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -3.49869, 0.00211923, -1.93705)
-
-[node name="Sprite3D" type="Sprite3D" parent="ArcadeCabinet" unique_id=138507934]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219969, 1.8439, 0.224828)
-pixel_size = 0.0013
-axis = 0
-texture = SubResource("ViewportTexture_eegbv")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="ArcadeCabinet" unique_id=112902397]
-follow_viewport_enabled = true
-follow_viewport_scale = 7.905
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="ArcadeCabinet/CanvasLayer" unique_id=127190308]
-offset_right = 360.0
-offset_bottom = 360.0
-
-[node name="AuxCam" type="SubViewport" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
-handle_input_locally = false
-size = Vector2i(360, 360)
-render_target_update_mode = 4
-
-[node name="TestCam" parent="ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.9543014, 0, -0.29884577, 0, 1, 0, 0.29884577, 0, -0.9543014, 37.771843, 1.976, -59.112)
-
-[node name="Sprite3D2" type="Sprite3D" parent="ArcadeCabinet" unique_id=1620901459]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
-pixel_size = 0.0013
-axis = 0
-texture = SubResource("ViewportTexture_seky7")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="ArcadeCabinet" unique_id=1203993844]
-follow_viewport_enabled = true
-follow_viewport_scale = 7.905
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="ArcadeCabinet/CanvasLayer2" unique_id=1265506266]
-offset_left = 360.0
-offset_right = 720.0
-offset_bottom = 360.0
-
-[node name="AuxCam2" type="SubViewport" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
-handle_input_locally = false
-size = Vector2i(360, 360)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
-transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
 
 [node name="CameraController" type="Node3D" parent="." unique_id=893909451 node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -270,7 +212,7 @@ debug = true
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="DroneCam" parent="CameraController" unique_id=2009845040 instance=ExtResource("12_x3ijg")]
-transform = Transform3D(0.052802984, 0.23880804, 0.9696301, 0, 0.9709847, -0.23914164, -0.99860495, 0.012627392, 0.05127089, 0.8151483, 0.9630219, -1.6068418)
+transform = Transform3D(0.99904084, -0.0069760787, 0.043229003, 0, 0.987228, 0.15931387, -0.04378827, -0.15916106, 0.9862811, -3.5956762, 0.5959576, 2.1436796)
 
 [node name="Bike" type="Node3D" parent="CameraController" unique_id=1936527040]
 script = ExtResource("7_embkr")
@@ -379,135 +321,107 @@ relative_to_travel_direction = true
 treat_as_point = false
 metadata/_custom_type_script = "uid://u8kmj6bobusb"
 
-[node name="Temple" parent="." unique_id=326148284 node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 51.4022, 0, -61.4187)
-camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/TestCam")
+[node name="Environment" type="Node3D" parent="." unique_id=193396544]
 
-[node name="TouchInput" type="Control" parent="." unique_id=842695373]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme = ExtResource("17_jr4o4")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="TouchInput" unique_id=1086416257]
-
-[node name="Control" type="Control" parent="TouchInput/CanvasLayer" unique_id=804378672]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("17_jr4o4")
-
-[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control" unique_id=2023854644]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Panel" type="Panel" parent="TouchInput/CanvasLayer/Control/MarginContainer" unique_id=590874335]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer" unique_id=1644927440]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer" unique_id=1945259881]
-layout_mode = 2
-size_flags_horizontal = 13
-size_flags_vertical = 0
-theme = ExtResource("17_jr4o4")
-
-[node name="LoiterButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1671983425]
-visible = false
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme = ExtResource("17_jr4o4")
-text = "Loiter"
-
-[node name="ToolboxButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1441518706]
-visible = false
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme = ExtResource("17_jr4o4")
-text = "Toolbox"
-
-[node name="BikeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=959216760]
-visible = false
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme = ExtResource("17_jr4o4")
-text = "Bike"
-
-[node name="TerminalButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1679642591]
-visible = false
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme = ExtResource("17_jr4o4")
-text = "Terminal"
-
-[node name="ArcadeButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=400927104]
-visible = false
-custom_minimum_size = Vector2(250, 60)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme = ExtResource("17_jr4o4")
-text = "Arcade "
-
-[node name="BackButton" type="Button" parent="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1698991955]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-icon = ExtResource("18_m7c5n")
-expand_icon = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=165014565]
-transform = Transform3D(0.891916, -0.3669671, 0.2642369, 0.20717743, 0.8510113, 0.48255292, -0.40194955, -0.37565273, 0.8350578, 0, 6.073155, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=165014565]
+transform = Transform3D(0.891916, -0.36696708, 0.2642368, 0.20717743, 0.8510113, 0.48255292, -0.40194955, -0.37565276, 0.83505785, 0, 6.073155, 0)
 light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_opacity = 0.7
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1240121513]
-transform = Transform3D(0.6892868, 0.22305025, -0.6892984, 0.20717742, 0.8510113, 0.48255292, 0.69423425, -0.47542447, 0.54038, 0, 6.073155, 0)
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment" unique_id=1240121513]
+transform = Transform3D(0.6892868, 0.22305027, -0.6892984, 0.20717742, 0.8510113, 0.48255292, 0.69423425, -0.47542444, 0.5403799, 0, 6.073155, 0)
 layers = 2
 light_energy = 0.148
 light_cull_mask = 4294967294
 shadow_opacity = 0.7
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1093680361]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=1093680361]
 environment = SubResource("Environment_x3ijg")
 
-[node name="Node" type="Node" parent="." unique_id=1793695943]
+[node name="Props" type="Node3D" parent="." unique_id=917414073]
 
-[node name="DebugInfo" parent="." unique_id=478141873 instance=ExtResource("18_y6y6u")]
+[node name="Garage" parent="Props" unique_id=28143282 instance=ExtResource("2_7v8ca")]
+
+[node name="Bike" parent="Props" unique_id=1435548934 instance=ExtResource("16_seky7")]
+transform = Transform3D(-0.997038, 0, 0.0769104, 0, 1, 0, -0.0769104, 0, -0.997038, -1.855, 0, 1.03464)
+
+[node name="ArcadeCabinet" parent="Props" unique_id=688671305 instance=ExtResource("5_60i1o")]
+transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -3.49869, 0.00211923, -1.93705)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=138507934]
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219969, 1.8439, 0.224828)
+pixel_size = 0.0013
+axis = 0
+texture = SubResource("ViewportTexture_eegbv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=112902397]
+follow_viewport_enabled = true
+follow_viewport_scale = 7.905
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer" unique_id=127190308]
+offset_right = 360.0
+offset_bottom = 360.0
+
+[node name="AuxCam" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
+handle_input_locally = false
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="TestCam" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
+transform = Transform3D(-0.9873412, 0, -0.15861063, 0, 1, 0, 0.15861063, 0, -0.9873412, 36.462288, 1.976, -67.64576)
+
+[node name="Sprite3D2" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1620901459]
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
+pixel_size = 0.0013
+axis = 0
+texture = SubResource("ViewportTexture_seky7")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=1203993844]
+follow_viewport_enabled = true
+follow_viewport_scale = 7.905
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer2" unique_id=1265506266]
+offset_left = 360.0
+offset_right = 720.0
+offset_bottom = 360.0
+
+[node name="AuxCam2" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
+handle_input_locally = false
+size = Vector2i(360, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
+transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
+
+[node name="Temple" parent="Props" unique_id=326148284 node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 51.4022, 0, -61.4187)
+camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/TestCam")
+
+[node name="Terminal" parent="Props" unique_id=935590628 instance=ExtResource("16_m7c5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9215918, 1.443, -2.6265724)
+
+[node name="GUI" type="Control" parent="." unique_id=318238856]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Location" parent="GUI" unique_id=866310046 node_paths=PackedStringArray("cinna_cam", "obstacle") instance=ExtResource("17_jr4o4")]
+layout_mode = 0
+cinna_cam = NodePath("../../CameraController")
+obstacle = NodePath("../../Props/Terminal")
+
+[node name="Debug" parent="GUI" unique_id=478141873 instance=ExtResource("18_y6y6u")]
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.067
 anchor_bottom = 0.074
-offset_right = -27.114002
-offset_bottom = -25.711998
+offset_right = -2.68
+offset_bottom = -2.96
+
+[node name="DialogueContainer" parent="GUI" unique_id=1950969821 instance=ExtResource("16_x3ijg")]
+dialogue_resource = ExtResource("17_x3ijg")
+will_block_other_input = false
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/LoiterButton" to="." method="_on_loiter_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ToolboxButton" to="." method="_on_toolbox_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BikeButton" to="." method="_on_bike_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/TerminalButton" to="." method="_on_terminal_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_pressed"]
-[connection signal="pressed" from="TouchInput/CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -48,7 +48,7 @@ func _ready() -> void:
 			meta_path.jump_cut_signal = jump_cut
 			meta_path.meta_path_index = meta_path_index
 
-func _physics_process(delta: float) -> void:
+func run(delta: float) -> void:
 	if not camera:
 		return
 	move_camera(delta)

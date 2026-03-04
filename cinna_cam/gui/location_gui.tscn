@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://612fduue4mhq"]
+
+[ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="1_l01q7"]
+[ext_resource type="Texture2D" uid="uid://b0na6bvjoegr2" path="res://themes/left-arrow-back.svg" id="2_dkrph"]
+[ext_resource type="Script" uid="uid://bi8xlc7a1bdaa" path="res://cinna_cam/gui/location_gui.gd" id="2_yvspg"]
+
+[node name="LocationGUI" type="Control" unique_id=866310046]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_l01q7")
+script = ExtResource("2_yvspg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1956631615]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1560655975]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l01q7")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=987142508]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer" unique_id=853615557]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=1782701392]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/MarginContainer" unique_id=138659802]
+layout_mode = 2
+size_flags_horizontal = 13
+size_flags_vertical = 0
+theme = ExtResource("1_l01q7")
+
+[node name="LoiterButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=2000593000]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = ExtResource("1_l01q7")
+text = "Loiter"
+
+[node name="ToolboxButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=394785406]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = ExtResource("1_l01q7")
+text = "Toolbox"
+
+[node name="BikeButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1293712747]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = ExtResource("1_l01q7")
+text = "Bike"
+
+[node name="TerminalButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1629829345]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = ExtResource("1_l01q7")
+text = "Terminal"
+
+[node name="ArcadeButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=357532403]
+visible = false
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 3
+theme = ExtResource("1_l01q7")
+text = "Arcade "
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=577137259]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+icon = ExtResource("2_dkrph")
+expand_icon = true
+
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/LoiterButton" to="." method="_on_loiter_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ToolboxButton" to="." method="_on_toolbox_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BikeButton" to="." method="_on_bike_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/TerminalButton" to="." method="_on_terminal_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
