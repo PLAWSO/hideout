@@ -86,7 +86,6 @@ func switch_visible_movement_buttons(show_all_buttons: bool) -> void:
 
 func switch_visible_buttons_if_obscured(show_all_buttons: bool) -> void:
 	last_show_all_buttons = show_all_buttons
-	print("Cinna Cam Meta Path Index: " + str(cinna_cam.meta_path_index))
 	if not has_arrived_at_4:
 		return
 	switch_visible_movement_buttons(show_all_buttons)
