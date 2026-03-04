@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c4xmxa7b1q2pt"]
 
-[ext_resource type="Script" uid="uid://bhmcqj1lc7sn" path="res://dialog/balloon.gd" id="1_36de5"]
-[ext_resource type="Script" uid="uid://bfg56qrtvqm48" path="res://dialog/skip_dialog_button.gd" id="2_846g4"]
+[ext_resource type="Script" uid="uid://bhmcqj1lc7sn" path="res://dialog/gui/dialog_template.gd" id="1_36de5"]
+[ext_resource type="Script" uid="uid://bfg56qrtvqm48" path="res://dialog/gui/skip_dialog_button.gd" id="2_846g4"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="2_haggk"]
-[ext_resource type="Script" uid="uid://bak3xw5ftsjcf" path="res://dialog/grow_to_extent.gd" id="2_tskr7"]
+[ext_resource type="Script" uid="uid://bak3xw5ftsjcf" path="res://dialog/formatting/grow_to_extent.gd" id="2_tskr7"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 [ext_resource type="Texture2D" uid="uid://b21jrnhq3awun" path="res://robot_animations/nod/0001.png" id="5_8aj35"]
 [ext_resource type="Texture2D" uid="uid://c6brfvkyjsmj4" path="res://robot_animations/nod/0002.png" id="6_4k0ti"]
@@ -64,7 +64,7 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="TestBalloon" type="CanvasLayer" unique_id=1587428784]
+[node name="DialogTemplate" type="CanvasLayer" unique_id=1587428784]
 layer = 100
 script = ExtResource("1_36de5")
 
