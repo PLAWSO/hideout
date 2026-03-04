@@ -1,59 +1,23 @@
 var directory = "PAYTONL@UNATCO: "
 
-var loadingTexts = [
-	{ 
-		text: `ssh human@10.69.331.12
+var startText = `
+PAYTONL@UNATCO: ssh human@10.69.331.12
 		
-		The programs included with the [HUMAN] are free software;
-		the exact distribution terms for each program are described in the
-		individual files in /human/share/doc/*/copyright.
+The programs included with the [HUMAN] are free software;
+the exact distribution terms for each program are described in the
+individual files in /human/share/doc/*/copyright.
 
-		[HUMAN] comes with ABSOLUTELY NO WARRANTY, to the extent
-		permitted by applicable law.
-		`,
-		directory: true,
-		ok: false
-	},
-	{
-		text: `sudo humanctl start optical.services`,
-		directory: true,
-		ok: false
-	},
-	{
-		text: `Spooling neuronet uplink: carrier stabilized.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Decrypting cortex headers: entropy within limits.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Mapping gray-matter topology: nodes responding.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Injecting holo-UI hooks: tactile layer primed.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Negotiating limbic permissions: empathy sandboxed.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Compiling thought-VM: runtime seeded with dreams.`,
-		directory: false,
-		ok: true
-	},
-	{
-		text: `Establishing ghost-presence: remote admin in mindspace.`,
-		directory: false,
-		ok: true
-	},
+[HUMAN] comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+
+sudo humanctlstart optical.services
+`
+var loadingTexts = [
+`NET_REQUEST: Searching for endpoint`,
+`NET_REQUEST: Found endpoint at 10.69.331.12:1337`,
+`NET_REQUEST: Sending authentication packet`,
+`NET_REQUEST: Authentication successful`,
+`NET_REQUEST: Negotiating connection`,
 ]
 var textIndex = 0;
 
@@ -119,13 +83,11 @@ function getWatchedIntro() {
 
 window.addEventListener('DOMContentLoaded', () => {
 	var loadingScreen = document.getElementById("loading");
+	loadingScreen.innerText = startText;
+
 	terminalContainer = document.getElementById("terminal-container");
 	sections = document.querySelectorAll('.section');
 	navButtons = document.querySelectorAll('.nav-button');
-
-	// allegedly iOS ignores maximum-scale in the viewport meta tag, so we set it here via JS
-	var viewport = document.querySelector("meta[name=viewport]");
-	viewport.maximumScale = 1.0;
 
 	var showDebugCheckBox = document.getElementById("show-debug");
 	showDebugCheckBox.addEventListener('change', function() {
@@ -149,17 +111,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (textIndex >= loadingTexts.length) return;
 
-			let okayPrevious = textIndex != 0 && loadingTexts[textIndex - 1].ok 
-			let directoryCurrent = loadingTexts[textIndex].directory
-			loadingScreen.innerText += (okayPrevious ? " - OK!\n" : "\n") + (directoryCurrent ? directory : "") + loadingTexts[textIndex].text;
+			let date = new Date();
+			let time = date.toLocaleTimeString();
+			let header = `[${time}] `;
+
+			loadingScreen.innerText += "\n" + header + loadingTexts[textIndex];
 
 			textIndex++;
 		},
 	});
 	
 	engine.startGame().then(() => {
-		loadingScreen.innerText += " - OK!"
-
 		setTimeout(() => {
 			loadingScreen.innerText += "\n\nCONNECTION ESTABLISHED.";
 		}, 500)
@@ -168,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			document.getElementById("loading-container").style.display = "none";
 		}, 3000);
 	}).catch(error => {
-		console.error("Error starting the game:", error);
+		console.error("Failed to start Godot:", error);
 	});
 
 })
