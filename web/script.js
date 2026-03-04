@@ -77,7 +77,7 @@ function setTerminalBounds(x, y, width, height) {
 }
 
 var opacity = 0.0;
-function setTerminalVisibility(lockedOnTerminal) {
+function setTerminalGUIVisible(lockedOnTerminal) {
 	terminalContainer.style.display = lockedOnTerminal ? "block" : "none";
 
 	if (lockedOnTerminal) {
@@ -113,7 +113,7 @@ function setWatchedIntro() {
 	console.log("Intro marked as watched in localStorage.");
 }
 
-function hasWatchedIntro() {
+function getWatchedIntro() {
 	return localStorage.getItem("watchedIntro") === "true";
 }
 

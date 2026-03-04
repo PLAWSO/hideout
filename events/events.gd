@@ -6,4 +6,4 @@ signal camera_moved()
 
 signal skipped_intro()
 
-signal switch_visible_movement_buttons(showAllButtons: bool)
+signal safe_zone_crossed(show_all_buttons: bool)
