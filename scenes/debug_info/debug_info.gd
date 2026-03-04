@@ -23,7 +23,6 @@ func _process(_delta: float) -> void:
 
 
 func _on_show_debug(args):
-	print("Received show debug signal from JavaScript with args: ", args)
 	var show_debug = args[0]
 
 	if show_debug:

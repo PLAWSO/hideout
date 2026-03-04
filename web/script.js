@@ -78,7 +78,6 @@ function setTerminalBounds(x, y, width, height) {
 
 var opacity = 0.0;
 function setTerminalVisibility(lockedOnTerminal) {
-	console.log(`Setting terminal visibility: ${lockedOnTerminal}`);
 	terminalContainer.style.display = lockedOnTerminal ? "block" : "none";
 
 	if (lockedOnTerminal) {
@@ -137,13 +136,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
+	var loadingLog = "Loading."
 	const canvas = document.getElementById("canvas");
 	var engine = new Engine({
 		canvas: { element: canvas },
 		executable: "./build/godot",
 		canvasResizePolicy: 2,
 		onProgress: function (current, total) {
-			console.log("Loading progress:", current, "/", total)
+
+			console.log(loadingLog)
+			loadingLog += "."
 
 			if (textIndex >= loadingTexts.length) return;
 
@@ -156,8 +158,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 	
 	engine.startGame().then(() => {
-		console.log("Game started successfully");
-
 		loadingScreen.innerText += " - OK!"
 
 		setTimeout(() => {
