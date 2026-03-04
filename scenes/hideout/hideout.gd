@@ -51,7 +51,7 @@ func _ready() -> void:
 
 	await get_tree().create_timer(1.0).timeout
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	DialogueManager.show_dialogue_balloon_scene(test_balloon, load("res://dialog/test.dialogue"), "start")
+	DialogueManager.show_dialogue_balloon_scene(test_balloon, load("res://dialog/trees/intro.dialogue"), "start")
 
 
 func _on_skipped_intro() -> void:
