@@ -104,9 +104,6 @@ func make_continuous():
 # 		preview_mesh.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_angle(new_camera_rotation.y, delta))
 
 func get_target_location() -> Vector3:
-	print(self.name)
-	if self.name == "TrailFollow":
-		print(path_sections[section_index].target.global_position)
 	return path_sections[section_index].target.global_position
 
 

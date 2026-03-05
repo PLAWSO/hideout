@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://c4xmxa7b1q2pt"]
 
 [ext_resource type="Script" uid="uid://bhmcqj1lc7sn" path="res://dialog/gui/dialog_template.gd" id="1_36de5"]
-[ext_resource type="Script" uid="uid://bfg56qrtvqm48" path="res://dialog/gui/skip_dialog_button.gd" id="2_846g4"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Theme" uid="uid://dyf04f7laussd" path="res://themes/kenneyUI-green.tres" id="2_haggk"]
 [ext_resource type="Script" uid="uid://bak3xw5ftsjcf" path="res://dialog/formatting/grow_to_extent.gd" id="2_tskr7"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Script" uid="uid://bidk7ou382ngs" path="res://dialog/gui/character.gd" id="4_d7y6r"]
 [ext_resource type="Texture2D" uid="uid://b21jrnhq3awun" path="res://robot_animations/nod/0001.png" id="5_8aj35"]
 [ext_resource type="Texture2D" uid="uid://c6brfvkyjsmj4" path="res://robot_animations/nod/0002.png" id="6_4k0ti"]
 [ext_resource type="Texture2D" uid="uid://bp6jyfyaxal26" path="res://robot_animations/nod/0003.png" id="7_hx2wk"]
 [ext_resource type="Texture2D" uid="uid://qdmj7oyl6yt5" path="res://robot_animations/nod/0004.png" id="8_d72dk"]
 [ext_resource type="Texture2D" uid="uid://sg6nhtk45uec" path="res://robot_animations/nod/0005.png" id="9_cf0h1"]
 [ext_resource type="Texture2D" uid="uid://gq34efxthldg" path="res://robot_animations/nod/0006.png" id="10_4xnhr"]
+[ext_resource type="Texture2D" uid="uid://k6x1ru6dke87" path="res://robot_animations/wave/0001.png" id="11_d7y6r"]
+[ext_resource type="Texture2D" uid="uid://dkij5nu848j72" path="res://robot_animations/wave/0002.png" id="12_4qxm0"]
+[ext_resource type="Texture2D" uid="uid://bxevcw43p571w" path="res://robot_animations/wave/0003.png" id="13_tkvqh"]
+[ext_resource type="Texture2D" uid="uid://waofsystv1rg" path="res://robot_animations/wave/0004.png" id="14_fyflk"]
+[ext_resource type="Texture2D" uid="uid://vca55pga4clf" path="res://robot_animations/wave/0005.png" id="15_1ampk"]
+[ext_resource type="Texture2D" uid="uid://dmnpoqu7kfi23" path="res://robot_animations/wave/0006.png" id="16_ghv1b"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_uhfse"]
 frames = 6
@@ -26,6 +32,21 @@ frame_3/duration = 1.0
 frame_4/texture = ExtResource("9_cf0h1")
 frame_4/duration = 1.0
 frame_5/texture = ExtResource("10_4xnhr")
+frame_5/duration = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_hepk4"]
+frames = 6
+speed_scale = -6.5
+frame_0/texture = ExtResource("11_d7y6r")
+frame_1/texture = ExtResource("12_4qxm0")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("13_tkvqh")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("14_fyflk")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("15_1ampk")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("16_ghv1b")
 frame_5/duration = 1.0
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
@@ -96,22 +117,6 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 theme = ExtResource("2_haggk")
 
-[node name="SkipButton" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer" unique_id=2006990030]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = ExtResource("2_haggk")
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="SkipDialogButton" type="Button" parent="Balloon/MarginContainer/VBoxContainer/SkipButton" unique_id=1573120106]
-custom_minimum_size = Vector2(175, 51.89)
-layout_mode = 2
-theme = ExtResource("2_haggk")
-text = "Skip Intro"
-script = ExtResource("2_846g4")
-
 [node name="Control" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer" unique_id=1946692756]
 layout_mode = 2
 theme = ExtResource("2_haggk")
@@ -142,13 +147,19 @@ theme_override_constants/margin_bottom = 5
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer" unique_id=1615111685]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer" unique_id=617963680]
+[node name="Character" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer" unique_id=617963680]
 layout_mode = 2
+script = ExtResource("4_d7y6r")
 
-[node name="Sprite2D" type="Sprite2D" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer/MarginContainer" unique_id=1476616269]
+[node name="NodAnimation" type="Sprite2D" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer/Character" unique_id=1476616269]
 position = Vector2(114.99999, 115.000015)
 scale = Vector2(3.5312495, 3.5312495)
 texture = SubResource("AnimatedTexture_uhfse")
+
+[node name="WaveAnimation" type="Sprite2D" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer/AvatarContainer/PanelContainer/Character" unique_id=1104367143]
+position = Vector2(115, 115)
+scale = Vector2(3.531, 3.531)
+texture = SubResource("AnimatedTexture_hepk4")
 
 [node name="TextContainer" type="MarginContainer" parent="Balloon/MarginContainer/VBoxContainer/Control/HBoxContainer" unique_id=190521642]
 custom_minimum_size = Vector2(480, 240)
@@ -245,5 +256,4 @@ text = "Response example"
 unique_name_in_owner = true
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="pressed" from="Balloon/MarginContainer/VBoxContainer/SkipButton/SkipDialogButton" to="Balloon/MarginContainer/VBoxContainer/SkipButton/SkipDialogButton" method="_on_pressed"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

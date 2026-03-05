@@ -18,10 +18,12 @@ extends Node3D
 #region Lifecycle
 
 func _ready() -> void:
-	Events.skipped_intro.connect(_on_skipped_intro)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
-	await get_tree().create_timer(1.0).timeout
-	_start_intro_sequence()
+	await get_tree().create_timer(3.0).timeout
+
+	var has_watched_intro = JSBridge.get_watched_intro()
+	_start_intro_sequence(has_watched_intro)
 
 
 func _physics_process(delta: float) -> void:
@@ -33,14 +35,12 @@ func _physics_process(delta: float) -> void:
 
 #region Introduction
 
-func _start_intro_sequence() -> void:
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+func _start_intro_sequence(has_watched_intro: bool) -> void:
+	if has_watched_intro:
+		DialogueManager.show_dialogue_balloon_scene(dialogue_container, load("res://dialog/trees/welcome_back.dialogue"), "start")
+		return
+
 	DialogueManager.show_dialogue_balloon_scene(dialogue_container, load("res://dialog/trees/intro.dialogue"), "start")
-
-
-func _on_skipped_intro() -> void:
-	dialogue_container.queue_free()
-	_transition_to_drone()
 
 
 func _on_dialogue_ended(_resource) -> void:
