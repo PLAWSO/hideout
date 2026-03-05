@@ -20,8 +20,6 @@ extends Node3D
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
-	await get_tree().create_timer(3.0).timeout
-
 	var has_watched_intro = JSBridge.get_watched_intro()
 	_start_intro_sequence(has_watched_intro)
 
