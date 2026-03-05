@@ -2898,7 +2898,7 @@ y_look_targeter = SubResource("Resource_fkpan")
 metadata/_custom_type_script = "uid://pkwdcfxgso1q"
 
 [node name="TestCam" parent="CinnaCam" unique_id=1813028640 instance=ExtResource("6_xdn75")]
-transform = Transform3D(0.32998738, 0, -0.94398534, 0, 1, 0, 0.94398534, 0, 0.32998738, 3.358701, 1.9759996, 13.380436)
+transform = Transform3D(-0.0012786821, 0, -0.99999917, 0, 1, 0, 0.99999917, 0, -0.0012786821, -13.2, 1.976, 14.902)
 visible = false
 show_preview_mesh = false
 

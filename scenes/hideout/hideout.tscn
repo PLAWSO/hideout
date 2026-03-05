@@ -369,7 +369,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.9999992, 0, 0.0012591756, 0, 1, 0, -0.0012591756, 0, -0.9999992, 36.5002, 1.976, -74.6187)
+transform = Transform3D(-0.96768314, 0, -0.2521693, 0, 1, 0, 0.2521693, 0, -0.96768314, 37.148994, 1.976, -62.2698)
 
 [node name="Sprite3D2" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
