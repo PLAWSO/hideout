@@ -47,9 +47,6 @@ func _ready() -> void:
 	if not Engine.is_editor_hint() and preview_mesh:
 		preview_mesh.visible = show_preview_mesh
 
-	if not Engine.is_editor_hint() and auto_start:
-		start_path_sequence()
-
 func collect_path_sections() -> void:
 	path_sections.clear()
 	var children = get_children()
@@ -107,6 +104,9 @@ func make_continuous():
 # 		preview_mesh.rotate_object_local(Vector3.RIGHT, y_look_targeter.get_next_constrained_angle(new_camera_rotation.y, delta))
 
 func get_target_location() -> Vector3:
+	print(self.name)
+	if self.name == "TrailFollow":
+		print(path_sections[section_index].target.global_position)
 	return path_sections[section_index].target.global_position
 
 

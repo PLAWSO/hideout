@@ -356,7 +356,6 @@ axis = 0
 texture = SubResource("ViewportTexture_eegbv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=112902397]
-visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -367,7 +366,7 @@ offset_bottom = 360.0
 [node name="AuxCam" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="TestCam" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
 transform = Transform3D(-0.9999992, 0, 0.0012591756, 0, 1, 0, -0.0012591756, 0, -0.9999992, 36.5002, 1.976, -74.6187)
@@ -379,7 +378,6 @@ axis = 0
 texture = SubResource("ViewportTexture_seky7")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=1203993844]
-visible = false
 follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
@@ -391,7 +389,7 @@ offset_bottom = 360.0
 [node name="AuxCam2" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
 handle_input_locally = false
 size = Vector2i(360, 360)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
 transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)

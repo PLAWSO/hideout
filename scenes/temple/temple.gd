@@ -8,3 +8,5 @@ extends Node3D
 	set(value):
 		cinna_cam.camera = value
 
+func _physics_process(delta: float) -> void:
+	cinna_cam.run(delta)
