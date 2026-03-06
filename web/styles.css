@@ -182,7 +182,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	background-color: green;
 	border-radius: 5px;
 
-	display: flex;
+	display: none;
 	flex-direction: column;
 
 	align-items: center;
