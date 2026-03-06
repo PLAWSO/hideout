@@ -1,10 +1,11 @@
-[gd_resource type="Theme" format=3 uid="uid://dyf04f7laussd"]
+[gd_resource type="Theme" format=3 uid="uid://dcwkpdab6jbi7"]
 
-[ext_resource type="Texture2D" uid="uid://cjm1yumynykog" path="res://themes/UIpack_vector.svg" id="1"]
-[ext_resource type="FontFile" uid="uid://dy3o2vaviopx3" path="res://themes/kenvector_future.ttf" id="2"]
+[ext_resource type="FontFile" uid="uid://dy3o2vaviopx3" path="res://themes/kenvector_future.ttf" id="1_g4t4a"]
+[ext_resource type="Texture2D" uid="uid://cjm1yumynykog" path="res://themes/UIpack_vector.svg" id="2_nurqn"]
+[ext_resource type="Texture2D" uid="uid://cgw40vx1bmfwf" path="res://themes/UIpack_vector_with_toggle_button.svg" id="3_nurqn"]
 
 [sub_resource type="FontFile" id="31"]
-fallbacks = Array[Font]([ExtResource("2")])
+fallbacks = Array[Font]([ExtResource("1_g4t4a")])
 cache/0/variation_coordinates = {}
 cache/0/face_index = 0
 cache/0/embolden = 0.0
@@ -262,7 +263,7 @@ cache/0/18/0/underline_thickness = 0.0
 cache/0/18/0/scale = 1.0
 
 [sub_resource type="StyleBoxTexture" id="1"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 12.5436
 texture_margin_top = 10.0349
 texture_margin_right = 8.78053
@@ -272,7 +273,7 @@ region_rect = Rect2(211, 120, 190, 49)
 [sub_resource type="StyleBoxEmpty" id="2"]
 
 [sub_resource type="StyleBoxTexture" id="3"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 12.5436
 texture_margin_top = 10.0349
 texture_margin_right = 8.78053
@@ -280,7 +281,7 @@ texture_margin_bottom = 14.2161
 region_rect = Rect2(1, 120, 190, 49)
 
 [sub_resource type="StyleBoxTexture" id="4"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 12.5436
 texture_margin_top = 10.0349
 texture_margin_right = 8.78053
@@ -288,27 +289,27 @@ texture_margin_bottom = 14.2161
 region_rect = Rect2(211, 120, 190, 49)
 
 [sub_resource type="StyleBoxTexture" id="5"]
-texture = ExtResource("1")
-texture_margin_left = 12.5436
-texture_margin_top = 10.0349
-texture_margin_right = 8.78053
+texture = ExtResource("3_nurqn")
+texture_margin_left = 13.0
+texture_margin_top = 10.0
+texture_margin_right = 9.0
 texture_margin_bottom = 14.2161
-region_rect = Rect2(421, 124, 190, 45)
+region_rect = Rect2(439.96268, 143.9886, 190.04745, 45.092438)
 
 [sub_resource type="AtlasTexture" id="6"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(100, 544, 36, 36)
 
 [sub_resource type="AtlasTexture" id="7"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(101, 440, 36, 36)
 
 [sub_resource type="AtlasTexture" id="8"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(1, 440, 36, 36)
 
 [sub_resource type="AtlasTexture" id="9"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(0, 544, 36, 36)
 
 [sub_resource type="StyleBoxEmpty" id="10"]
@@ -320,19 +321,19 @@ region = Rect2(0, 544, 36, 36)
 [sub_resource type="StyleBoxEmpty" id="13"]
 
 [sub_resource type="AtlasTexture" id="15"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(100, 544, 36, 36)
 
 [sub_resource type="AtlasTexture" id="14"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(100, 644, 36, 36)
 
 [sub_resource type="AtlasTexture" id="16"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(872, 564, 28, 42)
 
 [sub_resource type="StyleBoxTexture" id="17"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 2.0
 texture_margin_top = 2.0
 texture_margin_right = 2.0
@@ -342,7 +343,7 @@ region_rect = Rect2(840, 316, 192, 6)
 [sub_resource type="StyleBoxEmpty" id="18"]
 
 [sub_resource type="StyleBoxTexture" id="19"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 17.1475
 texture_margin_top = 12.0032
 texture_margin_right = 13.718
@@ -350,11 +351,11 @@ texture_margin_bottom = 9.43112
 region_rect = Rect2(629, 317, 194, 49)
 
 [sub_resource type="AtlasTexture" id="20"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(816, 578, 20, 10)
 
 [sub_resource type="StyleBoxTexture" id="21"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 12.3202
 texture_margin_top = 13.3469
 texture_margin_right = 13.3469
@@ -362,19 +363,19 @@ texture_margin_bottom = 11.2935
 region_rect = Rect2(243, 310, 100, 100)
 
 [sub_resource type="AtlasTexture" id="22"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(100, 544, 36, 36)
 
 [sub_resource type="AtlasTexture" id="23"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(101, 440, 36, 36)
 
 [sub_resource type="AtlasTexture" id="24"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(1, 440, 36, 36)
 
 [sub_resource type="AtlasTexture" id="25"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(0, 544, 36, 36)
 
 [sub_resource type="StyleBoxTexture" id="26"]
@@ -382,7 +383,7 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 7.94429
 texture_margin_top = 9.53314
 texture_margin_right = 8.73872
@@ -394,7 +395,7 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 7.94429
 texture_margin_top = 9.53314
 texture_margin_right = 8.73872
@@ -406,7 +407,7 @@ region_rect = Rect2(243, 310, 100, 100)
 [sub_resource type="StyleBoxTexture" id="28"]
 content_margin_left = 12.0
 content_margin_top = 10.0
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 10.8072
 texture_margin_top = 28.4299
 texture_margin_right = 9.71325
@@ -415,11 +416,11 @@ axis_stretch_vertical = 1
 region_rect = Rect2(1, 310, 100, 100)
 
 [sub_resource type="AtlasTexture" id="29"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_nurqn")
 region = Rect2(1007, 570, 39, 31)
 
 [sub_resource type="StyleBoxTexture" id="30"]
-texture = ExtResource("1")
+texture = ExtResource("2_nurqn")
 texture_margin_left = 1.0
 texture_margin_top = 1.0
 texture_margin_right = 1.0
