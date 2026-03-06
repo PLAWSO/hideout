@@ -1,5 +1,3 @@
-var directory = "PAYTONL@UNATCO: "
-
 var startText = `
 PAYTONL@UNATCO: ssh human@10.69.331.12
 		
@@ -21,7 +19,7 @@ var loadingTexts = [
 ]
 var textIndex = 0;
 
-let terminalContainer, sections, navButtons;
+let terminalContainer, sections, navButtons, rotatePopup;
 
 function navButtonClicked(buttonClicked) {
   sections.forEach(sec => { sec.style.display = 'none'; });
@@ -38,6 +36,10 @@ function setTerminalBounds(x, y, width, height) {
 	terminalContainer.style.width = `${width}px`;
 	terminalContainer.style.maxWidth = `${width}px`;
 	terminalContainer.style.height = `${height}px`;
+}
+
+function showRotateDeviceIcon(show) {
+	rotatePopup.style.display = show ? "flex" : "none";
 }
 
 var opacity = 0.0;
@@ -88,6 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	terminalContainer = document.getElementById("terminal-container");
 	sections = document.querySelectorAll('.section');
 	navButtons = document.querySelectorAll('.nav-button');
+	rotatePopup = document.getElementById("rotate-device-popup");
 
 	var showDebugCheckBox = document.getElementById("show-debug");
 	showDebugCheckBox.addEventListener('change', function() {

@@ -11,6 +11,7 @@ var movement_buttons: Array[Button] = []
 var last_show_all_buttons: bool = true
 var show_all_buttons: bool = true
 var has_arrived_at_4: bool = false
+var terminal_bounds: Rect2
 
 
 #region Lifecycle
@@ -41,6 +42,16 @@ func _on_camera_moved() -> void:
 	set_terminal_bounds()
 	check_safe_zone_crossed()
 
+	show_rotate_device()
+
+
+func show_rotate_device() -> void:
+	if has_arrived_at_4:
+		JSBridge.show_rotate_device_icon(terminal_bounds.position.x < -150)
+		return
+
+	JSBridge.show_rotate_device_icon(false)
+
 
 func _enable_movement_buttons(_resource) -> void:
 	blocker.visible = false
@@ -58,7 +69,9 @@ func set_terminal_bounds() -> void:
 		var width = obstacle_bounds.size.x * scale_x
 		var height = obstacle_bounds.size.y * scale_y
 
-		JSBridge.set_terminal_bounds(Rect2(left, top, width, height))
+		terminal_bounds = Rect2(left, top, width, height)
+
+		JSBridge.set_terminal_bounds(terminal_bounds)
 
 
 func check_safe_zone_crossed() -> void:
