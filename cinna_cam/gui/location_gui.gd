@@ -1,23 +1,27 @@
 extends Control
 
 @export var cinna_cam: CinnaCam
+@export var obstacle: Node3D
+
+@onready var blocker = $CanvasLayer/Control/MarginContainer/Blocker
+@onready var back_button_icon = preload("res://themes/left-arrow-back.svg")
 
 var back_button: Button
 var movement_buttons: Array[Button] = []
 var last_show_all_buttons: bool = true
 var show_all_buttons: bool = true
-
 var has_arrived_at_4: bool = false
 
-@export var obstacle: Node3D
 
 #region Lifecycle
 
 func _ready() -> void:
+	blocker.visible = true
+
 	var v_box_children = $CanvasLayer/Control/MarginContainer/MarginContainer/VBoxContainer.get_children()
 	for child in v_box_children:
 		if child is Button:
-			if child.text != "":
+			if child.text != "Loiter":
 				movement_buttons.append(child)
 				continue
 			back_button = child
@@ -29,13 +33,17 @@ func _ready() -> void:
 	Events.arrived_at_meta_path.connect(_on_arrived_at_meta_path)
 	Events.left_meta_path.connect(_on_left_meta_path)
 	Events.camera_moved.connect(_on_camera_moved)
+	DialogueManager.dialogue_ended.connect(_enable_movement_buttons)
 
 #endregion
-
 
 func _on_camera_moved() -> void:
 	set_terminal_bounds()
 	check_safe_zone_crossed()
+
+
+func _enable_movement_buttons(_resource) -> void:
+	blocker.visible = false
 
 
 func set_terminal_bounds() -> void:
@@ -66,11 +74,15 @@ func switch_visible_movement_buttons(show_buttons: bool) -> void:
 	if show_buttons:
 		for button in movement_buttons:
 			button.visible = true
-		back_button.visible = false
+		back_button.icon = null
+		back_button.text = "Loiter"
+		back_button.custom_minimum_size = Vector2(250, 60)
 	else:
 		for button in movement_buttons:
 			button.visible = false
-		back_button.visible = true
+		back_button.icon = back_button_icon
+		back_button.text = ""
+		back_button.custom_minimum_size = Vector2(50, 50)
 
 
 func switch_visible_buttons_if_obscured(show_buttons: bool) -> void:
