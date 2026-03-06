@@ -4,7 +4,7 @@ import "res://dialog/trees/intro.dialogue" as intro
 null: Welcome back!
 null: Would you like to rewatch the intro, or jump right back in?
 - REWATCH INTRO =>< intro/start
-- SWITCH TO DRONE FEED => switch
+- JUMP BACK IN => switch
 => END
 
 ~ switch

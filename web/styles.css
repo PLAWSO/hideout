@@ -169,6 +169,44 @@ html, body, #loading-container, #canvas, #terminal-container {
 	font-size: 2rem;
 }
 
+#rotate-device-popup {
+	position: fixed;
+
+	top: calc(50% - 6rem);
+	left: calc(50% - 8rem);
+
+	height: 11rem;
+	width: 16rem;
+
+
+	background-color: green;
+	border-radius: 5px;
+
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+}
+
+#rotate-device-popup > div {
+	text-shadow: 0 0 0.25rem black;
+
+	margin-top: 1rem;
+
+	color: black;
+	font-size: 6rem;
+}
+
+#rotate-device-popup > p {
+	text-shadow: 0 0 0.25rem black;
+
+	margin-top: 1rem;
+
+	color: black;
+
+	font-size: 1.5rem;
+}
+
 
 /*#########################
 ### SCANLINE EFFECT     ###

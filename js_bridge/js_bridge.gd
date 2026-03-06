@@ -26,6 +26,10 @@ func set_terminal_bounds(rect: Rect2) -> void:
 	terminal_bounds = rect
 	console.setTerminalBounds(rect.position.x, rect.position.y, rect.size.x, rect.size.y)
 
+func show_rotate_device_icon(show: bool) -> void:
+	if console:
+		console.showRotateDeviceIcon(show)
+
 
 func set_watched_intro() -> void:
 	if console:
