@@ -360,8 +360,8 @@ follow_viewport_enabled = true
 follow_viewport_scale = 7.905
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer" unique_id=127190308]
+offset_top = -360.0
 offset_right = 360.0
-offset_bottom = 360.0
 
 [node name="AuxCam" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
 handle_input_locally = false
@@ -369,7 +369,7 @@ size = Vector2i(360, 360)
 render_target_update_mode = 4
 
 [node name="TestCam" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.96768314, 0, -0.2521693, 0, 1, 0, 0.2521693, 0, -0.96768314, 37.148994, 1.976, -62.2698)
+transform = Transform3D(-0.97236544, 0, -0.23346415, 0, 1, 0, 0.23346415, 0, -0.97236544, 36.91098, 1.976, -63.709167)
 
 [node name="Sprite3D2" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1620901459]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
@@ -383,8 +383,8 @@ follow_viewport_scale = 7.905
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer2" unique_id=1265506266]
 offset_left = 360.0
+offset_top = -360.0
 offset_right = 720.0
-offset_bottom = 360.0
 
 [node name="AuxCam2" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
 handle_input_locally = false
