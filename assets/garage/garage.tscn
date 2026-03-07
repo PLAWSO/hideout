@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bibjvqjjxn6ga" path="res://assets/wrench-set/wrench-set_wrench.png" id="10_kbdnh"]
 [ext_resource type="Texture2D" uid="uid://j7a23qcntjxm" path="res://assets/wrench-set/wrench-set_cork.png" id="11_k3ys0"]
 [ext_resource type="PackedScene" uid="uid://doocj678x8oy3" path="res://assets/fan/fan.glb" id="12_jtp7c"]
-[ext_resource type="Texture2D" uid="uid://b6d3x1mqnt3k6" path="res://assets/fan/fan_torch.jpg" id="13_csk6h"]
+[ext_resource type="Texture2D" uid="uid://bv6266n4052nw" path="res://assets/garage/fan_torch.jpg" id="13_888oy"]
 [ext_resource type="PackedScene" uid="uid://c44vhm3nibrmd" path="res://assets/security-camera/security_camera.tscn" id="14_888oy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uslpt"]
@@ -759,11 +759,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yjy2r")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q7eas"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjsyt"]
 resource_name = "Basic Steel"
 cull_mode = 2
 shading_mode = 0
-albedo_texture = ExtResource("13_csk6h")
+albedo_texture = ExtResource("13_888oy")
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_gswwc"]
@@ -774,7 +774,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 204,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAOAA6ADwAOAA9ADsAOAA8AD4AOAA/AD0AOAA+AEAAOABBAD8AOABAAEIAOABCAEEAQwBEAEUAQwBGAEQAQwBFAEcAQwBIAEYAQwBHAEkAQwBKAEgAQwBJAEsAQwBMAEoAQwBLAE0AQwBNAEwATgBPAFAATgBRAE8AUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMA"),
-"material": SubResource("StandardMaterial3D_q7eas"),
+"material": SubResource("StandardMaterial3D_wjsyt"),
 "name": "Basic Steel",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -783,22 +783,21 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Animation" id="Animation_qmn6h"]
-resource_name = "BladesAction"
-length = 0.5083333
+[sub_resource type="Animation" id="Animation_7a0r0"]
+resource_name = "BladesAction_001"
+length = 0.125
 loop_mode = 1
-step = 0.0083
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
 tracks/0/path = NodePath("Blades")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0, -2.7814184e-07, 0, 1, 0.06666667, 1, 0, -0.8660245, 0, 0.5000018, 0.1, 1, 0, 0.8660264, 0, 0.49999842, 0.13333334, 1, 0, 1.4703139e-06, 0, 1, 0.16666667, 1, 0, -0.866023, 0, 0.5000043, 0.2, 1, 0, 0.8660258, 0, 0.49999946, 0.23333333, 1, 0, 4.172444e-06, 0, 1, 0.26666668, 1, 0, -0.86602163, 0, 0.5000067, 0.3, 1, 0, 0.86602336, 0, 0.50000364, 0.33333334, 1, 0, 1.4503969e-05, 0, 1, 0.36666667, 1, 0, -0.86602414, 0, 0.5000023, 0.4, 1, 0, 0.8660209, 0, 0.50000787, 0.43333334, 1, 0, -5.6820854e-06, 0, 1, 0.46666667, 1, 0, -0.86601895, 0, 0.5000113, 0.5, 1, 0, 0.8660261, 0, 0.49999896, 0.5083333, 1, 0, 5.881255e-06, 0, 1)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0, -0.99660873, 0, 0.08228672, 0.06666667, 1, 0, -0.89132273, 0, 0.4533694, 0.1, 1, 0, -0.8305954, 0, 0.5568764, 0.125, 1, 0, 2.3849761e-08, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sqanb"]
 _data = {
-&"BladesAction": SubResource("Animation_qmn6h")
+&"BladesAction_001": SubResource("Animation_7a0r0")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nms20"]
@@ -1031,15 +1030,15 @@ visible = false
 
 [node name="Fan" type="Node3D" parent="Props" unique_id=787877229]
 
-[node name="Blades" type="MeshInstance3D" parent="Props/Fan" unique_id=1126367737]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1130052, 3.072114, 1.5874777)
+[node name="Blades" type="MeshInstance3D" parent="Props/Fan" unique_id=295364729]
+transform = Transform3D(0.32331574, 0, -0.94629115, 0, 1, 0, 0.94629115, 0, 0.32331574, -3.1130052, 3.072114, 1.5874777)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_gswwc")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Fan" unique_id=13456575]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Props/Fan" unique_id=1701128130]
 libraries/ = SubResource("AnimationLibrary_sqanb")
-autoplay = &"BladesAction"
+autoplay = &"BladesAction_001"
 
 [node name="security-camera" parent="Props" unique_id=265483856 instance=ExtResource("14_888oy")]
 
