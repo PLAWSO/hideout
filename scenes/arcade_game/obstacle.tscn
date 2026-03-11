@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bxexdkkj8iafw"]
+
+[ext_resource type="Texture2D" uid="uid://biefe54ic6vs4" path="res://scenes/arcade_game/obstacle.png" id="1_4ugq8"]
+[ext_resource type="Script" uid="uid://cumdgng2gm86u" path="res://scenes/arcade_game/obstacle.gd" id="1_8qk83"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qk83"]
+size = Vector2(7.8, 7.8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjste"]
+size = Vector2(200, 8)
+
+[node name="Obstacle" type="Node2D" unique_id=1929468879]
+script = ExtResource("1_8qk83")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1295446329]
+texture = ExtResource("1_4ugq8")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=586676516]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=36759823]
+shape = SubResource("RectangleShape2D_8qk83")
+
+[node name="NearMissBox" type="Area2D" parent="." unique_id=1521018411]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearMissBox" unique_id=1789188042]
+shape = SubResource("RectangleShape2D_gjste")

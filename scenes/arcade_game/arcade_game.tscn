@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://m0rshmt51sxp" path="res://scenes/arcade_game/arcade_game.gd" id="1_00tmu"]
 [ext_resource type="Texture2D" uid="uid://c68ioyvi1gqu6" path="res://scenes/arcade_game/spaceship.png" id="1_vwrm4"]
+[ext_resource type="PackedScene" uid="uid://bxexdkkj8iafw" path="res://scenes/arcade_game/obstacle.tscn" id="2_rco1b"]
 [ext_resource type="Texture2D" uid="uid://c7kb4br1eahdv" path="res://scenes/arcade_game/projectile.png" id="3_sfspv"]
-[ext_resource type="Texture2D" uid="uid://biefe54ic6vs4" path="res://scenes/arcade_game/obstacle.png" id="4_rco1b"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rco1b"]
-size = Vector2(7.8, 7.8)
+[ext_resource type="PackedScene" uid="uid://is403d2yosab" path="res://scenes/arcade_game/points_counter.tscn" id="5_qfjtt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjtt"]
 size = Vector2(13.5, 13.5)
@@ -14,22 +12,15 @@ size = Vector2(13.5, 13.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ri2xw"]
 size = Vector2(10, 2)
 
-[node name="ArcadeGame" type="Node2D" unique_id=1069089697 node_paths=PackedStringArray("ship", "projectile", "obstacle")]
+[node name="ArcadeGame" type="Node2D" unique_id=1069089697 node_paths=PackedStringArray("ship", "projectile")]
 script = ExtResource("1_00tmu")
 ship = NodePath("Ship")
-projectile = NodePath("Projectile")
-obstacle = NodePath("Obstacle")
 rest_pos = Vector2(226.015, 347.6)
+ObstacleScene = ExtResource("2_rco1b")
+obstacle_spawn_interval = 2.0
+projectile = NodePath("Projectile")
 
-[node name="Obstacle" type="StaticBody2D" parent="." unique_id=2056814502]
-
-[node name="Sprite2D" type="Sprite2D" parent="Obstacle" unique_id=616752851]
-texture = ExtResource("4_rco1b")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle" unique_id=216163065]
-shape = SubResource("RectangleShape2D_rco1b")
-
-[node name="Ship" type="StaticBody2D" parent="." unique_id=1290526714]
+[node name="Ship" type="Area2D" parent="." unique_id=871429142]
 position = Vector2(226.015, 347.6)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ship" unique_id=1954332060]
@@ -38,10 +29,16 @@ texture = ExtResource("1_vwrm4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship" unique_id=1072839146]
 shape = SubResource("RectangleShape2D_qfjtt")
 
-[node name="Projectile" type="StaticBody2D" parent="." unique_id=1813611044]
+[node name="Projectile" type="Area2D" parent="." unique_id=170961713]
 
 [node name="Sprite2D" type="Sprite2D" parent="Projectile" unique_id=850217674]
 texture = ExtResource("3_sfspv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile" unique_id=289709938]
 shape = SubResource("RectangleShape2D_ri2xw")
+
+[node name="PointsCounter" parent="." unique_id=137588062 instance=ExtResource("5_qfjtt")]
+
+[connection signal="area_entered" from="Ship" to="." method="_on_ship_area_entered"]
+[connection signal="area_exited" from="Ship" to="." method="_on_ship_area_exited"]
+[connection signal="area_entered" from="Projectile" to="." method="_on_projectile_area_entered"]
