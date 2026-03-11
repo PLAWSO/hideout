@@ -15,6 +15,9 @@ const physics_frame_rate: float = 30.0
 
 # GUI ELEMENTS
 @onready var points_counter: PointsCounter = $PointsCounter
+@onready var top_track_indicator: Sprite2D = $TopTrackIndicator
+@onready var middle_track_indicator: Sprite2D = $MiddleTrackIndicator
+@onready var bottom_track_indicator: Sprite2D = $BottomTrackIndicator
 
 
 # LAYOUT
@@ -43,6 +46,9 @@ var alive: bool = true
 func _ready() -> void:
 	create_obstacles()
 	ship.position = rest_pos
+	top_track_indicator.position = rest_pos + Vector2(75, -move_distance)
+	middle_track_indicator.position = rest_pos + Vector2(75, 0)
+	bottom_track_indicator.position = rest_pos + Vector2(75, move_distance)
 
 
 func _process(_delta: float) -> void:
