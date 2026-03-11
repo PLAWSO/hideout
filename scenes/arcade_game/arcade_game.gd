@@ -71,13 +71,15 @@ func stop_game() -> void:
 
 
 func reset_game() -> void:
+	set_in_near_miss(false)
+	points_counter.reset_points()
+
 	reset_obstacles()
 
 	ship.position.y = rest_pos.y
 
 	alive = true
 
-	points_counter.reset_points()
 
 ####################################
 ## INPUT                          ##
@@ -130,10 +132,12 @@ func set_in_near_miss(value: bool) -> void:
 func award_early_near_miss_points(distance: float) -> void:
 	if not in_early_near_miss:
 		return
+	print("Awarding early near miss points")
 	_award_near_miss_points(distance)
 
 
 func award_late_near_miss_points(distance: float) -> void:
+	print("Awarding late near miss points")
 	_award_near_miss_points(distance)
 
 
