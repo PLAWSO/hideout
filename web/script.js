@@ -1,3 +1,21 @@
+async function getData(url) {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+getData(`${window.location.origin}/api/runs?type=getTop100`);
+
+
 var startText = `
 PAYTONL@UNATCO: ssh human@10.69.331.12
 		
