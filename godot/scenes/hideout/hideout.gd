@@ -5,20 +5,21 @@ extends Node3D
 
 @onready var dialogue_container: CanvasLayer = $GUI/DialogueContainer
 
+@onready var void_calibur := $SubViewport/ArcadeGame
 
-#region Input Handling
+@onready var focus_holder := $GUI/FocusHolder
 
-# func _unhandled_input(event: InputEvent) -> void:
-# 	if event.is_action_pressed("left"):
-# 		print("do something")
-
-#endregion
+func _unhandled_input(event: InputEvent) -> void:
+	if cinna_cam.meta_path_index == 2:
+		void_calibur.input(event)
 
 
 #region Lifecycle
 
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+
+	Events.arrived_at_meta_path.connect(_on_arrived_at_meta_path)
 
 	var has_watched_intro = JSBridge.get_watched_intro()
 	_start_intro_sequence(has_watched_intro)
@@ -53,3 +54,8 @@ func _transition_to_drone() -> void:
 	tween.tween_property(transition.material, "shader_parameter/opacity", 0.0, 3.0).from(1.0)
 
 #endregion
+
+func _on_arrived_at_meta_path(_meta_path_index: int) -> void:
+	if _meta_path_index == 2:
+		focus_holder.grab_focus()
+	pass

@@ -94,7 +94,7 @@ func reset_game() -> void:
 var up_pressed: bool = false
 var down_pressed: bool = false
 
-func _unhandled_input(event: InputEvent) -> void:
+func input(event: InputEvent) -> void:
 	if event.is_action_pressed("up"):
 		up_pressed = true
 	elif event.is_action_pressed("down"):
@@ -138,12 +138,10 @@ func set_in_near_miss(value: bool) -> void:
 func award_early_near_miss_points(distance: float) -> void:
 	if not in_early_near_miss:
 		return
-	print("Awarding early near miss points")
 	_award_near_miss_points(distance)
 
 
 func award_late_near_miss_points(distance: float) -> void:
-	print("Awarding late near miss points")
 	_award_near_miss_points(distance)
 
 

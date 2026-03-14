@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" uid="uid://puedae26ukqg" path="res://scenes/hideout/hideout.gd" id="1_ura2u"]
 [ext_resource type="PackedScene" uid="uid://d1lcmhjvkefw6" path="res://assets/garage/garage.tscn" id="2_7v8ca"]
-[ext_resource type="Shader" uid="uid://bafs2pth5iv6y" path="res://scenes/hideout/viewport-buffer.tres" id="2_eegbv"]
 [ext_resource type="Script" uid="uid://pkwdcfxgso1q" path="res://cinna_cam/camera_movement/cinna_cam.gd" id="3_ura2u"]
 [ext_resource type="Script" uid="uid://bf4wol320c205" path="res://cinna_cam/camera_movement/planar-system.gd" id="4_eegbv"]
 [ext_resource type="PackedScene" uid="uid://bohb81o14ve6l" path="res://assets/arcade-cabinet/arcade-cabinet.tscn" id="5_60i1o"]
 [ext_resource type="Script" uid="uid://cep4n5ilt5opf" path="res://cinna_cam/camera_movement/angular-system.gd" id="5_x1t0x"]
 [ext_resource type="Script" uid="uid://c3pfswfcml75e" path="res://cinna_cam/pathing/meta-path.gd" id="7_embkr"]
 [ext_resource type="Script" uid="uid://u8kmj6bobusb" path="res://cinna_cam/pathing/path-section.gd" id="8_seky7"]
-[ext_resource type="PackedScene" uid="uid://xnag74oihr5b" path="res://assets/camera/preview_cam.tscn" id="9_60i1o"]
 [ext_resource type="PackedScene" uid="uid://sj3wt5u1le7l" path="res://scenes/temple/temple.tscn" id="11_ura2u"]
 [ext_resource type="PackedScene" uid="uid://fhiawtlmnjm6" path="res://assets/drone/drone_cam.tscn" id="12_x3ijg"]
 [ext_resource type="Shader" uid="uid://b0qwiybvl0ct8" path="res://scenes/hideout/skybox.tres" id="14_60i1o"]
@@ -17,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://btkxj8xo50ojy" path="res://assets/terminal/computer_terminal_modified.tscn" id="16_m7c5n"]
 [ext_resource type="PackedScene" uid="uid://c3qs16gcm7owy" path="res://assets/bike/bike.tscn" id="16_seky7"]
 [ext_resource type="PackedScene" uid="uid://c4xmxa7b1q2pt" path="res://dialog/gui/dialog_template.tscn" id="16_x3ijg"]
+[ext_resource type="PackedScene" uid="uid://bjdkg2fmj7e12" path="res://scenes/arcade_game/arcade_game.tscn" id="17_id51i"]
 [ext_resource type="PackedScene" uid="uid://612fduue4mhq" path="res://cinna_cam/gui/location_gui.tscn" id="17_jr4o4"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/trees/intro.dialogue" id="17_x3ijg"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://debugging/gui/debug_info.tscn" id="18_y6y6u"]
@@ -48,22 +47,6 @@ noise = SubResource("FastNoiseLite_jr4o4")
 shader = SubResource("Shader_y6y6u")
 shader_parameter/noise = SubResource("NoiseTexture2D_m7c5n")
 shader_parameter/opacity = 1.0
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_60i1o"]
-viewport_path = NodePath("Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ura2u"]
-resource_local_to_scene = true
-shader = ExtResource("2_eegbv")
-shader_parameter/Texture2DParameter = SubResource("ViewportTexture_60i1o")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_embkr"]
-viewport_path = NodePath("Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_seky7"]
-resource_local_to_scene = true
-shader = ExtResource("2_eegbv")
-shader_parameter/Texture2DParameter = SubResource("ViewportTexture_embkr")
 
 [sub_resource type="Resource" id="Resource_leb7k"]
 script = ExtResource("4_eegbv")
@@ -151,11 +134,8 @@ ambient_light_color = Color(0, 1, 0, 1)
 ambient_light_energy = 2.65
 reflected_light_source = 1
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_eegbv"]
-viewport_path = NodePath("StationaryCamRenderBuffer")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_seky7"]
-viewport_path = NodePath("DynamicCamRenderBuffer")
+[sub_resource type="ViewportTexture" id="ViewportTexture_jr4o4"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
@@ -177,28 +157,6 @@ grow_vertical = 2
 
 [node name="SecurityCamera" type="Camera3D" parent="." unique_id=1649804378]
 transform = Transform3D(0.6636129, -0.38310313, 0.64253396, 0, 0.85891527, 0.5121178, -0.74807614, -0.339848, 0.56998724, 3.9733453, 2.8558252, 2.1902392)
-
-[node name="StationaryCamRenderBuffer" type="SubViewport" parent="." unique_id=795163889]
-size = Vector2i(360, 360)
-render_target_clear_mode = 2
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="StationaryCamRenderBuffer" unique_id=1056464830]
-material = SubResource("ShaderMaterial_ura2u")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="DynamicCamRenderBuffer" type="SubViewport" parent="." unique_id=1417350610]
-size = Vector2i(360, 360)
-
-[node name="ColorRect" type="ColorRect" parent="DynamicCamRenderBuffer" unique_id=1274268457]
-material = SubResource("ShaderMaterial_seky7")
-offset_right = 360.0
-offset_bottom = 360.0
 
 [node name="CameraController" type="Node3D" parent="." unique_id=893909451 node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -349,54 +307,14 @@ transform = Transform3D(-0.997038, 0, 0.0769104, 0, 1, 0, -0.0769104, 0, -0.9970
 [node name="ArcadeCabinet" parent="Props" unique_id=688671305 instance=ExtResource("5_60i1o")]
 transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -3.49869, 0.00211923, -1.93705)
 
-[node name="Sprite3D" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=138507934]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219969, 1.8439, 0.224828)
-pixel_size = 0.0013
+[node name="VoidCalibur" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1938819238]
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.9802322e-08, -7.450581e-09, 1, 0.22001052, 1.8439, -0.006335616)
+pixel_size = 0.000544
 axis = 0
-texture = SubResource("ViewportTexture_eegbv")
+texture = SubResource("ViewportTexture_jr4o4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=112902397]
-follow_viewport_enabled = true
-follow_viewport_scale = 7.905
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer" unique_id=127190308]
-offset_top = -360.0
-offset_right = 360.0
-
-[node name="AuxCam" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer" unique_id=556231912]
-handle_input_locally = false
-size = Vector2i(360, 360)
-render_target_update_mode = 4
-
-[node name="TestCam" parent="Props/ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam" unique_id=619748171 instance=ExtResource("9_60i1o")]
-transform = Transform3D(-0.97236544, 0, -0.23346415, 0, 1, 0, 0.23346415, 0, -0.97236544, 36.91098, 1.976, -63.709167)
-
-[node name="Sprite3D2" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1620901459]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.98023e-08, -7.45058e-09, 1, 0.219968, 1.8439, -0.233517)
-pixel_size = 0.0013
-axis = 0
-texture = SubResource("ViewportTexture_seky7")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Props/ArcadeCabinet" unique_id=1203993844]
-follow_viewport_enabled = true
-follow_viewport_scale = 7.905
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Props/ArcadeCabinet/CanvasLayer2" unique_id=1265506266]
-offset_left = 360.0
-offset_top = -360.0
-offset_right = 720.0
-
-[node name="AuxCam2" type="SubViewport" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer" unique_id=2086386652]
-handle_input_locally = false
-size = Vector2i(360, 360)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="Props/ArcadeCabinet/CanvasLayer2/SubViewportContainer/AuxCam2" unique_id=973830124]
-transform = Transform3D(0.529993, -0.39096, 0.752501, 0, 0.887381, 0.461036, -0.848002, -0.244346, 0.470306, 71.0699, 8.33833, -47.9196)
-
-[node name="Temple" parent="Props" unique_id=326148284 node_paths=PackedStringArray("camera") instance=ExtResource("11_ura2u")]
+[node name="Temple" parent="Props" unique_id=326148284 instance=ExtResource("11_ura2u")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 51.4022, 0, -61.4187)
-camera = NodePath("../ArcadeCabinet/CanvasLayer/SubViewportContainer/AuxCam/TestCam")
 
 [node name="Terminal" parent="Props" unique_id=935590628 instance=ExtResource("16_m7c5n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9215918, 1.443, -2.6265724)
@@ -423,5 +341,17 @@ offset_bottom = -2.96
 [node name="DialogueContainer" parent="GUI" unique_id=1950969821 instance=ExtResource("16_x3ijg")]
 dialogue_resource = ExtResource("17_x3ijg")
 will_block_other_input = false
+
+[node name="FocusHolder" type="Button" parent="GUI" unique_id=499860008]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1611177578]
+handle_input_locally = false
+size = Vector2i(1800, 850)
+
+[node name="ArcadeGame" parent="SubViewport" unique_id=1069089697 instance=ExtResource("17_id51i")]
 
 [connection signal="ready" from="CameraController" to="." method="_on_camera_controller_ready"]
