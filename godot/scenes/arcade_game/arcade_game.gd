@@ -78,7 +78,7 @@ func stop_game() -> void:
 
 func reset_game() -> void:
 	set_in_near_miss(false)
-	points_counter.reset_points()
+	points_counter.reset()
 
 	reset_obstacles()
 
@@ -107,7 +107,7 @@ func input(event: InputEvent) -> void:
 		shoot()
 	elif event.is_action_released("shoot") and not alive:
 		reset_game()
-		
+	
 
 func move_ship() -> void:
 	if not alive:
@@ -136,12 +136,14 @@ func set_in_near_miss(value: bool) -> void:
 
 
 func award_early_near_miss_points(distance: float) -> void:
-	if not in_early_near_miss:
+	if not (in_early_near_miss and alive):
 		return
 	_award_near_miss_points(distance)
 
 
 func award_late_near_miss_points(distance: float) -> void:
+	if not alive:
+		return
 	_award_near_miss_points(distance)
 
 
@@ -283,6 +285,8 @@ func shoot() -> void:
 func _on_ship_area_entered(area: Area2D) -> void:
 	if (area.name == "HitBox"):
 		stop_game()
+		JSBridge.save_score(points_counter.total_points)
+		return
 
 	elif (area.name == "NearMissBox"):
 		var behind_obstacle := area.global_position.x < ship.global_position.x

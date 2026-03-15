@@ -106,6 +106,9 @@ func switch_visible_buttons_if_obscured(show_buttons: bool) -> void:
 
 
 func _on_arrived_at_meta_path(_meta_path_index: int) -> void:
+	if cinna_cam.meta_path_index == 2:
+		switch_visible_movement_buttons(false)
+		return
 	if cinna_cam.meta_path_index != 4:
 		return
 	has_arrived_at_4 = true
