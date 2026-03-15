@@ -42,7 +42,10 @@ func get_watched_intro() -> bool:
 
 	return true
 
-
 func set_terminal_gui_visible(visible: bool) -> void:
 	if console:
 		console.setTerminalGUIVisible(visible)
+
+func save_score(score: int) -> void:
+	if console:
+		console.saveScore(score)

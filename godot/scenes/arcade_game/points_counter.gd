@@ -8,7 +8,7 @@ var total_points: int = 0
 ###########################
 
 
-func reset_points() -> void:
+func reset() -> void:
 	total_points = 0
 	_set_points(total_points)
 

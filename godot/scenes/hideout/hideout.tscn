@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://612fduue4mhq" path="res://cinna_cam/gui/location_gui.tscn" id="17_jr4o4"]
 [ext_resource type="Resource" uid="uid://da2qcx3pj0gjl" path="res://dialog/trees/intro.dialogue" id="17_x3ijg"]
 [ext_resource type="PackedScene" uid="uid://bjpw465tbn5lf" path="res://debugging/gui/debug_info.tscn" id="18_y6y6u"]
+[ext_resource type="Script" uid="uid://cowrnn45vgooo" path="res://scenes/hideout/void_calibur_touch_screen_controls.gd" id="19_m7c5n"]
 
 [sub_resource type="Shader" id="Shader_y6y6u"]
 code = "shader_type canvas_item;
@@ -136,6 +137,15 @@ reflected_light_source = 1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_jr4o4"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c5n"]
+size = Vector2(821, 368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id51i"]
+size = Vector2(821, 368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jr4o4"]
+size = Vector2(821, 736)
 
 [node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
@@ -308,7 +318,7 @@ transform = Transform3D(-0.997038, 0, 0.0769104, 0, 1, 0, -0.0769104, 0, -0.9970
 transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -3.49869, 0.00211923, -1.93705)
 
 [node name="VoidCalibur" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1938819238]
-transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.9802322e-08, -7.450581e-09, 1, 0.22001052, 1.8439, -0.006335616)
+transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.9802322e-08, -7.450581e-09, 1, 0.22952223, 1.8556058, -0.00010097027)
 pixel_size = 0.000544
 axis = 0
 texture = SubResource("ViewportTexture_jr4o4")
@@ -321,9 +331,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9215918, 1.443, -2.6265724
 
 [node name="GUI" type="Control" parent="." unique_id=318238856]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Location" parent="GUI" unique_id=866310046 node_paths=PackedStringArray("cinna_cam", "obstacle") instance=ExtResource("17_jr4o4")]
 layout_mode = 0
@@ -348,9 +360,58 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
+[node name="VoidCaliburTouchScreenControls" type="Control" parent="GUI" unique_id=507578393]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("19_m7c5n")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VoidCaliburTouchScreenControls" unique_id=448838689]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer" unique_id=288249920]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer/VBoxContainer" unique_id=1151571110]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DownButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer/VBoxContainer" unique_id=613547794]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShootButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer" unique_id=639211945]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1849221357]
+position = Vector2(410.5, 184)
+shape = SubResource("RectangleShape2D_m7c5n")
+action = "up"
+
+[node name="DownButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1769544559]
+position = Vector2(410.5, 552)
+shape = SubResource("RectangleShape2D_id51i")
+action = "down"
+
+[node name="ShootButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=410783535]
+position = Vector2(1231.5, 368)
+shape = SubResource("RectangleShape2D_jr4o4")
+action = "shoot"
+
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1611177578]
 handle_input_locally = false
-size = Vector2i(1800, 850)
+size = Vector2i(1620, 800)
 
 [node name="ArcadeGame" parent="SubViewport" unique_id=1069089697 instance=ExtResource("17_id51i")]
 
