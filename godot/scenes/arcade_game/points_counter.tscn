@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://is403d2yosab"]
 
+[ext_resource type="Theme" uid="uid://csfw5nj8r1ed1" path="res://themes/arcade_cabinet.tres" id="1_hrvou"]
 [ext_resource type="Script" uid="uid://cperjylt2y4xm" path="res://scenes/arcade_game/points_counter.gd" id="1_pv0ms"]
 
 [node name="PointsCounter" type="Control" unique_id=137588062]
@@ -9,10 +10,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hrvou")
 script = ExtResource("1_pv0ms")
 
-[node name="Label" type="Label" parent="." unique_id=491441850]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Points: "
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=835002783]
+layout_mode = 1
+offset_right = 14.0
+offset_bottom = 24.0
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 31
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=491441850]
+texture_filter = 3
+layout_mode = 2
+text = "SCORE"

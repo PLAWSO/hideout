@@ -139,13 +139,13 @@ reflected_light_source = 1
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c5n"]
-size = Vector2(821, 368)
+size = Vector2(759.5, 611.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id51i"]
-size = Vector2(821, 368)
+size = Vector2(759.5, 611.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jr4o4"]
-size = Vector2(821, 736)
+size = Vector2(759.5, 1223)
 
 [node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
@@ -319,7 +319,7 @@ transform = Transform3D(0.66523, 0, -0.746638, 0, 1, 0, 0.746638, 0, 0.66523, -3
 
 [node name="VoidCalibur" type="Sprite3D" parent="Props/ArcadeCabinet" unique_id=1938819238]
 transform = Transform3D(0.975554, -0.219761, 0, 0.219761, 0.975554, 0, 2.9802322e-08, -7.450581e-09, 1, 0.22952223, 1.8556058, -0.00010097027)
-pixel_size = 0.000544
+pixel_size = 0.0005
 axis = 0
 texture = SubResource("ViewportTexture_jr4o4")
 
@@ -369,49 +369,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("19_m7c5n")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VoidCaliburTouchScreenControls" unique_id=448838689]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer" unique_id=288249920]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="UpButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer/VBoxContainer" unique_id=1151571110]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DownButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer/VBoxContainer" unique_id=613547794]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ShootButton" type="Button" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer" unique_id=639211945]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="UpButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1849221357]
-position = Vector2(410.5, 184)
+position = Vector2(379.75, 305.75)
 shape = SubResource("RectangleShape2D_m7c5n")
 action = "up"
 
 [node name="DownButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1769544559]
-position = Vector2(410.5, 552)
+position = Vector2(379.75, 917.25)
 shape = SubResource("RectangleShape2D_id51i")
 action = "down"
 
 [node name="ShootButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=410783535]
-position = Vector2(1231.5, 368)
+position = Vector2(1139.25, 611.5)
 shape = SubResource("RectangleShape2D_jr4o4")
 action = "shoot"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VoidCaliburTouchScreenControls" unique_id=64981489]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VoidCaliburTouchScreenControls/HBoxContainer" unique_id=1248896514]
+layout_mode = 2
+
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1611177578]
 handle_input_locally = false
-size = Vector2i(1620, 800)
+size = Vector2i(1766, 870)
 
 [node name="ArcadeGame" parent="SubViewport" unique_id=1069089697 instance=ExtResource("17_id51i")]
 

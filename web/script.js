@@ -76,15 +76,33 @@ function getCanvasHeight() {
 
 function setWatchedIntro() {
 	localStorage.setItem("watchedIntro", "true");
-	console.log("Intro marked as watched in localStorage.");
+	console.log("watchedIntro set to true in localStorage.");
 }
 
 function getWatchedIntro() {
 	return localStorage.getItem("watchedIntro") === "true";
 }
 
-function saveScore(score) {
-	query(`${window.location.origin}/api/runs?type=save&score=${score}`);
+let lastScore = 0;
+async function saveScore(score) {
+	let username = localStorage.getItem("username")
+	if (!username) {
+		lastScore = score;
+		document.getElementById("username-popup").showModal()
+		return;
+	}
+	if (!score) return;
+	
+	query(`${window.location.origin}/api/runs?type=save&username=${username}&score=${score}`);
+}
+
+function setUsername(event) {
+	event.preventDefault();
+	let username = document.getElementById("username-textbox").value;
+	localStorage.setItem("username", username);
+	document.getElementById("username-popup").close();
+	console.log(`username set to ${username} in localStorage.`);
+	saveScore(lastScore);
 }
 
 async function query(url) {
@@ -121,6 +139,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			onShowDebug(false)
 		}
 	})
+
+	var usernameForm = document.getElementById("username-form");
+	usernameForm.addEventListener('submit', setUsername);
 
 	var loadingLog = "Loading."
 	const canvas = document.getElementById("canvas");
