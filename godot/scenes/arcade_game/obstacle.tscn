@@ -10,6 +10,7 @@ size = Vector2(124, 36)
 size = Vector2(240, 48.705)
 
 [node name="Obstacle" type="Node2D" unique_id=1929468879]
+scale = Vector2(2, 2)
 script = ExtResource("1_8qk83")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1295446329]

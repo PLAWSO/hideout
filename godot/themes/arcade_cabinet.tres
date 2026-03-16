@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://csfw5nj8r1ed1"]
+
+[ext_resource type="FontFile" uid="uid://cehvou13r2tbt" path="res://themes/VT323-Regular.ttf" id="1_34685"]
+
+[resource]
+default_font = ExtResource("1_34685")
+Label/font_sizes/font_size = 192

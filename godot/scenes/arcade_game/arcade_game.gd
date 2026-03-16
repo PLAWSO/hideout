@@ -1,5 +1,3 @@
-@tool
-
 extends Node2D
 
 ####################################
@@ -37,7 +35,7 @@ const physics_frame_rate: float = 30.0
 
 
 # STATE
-var alive: bool = true
+var alive: bool = false
 
 ####################################
 ## LIFETIME                       ##
@@ -60,6 +58,9 @@ func _physics_process(_delta: float) -> void:
 
 	for obstacle in enabled_obstacles:
 		obstacle.move(_delta)
+
+	if not alive:
+		return
 
 	# OBSTACLES
 	check_recycle_obstacles()
@@ -85,6 +86,7 @@ func reset_game() -> void:
 	ship.position.y = rest_pos.y
 
 	alive = true
+	reset_input()
 
 
 ####################################
@@ -118,6 +120,10 @@ func move_ship() -> void:
 		ship.position.y = rest_pos.y + move_distance
 	else:
 		ship.position.y = rest_pos.y
+
+func reset_input() -> void:
+	up_pressed = false
+	down_pressed = false
 
 ####################################
 ## POINTS                         ##

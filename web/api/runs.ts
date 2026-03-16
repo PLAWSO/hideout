@@ -13,11 +13,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	});
 
 	if (req.query.type == "save"){
+		let username = req.query.username as string;
 		let score = +req.query.score;
-		if (isNaN(score)) return;
+		if (isNaN(score) || score == 0 || !username) return res.status(200);
 
 		try {
-			const response = await save(client, score);
+			const response = await save(client, username, score);
 	
 			return res.status(200).json({
 				response,
@@ -46,18 +47,20 @@ async function get(client: typeof MongoClient) {
   }
 }
 
-async function save(client: typeof MongoClient, score: number) {
+async function save(client: typeof MongoClient, username: string, score: number) {
   try {
     await client.connect();
     const runs = await client
       .db("hideout")
       .collection("runs")
       .insertOne({
-				username: "Test Player",
+				username: username,
 				score: score,
 				completed: false,
 				doneOn: new Date()
 			})
+		
+		console.log(`Saved run for ${username} with score ${score}`);
 
     return runs;
   } finally {

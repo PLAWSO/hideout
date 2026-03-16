@@ -1,6 +1,6 @@
 class_name PointsCounter extends Control
 
-@onready var label: Label = $Label
+@onready var label: Label = $MarginContainer/Label
 
 var total_points: int = 0
 
@@ -23,4 +23,4 @@ func add_points(points_to_add: int) -> void:
 
 
 func _set_points(points: int) -> void:
-	label.text = "Points: %d" % points
+	label.text = str(points)
