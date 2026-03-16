@@ -1,0 +1,278 @@
+[gd_scene format=3 uid="uid://daofbb811k2xs"]
+
+[ext_resource type="Theme" uid="uid://csfw5nj8r1ed1" path="res://themes/arcade_cabinet.tres" id="1_nf80h"]
+[ext_resource type="Texture2D" uid="uid://ckyyryt5kic3o" path="res://icons/touchscreen-controls.svg" id="2_b3m1e"]
+[ext_resource type="Texture2D" uid="uid://bnpdc6xpljtnn" path="res://icons/keyboard_arrow_up_outline.svg" id="2_irjw2"]
+[ext_resource type="Texture2D" uid="uid://bnaab6wrx2pw1" path="res://icons/keyboard_arrow_down_outline.svg" id="3_b3m1e"]
+[ext_resource type="Texture2D" uid="uid://esr03tkbmrr7" path="res://icons/keyboard_space_outline.svg" id="4_jvwbq"]
+[ext_resource type="Texture2D" uid="uid://cmgbpq5nxsgpy" path="res://icons/keyboard_w_outline.svg" id="5_kemef"]
+[ext_resource type="Texture2D" uid="uid://baoues8yt2ut" path="res://icons/keyboard_s_outline.svg" id="6_16mxx"]
+
+[node name="ControlInfo" type="Control" unique_id=1341362679]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 824.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nf80h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1036016373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="MarginContainer" parent="VBoxContainer" unique_id=636327390]
+layout_mode = 2
+theme_override_constants/margin_top = 140
+
+[node name="Label" type="Label" parent="VBoxContainer/Header" unique_id=434545591]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+text = "VOID CALIBUR can be controlled using any of the following control schemes:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Body" type="MarginContainer" parent="VBoxContainer" unique_id=1989811959]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 83
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body" unique_id=1392518346]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer" unique_id=706862876]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer" unique_id=800977149]
+layout_mode = 2
+
+[node name="TouchscreenControls" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer" unique_id=2138710736]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls" unique_id=1084777662]
+custom_minimum_size = Vector2(0, 400.475)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer" unique_id=1716328507]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "TOUCHSCREEN"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer" unique_id=1876768819]
+layout_mode = 2
+theme_override_constants/margin_top = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer" unique_id=335520531]
+custom_minimum_size = Vector2(0, 266)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1105936820]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Up" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=327546936]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+text = "Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Down" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=705682655]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
+text = "Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shoot" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer" unique_id=475137717]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "Shoot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer" unique_id=523527169]
+visible = false
+layout_mode = 2
+icon = ExtResource("2_b3m1e")
+icon_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer" unique_id=108286098]
+layout_mode = 2
+texture_normal = ExtResource("2_b3m1e")
+ignore_texture_size = true
+stretch_mode = 6
+
+[node name="KeyboardControls1" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1227649343]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1" unique_id=631994098]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer" unique_id=1685916946]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "KEYBOARD 1"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer" unique_id=10295453]
+layout_mode = 2
+theme_override_constants/margin_left = 180
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer" unique_id=1920198598]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Up" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1707542727]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Up" unique_id=3683398]
+layout_mode = 2
+icon = ExtResource("2_irjw2")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Up" unique_id=936433311]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Up/MarginContainer" unique_id=1073324701]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "UP"
+
+[node name="Down" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1184707612]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Down" unique_id=1759066543]
+layout_mode = 2
+icon = ExtResource("3_b3m1e")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Down" unique_id=350277518]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Down/MarginContainer" unique_id=1204990481]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "DOWN"
+
+[node name="Shoot" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer" unique_id=236304990]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Shoot" unique_id=443081328]
+layout_mode = 2
+icon = ExtResource("4_jvwbq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Shoot" unique_id=766745378]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls1/VBoxContainer/MarginContainer/VBoxContainer/Shoot/MarginContainer" unique_id=678550582]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "SHOOT"
+
+[node name="KeyboardControls2" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer" unique_id=245931435]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2" unique_id=140407394]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer" unique_id=1015073073]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "KEYBOARD 2"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer" unique_id=1147704183]
+layout_mode = 2
+theme_override_constants/margin_left = 180
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer" unique_id=2022177950]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Up" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer" unique_id=524273598]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Up" unique_id=1615312095]
+layout_mode = 2
+icon = ExtResource("5_kemef")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Up" unique_id=860278869]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Up/MarginContainer" unique_id=425869091]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "UP"
+
+[node name="Down" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1794700270]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Down" unique_id=110383117]
+layout_mode = 2
+icon = ExtResource("6_16mxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Down" unique_id=1248717918]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Down/MarginContainer" unique_id=657307133]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "DOWN"
+
+[node name="Shoot" type="HBoxContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1997837823]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Shoot" unique_id=808856440]
+layout_mode = 2
+icon = ExtResource("4_jvwbq")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Shoot" unique_id=1244969843]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/KeyboardControls2/VBoxContainer/MarginContainer/VBoxContainer/Shoot/MarginContainer" unique_id=1218520710]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "SHOOT"
+
+[node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer" unique_id=1266341106]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Press SHOOT to play"
+horizontal_alignment = 1

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="523.50012"
+   height="277.45724"
+   viewBox="0 0 138.50941 73.410565"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="touchscreen-controls.svg"
+   inkscape:export-filename="home\games\portfolio\godot\icons\touchscreen-controls.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="138.50941"
+       height="73.410568"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-20.231515,-19.730249)">
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#fefefe;stroke-width:1.32292;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1"
+       width="135.86357"
+       height="70.764732"
+       x="21.55443"
+       y="21.053164"
+       ry="6.8531361"
+       rx="6.8531361" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#fefefe;stroke-width:0.855987;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2"
+       width="63.117104"
+       height="30.790596"
+       x="24.126869"
+       y="23.645279"
+       rx="4.339139"
+       ry="4.1399293" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#fefefe;stroke-width:0.828564;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3"
+       width="64.197578"
+       height="65.644905"
+       x="90.727791"
+       y="23.722658"
+       rx="4.6950264"
+       ry="4.9828711" />
+    <rect
+       style="fill:#000000;fill-opacity:0;stroke:#fefefe;stroke-width:0.899251;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4"
+       width="62.870373"
+       height="31.996855"
+       x="24.648911"
+       y="57.007603"
+       rx="4.3829765"
+       ry="4.154099" />
+  </g>
+</svg>

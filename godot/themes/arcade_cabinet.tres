@@ -2,6 +2,18 @@
 
 [ext_resource type="FontFile" uid="uid://cehvou13r2tbt" path="res://themes/VT323-Regular.ttf" id="1_34685"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_34685"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iqc2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rmbee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fnuot"]
+
 [resource]
 default_font = ExtResource("1_34685")
+Button/styles/disabled = SubResource("StyleBoxEmpty_34685")
+Button/styles/hover = SubResource("StyleBoxEmpty_iqc2h")
+Button/styles/normal = SubResource("StyleBoxEmpty_rmbee")
+Button/styles/pressed = SubResource("StyleBoxEmpty_fnuot")
 Label/font_sizes/font_size = 192

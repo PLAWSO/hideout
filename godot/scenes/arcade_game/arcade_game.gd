@@ -12,10 +12,10 @@ const physics_frame_rate: float = 30.0
 
 
 # GUI ELEMENTS
-@onready var points_counter: PointsCounter = $PointsCounter
-@onready var top_track_indicator: Sprite2D = $TopTrackIndicator
-@onready var middle_track_indicator: Sprite2D = $MiddleTrackIndicator
-@onready var bottom_track_indicator: Sprite2D = $BottomTrackIndicator
+@onready var points_counter: PointsCounter = $GameAssets/PointsCounter
+@onready var top_track_indicator: Sprite2D = $GameAssets/TopTrackIndicator
+@onready var middle_track_indicator: Sprite2D = $GameAssets/MiddleTrackIndicator
+@onready var bottom_track_indicator: Sprite2D = $GameAssets/BottomTrackIndicator
 
 
 # LAYOUT
@@ -48,6 +48,8 @@ func _ready() -> void:
 	middle_track_indicator.position = rest_pos + Vector2(75, 0)
 	bottom_track_indicator.position = rest_pos + Vector2(75, move_distance)
 
+	Events.arrived_at_meta_path.connect(_on_arrived_at_meta_path)
+	Events.left_meta_path.connect(_on_left_meta_path)
 
 func _process(_delta: float) -> void:
 	pass
@@ -105,6 +107,9 @@ func input(event: InputEvent) -> void:
 		up_pressed = false
 	elif event.is_action_released("down"):
 		down_pressed = false
+	elif event.is_action_pressed("shoot") and $ControlInfo.visible:
+		reset_game()
+		show_game_assets()
 	elif event.is_action_pressed("shoot") and alive:
 		shoot()
 	elif event.is_action_released("shoot") and not alive:
@@ -124,6 +129,37 @@ func move_ship() -> void:
 func reset_input() -> void:
 	up_pressed = false
 	down_pressed = false
+
+
+####################################
+## GUI                            ##
+####################################
+
+func show_game_assets() -> void:
+	$ControlInfo.visible = false
+	$GameAssets.visible = true
+
+func show_control_info() -> void:
+	$GameAssets.visible = false
+	$ControlInfo.visible = true
+	stop_game()
+	reset_obstacles()
+	points_counter.reset()
+
+
+func _on_arrived_at_meta_path(meta_path_index: int) -> void:
+	if meta_path_index == 2:
+		show_control_info()
+
+func _on_left_meta_path(_meta_path_index: int) -> void:
+	show_game_assets()
+	stop_game()
+	reset_obstacles()
+	points_counter.reset()
+
+
+
+
 
 ####################################
 ## POINTS                         ##
@@ -314,5 +350,5 @@ func _on_ship_area_exited(area: Area2D) -> void:
 	set_in_near_miss(false)
 
 
-func _on_projectile_area_entered(area: Area2D) -> void:
+func _on_projectile_area_entered(_area: Area2D) -> void:
 	pass # Replace with function body.
