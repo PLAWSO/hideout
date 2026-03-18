@@ -111,6 +111,7 @@ async function saveScore(score) {
   })
 }
 
+sendTopScoresToGodot = null; // set in godot
 
 function loadRuns() {
 	fetch(`${window.location.origin}/api/runs`, {
@@ -126,7 +127,6 @@ function loadRuns() {
 	})
 	.catch(error => console.error(error));
 }
-
 
 ///////////////////////////////////////////
 // EVENTS                                //
