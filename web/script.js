@@ -117,7 +117,7 @@ function loadRuns() {
 	.then(response => response.json())
 	.then(data => {
 		let objectToSend = [data.percentiles, data.topRuns]
-		window.sendTopScoresToGodot(objectToSend); // sendTopScoresToGodot is defined in godot is exposed via a callback reference
+		sendTopScoresToGodot(objectToSend); // sendTopScoresToGodot is defined in godot is exposed via a callback reference
 	})
 	.catch(error => console.error(error));
 }
