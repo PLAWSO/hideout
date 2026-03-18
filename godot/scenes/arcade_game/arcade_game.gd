@@ -41,6 +41,8 @@ var alive: bool = false
 ## LIFETIME                       ##
 ####################################
 
+@onready var high_scores := $GameAssets/HighScores
+
 func _ready() -> void:
 	create_obstacles()
 	ship.position = rest_pos
@@ -51,8 +53,6 @@ func _ready() -> void:
 	Events.arrived_at_meta_path.connect(_on_arrived_at_meta_path)
 	Events.left_meta_path.connect(_on_left_meta_path)
 
-func _process(_delta: float) -> void:
-	pass
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -71,12 +71,23 @@ func _physics_process(_delta: float) -> void:
 	# SHIP
 	move_ship()
 
-func stop_game() -> void:
+
+func stop_game(flight_completed: bool) -> void:
 	for obstacle in enabled_obstacles:
 		obstacle.speed = 0.0
 	for obstacle in disabled_obstacles:
 		obstacle.speed = 0.0
 	alive = false
+
+	if flight_completed:
+		var score = points_counter.total_points
+		var saved = JSBridge.save_score(score)
+
+		var result = "score not saved :( "
+		if saved:
+			result = high_scores.check_add_high_score(score)
+		
+		show_game_over(result)
 
 
 func reset_game() -> void:
@@ -90,6 +101,9 @@ func reset_game() -> void:
 	alive = true
 	reset_input()
 
+	hide_game_over()
+
+	Events.game_reset.emit()
 
 ####################################
 ## INPUT                          ##
@@ -135,16 +149,28 @@ func reset_input() -> void:
 ## GUI                            ##
 ####################################
 
+@onready var control_info: Control = $ControlInfo
+@onready var game_assets: Node2D = $GameAssets
+@onready var game_over: Control = $GameOver
+
 func show_game_assets() -> void:
-	$ControlInfo.visible = false
-	$GameAssets.visible = true
+	control_info.visible = false
+	game_assets.visible = true
+
 
 func show_control_info() -> void:
-	$GameAssets.visible = false
-	$ControlInfo.visible = true
-	stop_game()
+	game_assets.visible = false
+	control_info.visible = true
+	stop_game(false)
 	reset_obstacles()
 	points_counter.reset()
+
+func hide_game_over() -> void:
+	game_over.visible = false
+
+func show_game_over(result: String) -> void:
+	game_over.set_text(result)
+	game_over.visible = true
 
 
 func _on_arrived_at_meta_path(meta_path_index: int) -> void:
@@ -153,7 +179,8 @@ func _on_arrived_at_meta_path(meta_path_index: int) -> void:
 
 func _on_left_meta_path(_meta_path_index: int) -> void:
 	show_game_assets()
-	stop_game()
+	stop_game(true)
+	hide_game_over()
 	reset_obstacles()
 	points_counter.reset()
 
@@ -227,7 +254,7 @@ var frames_since_last_spawn: int = 0
 func create_obstacles() -> void:
 	for i in range(number_of_obstacles):
 		var obstacle := ObstacleScene.instantiate()
-		self.add_child(obstacle)
+		game_assets.add_sibling(obstacle)
 		_disable_obstacle(obstacle)
 		disabled_obstacles.append(obstacle)
 
@@ -326,8 +353,7 @@ func shoot() -> void:
 
 func _on_ship_area_entered(area: Area2D) -> void:
 	if (area.name == "HitBox"):
-		stop_game()
-		JSBridge.save_score(points_counter.total_points)
+		stop_game(true)
 		return
 
 	elif (area.name == "NearMissBox"):

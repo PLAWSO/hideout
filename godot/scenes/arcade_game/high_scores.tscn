@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://crps7vt1r1lv8"]
+
+[ext_resource type="Theme" uid="uid://csfw5nj8r1ed1" path="res://themes/arcade_cabinet.tres" id="1_j8oty"]
+[ext_resource type="Script" uid="uid://bvm1patn0atc0" path="res://scenes/arcade_game/high_scores.gd" id="2_cm3t0"]
+
+[node name="HighScores" type="Control" unique_id=758109555 node_paths=PackedStringArray("first_place_label", "second_place_label", "third_place_label", "fourth_place_label", "fifth_place_label", "sixth_place_label", "seventh_place_label", "eighth_place_label", "ninth_place_label")]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_j8oty")
+script = ExtResource("2_cm3t0")
+first_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label")
+second_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label2")
+third_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Label3")
+fourth_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/Label")
+fifth_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/Label2")
+sixth_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/Label3")
+seventh_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer3/Label")
+eighth_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer3/Label2")
+ninth_place_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer3/Label3")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=75464808]
+layout_mode = 1
+offset_left = 542.64
+offset_top = 3.355
+offset_right = 1765.667
+offset_bottom = 240.355
+theme_override_constants/margin_top = 18
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1278699207]
+layout_mode = 2
+theme_override_constants/separation = 31
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=351564166]
+layout_mode = 2
+theme_override_constants/separation = -12
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=233558626]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "802 TOMCAT"
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=639444671]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "495 CHIEFSWITHGUNS"
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1191989275]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "105 CIGCAT"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1936551098]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=295578493]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "101 ZIPITCOM"
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=349091105]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "32 CHIEFSWITHGUNS"
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=85770139]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "16 ZIP"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1191056184]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1929460129]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "101 ZIPITCOM"
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1640318732]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "32 CHIEFSWITHGUNS"
+
+[node name="Label3" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer3" unique_id=717018638]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 48
+text = "16 ZIP"
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=703777933]
+visible = false
+layout_mode = 2

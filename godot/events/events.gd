@@ -7,3 +7,7 @@ signal camera_moved()
 signal safe_zone_crossed(show_all_buttons: bool)
 
 signal switch_intro_animation_to_nod()
+
+signal scores_received()
+
+signal game_reset()
