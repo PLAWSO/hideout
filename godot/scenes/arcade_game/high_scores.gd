@@ -79,6 +79,6 @@ func check_add_high_score(score: int) -> String:
 	
 	for i in range(1, local_percentiles.size()):
 		if score < local_percentiles[i].value:
-			return "better than %s of all flights!" % local_percentiles[i - 1].key
+			return "better than %s of all attempts!" % local_percentiles[i - 1].key
 	
 	return "something went wrong"
