@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c2xf5xo0jm7ck" path="res://scenes/arcade_game/separator.png" id="6_ri2xw"]
 [ext_resource type="Texture2D" uid="uid://c5exlw1xqvqcu" path="res://scenes/arcade_game/space.png" id="7_mpnk3"]
 [ext_resource type="PackedScene" uid="uid://daofbb811k2xs" path="res://scenes/arcade_game/control_info.tscn" id="9_ile23"]
+[ext_resource type="PackedScene" uid="uid://cav7uvijymbv3" path="res://scenes/arcade_game/game_over.tscn" id="10_arsvv"]
+[ext_resource type="PackedScene" uid="uid://crps7vt1r1lv8" path="res://scenes/arcade_game/high_scores.tscn" id="10_b207a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdlcs"]
 texture = ExtResource("7_mpnk3")
@@ -51,6 +53,8 @@ tile_set = SubResource("TileSet_ile23")
 
 [node name="GameAssets" type="Node2D" parent="." unique_id=906454901]
 
+[node name="HighScores" parent="GameAssets" unique_id=758109555 instance=ExtResource("10_b207a")]
+
 [node name="PointsCounter" parent="GameAssets" unique_id=137588062 instance=ExtResource("5_qfjtt")]
 
 [node name="TopTrackIndicator" type="Sprite2D" parent="GameAssets" unique_id=899133023]
@@ -88,6 +92,11 @@ texture = ExtResource("3_sfspv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile" unique_id=289709938]
 shape = SubResource("RectangleShape2D_ri2xw")
+
+[node name="GameOver" parent="." unique_id=644381526 instance=ExtResource("10_arsvv")]
+visible = false
+offset_right = 1766.0
+offset_bottom = 870.0
 
 [node name="ControlInfo" parent="." unique_id=1341362679 instance=ExtResource("9_ile23")]
 visible = false

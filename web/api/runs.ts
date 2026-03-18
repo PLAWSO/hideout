@@ -12,55 +12,81 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		}
 	});
 
-	if (req.query.type == "save"){
-		let username = req.query.username as string;
-		let score = +req.query.score;
-		if (isNaN(score) || score == 0 || !username) return res.status(200);
+	if (req.method == "GET"){
+		const result = await get(client);
+		return res.status(200).json(result);
+	}
 
-		try {
-			const response = await save(client, username, score);
-	
-			return res.status(200).json({
-				response,
-			});
-		} catch (err) {
-			console.error("[" + new Date() + "] ERROR:\n", err);
-			return res.status(500).json({
-				message: "Failed to read data from MongoDB"
-			});
-		}
+	if (req.method == "POST"){
+		const result = await save(client, req.body);
+		if (!result) { return res.status(400).json({ error: "invalid username or score, or maybe a network issue? who's to say really" }) }
+		return res.status(200).json(result);
 	}
 }
 
-async function get(client: typeof MongoClient) {
+export async function get(client: typeof MongoClient) {
   try {
     await client.connect();
-    const runs = await client
+    const percentiles = await client
       .db("hideout")
       .collection("runs")
-      .find({})
-      .toArray();
+      .aggregate([
+				{
+					$group: {
+						_id: null,
+						percentiles: {
+							$percentile: {
+								input: "$score",
+								p: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 0.96, 0.97, 0.98, 0.99],
+								method: "approximate"
+							}
+						}
+					}
+				}
+			])
+			.toArray();
+		
+		const topRuns = await client
+		.db("hideout")
+		.collection("runs")
+		.find({ })
+		.sort({ score: -1 })
+		.project({
+			"_id": 0,
+			"score": 1,
+			"username": 1
+		})
+		.limit(10)
+		.toArray();
 
-    return runs;
+    return { percentiles: percentiles?.[0]?.percentiles, topRuns };
   } finally {
 		await client.close();
   }
 }
 
-async function save(client: typeof MongoClient, username: string, score: number) {
+async function save(client: typeof MongoClient, body: any) {
+	const { username, score } = body ?? {}
+	const parsedScore = Number(score)
+
+	if (!username || Number.isNaN(parsedScore) || parsedScore <= 0) {
+		return false;
+	}
+
+
   try {
     await client.connect();
     const runs = await client
       .db("hideout")
       .collection("runs")
       .insertOne({
-				username: username,
-				score: score,
+				username,
+				score: parsedScore,
 				completed: false,
 				doneOn: new Date()
 			})
 		
-		console.log(`Saved run for ${username} with score ${score}`);
+		console.log(`saved run for ${username} with score ${parsedScore}`);
 
     return runs;
   } finally {

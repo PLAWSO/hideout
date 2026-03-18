@@ -36,7 +36,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 48
-text = "VOID CALIBUR can be controlled using any of the following control schemes:"
+text = "VOID CALIBUR can be controlled using any of the following schemes:"
 horizontal_alignment = 1
 autowrap_mode = 2
 

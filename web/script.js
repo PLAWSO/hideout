@@ -1,25 +1,10 @@
-var startText = `
-PAYTONL@UNATCO: ssh human@10.69.331.12
-		
-The programs included with the [HUMAN] are free software;
-the exact distribution terms for each program are described in the
-individual files in /human/share/doc/*/copyright.
+let usernamePopup;
 
-[HUMAN] comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
+///////////////////////////////////////////
+// TERMINAL                             //
+///////////////////////////////////////////
 
-sudo humanctlstart optical.services
-`
-var loadingTexts = [
-`NET_REQUEST: Searching for endpoint`,
-`NET_REQUEST: Found endpoint at 10.69.331.12:1337`,
-`NET_REQUEST: Sending authentication packet`,
-`NET_REQUEST: Authentication successful`,
-`NET_REQUEST: Negotiating connection`,
-]
-var textIndex = 0;
-
-let terminalContainer, sections, navButtons, rotatePopup;
+let terminalContainer, sections, navButtons
 
 function navButtonClicked(buttonClicked) {
   sections.forEach(sec => { sec.style.display = 'none'; });
@@ -38,121 +23,184 @@ function setTerminalBounds(x, y, width, height) {
 	terminalContainer.style.height = `${height}px`;
 }
 
-function showRotateDeviceIcon(show) {
-	rotatePopup.style.display = show ? "flex" : "none";
+
+function toggleTerminalVisibility(visible) {
+	terminalContainer.style.display = visible ? "block" : "none";
+	terminalContainer.style.opacity = 0.0;
+
+	if (visible) {
+		fadeInTerminal(0.0);
+	} 
 }
 
-var opacity = 0.0;
-function setTerminalGUIVisible(lockedOnTerminal) {
-	terminalContainer.style.display = lockedOnTerminal ? "block" : "none";
-
-	if (lockedOnTerminal) {
-		fadeInTerminal(10, opacity);
-	} else {
-		opacity = 0.0;
-		terminalContainer.style.opacity = opacity;
-	}
-}
-
-
-function fadeInTerminal(delay, opacity) {
+function fadeInTerminal(opacity) {
 	if (opacity >= 1.0) return;
 
   setTimeout(() => {
     opacity += 0.04;
 		terminalContainer.style.opacity = opacity;
 
-    fadeInTerminal(delay, opacity);
-  }, delay);
+    fadeInTerminal(opacity);
+  }, 10);
 };
+
+
+///////////////////////////////////////////
+// JS BRIDGE                             //
+///////////////////////////////////////////
+
+let rotatePopup
+
+function showRotateDeviceIcon(show) {
+	rotatePopup.style.display = show ? "flex" : "none";
+}
+
 
 function getCanvasWidth() {
 	return document.getElementById("canvas").clientWidth;
 }
 
+
 function getCanvasHeight() {
 	return document.getElementById("canvas").clientHeight;
 }
+
 
 function setWatchedIntro() {
 	localStorage.setItem("watchedIntro", "true");
 	console.log("watchedIntro set to true in localStorage.");
 }
 
+
 function getWatchedIntro() {
 	return localStorage.getItem("watchedIntro") === "true";
 }
 
-let lastScore = 0;
-async function saveScore(score) {
-	let username = localStorage.getItem("username")
-	if (!username) {
-		lastScore = score;
-		document.getElementById("username-popup").showModal()
-		return;
-	}
-	if (!score) return;
-	
-	query(`${window.location.origin}/api/runs?type=save&username=${username}&score=${score}`);
+
+function getUsername() {
+	return localStorage.getItem("username");
 }
 
-function setUsername(event) {
+
+function setTerminalGUIVisible(lockedOnTerminal) {
+	toggleTerminalVisibility(lockedOnTerminal);
+}
+
+
+///////////////////////////////////////////
+// QUERIES                               //
+///////////////////////////////////////////
+
+
+async function saveScore(score) {
+	if (!score) return;
+
+	let username = localStorage.getItem("username")
+	if (!username) {
+		setLastScore(score);
+		usernamePopup.showModal()
+		return;
+	}
+	
+	fetch(`${window.location.origin}/api/runs`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, score }),
+  })
+}
+
+
+function loadRuns() {
+	fetch(`${window.location.origin}/api/runs`, {
+		method: 'GET'
+	})
+	.then(response => response.json())
+	.then(data => {
+		let objectToSend = [data.percentiles, data.topRuns]
+		window.sendTopScoresToGodot(objectToSend); // sendTopScoresToGodot is defined in godot is exposed via a callback reference
+	})
+	.catch(error => console.error(error));
+}
+
+
+///////////////////////////////////////////
+// EVENTS                                //
+///////////////////////////////////////////
+
+let lastScore = 0;
+let usernameTextBox
+
+function setLastScore(score) {
+	lastScore = score;
+}
+
+
+function _onSubmitUsername(event) {
 	event.preventDefault();
-	let username = document.getElementById("username-textbox").value;
+	let username = usernameTextBox.value;
 	localStorage.setItem("username", username);
-	document.getElementById("username-popup").close();
+	
+	usernamePopup.close();
 	console.log(`username set to ${username} in localStorage.`);
+
 	saveScore(lastScore);
 }
 
-async function query(url) {
-  try {
-    const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('Fetch error:', error);
-  }
+function _onShowDebugCheckBoxChanged(show) {
+	if (this.checked) {
+		onShowDebug(true) // onShowDebug is defined in godot is exposed via a callback reference
+	} else {
+		onShowDebug(false)
+	}
 }
 
 
+///////////////////////////////////////////
+// STARTUP                               //
+///////////////////////////////////////////
+
+let loadingScreen
+
+var startText = `
+PAYTONL@UNATCO: ssh human@10.69.331.12
+		
+The programs included with the [HUMAN] are free software;
+the exact distribution terms for each program are described in the
+individual files in /human/share/doc/*/copyright.
+
+[HUMAN] comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+
+sudo humanctlstart optical.services
+`
+
+var loadingTexts = [
+	`NET_REQUEST: Searching for endpoint`,
+	`NET_REQUEST: Found endpoint at 10.69.331.12:1337`,
+	`NET_REQUEST: Sending authentication packet`,
+	`NET_REQUEST: Authentication successful`,
+	`NET_REQUEST: Negotiating connection`,
+]
+
+var textIndex = 0;
 
 window.addEventListener('DOMContentLoaded', () => {
-	var loadingScreen = document.getElementById("loading");
+
+	loadSharedElements();
+
 	loadingScreen.innerText = startText;
 
-	terminalContainer = document.getElementById("terminal-container");
-	sections = document.querySelectorAll('.section');
-	navButtons = document.querySelectorAll('.nav-button');
-	rotatePopup = document.getElementById("rotate-device-popup");
+	loadRuns();
 
-	var showDebugCheckBox = document.getElementById("show-debug");
-	showDebugCheckBox.addEventListener('change', function() {
-		if (this.checked) {
-			onShowDebug(true)
-		} else {
-			onShowDebug(false)
-		}
-	})
+	registerEventListeners();
 
-	var usernameForm = document.getElementById("username-form");
-	usernameForm.addEventListener('submit', setUsername);
-
-	var loadingLog = "Loading."
 	const canvas = document.getElementById("canvas");
 	var engine = new Engine({
 		canvas: { element: canvas },
 		executable: "./build/godot",
 		canvasResizePolicy: 2,
 		onProgress: function (current, total) {
-
-			console.log(loadingLog)
-			loadingLog += "."
 
 			if (textIndex >= loadingTexts.length) return;
 
@@ -177,6 +225,25 @@ window.addEventListener('DOMContentLoaded', () => {
 	}).catch(error => {
 		console.error("Failed to start Godot:", error);
 	});
-
 })
+
+
+function loadSharedElements() {
+	terminalContainer = document.getElementById("terminal-container");
+	sections = document.querySelectorAll('.section');
+	navButtons = document.querySelectorAll('.nav-button');
+	rotatePopup = document.getElementById("rotate-device-popup");
+	loadingScreen = document.getElementById("loading");
+	usernameTextBox = document.getElementById("username");
+	usernamePopup = document.getElementById("username-popup")
+}
+
+
+function registerEventListeners() {
+	var showDebugCheckBox = document.getElementById("show-debug");
+	showDebugCheckBox.addEventListener('change', _onShowDebugCheckBoxChanged)
+
+	var usernameForm = document.getElementById("username-form");
+	usernameForm.addEventListener('submit', _onSubmitUsername);
+}
 
