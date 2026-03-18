@@ -179,7 +179,10 @@ func _on_arrived_at_meta_path(meta_path_index: int) -> void:
 
 func _on_left_meta_path(_meta_path_index: int) -> void:
 	show_game_assets()
-	stop_game(true)
+	if alive:
+		stop_game(true)
+	else:
+		stop_game(false)
 	hide_game_over()
 	reset_obstacles()
 	points_counter.reset()
