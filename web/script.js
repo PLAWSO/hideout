@@ -245,7 +245,7 @@ function loadSharedElements() {
 	navButtons = document.querySelectorAll('.nav-button');
 	rotatePopup = document.getElementById("rotate-device-popup");
 	loadingScreen = document.getElementById("loading");
-	usernameTextBox = document.getElementById("username");
+	usernameTextBox = document.getElementById("username-textbox");
 	usernamePopup = document.getElementById("username-popup")
 }
 

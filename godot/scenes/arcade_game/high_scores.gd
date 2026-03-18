@@ -37,7 +37,8 @@ func _ready() -> void:
 func _fill_high_scores() -> void:
 	for i in range(score_labels.size()):
 		var run = local_high_scores[i]
-		score_labels[i].text = str(run.value) + " " + run.key
+		var untrimmed : String= str(run.value) + " " + run.key
+		score_labels[i].text = untrimmed.substr(0, 18)
 
 
 func _flash_new_score(index: int) -> void:
