@@ -91,6 +91,8 @@ function setTerminalGUIVisible(lockedOnTerminal) {
 // QUERIES                               //
 ///////////////////////////////////////////
 
+let scores = null
+let scoresSentToGodot = false;
 
 async function saveScore(score) {
 	if (!score) return;
@@ -116,8 +118,11 @@ function loadRuns() {
 	})
 	.then(response => response.json())
 	.then(data => {
-		let objectToSend = [data.percentiles, data.topRuns]
-		sendTopScoresToGodot(objectToSend); // sendTopScoresToGodot is defined in godot is exposed via a callback reference
+		scores = [data.percentiles, data.topRuns]
+		if (sendTopScoresToGodot && !scoresSentToGodot) {
+			sendTopScoresToGodot(scores); // godot callback reference
+			scoresSentToGodot = true;
+		}
 	})
 	.catch(error => console.error(error));
 }
@@ -149,9 +154,9 @@ function _onSubmitUsername(event) {
 
 function _onShowDebugCheckBoxChanged(show) {
 	if (this.checked) {
-		onShowDebug(true) // onShowDebug is defined in godot is exposed via a callback reference
+		onShowDebug(true) // godot callback reference
 	} else {
-		onShowDebug(false)
+		onShowDebug(false) // godot callback reference
 	}
 }
 
@@ -215,6 +220,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 	
 	engine.startGame().then(() => {
+		if (!scoresSentToGodot && scores) {
+			// query returned before godot was ready, send scores now that godot is ready
+			sendTopScoresToGodot(scores); // godot callback reference
+			scoresSentToGodot = true;
+		}
+
 		setTimeout(() => {
 			loadingScreen.innerText += "\n\nCONNECTION ESTABLISHED.";
 		}, 500)
