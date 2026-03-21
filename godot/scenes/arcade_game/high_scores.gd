@@ -37,7 +37,7 @@ func _ready() -> void:
 func _fill_high_scores() -> void:
 	for i in range(score_labels.size()):
 		var run = local_high_scores[i]
-		var untrimmed : String= str(run.value) + " " + run.key
+		var untrimmed: String = str(run.value) + " " + run.key
 		score_labels[i].text = untrimmed.substr(0, 18)
 
 
@@ -62,9 +62,13 @@ func _on_game_reset() -> void:
 		score_labels[flashing].add_theme_color_override("font_color", Color(1, 1, 1, 1))
 
 
-func check_add_high_score(score: int) -> String:
+func check_add_high_score(score: int) -> Dictionary:
+	var result = Dictionary()
+	result["new_pb"] = JSBridge.check_set_personal_best(score)
+
 	if not local_high_scores or not local_percentiles:
-		return "populate high scores to see stats :D"
+		result["message"] = "populate high scores to see stats :D"
+		return result
 
 	for i in range(local_high_scores.size() - 1):
 		if score > local_high_scores[i].value:
@@ -73,13 +77,21 @@ func check_add_high_score(score: int) -> String:
 			local_high_scores.pop_back()
 			_fill_high_scores()
 			_flash_new_score(i)
-			return "!! NEW HIGH SCORE !!"
+			result["message"] = "!! NEW HIGH SCORE !!"
+			return result
+
+	if result["new_pb"]:
+		result["message"] = "new PB!`"
+		return result
 	
 	if score < local_percentiles[0].value:
-		return "erm... maybe try again :)"
+		result["message"] = "erm... maybe try again :)"
+		return result
 	
 	for i in range(1, local_percentiles.size()):
 		if score < local_percentiles[i].value:
-			return "better than %s of all attempts!" % local_percentiles[i - 1].key
+			result["message"] = "better than %s of all attempts!" % local_percentiles[i - 1].key
+			return result
 	
-	return "something went wrong"
+	result["message"] = "something went wrong"
+	return result

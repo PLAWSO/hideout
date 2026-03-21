@@ -23,6 +23,12 @@ const physics_frame_rate: float = 30.0
 @export var off_screen_left: float = -100.0
 @export var move_distance: float = 50.0
 
+# SOUNDS
+@onready var died_sound: AudioStreamPlayer = $GameAssets/DiedSound
+@onready var scored_sound: AudioStreamPlayer = $GameAssets/ScoredSound
+@onready var new_high_score_sound: AudioStreamPlayer = $GameAssets/NewHighScoreSound
+@onready var intro_music_sound: AudioStreamPlayer = $GameAssets/IntroMusicSound
+
 @export var rest_pos: Vector2:
 	set(value):
 		rest_pos = value
@@ -58,36 +64,54 @@ func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	for obstacle in enabled_obstacles:
-		obstacle.move(_delta)
+
+	# OBSTACLES
+	move_obstacles(_delta)
+	check_recycle_obstacles()
+	check_spawn_obstacles()
 
 	if not alive:
 		return
-
-	# OBSTACLES
-	check_recycle_obstacles()
-	check_spawn_obstacles()
 
 	# SHIP
 	move_ship()
 
 
 func stop_game(flight_completed: bool) -> void:
-	for obstacle in enabled_obstacles:
-		obstacle.speed = 0.0
-	for obstacle in disabled_obstacles:
-		obstacle.speed = 0.0
 	alive = false
+	ship.visible = false
 
-	if flight_completed:
-		var score = points_counter.total_points
-		var saved = JSBridge.save_score(score)
+	if not flight_completed:
+		return
 
-		var result = "score not saved :( "
-		if saved:
-			result = high_scores.check_add_high_score(score)
-		
-		show_game_over(result)
+	for obstacle in enabled_obstacles:
+		# obstacle.disable_obstacle_hitbox()
+		obstacle.speed_tween = create_tween()
+		obstacle.speed_tween.tween_property(obstacle, "speed", -3200.0, 3.0).set_ease(Tween.EASE_IN) # should probably add callback function (or similar) to reset speed
+		pass
+
+	for obstacle in disabled_obstacles:
+		# obstacle.disable_obstacle_hitbox()
+		obstacle.speed_tween = create_tween()
+		obstacle.speed_tween.tween_property(obstacle, "speed", -3200.0, 3.0).set_ease(Tween.EASE_IN)
+		pass
+
+	var score = points_counter.total_points
+	var saved = JSBridge.save_score(score)
+
+	var result := {"message": "score not saved :("}
+	if saved:
+		result = high_scores.check_add_high_score(score)
+
+		if result["new_pb"]:
+			points_counter.set_personal_best(score)
+
+	if result["message"] == "!! NEW HIGH SCORE !!":
+		new_high_score_sound.play()
+	else:
+		died_sound.play()
+
+	show_game_over(result["message"])
 
 
 func reset_game() -> void:
@@ -97,6 +121,7 @@ func reset_game() -> void:
 	reset_obstacles()
 
 	ship.position.y = rest_pos.y
+	ship.visible = true
 
 	alive = true
 	reset_input()
@@ -172,10 +197,18 @@ func show_game_over(result: String) -> void:
 	game_over.set_text(result)
 	game_over.visible = true
 
-
+var quiet_music_tween: Tween = null
 func _on_arrived_at_meta_path(meta_path_index: int) -> void:
-	if meta_path_index == 2:
-		show_control_info()
+	if meta_path_index != 2:
+		return
+	show_control_info()
+
+	intro_music_sound.volume_db = 0.0
+	intro_music_sound.play()
+	quiet_music_tween = create_tween()
+	quiet_music_tween.tween_property(intro_music_sound, "pitch_scale", 1.0, 12.0).from(1.0)
+	quiet_music_tween.tween_property(intro_music_sound, "volume_db", -80.0, 2.0).from(0.0)
+
 
 func _on_left_meta_path(_meta_path_index: int) -> void:
 	show_game_assets()
@@ -186,6 +219,11 @@ func _on_left_meta_path(_meta_path_index: int) -> void:
 	hide_game_over()
 	reset_obstacles()
 	points_counter.reset()
+
+	if intro_music_sound.playing:
+		intro_music_sound.stop()
+	if quiet_music_tween:
+		quiet_music_tween.kill()
 
 
 
@@ -210,12 +248,14 @@ func set_in_near_miss(value: bool) -> void:
 func award_early_near_miss_points(distance: float) -> void:
 	if not (in_early_near_miss and alive):
 		return
+	scored_sound.play()
 	_award_near_miss_points(distance)
 
 
 func award_late_near_miss_points(distance: float) -> void:
 	if not alive:
 		return
+	scored_sound.play()
 	_award_near_miss_points(distance)
 
 
@@ -268,14 +308,17 @@ func reset_obstacles() -> void:
 		_disable_obstacle(obstacle)
 		disabled_obstacles.append(obstacle)
 	enabled_obstacles.clear()
-
+	
 	for obstacle in disabled_obstacles:
+		if obstacle.speed_tween:
+			obstacle.speed_tween.kill()
 		obstacle.speed = obstacle_speed
+		obstacle.position.x = off_screen_right
 
 # used on physics frame to check for and recycle off-screen obstacles
 func check_recycle_obstacles() -> void:
 	for obstacle in enabled_obstacles:
-		if obstacle.position.x < off_screen_left:
+		if obstacle.position.x < off_screen_left - 100 or obstacle.position.x > off_screen_right + 100:
 			_recycle_obstacle(obstacle)
 
 
@@ -285,6 +328,11 @@ func check_spawn_obstacles() -> void:
 	if frames_since_last_spawn >= _spawn_every_n_frames:
 		frames_since_last_spawn = 0
 		_spawn_obstacle()
+
+
+func move_obstacles(delta: float) -> void:
+	for obstacle in enabled_obstacles:
+		obstacle.move(delta)
 
 
 # PRIVATE METHODS
@@ -300,16 +348,17 @@ func _recycle_obstacle(obstacle: Obstacle) -> void:
 
 # used to disable an obstacle
 func _disable_obstacle(obstacle: Obstacle) -> void:
-	obstacle.speed = obstacle_speed
-	obstacle.visible = false
+	# obstacle.visible = false
 	obstacle.hit_box.monitorable = false
 	obstacle.hit_box.set_process(false)
-	obstacle.position = Vector2(off_screen_right, rest_pos.y)
+	obstacle.physics_interpolation_mode = PhysicsInterpolationMode.PHYSICS_INTERPOLATION_MODE_OFF
+	obstacle.set_deferred("position:x", off_screen_right if alive else off_screen_left)
 
 
 # used to spawn an obstacle
 func _spawn_obstacle() -> void:
 	var obstacle = _enable_obstacle()
+
 	if not obstacle:
 		return
 	
@@ -328,10 +377,11 @@ func _enable_obstacle() -> Obstacle:
 	if not obstacle:
 		return null
 
-	obstacle.visible = true
-	obstacle.hit_box.monitorable = true
-	obstacle.hit_box.set_process(true)
-	obstacle.position.x = off_screen_right
+	obstacle.position.x = off_screen_right if alive else off_screen_left
+	obstacle.set_deferred("visible", true)
+	obstacle.hit_box.set_deferred("monitorable", true)
+	obstacle.hit_box.set_deferred("process", true)
+	obstacle.set_deferred("physics_interpolation_mode", PhysicsInterpolationMode.PHYSICS_INTERPOLATION_MODE_ON)
 	enabled_obstacles.append(obstacle)
 	return obstacle
 
@@ -356,11 +406,13 @@ func shoot() -> void:
 
 func _on_ship_area_entered(area: Area2D) -> void:
 	if (area.name == "HitBox"):
-		stop_game(true)
+		if alive:
+			stop_game(true)
 		return
 
-	elif (area.name == "NearMissBox"):
+	if (area.name == "NearMissBox"):
 		var behind_obstacle := area.global_position.x < ship.global_position.x
+		
 		if behind_obstacle:
 			var distance = abs(area.global_position.x - ship.global_position.x)
 			award_late_near_miss_points(distance)

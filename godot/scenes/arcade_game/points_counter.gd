@@ -1,8 +1,13 @@
 class_name PointsCounter extends Control
 
-@onready var label: Label = $MarginContainer/Label
+@onready var score_label: Label = $MarginContainer/ScoreLabel
+@onready var personal_best_label: Label = $MarginContainer2/PersonalBestLabel
 
 var total_points: int = 0
+
+
+func _ready() -> void:
+	set_personal_best(JSBridge.get_personal_best())
 
 # PUBLIC METHODS
 ###########################
@@ -18,9 +23,18 @@ func add_points(points_to_add: int) -> void:
 	_set_points(total_points)
 
 
+func get_personal_best() -> int:
+	return JSBridge.get_personal_best()
+
+
+func set_personal_best(points: int) -> void:
+	personal_best_label.text = str(points)
+
+
 # PRIVATE METHODS
 ###########################
 
 
 func _set_points(points: int) -> void:
-	label.text = str(points)
+	score_label.text = str(points)
+

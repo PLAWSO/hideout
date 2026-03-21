@@ -86,6 +86,19 @@ function setTerminalGUIVisible(lockedOnTerminal) {
 	toggleTerminalVisibility(lockedOnTerminal);
 }
 
+function checkSetPersonalBest(score) {
+	let personalBest = parseInt(localStorage.getItem("personalBest") || "0");
+	if (score > personalBest) {
+		localStorage.setItem("personalBest", score.toString());
+		return true
+	}
+
+	return false;
+}
+
+function getPersonalBest() {
+	return parseInt(localStorage.getItem("personalBest") || "0");
+}
 
 ///////////////////////////////////////////
 // QUERIES                               //

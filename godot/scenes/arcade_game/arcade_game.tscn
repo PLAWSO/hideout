@@ -8,9 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://is403d2yosab" path="res://scenes/arcade_game/points_counter.tscn" id="5_qfjtt"]
 [ext_resource type="Texture2D" uid="uid://c2xf5xo0jm7ck" path="res://scenes/arcade_game/separator.png" id="6_ri2xw"]
 [ext_resource type="Texture2D" uid="uid://c5exlw1xqvqcu" path="res://scenes/arcade_game/space.png" id="7_mpnk3"]
+[ext_resource type="AudioStream" uid="uid://cf1ey1tp66h7t" path="res://scenes/arcade_game/sounds/died.wav" id="9_71vjf"]
 [ext_resource type="PackedScene" uid="uid://daofbb811k2xs" path="res://scenes/arcade_game/control_info.tscn" id="9_ile23"]
 [ext_resource type="PackedScene" uid="uid://cav7uvijymbv3" path="res://scenes/arcade_game/game_over.tscn" id="10_arsvv"]
 [ext_resource type="PackedScene" uid="uid://crps7vt1r1lv8" path="res://scenes/arcade_game/high_scores.tscn" id="10_b207a"]
+[ext_resource type="AudioStream" uid="uid://b4xeeyqonpwj6" path="res://scenes/arcade_game/sounds/scored.wav" id="10_jmyjk"]
+[ext_resource type="AudioStream" uid="uid://bk82ftfenb20n" path="res://scenes/arcade_game/sounds/new-high-score.wav" id="11_dsfpp"]
+[ext_resource type="AudioStream" uid="uid://lhpvmt7k5rhh" path="res://scenes/arcade_game/sounds/intro-music.wav" id="12_4137w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdlcs"]
 texture = ExtResource("7_mpnk3")
@@ -39,6 +43,7 @@ texture_filter = 1
 script = ExtResource("1_00tmu")
 ship = NodePath("GameAssets/Ship")
 off_screen_right = 1900.0
+off_screen_left = -500.0
 move_distance = 137.56
 rest_pos = Vector2(250.87, 445.165)
 ObstacleScene = ExtResource("2_rco1b")
@@ -84,6 +89,20 @@ shape = SubResource("RectangleShape2D_qfjtt")
 texture_filter = 1
 texture = ExtResource("1_vwrm4")
 offset = Vector2(-1, 0.5)
+
+[node name="DiedSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=670687932]
+stream = ExtResource("9_71vjf")
+
+[node name="ScoredSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=1664051197]
+stream = ExtResource("10_jmyjk")
+volume_db = -3.045
+
+[node name="NewHighScoreSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=1519086167]
+stream = ExtResource("11_dsfpp")
+volume_db = -3.045
+
+[node name="IntroMusicSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=49005483]
+stream = ExtResource("12_4137w")
 
 [node name="Projectile" type="Area2D" parent="." unique_id=170961713]
 

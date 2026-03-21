@@ -132,3 +132,13 @@ func _set_top_scores_from_db(args) -> void:
 
 	print("successfully parsed top scores from db")
 	Events.scores_received.emit()
+
+func check_set_personal_best(score: int) -> bool:
+	if console:
+		return console.checkSetPersonalBest(score)
+	return false
+
+func get_personal_best() -> int:
+	if console:
+		return console.getPersonalBest()
+	return 0
