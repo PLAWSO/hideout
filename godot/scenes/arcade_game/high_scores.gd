@@ -81,7 +81,7 @@ func check_add_high_score(score: int) -> Dictionary:
 			return result
 
 	if result["new_pb"]:
-		result["message"] = "new PB!`"
+		result["message"] = "new PB!"
 		return result
 	
 	if score < local_percentiles[0].value:
