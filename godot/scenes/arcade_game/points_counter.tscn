@@ -8,6 +8,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_hrvou")
@@ -20,7 +21,19 @@ offset_bottom = 24.0
 theme_override_constants/margin_left = 45
 theme_override_constants/margin_top = 31
 
-[node name="Label" type="Label" parent="MarginContainer" unique_id=491441850]
+[node name="ScoreLabel" type="Label" parent="MarginContainer" unique_id=491441850]
 texture_filter = 3
 layout_mode = 2
+text = "0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1557913644]
+layout_mode = 1
+offset_right = 310.0
+offset_bottom = 736.0
+theme_override_constants/margin_left = 41
+theme_override_constants/margin_top = 736
+
+[node name="PersonalBestLabel" type="Label" parent="MarginContainer2" unique_id=2127235818]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
 text = "0"

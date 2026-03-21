@@ -88,19 +88,31 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Up" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=327546936]
+[node name="UpContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1370357830]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 9
+
+[node name="Up" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/UpContainer" unique_id=327546936]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-text = "Up"
+text = "UP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Down" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=705682655]
+[node name="DownContainer" type="MarginContainer" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1054237307]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_bottom = 15
+
+[node name="Down" type="Label" parent="VBoxContainer/Body/VBoxContainer/MarginContainer/HBoxContainer/TouchscreenControls/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/DownContainer" unique_id=705682655]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 64
-text = "Down"
+text = "DOWN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -109,7 +121,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 64
-text = "Shoot"
+text = "SHOOT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
