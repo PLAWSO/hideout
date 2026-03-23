@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://b51r4peism4gx"]
+
+[ext_resource type="Theme" uid="uid://csfw5nj8r1ed1" path="res://themes/arcade_cabinet.tres" id="1_nxo04"]
+
+[node name="GameplayInfo" type="Control" unique_id=796897227]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 824.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_nxo04")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2055377903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 243
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=634829205]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer" unique_id=476593669]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "You have 60 seconds to score as many POINTS as possible."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1442889536]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Score POINTS by narrowly dodging enemy ships or missiles."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1589472996]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "The closer you get to either the more POINTS you will receive."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer" unique_id=786831134]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 48
+text = "Dodging missiles will award you double POINTS."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1092617246]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Press SHOOT to play"
+horizontal_alignment = 1
+vertical_alignment = 1

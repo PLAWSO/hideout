@@ -286,5 +286,5 @@ text = "SHOOT"
 [node name="Label" type="Label" parent="VBoxContainer/Body/VBoxContainer" unique_id=1266341106]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "Press SHOOT to play"
+text = "Press SHOOT to continue"
 horizontal_alignment = 1

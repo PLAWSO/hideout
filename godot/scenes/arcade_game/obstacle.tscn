@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bxexdkkj8iafw"]
 
 [ext_resource type="Script" uid="uid://cumdgng2gm86u" path="res://scenes/arcade_game/obstacle.gd" id="1_8qk83"]
-[ext_resource type="Texture2D" uid="uid://cc3hmagxxlh4q" path="res://scenes/arcade_game/passenger-ship.png" id="2_8qk83"]
+[ext_resource type="Texture2D" uid="uid://k57et528nbkg" path="res://scenes/arcade_game/enemy-ship.png" id="2_8qk83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qk83"]
-size = Vector2(124, 36)
+size = Vector2(57.555, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjste"]
 size = Vector2(240, 48.705)

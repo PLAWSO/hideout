@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://m0rshmt51sxp" path="res://scenes/arcade_game/arcade_game.gd" id="1_00tmu"]
 [ext_resource type="Texture2D" uid="uid://c68ioyvi1gqu6" path="res://scenes/arcade_game/spaceship.png" id="1_vwrm4"]
 [ext_resource type="PackedScene" uid="uid://bxexdkkj8iafw" path="res://scenes/arcade_game/obstacle.tscn" id="2_rco1b"]
-[ext_resource type="Texture2D" uid="uid://c7kb4br1eahdv" path="res://scenes/arcade_game/projectile.png" id="3_sfspv"]
+[ext_resource type="PackedScene" uid="uid://bwgq08qxhyw4x" path="res://scenes/arcade_game/missile.tscn" id="3_m46lg"]
 [ext_resource type="Texture2D" uid="uid://cfaelna7rvs0e" path="res://scenes/arcade_game/space2.png" id="4_mdlcs"]
 [ext_resource type="PackedScene" uid="uid://is403d2yosab" path="res://scenes/arcade_game/points_counter.tscn" id="5_qfjtt"]
 [ext_resource type="Texture2D" uid="uid://c2xf5xo0jm7ck" path="res://scenes/arcade_game/separator.png" id="6_ri2xw"]
 [ext_resource type="Texture2D" uid="uid://c5exlw1xqvqcu" path="res://scenes/arcade_game/space.png" id="7_mpnk3"]
+[ext_resource type="PackedScene" uid="uid://cirqcv1jw3wnu" path="res://scenes/arcade_game/game_timer_display.tscn" id="8_m46lg"]
 [ext_resource type="AudioStream" uid="uid://cf1ey1tp66h7t" path="res://scenes/arcade_game/sounds/died.wav" id="9_71vjf"]
 [ext_resource type="PackedScene" uid="uid://daofbb811k2xs" path="res://scenes/arcade_game/control_info.tscn" id="9_ile23"]
 [ext_resource type="PackedScene" uid="uid://cav7uvijymbv3" path="res://scenes/arcade_game/game_over.tscn" id="10_arsvv"]
@@ -15,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://b4xeeyqonpwj6" path="res://scenes/arcade_game/sounds/scored.wav" id="10_jmyjk"]
 [ext_resource type="AudioStream" uid="uid://bk82ftfenb20n" path="res://scenes/arcade_game/sounds/new-high-score.wav" id="11_dsfpp"]
 [ext_resource type="AudioStream" uid="uid://lhpvmt7k5rhh" path="res://scenes/arcade_game/sounds/intro-music.wav" id="12_4137w"]
+[ext_resource type="PackedScene" uid="uid://b51r4peism4gx" path="res://scenes/arcade_game/gameplay_info.tscn" id="17_14lu7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mdlcs"]
 texture = ExtResource("7_mpnk3")
@@ -35,10 +37,7 @@ sources/1 = SubResource("TileSetAtlasSource_ile23")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjtt"]
 size = Vector2(24, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri2xw"]
-size = Vector2(10, 2)
-
-[node name="ArcadeGame" type="Node2D" unique_id=1069089697 node_paths=PackedStringArray("ship", "projectile")]
+[node name="ArcadeGame" type="Node2D" unique_id=1069089697 node_paths=PackedStringArray("ship")]
 texture_filter = 1
 script = ExtResource("1_00tmu")
 ship = NodePath("GameAssets/Ship")
@@ -49,7 +48,7 @@ rest_pos = Vector2(250.87, 445.165)
 ObstacleScene = ExtResource("2_rco1b")
 obstacle_speed = 800.0
 obstacle_spawn_interval = 2.0
-projectile = NodePath("Projectile")
+MissileScene = ExtResource("3_m46lg")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=438692509]
 scale = Vector2(2, 2)
@@ -61,6 +60,11 @@ tile_set = SubResource("TileSet_ile23")
 [node name="HighScores" parent="GameAssets" unique_id=758109555 instance=ExtResource("10_b207a")]
 
 [node name="PointsCounter" parent="GameAssets" unique_id=137588062 instance=ExtResource("5_qfjtt")]
+
+[node name="GameTimerDisplay" parent="GameAssets" unique_id=1505411126 instance=ExtResource("8_m46lg")]
+offset_top = -9.0
+offset_right = 1766.0
+offset_bottom = 861.0
 
 [node name="TopTrackIndicator" type="Sprite2D" parent="GameAssets" unique_id=899133023]
 position = Vector2(211.495, 141.35)
@@ -104,14 +108,6 @@ volume_db = -3.045
 [node name="IntroMusicSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=49005483]
 stream = ExtResource("12_4137w")
 
-[node name="Projectile" type="Area2D" parent="." unique_id=170961713]
-
-[node name="Sprite2D" type="Sprite2D" parent="Projectile" unique_id=850217674]
-texture = ExtResource("3_sfspv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Projectile" unique_id=289709938]
-shape = SubResource("RectangleShape2D_ri2xw")
-
 [node name="GameOver" parent="." unique_id=644381526 instance=ExtResource("10_arsvv")]
 visible = false
 offset_right = 1766.0
@@ -123,6 +119,20 @@ offset_top = -9.0
 offset_right = 1766.0
 offset_bottom = 861.0
 
+[node name="GameplayInfo" parent="." unique_id=796897227 instance=ExtResource("17_14lu7")]
+visible = false
+offset_top = -9.0
+offset_right = 1766.0
+offset_bottom = 861.0
+
+[node name="GameTimer" type="Timer" parent="." unique_id=38171874]
+wait_time = 60.0
+one_shot = true
+
+[node name="ReplayDelayTimer" type="Timer" parent="." unique_id=1512237342]
+one_shot = true
+
 [connection signal="area_entered" from="GameAssets/Ship" to="." method="_on_ship_area_entered"]
 [connection signal="area_exited" from="GameAssets/Ship" to="." method="_on_ship_area_exited"]
-[connection signal="area_entered" from="Projectile" to="." method="_on_projectile_area_entered"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="ReplayDelayTimer" to="." method="_on_replay_delay_timer_timeout"]
