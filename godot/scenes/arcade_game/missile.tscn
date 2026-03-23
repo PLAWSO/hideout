@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bwgq08qxhyw4x"]
+
+[ext_resource type="Script" uid="uid://b415uq1pj1nw2" path="res://scenes/arcade_game/missile.gd" id="1_n6cra"]
+[ext_resource type="Texture2D" uid="uid://bfwpj1roc3874" path="res://scenes/arcade_game/missile.png" id="2_ogi2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0uoyr"]
+size = Vector2(5, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6cra"]
+size = Vector2(62.5, 5)
+
+[node name="Missile" type="Node2D" unique_id=495095548]
+scale = Vector2(2, 2)
+script = ExtResource("1_n6cra")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1477689798]
+texture = ExtResource("2_ogi2p")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1236505901]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=645908487]
+shape = SubResource("RectangleShape2D_0uoyr")
+
+[node name="NearMissBox" type="Area2D" parent="." unique_id=2036096858]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearMissBox" unique_id=1034631422]
+position = Vector2(31.25, 0)
+shape = SubResource("RectangleShape2D_n6cra")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

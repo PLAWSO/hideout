@@ -29,6 +29,9 @@ const physics_frame_rate: float = 30.0
 @onready var new_high_score_sound: AudioStreamPlayer = $GameAssets/NewHighScoreSound
 @onready var intro_music_sound: AudioStreamPlayer = $GameAssets/IntroMusicSound
 
+# OTHER
+@onready var replay_delay_timer: Timer = $ReplayDelayTimer
+
 @export var rest_pos: Vector2:
 	set(value):
 		rest_pos = value
@@ -46,6 +49,8 @@ var alive: bool = false
 ####################################
 ## LIFETIME                       ##
 ####################################
+
+var can_restart: bool = false
 
 @onready var high_scores := $GameAssets/HighScores
 
@@ -70,8 +75,13 @@ func _physics_process(_delta: float) -> void:
 	check_recycle_obstacles()
 	check_spawn_obstacles()
 
-	if not alive:
-		return
+	# MISSILES
+	for missile in active_missiles:
+		missile.move(_delta)
+	
+	check_recycle_missiles()
+
+	set_timer_display()
 
 	# SHIP
 	move_ship()
@@ -84,14 +94,16 @@ func stop_game(flight_completed: bool) -> void:
 	if not flight_completed:
 		return
 
+	pause_timer()
+	replay_delay_timer.stop()
+	replay_delay_timer.start()
+
 	for obstacle in enabled_obstacles:
-		# obstacle.disable_obstacle_hitbox()
 		obstacle.speed_tween = create_tween()
-		obstacle.speed_tween.tween_property(obstacle, "speed", -3200.0, 3.0).set_ease(Tween.EASE_IN) # should probably add callback function (or similar) to reset speed
+		obstacle.speed_tween.tween_property(obstacle, "speed", -3200.0, 3.0).set_ease(Tween.EASE_IN)
 		pass
 
 	for obstacle in disabled_obstacles:
-		# obstacle.disable_obstacle_hitbox()
 		obstacle.speed_tween = create_tween()
 		obstacle.speed_tween.tween_property(obstacle, "speed", -3200.0, 3.0).set_ease(Tween.EASE_IN)
 		pass
@@ -120,7 +132,18 @@ func reset_game() -> void:
 
 	reset_obstacles()
 
-	ship.position.y = rest_pos.y
+	clear_active_missiles()
+
+	start_game_timer()
+	in_end_cutscene = false
+	if cutscene_tween:
+		cutscene_tween.kill()
+
+	game_over.show_restart(false)
+	print("can't restart")
+	can_restart = false
+
+	ship.position = rest_pos
 	ship.visible = true
 
 	alive = true
@@ -129,6 +152,14 @@ func reset_game() -> void:
 	hide_game_over()
 
 	Events.game_reset.emit()
+
+
+
+func _on_replay_delay_timer_timeout() -> void:
+	print("Replay delay timer finished, allowing restart")
+	can_restart = true
+	game_over.show_restart(true)
+	
 
 ####################################
 ## INPUT                          ##
@@ -146,17 +177,20 @@ func input(event: InputEvent) -> void:
 		up_pressed = false
 	elif event.is_action_released("down"):
 		down_pressed = false
-	elif event.is_action_pressed("shoot") and $ControlInfo.visible:
+	elif event.is_action_pressed("shoot") and control_info.visible:
+		gameplay_info.visible = true
+		show_gameplay_info()
+	elif event.is_action_pressed("shoot") and gameplay_info.visible:
 		reset_game()
 		show_game_assets()
 	elif event.is_action_pressed("shoot") and alive:
 		shoot()
-	elif event.is_action_released("shoot") and not alive:
+	elif event.is_action_pressed("shoot") and not alive and can_restart:
 		reset_game()
 	
 
 func move_ship() -> void:
-	if not alive:
+	if not (alive or in_end_cutscene):
 		return
 	if up_pressed and not down_pressed:
 		ship.position.y = rest_pos.y - move_distance
@@ -177,11 +211,11 @@ func reset_input() -> void:
 @onready var control_info: Control = $ControlInfo
 @onready var game_assets: Node2D = $GameAssets
 @onready var game_over: Control = $GameOver
+@onready var gameplay_info: Control = $GameplayInfo
 
 func show_game_assets() -> void:
-	control_info.visible = false
+	gameplay_info.visible = false
 	game_assets.visible = true
-
 
 func show_control_info() -> void:
 	game_assets.visible = false
@@ -196,6 +230,10 @@ func hide_game_over() -> void:
 func show_game_over(result: String) -> void:
 	game_over.set_text(result)
 	game_over.visible = true
+
+func show_gameplay_info() -> void:
+	control_info.visible = false
+	gameplay_info.visible = true
 
 var quiet_music_tween: Tween = null
 func _on_arrived_at_meta_path(meta_path_index: int) -> void:
@@ -225,6 +263,40 @@ func _on_left_meta_path(_meta_path_index: int) -> void:
 	if quiet_music_tween:
 		quiet_music_tween.kill()
 
+####################################
+## TIMER                          ##
+####################################
+
+@onready var game_timer: Timer = $GameTimer
+@onready var game_timer_display: GameTimerDisplay = $GameAssets/GameTimerDisplay
+
+var in_end_cutscene: bool = false
+var cutscene_tween: Tween = null
+
+func set_timer_display() -> void:
+	var time_remaining = int(ceil(game_timer.time_left))
+	game_timer_display.set_time_remaining(time_remaining)
+
+func start_game_timer() -> void:
+	game_timer.paused = false
+	game_timer.stop()
+	game_timer.start()
+
+func pause_timer() -> void:
+	game_timer.paused = true
+
+
+func _on_game_timer_timeout() -> void:
+	alive = false
+	in_end_cutscene = true
+
+	await get_tree().create_timer(3.0).timeout
+	if alive:
+		return
+	cutscene_tween = create_tween()
+	cutscene_tween.tween_property(ship, "position:x", off_screen_right + 500.0, 3.0).set_ease(Tween.EASE_IN)
+	await cutscene_tween.finished
+	stop_game(true)
 
 
 
@@ -298,6 +370,7 @@ func create_obstacles() -> void:
 	for i in range(number_of_obstacles):
 		var obstacle := ObstacleScene.instantiate()
 		game_assets.add_sibling(obstacle)
+		obstacle.position.x = off_screen_right
 		_disable_obstacle(obstacle)
 		disabled_obstacles.append(obstacle)
 
@@ -387,18 +460,36 @@ func _enable_obstacle() -> Obstacle:
 
 
 ####################################
-## PROJECTILES                    ##
+## MISSILES                       ##
 ####################################
 
-@export var projectile: Area2D
-var projectile_speed: float = 800.0
+@export var MissileScene: PackedScene
+
+var active_missiles: Array[Missile] = []
 
 func shoot() -> void:
-	# if not projectile.visible:
-	# 	projectile.visible = true
-	# 	projectile.position = ship.position
-	pass
+	if active_missiles.size() >= 3:
+		return
+		
+	var missile := MissileScene.instantiate()
+	active_missiles.append(missile)
+	missile.position = ship.position + Vector2(50, 0)
+	game_assets.add_sibling(missile)
 
+func check_recycle_missiles() -> void:
+	for missile in active_missiles:
+		if missile.position.x > off_screen_right + 100 or missile.position.x < off_screen_left - 100:
+			_recycle_missile(missile)
+
+func clear_active_missiles() -> void:
+	for missile in active_missiles:
+		missile.queue_free()
+	active_missiles.clear()
+
+
+func _recycle_missile(missile: Missile) -> void:
+	active_missiles.erase(missile)
+	missile.queue_free()
 
 ####################################
 ## COLLISIONS                     ##

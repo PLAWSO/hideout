@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cirqcv1jw3wnu"]
+
+[ext_resource type="Theme" uid="uid://csfw5nj8r1ed1" path="res://themes/arcade_cabinet.tres" id="1_mkrbi"]
+[ext_resource type="Script" uid="uid://chteqdcnmun2o" path="res://scenes/arcade_game/game_timer_display.gd" id="2_0oedq"]
+
+[node name="GameTimerDisplay" type="Control" unique_id=1505411126]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 824.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mkrbi")
+script = ExtResource("2_0oedq")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2120747503]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -193.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 35
+
+[node name="TimeRemaining" type="Label" parent="MarginContainer" unique_id=1222209283]
+layout_mode = 2
+text = "60"
+horizontal_alignment = 1
+vertical_alignment = 1
