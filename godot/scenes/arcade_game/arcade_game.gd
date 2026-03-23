@@ -241,11 +241,11 @@ func _on_arrived_at_meta_path(meta_path_index: int) -> void:
 		return
 	show_control_info()
 
-	intro_music_sound.volume_db = 0.0
+	intro_music_sound.volume_db = -8.0
 	intro_music_sound.play()
 	quiet_music_tween = create_tween()
 	quiet_music_tween.tween_property(intro_music_sound, "pitch_scale", 1.0, 12.0).from(1.0)
-	quiet_music_tween.tween_property(intro_music_sound, "volume_db", -80.0, 2.0).from(0.0)
+	quiet_music_tween.tween_property(intro_music_sound, "volume_db", -80.0, 2.0).from(-8.0)
 
 
 func _on_left_meta_path(_meta_path_index: int) -> void:
