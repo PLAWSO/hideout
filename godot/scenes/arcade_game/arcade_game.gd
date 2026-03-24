@@ -214,6 +214,7 @@ func reset_input() -> void:
 @onready var gameplay_info: Control = $GameplayInfo
 
 func show_game_assets() -> void:
+	control_info.visible = false
 	gameplay_info.visible = false
 	game_assets.visible = true
 
