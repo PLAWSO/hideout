@@ -17,8 +17,8 @@ var percentile_names = ["10%", "20%", "30%", "40%", "50%", "60%", "70%", "75%", 
 @export var terminal: Node3D
 
 func _ready() -> void:
-	console = null
-	json_interface = null
+	console = JavaScriptBridge.get_interface("window")
+	json_interface = JavaScriptBridge.get_interface("JSON")
 
 	if console:
 		console.sendTopScoresToGodot = _set_top_scores_callback_ref

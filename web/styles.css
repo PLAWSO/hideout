@@ -1,0 +1,292 @@
+/*#########################
+### GODOT               ###
+#########################*/
+
+#canvas {
+	z-index: -1;
+}
+
+/*#########################
+### SHARED              ###
+#########################*/
+
+* {
+	font-family: "VT323", monospace;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 32px;
+	color: green;
+	text-shadow: 0 0 0.25rem green;
+}
+
+body {
+	background-color: #111111;
+}
+
+h1 {
+	font-size: 2rem;
+	margin: 0.25rem 0rem;
+}
+
+p {
+	margin: 0.25rem 0rem;
+}
+
+/* prevent scrolling on mobile */
+html, body, #loading-container, #canvas, #terminal-container {
+	overflow: hidden;
+}
+
+@media (max-height: 800px) {
+	* {
+		font-size: 24px;
+	}
+}
+
+@media (max-height: 550px) {
+	* {
+		font-size: 12px;
+	}
+}
+
+@media (max-height: 350px) {
+	* {
+		font-size: 8px;
+	}
+}
+
+/*#########################
+### LOADING             ###
+#########################*/
+
+#loading {
+	align-self: flex-end;
+	margin: 20px;
+}
+
+#loading-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100dvh;
+	
+	background: black;
+	
+	display: flex;
+}
+
+@media (max-width: 700px) {
+	#loading {
+		font-size: 12px;
+	}
+}
+
+/*#########################
+### USERNAME POPUP      ###
+#########################*/
+
+#username-popup {
+	background: black;
+	border: 2px solid green;
+}
+
+#username-textbox {
+	border: 2px solid green;
+	background-color: darkgreen;
+	color: black;
+	width: 300px;
+}
+
+#submit-username-button {
+	border: 2px solid green;
+	background-color: darkgreen;
+	color: black;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+/*#########################
+### TERMINAL            ###
+#########################*/
+
+#terminal-container {
+	position: absolute;
+
+	display: none;
+	opacity: 0.0;
+
+	/* center the terminal container on the page */
+	margin-left: 0.3%;
+}
+
+#terminal {
+	/* 3% gets us inside the bezels of the terminal, 0.5rem for font-size scaled margin */
+	margin: calc(3% + 0.5rem);
+	
+	height: calc(100% - 2 * (3% + 0.5rem));
+	
+  display: flex;
+  gap: 10px;
+}
+
+#navbar {
+	width: 6rem;
+  flex-shrink: 0;
+  padding: 0.5rem;
+  
+	border: 2px solid green;
+  border-radius: 5px;
+	
+	display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#content {
+	flex-grow: 1;
+
+	border: 2px solid green;
+	border-radius: 5px;
+}
+
+.section {
+	padding: 1rem;
+}
+
+.section > iframe {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+}
+
+.nav-button {
+  all: unset;
+  border: 2px solid green;
+  background-color: darkgreen;
+  color: black;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: green;
+}
+
+.nav-button.active {
+  background-color: green;
+}
+
+#settings-button {
+	margin-top: auto;
+	margin-left: auto;
+	color: black;
+
+	height: 2rem;
+	width: 2rem;
+
+	padding: 0rem;
+}
+
+#settings-button > i {
+	color: black;
+	font-size: 2rem;
+}
+
+#rotate-device-popup {
+	position: fixed;
+
+	top: calc(50% - 6rem);
+	left: calc(50% - 8rem);
+
+	height: 11rem;
+	width: 16rem;
+
+
+	background-color: green;
+	border-radius: 5px;
+
+	display: none;
+	flex-direction: column;
+
+	align-items: center;
+
+	z-index: 1;
+}
+
+#rotate-device-popup > div {
+	text-shadow: 0 0 0.25rem black;
+
+	margin-top: 1rem;
+
+	color: black;
+	font-size: 6rem;
+}
+
+#rotate-device-popup > p {
+	text-shadow: 0 0 0.25rem black;
+
+	margin-top: 1rem;
+
+	color: black;
+
+	font-size: 1.5rem;
+}
+
+
+/*#########################
+### SCANLINE EFFECT     ###
+#########################*/
+
+.scanline {
+	overflow: hidden;
+	position: relative;
+}
+
+.scanline:before,
+.scanline:after {
+	display: block;
+	pointer-events: none;
+	content: "";
+	position: absolute;
+}
+
+.scanline:before {
+	width: 100%;
+	height: 2px;
+	z-index: 2147483649;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 0.75;
+	animation: scanline 6s linear infinite;
+}
+
+.scanline:after {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483648;
+	background: linear-gradient(
+			to bottom,
+			transparent 50%,
+			rgba(0, 0, 0, 0.3) 51%
+	);
+	background-size: 100% 4px;
+	animation: scanline 1s steps(60) infinite;
+}
+
+@keyframes scanline {
+	0% {
+			transform: translate3d(0, 200000%, 0);
+	}
+}
+@keyframes scanline {
+	0% {
+			background-position: 0 50%;
+	}
+}
