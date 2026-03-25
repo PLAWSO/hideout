@@ -17,6 +17,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #region Lifecycle
 
 func _ready() -> void:
+	print("TESTING!")
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 	Events.arrived_at_meta_path.connect(_on_arrived_at_meta_path)

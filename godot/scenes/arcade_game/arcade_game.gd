@@ -140,7 +140,6 @@ func reset_game() -> void:
 		cutscene_tween.kill()
 
 	game_over.show_restart(false)
-	print("can't restart")
 	can_restart = false
 
 	ship.position = rest_pos
@@ -156,7 +155,6 @@ func reset_game() -> void:
 
 
 func _on_replay_delay_timer_timeout() -> void:
-	print("Replay delay timer finished, allowing restart")
 	can_restart = true
 	game_over.show_restart(true)
 	
