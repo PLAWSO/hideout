@@ -203,6 +203,35 @@ var loadingTexts = [
 
 var textIndex = 0;
 
+// function onProgress(current, total) {
+// 	let date = new Date();
+// 	let time = date.toLocaleTimeString();
+// 	let header = `[${time}] `;
+
+// 	loadingScreen.innerText += "\n" + header + loadingTexts[textIndex];
+
+// 	textIndex++;
+// }
+
+const GODOT_CONFIG = {
+	executable: "./build/godot",
+	canvasResizePolicy: 2,
+	onProgress: function (current, total) {
+
+		if (textIndex >= loadingTexts.length) return;
+
+		let date = new Date();
+		let time = date.toLocaleTimeString();
+		let header = `[${time}] `;
+
+		loadingScreen.innerText += "\n" + header + loadingTexts[textIndex];
+
+		textIndex++;
+	}
+}
+const GODOT_THREADS_ENABLED = false;
+let engine = null;
+
 window.addEventListener('DOMContentLoaded', () => {
 
 	loadSharedElements();
@@ -213,24 +242,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	registerEventListeners();
 
-	const canvas = document.getElementById("canvas");
-	var engine = new Engine({
-		canvas: { element: canvas },
-		executable: "./build/godot",
-		canvasResizePolicy: 2,
-		onProgress: function (current, total) {
-
-			if (textIndex >= loadingTexts.length) return;
-
-			let date = new Date();
-			let time = date.toLocaleTimeString();
-			let header = `[${time}] `;
-
-			loadingScreen.innerText += "\n" + header + loadingTexts[textIndex];
-
-			textIndex++;
-		},
-	});
+	engine = new Engine(GODOT_CONFIG)
 	
 	engine.startGame().then(() => {
 		if (!scoresSentToGodot && scores) {
