@@ -127,7 +127,6 @@ async function saveScore(score) {
 sendTopScoresToGodot = null; // set in godot
 
 function loadRuns() {
-	console.log(`${window.location.origin}/api/runs`)
 	fetch(`${window.location.origin}/api/runs`, {
 		method: 'GET'
 	})
