@@ -14,7 +14,7 @@
 	font-family: "VT323", monospace;
 	font-weight: 400;
 	font-style: normal;
-	font-size: 3vh;
+	font-size: 4vh;
 	color: green;
 	text-shadow: 0 0 0.25rem green;
 }
@@ -24,22 +24,21 @@ body {
 }
 
 h1 {
+	font-size: 8vh;
+	margin: 0.25rem 0rem;
+}
+
+h2 {
 	font-size: 6vh;
 	margin: 0.25rem 0rem;
 }
 
-h2, .title-link {
+h3 {
 	font-size: 5vh;
 	margin: 0.25rem 0rem;
 }
 
-h3 {
-	font-size: 3vh;
-	margin: 0.25rem 0rem;
-}
-
 p {
-	font-size: 2vh;
 	margin: 0.25rem 0rem;
 }
 
@@ -106,7 +105,18 @@ html, body, #loading-container, #canvas, #terminal-container {
 ### TERMINAL            ###
 #########################*/
 
+#terminal-clip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 #terminal-container {
+  pointer-events: auto;
 	position: absolute;
 
 	display: none;
@@ -114,11 +124,13 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 	/* center the terminal container on the page */
 	margin-left: 0.3%;
+
+	overflow: hidden;
 }
 
 #terminal {
-	margin: 5vh;
-	height: calc(100% - 10vh);
+	margin: 1rem;
+	height: calc(100% - 2rem);
 
   display: flex;
   gap: 0.5rem;
@@ -142,60 +154,10 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 	border: 2px solid green;
 	border-radius: 5px;
-
-	display: flex;
 }
 
 .section {
-	flex-grow: 1;
-	padding: 2dvh;
-	overflow: auto;
-
-	display: flex;
-	flex-direction: column;
-}
-
-.section fieldset {
-	border: 2px solid green;
-	border-radius: 5px;
-	padding: 1dvh 2dvh;
-}
-
-.scrollable {
-	overflow: auto;
-	padding-top: 0dvh;
-	padding-bottom: 0dvh;
-	flex-grow: 1;
-}
-
-/* width */
-::-webkit-scrollbar {
-  width: 1dvh;
-	margin: 0.25dvh;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px green; 
-	margin: 0.25dvh;
-  border-radius: 0.5dvh;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: green; 
-	margin: 0.25dvh;
-  border-radius: 0.5dvh;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	margin: 0.25dvh;
-  background: green; 
-}
-
-.section fieldset + fieldset {
-	margin-top: 2dvh;
+	padding: 1rem;
 }
 
 .section > iframe {
@@ -278,20 +240,6 @@ html, body, #loading-container, #canvas, #terminal-container {
 	font-size: 1.5rem;
 }
 
-.list-item {
-	display: flex;
-	align-items: center;
-}
-
-.icon {
-	padding: 2dvh;
-	padding-left: 0px;
-}
-
-#resources .list-item + .list-item {
-	border-top: solid green 0.25dvh;
-	display: flex;
-}
 
 /*#########################
 ### SCANLINE EFFECT     ###

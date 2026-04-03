@@ -9,7 +9,7 @@ let terminalContainer, sections, navButtons
 function navButtonClicked(buttonClicked) {
   sections.forEach(sec => { sec.style.display = 'none'; });
   let targetSection = document.getElementById(buttonClicked.id.replace('-button', ''));
-  targetSection.style.display = 'flex';
+  targetSection.style.display = 'block';
   
   navButtons.forEach(btn => { btn.classList.remove('active'); });
   buttonClicked.classList.add('active');
@@ -22,6 +22,7 @@ function setTerminalBounds(x, y, width, height) {
 	terminalContainer.style.width = `${width}px`;
 	terminalContainer.style.maxWidth = `${width}px`;
 	terminalContainer.style.height = `${height}px`;
+	terminalContainer.style.maxHeight = `${height}px`;
 }
 
 
@@ -239,29 +240,53 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	loadingScreen.innerText = startText;
 
-	loadRuns();
-
-	registerEventListeners();
-
-	engine = new Engine(GODOT_CONFIG)
+	terminalContainer.style.display = "block";
 	
-	engine.startGame().then(() => {
-		if (!scoresSentToGodot && scores) {
-			// query returned before godot was ready, send scores now that godot is ready
-			sendTopScoresToGodot(scores); // godot callback reference
-			scoresSentToGodot = true;
-		}
+	toggleTerminalVisibility(true)
+	
+	console.log(terminalContainer.style.left)
+	setInterval(() => {
+		console.log(terminalContainer.style.left)
+	}, 1)
 
-		setTimeout(() => {
-			loadingScreen.innerText += "\n\nCONNECTION ESTABLISHED.";
-		}, 500)
 
-		setTimeout(() => {
-			document.getElementById("loading-container").style.display = "none";
-		}, 3000);
-	}).catch(error => {
-		console.error("Failed to start Godot:", error);
-	});
+
+
+
+
+	console.log(terminalContainer.parentElement.parentElement)
+
+	setTerminalBounds(631.65966796875, 114.86200714111328, 1608.258544921875, 1406.553466796875);
+	let canvas = document.getElementById("canvas")
+	canvas.style.width = "800px";
+	canvas.style.height = "800px";
+
+	// loadRuns();
+
+
+	// registerEventListeners();
+
+	// document.getElementById("loading-container").style.display = "none";
+
+	// engine = new Engine(GODOT_CONFIG)
+	
+	// engine.startGame().then(() => {
+	// 	if (!scoresSentToGodot && scores) {
+	// 		// query returned before godot was ready, send scores now that godot is ready
+	// 		sendTopScoresToGodot(scores); // godot callback reference
+	// 		scoresSentToGodot = true;
+	// 	}
+
+	// 	setTimeout(() => {
+	// 		loadingScreen.innerText += "\n\nCONNECTION ESTABLISHED.";
+	// 	}, 500) x
+
+	// 	setTimeout(() => {
+	// 		document.getElementById("loading-container").style.display = "none";
+	// 	}, 3000);
+	// }).catch(error => {
+	// 	console.error("Failed to start Godot:", error);
+	// });
 })
 
 

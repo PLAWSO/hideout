@@ -4,11 +4,6 @@
 			<meta charset="UTF-8">
 			<meta name="theme-color" content="#111111">
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-			<title>hideout</title>
-
-			<!-- icons -->
-			<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
-			<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 			
 			<!-- styles -->
 			<link rel="stylesheet" href="styles.css">
@@ -24,7 +19,7 @@
 
 			<script src="./build/godot.js"></script>
 			<script src="script.js"></script>
-
+			
 	</head>
 	<body>
 		<div id="loading-container" class="scanline">
@@ -42,6 +37,7 @@
 					<button class="nav-button active" id="about-button" onclick="navButtonClicked(this)">About</button>
 					<button class="nav-button" id="contact-button" onclick="navButtonClicked(this)">Contact</button>
 					<button class="nav-button" id="test-button" onclick="navButtonClicked(this)">Test</button>
+					<button class="nav-button" id="resources-button" onclick="navButtonClicked(this)">Resources</button>
 					<button class="nav-button" id="settings-button" onclick="navButtonClicked(this)">
 						<i class="material-icons">settings</i>
 					</button>
@@ -62,6 +58,100 @@
 						<p>TODO</p>
 						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
 					</div>
+					<div id="resources" class="section" style="display:none;">
+						<fieldset>
+							<h1>Resources</h1>
+							<p>This website was created almost exclusively with open-source software! </p>
+						</fieldset>
+
+						<fieldset class="scrollable">
+							<div class="list-item">
+								<img
+									src="godot_icon_monochrome_dark.svg"
+									alt="Godot Engine Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.godotengine.org/">Godot</a>
+									<h3>Game Engine</h3>
+								</div>
+							</div>
+	
+							<div class="list-item">
+								<img
+									src="blender_community_badge_white.svg"
+									alt="Blender Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.blender.org/">Blender</a>
+									<h3>3D Modeling Software</h3>
+								</div>
+							</div>
+
+							<div class="list-item">
+								<img
+									src="blender_community_badge_white.svg"
+									alt="Blender Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.blender.org/">Blender</a>
+									<h3>3D Modeling Software</h3>
+								</div>
+							</div>
+
+							<div class="list-item">
+								<img
+									src="blender_community_badge_white.svg"
+									alt="Blender Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.blender.org/">Blender</a>
+									<h3>3D Modeling Software</h3>
+								</div>
+							</div>
+
+							<div class="list-item">
+								<img
+									src="blender_community_badge_white.svg"
+									alt="Blender Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.blender.org/">Blender</a>
+									<h3>3D Modeling Software</h3>
+								</div>
+							</div>
+	
+							<div class="list-item">
+								<img
+									src="gimp-logo-editor-2-svgrepo-com.svg"
+									alt="GIMP Logo"
+									height="180"
+									width="180"
+									class="icon"
+								/>
+								<div>
+									<a class="title-link" href="https://www.gimp.org/">GIMP</a>
+									<h3>Image Editing Software</h3>
+									<p>Used here for texturing</p>
+								</div>
+							</div>
+						</fieldset>
+
+					</div>
 					<div id="settings" class="section" style="display:none;">
 						<h1>Settings</h1>
 						<input type="checkbox" id="show-debug" name="showDebug" value="debug">
@@ -81,4 +171,5 @@
 		</dialog>
 	</body>
 </html>
+
 

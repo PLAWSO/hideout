@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1774484917|31284385';
+const CACHE_VERSION = '1775017924|68263663';
 /** @type {string} */
 const CACHE_PREFIX = 'hideout-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
