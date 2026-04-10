@@ -4,15 +4,39 @@ let usernamePopup;
 // TERMINAL                             //
 ///////////////////////////////////////////
 
-let terminalContainer, sections, navButtons
+let terminalContainer, sections, navButtons, contentFrame;
 
 function navButtonClicked(buttonClicked) {
-  sections.forEach(sec => { sec.style.display = 'none'; });
-  let targetSection = document.getElementById(buttonClicked.id.replace('-button', ''));
-  targetSection.style.display = 'block';
+	const nextURL = `/${buttonClicked.id.replace('-button', '')}`;
+
+	if (window.location.pathname === nextURL) return;
+
+	const nextState = { additionalInformation: 'Updated via JS ' + nextURL };
+
+	contentFrame.data = nextURL + nextURL + ".html";
+	
+	window.history.pushState(nextState, "", nextURL);
   
+	setActiveNavButton(buttonClicked);
+}
+
+window.addEventListener("popstate", (event) => {
+	console.log("popstate event:", event);
+	const buttonId = event.target.location.pathname.substring(1) + "-button";
+	const buttonClicked = document.getElementById(buttonId);
+
+	setActiveNavButton(buttonClicked);
+})
+
+function setActiveNavButton(buttonClicked) {
   navButtons.forEach(btn => { btn.classList.remove('active'); });
   buttonClicked.classList.add('active');
+}
+
+function setNavButtonEventListeners() {
+	navButtons.forEach(button => {
+		button.addEventListener('click', () => navButtonClicked(button));
+	})
 }
 
 function setTerminalBounds(x, y, width, height) {
@@ -243,6 +267,22 @@ window.addEventListener('DOMContentLoaded', () => {
 	registerEventListeners();
 
 	engine = new Engine(GODOT_CONFIG)
+
+	setNavButtonEventListeners();
+
+	let pathName = window.location.pathname
+	let associatedButton = document.getElementById(pathName.substring(1) + "-button");
+	if (!associatedButton) {
+		pathName = "/intro"
+		associatedButton = document.getElementById(pathName.substring(1) + "-button");
+	}
+	
+	contentFrame.data = pathName + pathName + ".html";
+	
+	const nextState = { additionalInformation: 'Updated via JS ' + pathName };
+	window.history.replaceState(nextState, "", pathName);
+
+	setActiveNavButton(associatedButton);
 	
 	engine.startGame().then(() => {
 		if (!scoresSentToGodot && scores) {
@@ -272,12 +312,13 @@ function loadSharedElements() {
 	loadingScreen = document.getElementById("loading");
 	usernameTextBox = document.getElementById("username-textbox");
 	usernamePopup = document.getElementById("username-popup")
+	contentFrame = document.getElementById("content-frame");
 }
 
 
 function registerEventListeners() {
-	var showDebugCheckBox = document.getElementById("show-debug");
-	showDebugCheckBox.addEventListener('change', _onShowDebugCheckBoxChanged)
+	// var showDebugCheckBox = document.getElementById("show-debug");
+	// showDebugCheckBox.addEventListener('change', _onShowDebugCheckBoxChanged)
 
 	var usernameForm = document.getElementById("username-form");
 	usernameForm.addEventListener('submit', _onSubmitUsername);

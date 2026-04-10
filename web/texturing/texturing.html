@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="sub-page">
+	<head>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="./texturing.css">
+
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+	</head>
+
+	<style>
+		body { opacity: 0; transition: opacity 0.3s; }
+	</style>
+	
+	<script>
+		document.fonts.ready.then(function () {
+			document.body.style.opacity = "1";
+		});
+	</script>
+
+	<body class="section">
+		<fieldset class="section-header">
+			<h1>Texturing</h1>
+			<p class="explainer">
+				Texturing is the process of applying a 2D image to a 3D model to give it color.
+				This section describes the approach I took for texturing the 3D assets on this site.
+			</p>
+		</fieldset>
+
+		<div class="scroll-container">
+			<fieldset class="scrollable">
+				<figure>
+					<img
+						id="ultrakill"
+						src="./ultrakill.png"
+						alt="Ultrakill Museum Screenshot"
+					/>
+					<figcaption>A screenshot of the ULTRAKILL Museum.</figcaption>
+				</figure>
+
+				<p>
+					There are countless techniques and styles used to texture 3D models.
+					For this project, I wanted to try to replicate the video game <a href="https://store.steampowered.com/app/1229490/ULTRAKILL/" target="_parent">ULTRAKILL</a>'s textures.
+					It's most distinctive features are it's <a href="#texture-resolutions-header">low(er) resolution textures</a> and lack of <a href="#texture-filtering-header">texturing filtering</a>.
+				</p>
+
+				<br>
+
+				<h2 id="texture-resolutions-header">low(er) resolution textures</h2>
+				<figure>
+					<img
+						class="texture"
+						src="./low-res-texture.png"
+						alt="Lower Resolution Texture"
+					/>
+					<img
+						class="texture"
+						src="./high-res-texture.png"
+						alt="Higher Resolution Texture"
+					/>
+					<figcaption>LEFT: a lower resolution texture / RIGHT: a higher resolution texture</figcaption>
+				</figure>
+
+				<p>
+					ULTRAKILL uses 
+				</p>
+
+				<br>
+
+				<h2 id="texture-filtering-header">texture filtering</h2>
+				<figure>
+					<img
+						class="texture"
+						src="./nearest-filtering.png"
+						alt="Nearest Texture Filtering"
+					/>
+					<img
+						class="texture"
+						src="./linear-filtering.png"
+						alt="Linear Texture Filtering"
+					/>
+					<figcaption>LEFT: the bike with nearest texture filtering / RIGHT: the bike with linear texture filtering</figcaption>
+				</figure>
+
+				<p>
+					ULTRAKILL uses 
+				</p>
+				
+			</fieldset>
+		</div>
+		<p>TESTING TESTING</p>
+	</body>
+</html>

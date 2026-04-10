@@ -14,13 +14,15 @@
 			<link rel="stylesheet" href="styles.css">
 
 			<!-- material icons -->
-			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=mobile_rotate" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" crossorigin>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=mobile_rotate" crossorigin />
 			
 			<!-- google fonts -->
-			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet" crossorigin>
+
+
 
 			<script src="./build/godot.js"></script>
 			<script src="script.js"></script>
@@ -30,47 +32,32 @@
 		<div id="loading-container" class="scanline">
 			<p id="loading"></p>
 		</div>
-		<div id="terminal-container">
-			<div id="rotate-device-popup" class="scanline">
-				<div class="material-symbols-outlined">
-					mobile_rotate
-				</div>
-				<p>ROTATE DEVICE</p>
-			</div>
-			<div id="terminal">
-				<div id="navbar">
-					<button class="nav-button active" id="about-button" onclick="navButtonClicked(this)">About</button>
-					<button class="nav-button" id="contact-button" onclick="navButtonClicked(this)">Contact</button>
-					<button class="nav-button" id="test-button" onclick="navButtonClicked(this)">Test</button>
-					<button class="nav-button" id="settings-button" onclick="navButtonClicked(this)">
-						<i class="material-icons">settings</i>
-					</button>
-				</div>
-		
-				<div id="content">
-					<div id="about" class="section">
-						<h1>About</h1>
-						<p>TODO</p>
-					</div>
-					<div id="contact" class="section" style="display:none;">
-						<h1>Contact</h1>
-						<p>TODO</p>
-						<!-- <iframe src="https://www.youtube-nocookie.com/embed/Ata9cSC2WpM?si=8J0flyHd64mnk2Xo;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-					</div>
-					<div id="test" class="section" style="display:none;">
-						<h1>Test</h1>
-						<p>TODO</p>
-						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-					</div>
-					<div id="settings" class="section" style="display:none;">
-						<h1>Settings</h1>
-						<input type="checkbox" id="show-debug" name="showDebug" value="debug">
-						<label for="show-debug">Show debug info</label><br>
-						<!-- <iframe src="https://www.youtube.com/embed/Ata9cSC2WpM?si=gA-oNN5VGMPu7Bmr&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
-					</div>
+		<div id="terminal-clip">
 
+			<div id="terminal-container">
+				<div id="rotate-device-popup" class="scanline">
+					<div class="material-symbols-outlined">
+						mobile_rotate
+					</div>
+					<p>ROTATE DEVICE</p>
 				</div>
-			</div>
+				<div id="terminal">
+					<div id="navbar">
+						<button class="nav-button" id="intro-button">Intro</button>
+						<button class="nav-button" id="3d-asset-creation">3D Asset Creation</button>
+						<button class="nav-button" id="modeling-button">Modeling</button>
+						<button class="nav-button" id="texturing-button">Texturing</button>
+						<button class="nav-button" id="resources-button">Resources</button>
+						<button class="nav-button" id="settings-button">
+							<i class="material-icons">settings</i>
+						</button>
+					</div>
+			
+					<div id="content">
+						<object id="content-frame"></object>
+					</div>
+				</div>
+		</div>
 		</div>
 		<canvas id="canvas"></canvas>
 		<dialog id="username-popup" class="scanline">
@@ -81,4 +68,5 @@
 		</dialog>
 	</body>
 </html>
+
 

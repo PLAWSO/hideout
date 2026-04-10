@@ -1,0 +1,10 @@
+.texture {
+	aspect-ratio: 1920 / 1080;
+	height: 38dvh;
+
+	image-rendering: pixelated;
+}
+
+p {
+	margin-top: 3dvh;
+}

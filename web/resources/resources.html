@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="sub-page">
+	<head>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="./resources.css">
+
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+	</head>
+
+	<style>
+		body { opacity: 0; transition: opacity 0.3s; }
+	</style>
+	
+	<script>
+		document.fonts.ready.then(function () {
+			document.body.style.opacity = "1";
+		});
+	</script>
+
+	<body class="section">
+		<fieldset class="section-header">
+			<h1>Resources</h1>
+			<p>This website was created almost exclusively with open-source software! </p>
+		</fieldset>
+
+		<div class="scroll-container">
+			<fieldset class="scrollable">
+				<div class="list-item">
+					<img
+						src="godot.svg"
+						alt="Godot Engine Logo"
+						height="180"
+						width="180"
+						class="icon"
+					/>
+					<div>
+						<a class="title-link" href="https://www.godotengine.org/" target="_parent">Godot</a>
+						<h3>Game Engine</h3>
+						<p>3D Environment / Game Development</p>
+					</div>
+				</div>
+
+				<div class="list-item">
+					<img
+						src="blender.svg"
+						alt="Blender Logo"
+						height="180"
+						width="180"
+						class="icon"
+					/>
+					<div>
+						<a class="title-link" href="https://www.blender.org/" target="_parent">Blender</a>
+						<h3>3D Modeling Software</h3>
+						<p>3D Modeling / Texturing / Animation</p>
+					</div>
+				</div>
+
+				<div class="list-item">
+					<img
+						src="gimp.svg"
+						alt="GIMP Logo"
+						height="180"
+						width="180"
+						class="icon"
+					/>
+					<div>
+						<a class="title-link" href="https://www.gimp.org/" target="_parent">GIMP</a>
+						<h3>Image Editing Software</h3>
+						<p>Texturing</p>
+					</div>
+				</div>
+
+				<div class="list-item">
+					<img
+						src="aesprite.svg"
+						alt="Aesprite Logo"
+						height="180"
+						width="180"
+						class="icon"
+					/>
+					<div>
+						<a class="title-link" href="https://www.aseprite.org/" target="_parent">Aseprite</a>
+						<h3>Image Editing Software</h3>
+						<p>Sprites</p>
+					</div>
+				</div>
+
+			</fieldset>
+		</div>
+	</body>
+</html>
