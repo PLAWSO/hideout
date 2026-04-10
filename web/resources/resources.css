@@ -13,3 +13,10 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.icon {
+	padding: 2dvh;
+	padding-left: 0dvh;
+	aspect-ratio: 1 / 1;
+	height: 16dvh;
+}
