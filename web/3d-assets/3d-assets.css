@@ -1,0 +1,29 @@
+.texture {
+	aspect-ratio: 1920 / 1080;
+	height: 32dvh;
+
+	image-rendering: pixelated;
+}
+
+ul {
+	margin: 0dvh;
+	padding: 2dvh 0dvh;
+	padding-left: 5dvh;
+	padding-bottom: 5dvh;
+}
+
+p {
+	padding-top: 2dvh;
+	margin: 0dvh;
+}
+
+* + p {
+	padding-top: 3dvh;
+}
+
+.separated {
+	margin: 0dvh;
+	padding-top: 5dvh;
+	border-top: solid green 0.25dvh;
+	padding-top: 5dvh;
+}

@@ -19,6 +19,10 @@
 	text-shadow: 0 0 0.25rem green;
 }
 
+body {
+	background-color: #111111;
+}
+
 figure {
 	margin-left: 0dvh;
 	margin-right: 0dvh;
@@ -26,7 +30,7 @@ figure {
 
 figcaption {
 	font-size: 2vh;
-	margin: 0.25rem 0rem;
+	margin: 0dvh;
 }
 
 body {
@@ -143,7 +147,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 }
 
 #navbar {
-	width: 6rem;
+	width: 20dvh;
   flex-shrink: 0;
   padding: 2dvh;
   
@@ -152,7 +156,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	
 	display: flex;
   flex-direction: column;
-  gap: 2dvh;
+  gap: 1dvh;
 }
 
 #content {
@@ -212,7 +216,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	flex-grow: 1;
 	padding: 2dvh;
 
-	overflow: auto;
+	overflow: hidden;
 
 	border: 0.25dvh solid green;
 	border-radius: 0.5dvh;
@@ -256,9 +260,11 @@ html, body, #loading-container, #canvas, #terminal-container {
   background-color: darkgreen;
   color: black;
   border-radius: 0.5dvh;
-  padding: 0.1rem;
-	padding-left: 0.2rem;
+  padding: 0px;
+	text-align: center;
+	vertical-align: middle;
   cursor: pointer;
+	font-size: 3dvh;
 }
 
 .nav-button:hover {
@@ -323,13 +329,6 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 	font-size: 1.5rem;
 }
-
-.icon {
-	padding: 2dvh;
-	padding-left: 0dvh;
-	max-width: 20dvh;
-}
-
 
 /*#########################
 ### SCANLINE EFFECT     ###
