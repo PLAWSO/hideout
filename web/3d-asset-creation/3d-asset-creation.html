@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html class="sub-page">
+	<head>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="./3d-asset-creation.css">
+
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+	</head>
+
+	<style>
+		body { opacity: 0; transition: opacity 0.3s; }
+	</style>
+	
+	<script>
+		document.fonts.ready.then(function () {
+			document.body.style.opacity = "1";
+		});
+	</script>
+
+	<body class="section">
+		<fieldset class="section-header">
+			<h1>3D Asset Creation</h1>
+		</fieldset>
+
+		<div class="scroll-container">
+			<fieldset class="scrollable">
+				
+				<p>
+					The following sections discuss the process I followed for creating the 3D assets (the bike, the body of this terminal, etc.) used in the hideout.
+					The process wasn't identical for every 3D asset, but it generally went as follows:
+				</p>
+
+				<ul>
+					<li>Modeling</li>
+					<li>UV Unwrapping</li>
+					<li>Texturing</li>
+					<li>Animating</li>
+					<li>Exporting</li>
+				</ul>
+
+				<figure class="separated">
+					<img
+						class="texture"
+						src="./ultrakill.png"
+						alt="Ultrakill Museum Screenshot"
+					/>
+					<figcaption>A screenshot of the ULTRAKILL Museum.</figcaption>
+				</figure>
+
+				<p>
+					There were a few constraints on the asset creation process (and the project as a whole); namely time, my artistic abilities, and having to serve the entire project on demand for the web. 
+				</p>
+
+				<p>
+					With those constraints in mind, I decided I would try to replicate the video game ULTRAKILL's assets.
+					I felt I was capable of creating a similar style in a reasonable amount of time, and its smaller textures and 3D models made them a good fit for serving on demand.
+				</p>
+
+				<p>
+					I also just really like the grunge-y aesthetic and lower resolution textures and linear filtering that looks like pixel art wrapped on a 3D model.
+				</p>
+
+				<p>
+					I don't think I nailed the look on a technical level, and my artistic abilities don't compete with the artists that worked on ULTRAKILL, but I think it gives a similar vibe.
+				</p>
+			</fieldset>
+		</div>
+
+	</body>
+</html>

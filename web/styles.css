@@ -19,8 +19,20 @@
 	text-shadow: 0 0 0.25rem green;
 }
 
+figure {
+	margin-left: 0dvh;
+	margin-right: 0dvh;
+}
+
+figcaption {
+	font-size: 2vh;
+	margin: 0.25rem 0rem;
+}
+
 body {
-	background-color: #111111;
+	background-color: transparent;
+	margin: 0dvh;
+	padding: 0dvh;
 }
 
 h1 {
@@ -34,12 +46,12 @@ h2, .title-link {
 }
 
 h3 {
-	font-size: 3vh;
+	font-size: 4vh;
 	margin: 0.25rem 0rem;
 }
 
 p {
-	font-size: 2vh;
+	font-size: 3vh;
 	margin: 0.25rem 0rem;
 }
 
@@ -54,7 +66,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 #loading {
 	align-self: flex-end;
-	margin: 20px;
+	margin: 5dvh;
 }
 
 #loading-container {
@@ -93,7 +105,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	border: 2px solid green;
 	background-color: darkgreen;
 	color: black;
-	border-radius: 5px;
+	border-radius: 0.5dvh;
 	cursor: pointer;
 }
 
@@ -105,6 +117,11 @@ html, body, #loading-container, #canvas, #terminal-container {
 /*#########################
 ### TERMINAL            ###
 #########################*/
+
+.explainer {
+	font-size: 2vh;
+	margin: 0.25rem 0rem;
+}
 
 #terminal-container {
 	position: absolute;
@@ -119,46 +136,65 @@ html, body, #loading-container, #canvas, #terminal-container {
 #terminal {
 	margin: 5vh;
 	height: calc(100% - 10vh);
+	width: calc(100% - 10vh);
 
   display: flex;
-  gap: 0.5rem;
+  gap: 2dvh;
 }
 
 #navbar {
-	width: 5rem;
+	width: 6rem;
   flex-shrink: 0;
-  padding: 0.5rem;
+  padding: 2dvh;
   
-	border: 2px solid green;
-  border-radius: 5px;
+	border: 0.25dvh solid green;
+  border-radius: 0.5dvh;
 	
 	display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2dvh;
 }
 
 #content {
 	flex-grow: 1;
 
-	border: 2px solid green;
-	border-radius: 5px;
-
-	display: flex;
+	border: 0.25dvh solid green;
+	border-radius: 0.5dvh;
 }
 
-.section {
-	flex-grow: 1;
-	padding: 2dvh;
-	overflow: auto;
+#content-frame {
+	border: 0dvh;
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.sub-page {
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 }
 
-.section fieldset {
-	border: 2px solid green;
-	border-radius: 5px;
+.section {
+	flex-grow: 1;
+	padding: 2dvh;
+
+	display: flex;
+	flex-direction: column;
+
+	background-color: transparent;
+}
+
+
+.section-header {
+	border: 0.25dvh solid green;
+	border-radius: 0.5dvh;
 	padding: 1dvh 2dvh;
+	margin: 0dvh;
 }
 
 .scrollable {
@@ -166,6 +202,22 @@ html, body, #loading-container, #canvas, #terminal-container {
 	padding-top: 0dvh;
 	padding-bottom: 0dvh;
 	flex-grow: 1;
+
+	margin: 0dvh;
+
+	border: 0dvh;
+}
+
+.scroll-container {
+	flex-grow: 1;
+	padding: 2dvh;
+
+	overflow: auto;
+
+	border: 0.25dvh solid green;
+	border-radius: 0.5dvh;
+	display: flex;
+	flex-direction: column;
 }
 
 /* width */
@@ -176,7 +228,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px green; 
+  box-shadow: inset 0 0 1dvh green; 
 	margin: 0.25dvh;
   border-radius: 0.5dvh;
 }
@@ -194,21 +246,16 @@ html, body, #loading-container, #canvas, #terminal-container {
   background: green; 
 }
 
-.section fieldset + fieldset {
+.section-header + .scroll-container {
 	margin-top: 2dvh;
-}
-
-.section > iframe {
-	width: 100%;
-	aspect-ratio: 16 / 9;
 }
 
 .nav-button {
   all: unset;
-  border: 2px solid green;
+  border: 0.25dvh solid green;
   background-color: darkgreen;
   color: black;
-  border-radius: 5px;
+  border-radius: 0.5dvh;
   padding: 0.1rem;
 	padding-left: 0.2rem;
   cursor: pointer;
@@ -247,9 +294,8 @@ html, body, #loading-container, #canvas, #terminal-container {
 	height: 11rem;
 	width: 16rem;
 
-
 	background-color: green;
-	border-radius: 5px;
+	border-radius: 0.5dvh;
 
 	display: none;
 	flex-direction: column;
@@ -278,20 +324,12 @@ html, body, #loading-container, #canvas, #terminal-container {
 	font-size: 1.5rem;
 }
 
-.list-item {
-	display: flex;
-	align-items: center;
-}
-
 .icon {
 	padding: 2dvh;
-	padding-left: 0px;
+	padding-left: 0dvh;
+	max-width: 20dvh;
 }
 
-#resources .list-item + .list-item {
-	border-top: solid green 0.25dvh;
-	display: flex;
-}
 
 /*#########################
 ### SCANLINE EFFECT     ###
