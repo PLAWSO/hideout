@@ -1,11 +1,8 @@
 #ultrakill {
-	aspect-ratio: 640 / 480;
 	height: 40dvh;
 }
 
 .texture {
-	aspect-ratio: 480 / 480;
 	height: 30dvh;
-
 	image-rendering: pixelated;
 }

@@ -9,11 +9,6 @@
 	border-top: solid green 0.25dvh;
 }
 
-.scrollable {
-	display: flex;
-	flex-direction: column;
-}
-
 .icon {
 	padding: 2dvh;
 	padding-left: 0dvh;

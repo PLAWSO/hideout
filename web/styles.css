@@ -41,23 +41,39 @@ body {
 
 h1 {
 	font-size: 6vh;
-	margin: 0.25rem 0rem;
+	margin: 0dvh;
 }
 
 h2, .title-link {
 	font-size: 5vh;
-	margin: 0.25rem 0rem;
+	margin: 0dvh;
 }
 
 h3 {
 	font-size: 4vh;
-	margin: 0.25rem 0rem;
+	margin: 0dvh ;
 }
 
 p {
 	font-size: 3vh;
-	margin: 0.25rem 0rem;
+	padding-top: 2dvh;
+	margin: 0dvh;
 }
+
+* + p {
+	padding-top: 3dvh;
+}
+
+ul {
+	margin: 0dvh;
+	padding: 2dvh 0dvh;
+	padding-left: 5dvh;
+}
+
+/* .separated {
+	border-top: solid green 0.25dvh;
+	padding-top: 5dvh;
+} */
 
 /* prevent scrolling on mobile */
 html, body, #loading-container, #canvas, #terminal-container {
@@ -204,7 +220,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 .scrollable {
 	overflow: auto;
 	padding-top: 0dvh;
-	padding-bottom: 0dvh;
+	padding-bottom: 2dvh;
 	flex-grow: 1;
 
 	margin: 0dvh;
@@ -265,6 +281,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	vertical-align: middle;
   cursor: pointer;
 	font-size: 3dvh;
+	text-shadow: none;
 }
 
 .nav-button:hover {
@@ -273,6 +290,48 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 .nav-button.active {
   background-color: green;
+}
+
+.inset {
+	margin-left: 4dvh;
+}
+
+#neighbors-button {
+  border: 0.25dvh solid white;
+	background: linear-gradient(
+					-45deg,
+					rgba(255, 0, 0, 1) 0%,
+					rgba(255, 154, 0, 1) 5%,
+					rgba(208, 222, 33, 1) 10%,
+					rgba(79, 220, 74, 1) 15%,
+					rgba(63, 218, 216, 1) 20%,
+					rgba(47, 201, 226, 1) 25%,
+					rgba(28, 127, 238, 1) 30%,
+					rgba(95, 21, 242, 1) 35%,
+					rgba(186, 12, 248, 1) 40%,
+					rgba(251, 7, 217, 1) 45%,
+					rgba(255, 0, 0, 1) 50%,
+					rgba(255, 154, 0, 1) 55%,
+					rgba(208, 222, 33, 1) 60%,
+					rgba(79, 220, 74, 1) 65%,
+					rgba(63, 218, 216, 1) 70%,
+					rgba(47, 201, 226, 1) 75%,
+					rgba(28, 127, 238, 1) 80%,
+					rgba(95, 21, 242, 1) 85%,
+					rgba(186, 12, 248, 1) 90%,
+					rgba(251, 7, 217, 1) 95%,
+					rgba(255, 0, 0, 1) 100%
+			);
+	background-size: 400% 400%;
+	background-position: bottom right;
+
+	animation: a 2s linear infinite;
+}
+
+@keyframes a {
+	to {
+			background-position: 33.33% 33.33%;
+	}
 }
 
 #settings-button {
@@ -328,6 +387,16 @@ html, body, #loading-container, #canvas, #terminal-container {
 	color: black;
 
 	font-size: 1.5rem;
+}
+
+figure {
+	margin: 0dvh;
+	padding-top: 2dvh;
+}
+
+img {
+	height: 24dvh;
+	width: auto;
 }
 
 /*#########################
