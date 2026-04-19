@@ -2,7 +2,7 @@
 <html class="sub-page">
 	<head>
 		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="./3d-assets.css">
+		<link rel="stylesheet" href="./section-styles.css">
 
 		<!-- google fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,11 +29,12 @@
 			<fieldset class="scrollable">
 				
 				<p>
-					The following sections discuss the process I followed for creating the 3D assets (the bike, the body of this terminal, etc.) used in the hideout.
+					The following sections describe my process for creating the 3D assets (the bike, the body of this terminal, etc.) used in the hideout.
 					The process wasn't identical for every 3D asset, but it generally went as follows:
 				</p>
 
 				<ul>
+					<li>Finding References</li>
 					<li>Modeling</li>
 					<li>UV Unwrapping</li>
 					<li>Texturing</li>
@@ -41,9 +42,20 @@
 					<li>Exporting</li>
 				</ul>
 
-				<figure class="separated">
+				<h2>Overview</h2>
+				<p>
+					I knew going into this project the 3D assets would have to be basic due to my own artistic abilities, time, and the need to serve the project on demand over the internet.
+				</p>
+				
+				<p>
+					With those constraints in mind, I tried to replicate the video game <a href="https://store.steampowered.com/app/1229490/ULTRAKILL/" target="_parent">ULTRAKILL</a>'s visuals.
+					It uses several techniques of PlayStation 1-era games, namely: low poly models, low resolution textures, and linear texture filtering,
+					but it doesn't share the low display resolution of games of that era:
+				</p>
+				
+				<figure>
 					<img
-						class="texture"
+						id="ultrakill-screenshot"
 						src="./ultrakill.png"
 						alt="Ultrakill Museum Screenshot"
 					/>
@@ -51,21 +63,18 @@
 				</figure>
 
 				<p>
-					There were a few constraints on the asset creation process (and the project as a whole); namely time, my artistic abilities, and having to serve the entire project on demand for the web. 
+					You can find more information on my implementation of those techniques in the Modeling, UV Unwrapping and Texturing sections.
+				</p>
+				
+				<p>
+					I like the style, and I felt I was capable of creating something similar in a reasonable amount of time.
+					Plus, its smaller textures and 3D models made them a good fit for serving on demand.
 				</p>
 
 				<p>
-					With those constraints in mind, I decided I would try to replicate the video game ULTRAKILL's assets.
-					I felt I was capable of creating a similar style in a reasonable amount of time, and its smaller textures and 3D models made them a good fit for serving on demand.
+					I didn't nail the look on a technical level, and my artistic abilities don't compete with the artists that worked on ULTRAKILL, but I think it gives a similar vibe.
 				</p>
 
-				<p>
-					I also just really like the grunge-y aesthetic and lower resolution textures and linear filtering that looks like pixel art wrapped on a 3D model.
-				</p>
-
-				<p>
-					I don't think I nailed the look on a technical level, and my artistic abilities don't compete with the artists that worked on ULTRAKILL, but I think it gives a similar vibe.
-				</p>
 			</fieldset>
 		</div>
 

@@ -1,0 +1,7 @@
+.pixelated {
+	image-rendering: pixelated;
+}
+
+.big {
+	height: 30dvh;
+}

@@ -2,7 +2,7 @@
 <html class="sub-page">
 	<head>
 		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="./texturing.css">
+		<link rel="stylesheet" href="./section-styles.css">
 
 		<!-- google fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,69 +23,75 @@
 	<body class="section">
 		<fieldset class="section-header">
 			<h1>Texturing</h1>
-			<p class="explainer">
-				Texturing is the process of applying a 2D image to a 3D model to give it color.
-				This section describes the approach I took for texturing the 3D assets on this site.
-			</p>
 		</fieldset>
 
+		
 		<div class="scroll-container">
 			<fieldset class="scrollable">
-				<figure>
-					<img
-						id="ultrakill"
-						src="./ultrakill.png"
-						alt="Ultrakill Museum Screenshot"
-					/>
-					<figcaption>A screenshot of the ULTRAKILL Museum.</figcaption>
-				</figure>
-
 				<p>
-					There are countless techniques and styles used to texture 3D models.
-					For this project, I wanted to try to replicate the video game <a href="https://store.steampowered.com/app/1229490/ULTRAKILL/" target="_parent">ULTRAKILL</a>'s textures.
-					It's most distinctive features are it's <a href="#texture-resolutions-header">low(er) resolution textures</a> and lack of <a href="#texture-filtering-header">texturing filtering</a>.
+					Once you have a UV map, you can begin texturing.
+					This is where you'll do the actual "coloring" for your 3D model.
 				</p>
 
-				<br>
-
-				<h2 id="texture-resolutions-header">low(er) resolution textures</h2>
 				<figure>
 					<img
-						class="texture"
+						id=""
+						class="big pixelated"
+						src="./arcade-cabinet.png"
+						alt="Arcade Cabinet Texture"
+					/>
+					<img
+						id=""
+						class="big pixelated"
+						src="./bike-texture.png"
+						alt="Bike Texture"
+					/>
+					<figcaption>LEFT: The arcade cabinet texture / RIGHT: The bike texture</figcaption>
+				</figure>
+				
+				<p>
+					The first step is deciding on a resolution for the texture.
+					I used relatively low resolution textures, often 128x128.
+				</p>
+
+				<figure>
+					<img
+						class="big pixelated"
 						src="./low-res-texture.png"
 						alt="Lower Resolution Texture"
 					/>
 					<img
-						class="texture"
+						class="big pixelated"
 						src="./high-res-texture.png"
 						alt="Higher Resolution Texture"
 					/>
-					<figcaption>LEFT: a lower resolution texture / RIGHT: a higher resolution texture</figcaption>
+					<figcaption>LEFT: an 8x8 texture / RIGHT: a 64x64 texture</figcaption>
 				</figure>
 
 				<p>
-					ULTRAKILL uses 
+					The texture resolution will impact the size of texels (texture pixel) in the final product.
 				</p>
 
-				<br>
-
-				<h2 id="texture-filtering-header">texture filtering</h2>
 				<figure>
 					<img
-						class="texture"
-						src="./nearest-filtering.png"
-						alt="Nearest Texture Filtering"
+						class="big"
+						src="./bike-texel-highlight.png"
+						alt="Highlighted Texel Bike"
 					/>
-					<img
-						class="texture"
-						src="./linear-filtering.png"
-						alt="Linear Texture Filtering"
-					/>
-					<figcaption>LEFT: the bike with nearest texture filtering / RIGHT: the bike with linear texture filtering</figcaption>
+					<figcaption>The bike with a few of its texels highlighted.</figcaption>
 				</figure>
 
+
 				<p>
-					ULTRAKILL uses 
+					As was talked about in the UVs section, there are multiple kinds of textures or maps you can create for an object.
+					Most are used for changing how the surface interacts with light- how bright/dark or shiny it is.
+					With my restricted art style, I didn't feel that anything other than an albedo map was necessary for most objects.
+				</p>
+
+				<p>
+					I used GIMP and aesprite for creating the textures.
+					It mostly boiled down to experimenting with brushes and effects,
+					occasionally involving some photo bashing, like with the engine on the bike.
 				</p>
 				
 			</fieldset>

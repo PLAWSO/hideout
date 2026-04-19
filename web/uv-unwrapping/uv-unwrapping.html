@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="sub-page">
+	<head>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="./section-styles.css">
+
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+	</head>
+
+	<style>
+		body { opacity: 0; transition: opacity 0.3s; }
+	</style>
+	
+	<script>
+		document.fonts.ready.then(function () {
+			document.body.style.opacity = "1";
+		});
+	</script>
+
+	<body class="section">
+		<fieldset class="section-header">
+			<h1>UV Unwrapping</h1>
+		</fieldset>
+
+		<div class="scroll-container">
+			<fieldset class="scrollable">
+
+				<p>
+					Now we have the geometry of our brick:
+				</p>
+				
+				<figure>
+					<img
+						id=""
+						class="big"
+						src="./brick-phone-solid-shaded.png"
+						alt="Solid Shaded Brick Phone"
+					/>
+					<img
+						id=""
+						class="big"
+						src="./brick-phone-wireframe.png"
+						alt="Wireframe Brick Phone"
+					/>
+					<figcaption>LEFT: Solid-shaded brick phone / RIGHT: Wireframe brick phone</figcaption>
+				</figure>
+
+				<p>
+					How do we give it color?
+				</p>
+				
+				<p>
+					3D models can have 2D images (maps) attached, giving them color (albedo), roughness, and normal values:
+				</p>
+
+				<figure>
+					<img
+						id=""
+						class="big pixelated"
+						src="./arcade-cabinet.png"
+						alt="Arcade Cabinet Albedo Map"
+					/>
+					<img
+						id=""
+						class="big"
+						src="https://learnopengl.com/img/advanced-lighting/normal_mapping_normal_map.png"
+						alt="Example Normal Map"
+					/>
+					<figcaption>LEFT: Albedo map for the arcade cabinet / RIGHT: Example brick wall normal map</figcaption>
+				</figure>
+
+				<p>
+					To associate those maps with the geometry, we need to assign the geometry to regions in 2D space,
+					in a process called UV unwrapping:
+				</p>
+
+				<figure>
+					<img
+						id=""
+						src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Texture_mapping_demonstration_animation.gif"
+						alt="UV Unwrapping House"
+					/>
+					<figcaption>A model of a house being mapped to its texture</figcaption>
+				</figure>
+
+				<p>
+					The first step in UV unwrapping is marking edge seams. The faces with edges that are marked as seams won't be continuous on the map,
+					like in this projection of Earth:
+				</p>
+
+				<figure>
+					<img
+						id=""
+						src="./earth-edge-seams.png"
+						alt="Earth Edge Seams"
+					/>
+					<figcaption>A map of Earth with some of its edge seams marked.</figcaption>
+				</figure>
+
+				<p>
+					This is a necessary step to prevent the map from being overly stretched. This is what marking edge seams looks like in Blender:
+				</p>
+
+				<figure>
+					<video autoplay muted loop id="marking-edge-seams" alt="Marking Edge Seams In Blender">
+						<source src="./marking-edge-seams-brick-phone.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<figcaption>Marking an edge seam in blender.</figcaption>
+				</figure>
+
+				<p>
+					I should've left the sides, bottom and top in one piece to allow the texture to wrap all the way around-
+					you'll want to mark edges that are one solid color, or in less visible positions on the model.
+				</p>
+
+				<p>
+					Once that's done, the geometry can be unwrapped.
+					There are a few different automated processes for unwrapping, each with different results.
+					I typically do a regular unwrap and resize and reposition the geometry until I get it laid out how I want:
+				</p>
+
+				<figure>
+					<img
+						id=""
+						class="big"
+						src="./brick-phone-unwrapped.png"
+						alt="Brick Phone Unwrapped"
+					/>
+					<figcaption>The final UV map of the brick phone.</figcaption>
+				</figure>
+
+				<p>
+					UV unwrapping is often the most tedious part of the process,
+					requiring a lot of back and forth between texturing to ensure the maps line up as they should.
+				</p>
+
+				<p>
+					There are a few other considerations, too, like the scaling of the islands on the UV map.
+					Typically, you'd want to ensure all of the islands are close to the same size,
+					but intentionally making an island bigger can allow you to fit more detail.
+					For example, notice how big the dash is in relation to the rest of the bike so that gauges can be fit in the gauge cluster:
+				</p>
+
+				<figure>
+					<img
+						id=""
+						class="big"
+						src="./bike-unwrapped.png"
+						alt="Bike Unwrapped"
+					/>
+					<img
+						id=""
+						class="big pixelated"
+						src="./bike-texture.png"
+						alt="Bike Texture"
+					/>
+					<figcaption>LEFT: The UV map of the bike / RIGHT: The albedo map of the bike</figcaption>
+				</figure>
+
+			</fieldset>
+		</div>
+
+	</body>
+</html>

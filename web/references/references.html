@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="sub-page">
+	<head>
+		<link rel="stylesheet" href="../styles.css">
+		<link rel="stylesheet" href="./section-styles.css">
+
+		<!-- google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet">
+	</head>
+
+	<style>
+		body { opacity: 0; transition: opacity 0.3s; }
+	</style>
+	
+	<script>
+		document.fonts.ready.then(function () {
+			document.body.style.opacity = "1";
+		});
+	</script>
+
+	<body class="section">
+		<fieldset class="section-header">
+			<h1>References</h1>
+		</fieldset>
+
+		<div class="scroll-container">
+			<fieldset class="scrollable">
+
+				<p>
+					The first step I take when creating a 3D asset is finding good references for whatever it is I'm trying to make.
+					The references are useful for every proceeding step.
+				</p>
+
+				<figure>
+					<img
+						src="./akira-motorcycle-concept-James-Qiu-05.webp"
+						alt="Akira Motorcycle Concept"
+					/>
+					<img
+						src="./bike-reference.jpg"
+						alt="Bike Reference"
+					/>
+					<figcaption>References used for the bike.</figcaption>
+				</figure>
+
+				<p>
+					During modeling, I'll sometimes try to copy the shape of the reference 1:1.
+					Other times, like with the bike, I just use them to ensure the proportions are okay:
+				</p>
+				
+				<figure>
+					<img
+						src="bike-on-reference.png"
+						alt="Bike On Reference"
+					/>
+					<figcaption>Solid-viewport-shaded bike over one of the references.</figcaption>
+				</figure>
+
+				<p>
+					During texturing, the references can be used as inspiration (like with the bike), or chopped up and used in the final product, like with the drill:
+				</p>
+
+				<figure>
+					<img
+						src="./milwaukee-impact-side.png"
+						alt="Akira Motorcycle Concept"
+					/>
+					<img
+						id="drill-texture"
+						src="./drill-texture-2.png"
+						alt="Bike Reference"
+					/>
+					<figcaption>LEFT: A picture of an impact drill / RIGHT: That same picture (plus a battery) squished into a texture</figcaption>
+				</figure>
+
+			</fieldset>
+		</div>
+
+	</body>
+</html>

@@ -2,7 +2,7 @@
 <html class="sub-page">
 	<head>
 		<link rel="stylesheet" href="../styles.css">
-		<link rel="stylesheet" href="./resources.css">
+		<link rel="stylesheet" href="./section-styles.css">
 
 		<!-- google fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,11 +16,12 @@
 	
 	<script>
 		document.fonts.ready.then(function () {
-			document.body.style.opacity = "1";
+			let page = document.getElementById("page")
+			page.style.opacity = "1";
 		});
 	</script>
 
-	<body class="section">
+	<body id="page" class="section">
 		<fieldset class="section-header">
 			<h1>Resources</h1>
 			<p>This website was created almost exclusively with open-source software! </p>
