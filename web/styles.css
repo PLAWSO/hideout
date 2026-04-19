@@ -41,10 +41,25 @@ body {
 
 h1 {
 	font-size: 6vh;
+	padding-top: 2dvh;
 	margin: 0dvh;
 }
 
-h2, .title-link {
+* + h1 {
+	padding-top: 5dvh;
+}
+
+h2 {
+	font-size: 5vh;
+	padding-top: 2dvh;
+	margin: 0dvh;
+}
+
+* + h2 {
+	padding-top: 5dvh;
+}
+
+.title-link {
 	font-size: 5vh;
 	margin: 0dvh;
 }
@@ -215,6 +230,10 @@ html, body, #loading-container, #canvas, #terminal-container {
 	border-radius: 0.5dvh;
 	padding: 1dvh 2dvh;
 	margin: 0dvh;
+}
+
+.section-header > h1 {
+	padding: 1dvh 2dvh;
 }
 
 .scrollable {
@@ -394,8 +413,13 @@ figure {
 	padding-top: 2dvh;
 }
 
-img {
+img, video {
 	height: 24dvh;
+	width: auto;
+}
+
+iframe {
+	height: 32dvh;
 	width: auto;
 }
 

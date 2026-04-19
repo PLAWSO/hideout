@@ -1,8 +1,7 @@
-#ultrakill {
-	height: 40dvh;
+.pixelated {
+	image-rendering: pixelated;
 }
 
-.texture {
+.big {
 	height: 30dvh;
-	image-rendering: pixelated;
 }

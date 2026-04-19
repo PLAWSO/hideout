@@ -32,8 +32,48 @@
 					Once references have been collected, the next step is modeling.
 				</p>
 
+				<h2>The Basics</h2>
+
 				<p>
-					Most of the 3D objects I modeled are complete, closed objects like the arcade cabinet:
+					The primary method of building three-dimensional shapes for real-time graphics applications is with a bunch of triangles (tris) or rectangles (quads):
+				</p>
+
+				<figure>
+					<img
+						src="https://www.media4math.com/sites/default/files/library_asset/images/GIFs/NetForTetrahedron.gif"
+						alt="Triangles Folding Into Pyramid"
+					/>
+					<figcaption>2D triangles folding to form a 3D pyramid.</figcaption>
+				</figure>
+
+				<p>
+					That pyramid of 4 triangles is the most basic example, but the concept applies to even the most complex 3D models;
+					this model is also composed entirely of tris and quads:
+				</p>
+
+				<figure>
+					<img
+						src="./complex-3d-model.png"
+						alt="Complex 3D Model"
+					/>
+					<figcaption>A much more complex 3D model.</figcaption>
+				</figure>
+
+				<p>
+					The convention exists for a variety of reasons, but in short, 2D shapes (particularly tris and quads) are just easier.
+					The math required to calculate lighting, perspective, texturing mapping, and many other effects is more straightforward (and faster) to do with simple geometry.
+				</p>
+
+				<h2>The Process</h2>
+
+				<p>
+					To build your own models, you'll want a 3D modeling program. I used <a href="https://www.blender.org/" target="_parent">Blender</a> and would highly recommend it for other beginners.
+					It's open source and can do everything from modeling to animating to rendering. 
+				</p>
+
+				<p>
+					Even within a program, there can be several <a href="https://professional3dservices.com/blog/3d-modeling-techniques.html" target="_parent">3D modeling techniques</a>.
+					I did something like box modeling with bits added on as need be:
 				</p>
 
 				<figure>
@@ -41,11 +81,17 @@
 						src="arcade-cabinet-wireframe.png"
 						alt="Arcade Cabinet Wireframe"
 					/>
-					<figcaption>Wireframe-viewport-displayed arcade cabinet.</figcaption>
+					<figcaption>Wireframe-view arcade cabinet.</figcaption>
 				</figure>
 
 				<p>
-					But I also experimented with creating models that are more like origami, like the body of the bike:
+					As you can hopefully see (right click an image and click open in new tab to enlarge),
+					the body of the arcade cabinet is one solid object made of quads and tris,
+					and the buttons and joystick are smaller solid objects made of quads and tris.
+				</p>
+
+				<p>
+					I also experimented with creating models that are more like origami, like the body of the bike:
 				</p>
 
 				<figure>
@@ -53,12 +99,18 @@
 						src="bike-solid-shaded.png"
 						alt="Solid Shaded Bike"
 					/>
-					<figcaption>Solid-viewport-shaded bike (without tires).</figcaption>
+					<figcaption>Solid-shaded bike (without tires).</figcaption>
 				</figure>
 
 				<p>
-					It's kinda hard to make out, but it's actually made out of 10 planes, some of which are folded and overlapping each other.
+					It's still made out of quads and tris, but none of the faces enclose a volume.
 				</p>
+
+				<p>
+					Here's a timelapse of me modeling a brick phone
+				</p>
+
+				<iframe style="height:35dvh; aspect-ratio: 16/9;" src="https://www.youtube.com/embed/v0jzXq8HpK8?si=_7K7ZV1cwCqlQmMV&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 			</fieldset>
 		</div>

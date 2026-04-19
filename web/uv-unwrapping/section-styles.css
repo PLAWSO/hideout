@@ -1,0 +1,12 @@
+.pixelated {
+	image-rendering: pixelated;
+}
+
+#marking-edge-seams {
+	height: 36dvh;
+}
+
+.big {
+	height: 30dvh;
+}
+
