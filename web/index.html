@@ -22,12 +22,8 @@
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 			<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Squada+One&family=VT323&display=swap" rel="stylesheet" crossorigin>
 
-
-
 			<script src="./build/godot.js"></script>
 			<script src="script.js"></script>
-
-
 	</head>
 	<body>
 
@@ -59,22 +55,23 @@
 						const shadow = host.attachShadow({ mode: 'open' });
 						shadow.innerHTML = `
 							<link rel="stylesheet" href="https://unpkg.com/xp.css">
-							<div class="window" style="margin: 0px; width: 250px">
+							<div class="window" style="margin: 0px; width: 200px">
 								<div class="title-bar">
-									<div class="title-bar-text">
+									<div class="title-bar-text" style="font-size:9px;">
 										(╯°□°)╯︵ ┻━┻
 									</div>
 									<div class="title-bar-controls">
-										<button class="reader-view-button" aria-label="Minimize"></button>
-										<button class="reader-view-button" aria-label="Close"></button>
+										<button class="reader-view-notification-close-button" aria-label="Minimize"></button>
+										<button class="reader-view-notification-close-button" aria-label="Close"></button>
 									</div>
 								</div>
 								<div class="window-body">
-									<p style="color:black; text-shadow:none; font-family:'Trebuchet MS',sans-serif;">
+									<p style="font-size:9px; color:black; text-shadow:none; font-family:'Trebuchet MS',sans-serif;">
 										If the text on these pages is too small, you can open them in a new tab or click this button to view them in reader mode.
 									</p>
 									<section class="field-row" style="justify-content: flex-end">
-										<button class="reader-view-button">OK</button>
+										<button id="skip-reader-view" class="stop-showing-reader-view" disabled>I get it!</button>
+										<button class="reader-view-notification-close-button">OK</button>
 									</section>
 								</div>
 							</div>

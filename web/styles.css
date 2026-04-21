@@ -135,10 +135,11 @@ html, body, #loading-container, #canvas, #terminal-container {
 }
 
 #reader-view-popup {
-	scale: 2;
+	scale: calc(tan(atan2(1dvh, 5px)));
+	transform-origin: top left;
 	position: absolute;
-	top: 19%;
-	left: 34%;
+	top: 13%;
+	left: 23%;
 	background: transparent;
 	border: 0px;
 	margin: 0dvh;
