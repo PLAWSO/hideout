@@ -1,4 +1,4 @@
-let usernamePopup, readerViewPopup, arrow;
+let usernamePopup, readerViewPopup, arrow, skipReaderView;
 
 ///////////////////////////////////////////
 // TERMINAL                             //
@@ -6,23 +6,13 @@ let usernamePopup, readerViewPopup, arrow;
 
 let terminalContainer, sections, navButtons, contentFrame;
 
-function testing() {
-	console.log("testing reader view close");
-	arrow.style.display = "none";
-	readerViewPopup.style.display = "none";
-}
-
 function navButtonClicked(e, buttonClicked) {
   if (e.ctrlKey) {
 		navButtonAuxClicked(e, buttonClicked);
 		return;	
   }
 
-	if (true) {
-		// readerViewPopup.showModal();
-		readerViewPopup.style.display = "block"
-		arrow.style.display = "block";
-	}
+	showReaderViewNotification();
 
 	const nextURL = `/${buttonClicked.id.replace('-button', '')}`;
 
@@ -55,20 +45,59 @@ function setActiveNavButton(buttonClicked) {
 }
 
 function setNavButtonEventListeners() {
-	console.log(navButtons);
 	navButtons.forEach(button => {
 		button.addEventListener('click', (evt) => navButtonClicked(evt, button));
 		button.addEventListener('auxclick', (evt) => navButtonAuxClicked(evt, button));
 	})
+}
 
+function readerViewNotificationClosed() {
+	closeReaderViewNotification();
+
+	let clearedRVNotificationTimes = localStorage.getItem("clearedRVNotificationTimes")
+	if (!clearedRVNotificationTimes) {
+		localStorage.setItem("clearedRVNotificationTimes", "1");
+		return
+	}
+
+	clearedRVNotificationTimes = parseInt(clearedRVNotificationTimes) + 1;
+	localStorage.setItem("clearedRVNotificationTimes", clearedRVNotificationTimes.toString());
+
+	if (clearedRVNotificationTimes >= 2) {
+		skipReaderView.disabled = false;
+	}
+}
+
+function readerViewNotificationSkipped() {
+	localStorage.setItem("skipReaderView", "true");
+	closeReaderViewNotification();
+}
+
+function closeReaderViewNotification() {
+	arrow.style.display = "none";
+	readerViewPopup.style.display = "none";
+}
+
+function showReaderViewNotification() {
+	let skipReaderViewValue = localStorage.getItem("skipReaderView");
+	if (skipReaderViewValue && skipReaderViewValue === "true") {
+		return;
+	}
+
+	readerViewPopup.style.display = "block"
+	arrow.style.display = "block";
+}
+
+function setReaderViewNotificationEventListeners() {
 	const host = document.getElementById('reader-view-shadow-host');
-	
 
-	var readerViewButtons = host.shadowRoot.querySelectorAll(('.reader-view-button'));
-	console.log(readerViewButtons);
-	readerViewButtons.forEach(button => {
-		button.addEventListener('click', testing);
+	var closeReaderViewNotificationButtons = host.shadowRoot.querySelectorAll(('.reader-view-notification-close-button'));
+	closeReaderViewNotificationButtons.forEach(button => {
+		button.addEventListener('click', readerViewNotificationClosed);
 	})
+
+	skipReaderView = host.shadowRoot.querySelector(('#skip-reader-view'));
+	skipReaderView.addEventListener('click', readerViewNotificationSkipped);
 }
 
 function setTerminalBounds(x, y, width, height) {
@@ -301,6 +330,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	engine = new Engine(GODOT_CONFIG)
 
 	setNavButtonEventListeners();
+
+	setReaderViewNotificationEventListeners();
 
 	let pathName = window.location.pathname
 	let associatedButton = document.getElementById(pathName.substring(1) + "-button");
