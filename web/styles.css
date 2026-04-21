@@ -20,8 +20,12 @@
 }
 
 body {
-	background-color: #111111;
+	background-color: #010101;
+	margin: 0dvh;
+	padding: 0dvh;
+	overflow: hidden;
 }
+
 
 figure {
 	margin-left: 0dvh;
@@ -31,12 +35,6 @@ figure {
 figcaption {
 	font-size: 2vh;
 	margin: 0dvh;
-}
-
-body {
-	background-color: transparent;
-	margin: 0dvh;
-	padding: 0dvh;
 }
 
 h1 {
@@ -121,6 +119,33 @@ html, body, #loading-container, #canvas, #terminal-container {
 }
 
 /*#########################
+### READER VIEW POPUP   ###
+#########################*/
+
+#arrow {
+	position: absolute;
+	top: 3%;
+	left: 66%;
+	rotate: 70deg;
+	display: none;
+}
+
+.window {
+	margin: 0dvh;
+}
+
+#reader-view-popup {
+	scale: 2;
+	position: absolute;
+	top: 19%;
+	left: 34%;
+	background: transparent;
+	border: 0px;
+	margin: 0dvh;
+	display: none;
+}
+
+/*#########################
 ### USERNAME POPUP      ###
 #########################*/
 
@@ -131,7 +156,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 
 #username-textbox {
 	border: 2px solid green;
-	background-color: darkgreen;
+	background-color: rgb(107, 207, 107);
 	color: black;
 	width: 300px;
 }
@@ -217,11 +242,11 @@ html, body, #loading-container, #canvas, #terminal-container {
 .section {
 	flex-grow: 1;
 	padding: 2dvh;
+	opacity: 0;
+	transition: opacity 0.3s;
 
 	display: flex;
 	flex-direction: column;
-
-	background-color: transparent;
 }
 
 
@@ -230,6 +255,9 @@ html, body, #loading-container, #canvas, #terminal-container {
 	border-radius: 0.5dvh;
 	padding: 1dvh 2dvh;
 	margin: 0dvh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .section-header > h1 {
@@ -257,6 +285,18 @@ html, body, #loading-container, #canvas, #terminal-container {
 	border-radius: 0.5dvh;
 	display: flex;
 	flex-direction: column;
+}
+
+#reader-view-button {
+	padding: 0dvh 0.5dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#reader-view-button > i {
+	color: black;
+	font-size: 6dvh;
 }
 
 /* width */

@@ -1,4 +1,4 @@
-let usernamePopup;
+let usernamePopup, readerViewPopup, arrow;
 
 ///////////////////////////////////////////
 // TERMINAL                             //
@@ -6,7 +6,24 @@ let usernamePopup;
 
 let terminalContainer, sections, navButtons, contentFrame;
 
-function navButtonClicked(buttonClicked) {
+function testing() {
+	console.log("testing reader view close");
+	arrow.style.display = "none";
+	readerViewPopup.style.display = "none";
+}
+
+function navButtonClicked(e, buttonClicked) {
+  if (e.ctrlKey) {
+		navButtonAuxClicked(e, buttonClicked);
+		return;	
+  }
+
+	if (true) {
+		// readerViewPopup.showModal();
+		readerViewPopup.style.display = "block"
+		arrow.style.display = "block";
+	}
+
 	const nextURL = `/${buttonClicked.id.replace('-button', '')}`;
 
 	if (window.location.pathname === nextURL) return;
@@ -20,8 +37,12 @@ function navButtonClicked(buttonClicked) {
 	setActiveNavButton(buttonClicked);
 }
 
+function navButtonAuxClicked(e, buttonClicked) {
+	const url = `/${buttonClicked.id.replace('-button', '')}`;
+	window.open(`${window.location.origin + url + url}.html`, '_blank').focus()
+}
+
 window.addEventListener("popstate", (event) => {
-	console.log("popstate event:", event);
 	const buttonId = event.target.location.pathname.substring(1) + "-button";
 	const buttonClicked = document.getElementById(buttonId);
 
@@ -34,8 +55,19 @@ function setActiveNavButton(buttonClicked) {
 }
 
 function setNavButtonEventListeners() {
+	console.log(navButtons);
 	navButtons.forEach(button => {
-		button.addEventListener('click', () => navButtonClicked(button));
+		button.addEventListener('click', (evt) => navButtonClicked(evt, button));
+		button.addEventListener('auxclick', (evt) => navButtonAuxClicked(evt, button));
+	})
+
+	const host = document.getElementById('reader-view-shadow-host');
+	
+
+	var readerViewButtons = host.shadowRoot.querySelectorAll(('.reader-view-button'));
+	console.log(readerViewButtons);
+	readerViewButtons.forEach(button => {
+		button.addEventListener('click', testing);
 	})
 }
 
@@ -312,7 +344,9 @@ function loadSharedElements() {
 	loadingScreen = document.getElementById("loading");
 	usernameTextBox = document.getElementById("username-textbox");
 	usernamePopup = document.getElementById("username-popup")
+	readerViewPopup = document.getElementById("reader-view-popup");
 	contentFrame = document.getElementById("content-frame");
+	arrow = document.getElementById("arrow");
 }
 
 

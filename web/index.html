@@ -27,20 +27,61 @@
 			<script src="./build/godot.js"></script>
 			<script src="script.js"></script>
 
+
 	</head>
 	<body>
+
 		<div id="loading-container" class="scanline">
 			<p id="loading"></p>
 		</div>
 		<div id="terminal-clip">
 
 			<div id="terminal-container">
+				
 				<div id="rotate-device-popup" class="scanline">
 					<div class="material-symbols-outlined">
 						mobile_rotate
 					</div>
 					<p>ROTATE DEVICE</p>
 				</div>
+				
+				<video autoplay muted loop id="arrow" alt="Arrow">
+					<source src="./out.webm" type="video/webm">
+					Your browser does not support the video tag.
+				</video>
+
+				<div id="reader-view-popup">
+					<div id="reader-view-shadow-host"></div>
+				</div>
+				<script>
+					(() => {
+						const host = document.getElementById('reader-view-shadow-host');
+						const shadow = host.attachShadow({ mode: 'open' });
+						shadow.innerHTML = `
+							<link rel="stylesheet" href="https://unpkg.com/xp.css">
+							<div class="window" style="margin: 0px; width: 250px">
+								<div class="title-bar">
+									<div class="title-bar-text">
+										(╯°□°)╯︵ ┻━┻
+									</div>
+									<div class="title-bar-controls">
+										<button class="reader-view-button" aria-label="Minimize"></button>
+										<button class="reader-view-button" aria-label="Close"></button>
+									</div>
+								</div>
+								<div class="window-body">
+									<p style="color:black; text-shadow:none; font-family:'Trebuchet MS',sans-serif;">
+										If the text on these pages is too small, you can open them in a new tab or click this button to view them in reader mode.
+									</p>
+									<section class="field-row" style="justify-content: flex-end">
+										<button class="reader-view-button">OK</button>
+									</section>
+								</div>
+							</div>
+						`;
+					})();
+				</script>
+
 				<div id="terminal">
 					<div id="navbar">
 						<button class="nav-button" id="intro-button">Intro</button>
@@ -63,18 +104,21 @@
 					</div>
 			
 					<div id="content">
-						<object id="content-frame"></object>
+						<object id="content-frame" name="content-frame"></object>
 					</div>
 				</div>
+			</div>
 		</div>
-		</div>
+
 		<canvas id="canvas"></canvas>
+		
 		<dialog id="username-popup" class="scanline">
 			<form id="username-form" autocomplete="off">
 				<input type="text" id="username-textbox" name="username" placeholder="Enter your username..." maxlength="20" required>
 				<button id="submit-username-button" type="submit" >OK</button>
 			</form>
 		</dialog>
+
 	</body>
 </html>
 
