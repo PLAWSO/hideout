@@ -20,7 +20,7 @@
 }
 
 body {
-	background-color: #010101;
+	background-color: #111111;
 	margin: 0dvh;
 	padding: 0dvh;
 	overflow: hidden;
@@ -240,6 +240,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 }
 
 .section {
+	background-color: #000000;
 	flex-grow: 1;
 	padding: 2dvh;
 	opacity: 0;
