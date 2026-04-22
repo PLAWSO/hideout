@@ -11,7 +11,15 @@ function docReady(fn) {
 }    
 
 docReady(function() {
-	console.log("doc ready.")
+	if (window.top.location.href.includes(".html")) {
+		var lnk = document.createElement('link');
+		lnk.type='text/css';
+		lnk.href='../reader-view-styles.css';
+		lnk.rel='stylesheet';
+		document.getElementsByTagName('head')[0].appendChild(lnk);
+		document.styleSheets[0].disabled = true;
+		document.styleSheets[1].disabled = true;
+	}
 });
 
 function openInReaderView() {

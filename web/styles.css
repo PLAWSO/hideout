@@ -23,7 +23,6 @@ body {
 	background-color: #111111;
 	margin: 0dvh;
 	padding: 0dvh;
-	overflow: hidden;
 }
 
 
@@ -135,7 +134,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 }
 
 #reader-view-popup {
-	scale: calc(tan(atan2(1dvh, 5px)));
+	scale: abs(tan(atan2(1dvh, 5px)));
 	transform-origin: top left;
 	position: absolute;
 	top: 13%;
