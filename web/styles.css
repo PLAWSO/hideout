@@ -92,6 +92,11 @@ html, body, #loading-container, #canvas, #terminal-container {
 	overflow: hidden;
 }
 
+.under-construction {
+	text-align: center;
+}
+
+
 /*#########################
 ### LOADING             ###
 #########################*/
@@ -356,7 +361,7 @@ html, body, #loading-container, #canvas, #terminal-container {
 	margin-left: 4dvh;
 }
 
-#neighbors-button {
+#netizens-button {
   border: 0.25dvh solid white;
 	background: linear-gradient(
 					-45deg,
