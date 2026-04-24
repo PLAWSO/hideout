@@ -1,5 +1,20 @@
-.link-button {
-	height: 31px;
-	width: 88px;
-	image-rendering: pixelated;
+#button-holder {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5dvh;
+	line-height: 2dvh;
+}
+
+#button-text {
+	width: 125px;
+	font-size: 2.5dvh;
+	line-height: 2dvh;
+}
+
+pre {
+	margin: 0px;
+}
+
+.no-top-padding {
+	padding-top: 0px;
 }
