@@ -65,6 +65,10 @@ func set_terminal_gui_visible(visible: bool) -> void:
 	if console:
 		console.setTerminalGUIVisible(visible)
 
+func set_player_visible(visible: bool) -> void:
+	if console:
+		console.setPlayerVisible(visible)
+
 
 func save_score(score: int) -> bool:
 	if console:

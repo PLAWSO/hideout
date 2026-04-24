@@ -1,4 +1,4 @@
-let usernamePopup, readerViewPopup, arrow, skipReaderView;
+let usernamePopup, readerViewPopup, arrow, skipReaderView, playerContainer;
 
 ///////////////////////////////////////////
 // TERMINAL                             //
@@ -185,6 +185,12 @@ function getPersonalBest() {
 	return parseInt(localStorage.getItem("personalBest") || "0");
 }
 
+function setPlayerVisible(visible) {
+	if (!musicStarted) return;
+	let position = visible ? "0px" : "-30dvh";
+	playerContainer.style.top = position;
+}
+
 ///////////////////////////////////////////
 // QUERIES                               //
 ///////////////////////////////////////////
@@ -317,6 +323,75 @@ const GODOT_CONFIG = {
 const GODOT_THREADS_ENABLED = false;
 let engine = null;
 
+// copied from YouTube IFrame API docs: https://developers.google.com/youtube/iframe_api_reference
+// 2. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady() {
+	console.log("YouTube Iframe API ready, creating player.");
+	player = new YT.Player('player', {
+		height: '480',
+		width: '480',
+		videoId: 'UQoqB2rh1Ew',
+		playerVars: {
+			'playsinline': 1
+		},
+		events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
+	});
+}
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+	return;
+}
+
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+// var done = false;
+function onPlayerStateChange(event) {
+	console.log("YouTube Player state changed: " + event.data);
+	// if (event.data == YT.PlayerState.PLAYING && !done) {
+	// 	setTimeout(stopVideo, 6000);
+	// 	done = true;
+	// }
+}
+// function stopVideo() {
+// 	player.stopVideo();
+// }
+
+var playerVolume = 0;
+function setPlayerVolume(volume) {
+	console.log("Setting player volume to " + volume);
+	playerVolume = volume;
+	player.setVolume(playerVolume);
+}
+
+function rampUpPlayerVolume() {
+	if (playerVolume >= 20) return;
+	setPlayerVolume(playerVolume + 1);
+	setTimeout(rampUpPlayerVolume, 300);
+}
+
+var musicStarted = false;
+function playAmbientMusic(evt) {
+	setPlayerVolume(0);
+	player.playVideo();
+	rampUpPlayerVolume();
+
+	setPlayerVisible(true);
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 
 	loadSharedElements();
@@ -332,6 +407,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	setNavButtonEventListeners();
 
 	setReaderViewNotificationEventListeners();
+
+	// onYouTubeIframeAPIReady();
+	// playAmbientMusic();
+
+	document.getElementById("canvas").addEventListener("click", (evt) => {
+		if (musicStarted) return;
+
+		musicStarted = true;
+		playAmbientMusic(evt);
+	})
 
 	let pathName = window.location.pathname
 	let associatedButton = document.getElementById(pathName.substring(1) + "-button");
@@ -378,6 +463,7 @@ function loadSharedElements() {
 	readerViewPopup = document.getElementById("reader-view-popup");
 	contentFrame = document.getElementById("content-frame");
 	arrow = document.getElementById("arrow");
+	playerContainer = document.getElementById("player-container");
 }
 
 

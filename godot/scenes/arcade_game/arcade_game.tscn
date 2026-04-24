@@ -108,7 +108,7 @@ volume_db = -16.0
 
 [node name="IntroMusicSound" type="AudioStreamPlayer" parent="GameAssets" unique_id=49005483]
 stream = ExtResource("12_4137w")
-volume_db = -16.0
+volume_db = -23.991
 
 [node name="GameOver" parent="." unique_id=644381526 instance=ExtResource("10_arsvv")]
 visible = false
