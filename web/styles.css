@@ -470,6 +470,31 @@ iframe {
 }
 
 /*#########################
+### MUSIC PLAYER        ###
+#########################*/
+
+#player-container {
+	position: absolute;
+	top: -30dvh;
+	right: 2dvh;
+	height: 24dvh;
+	width: 24dvh;
+	background-image: url("./player.png");
+	background-size: cover;
+	image-rendering: pixelated;
+	box-sizing: border-box;
+	transition: top 2.0s;
+}
+
+#player {
+	height: 100%;
+	width: 100%;
+	padding: 1.25dvh;
+	box-sizing: border-box;
+}
+
+
+/*#########################
 ### SCANLINE EFFECT     ###
 #########################*/
 

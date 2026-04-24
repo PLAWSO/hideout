@@ -18,7 +18,7 @@ docReady(function() {
 		lnk.rel='stylesheet';
 		document.getElementsByTagName('head')[0].appendChild(lnk);
 		document.styleSheets[0].disabled = true;
-		document.styleSheets[1].disabled = true;
+		// document.styleSheets[1].disabled = true;
 	}
 });
 

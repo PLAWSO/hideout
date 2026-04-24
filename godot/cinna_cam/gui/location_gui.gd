@@ -90,12 +90,14 @@ func switch_visible_movement_buttons(show_buttons: bool) -> void:
 		back_button.icon = null
 		back_button.text = "Loiter"
 		back_button.custom_minimum_size = Vector2(250, 60)
+		JSBridge.set_player_visible(true)
 	else:
 		for button in movement_buttons:
 			button.visible = false
 		back_button.icon = back_button_icon
 		back_button.text = ""
 		back_button.custom_minimum_size = Vector2(50, 50)
+		JSBridge.set_player_visible(false)
 
 
 func switch_visible_buttons_if_obscured(show_buttons: bool) -> void:
