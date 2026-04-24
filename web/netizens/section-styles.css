@@ -3,6 +3,7 @@
 	flex-direction: column;
 	gap: 0.5dvh;
 	line-height: 2dvh;
+	border-bottom: 0.25dvh solid green;
 }
 
 #button-text {
