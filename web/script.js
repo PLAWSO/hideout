@@ -335,7 +335,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //    after the API code downloads.
 var player;
 function onYouTubeIframeAPIReady() {
-	console.log("YouTube Iframe API ready, creating player.");
 	player = new YT.Player('player', {
 		height: '480',
 		width: '480',
@@ -372,7 +371,6 @@ function onPlayerStateChange(event) {
 
 var playerVolume = 0;
 function setPlayerVolume(volume) {
-	console.log("Setting player volume to " + volume);
 	playerVolume = volume;
 	player.setVolume(playerVolume);
 }
@@ -468,9 +466,6 @@ function loadSharedElements() {
 
 
 function registerEventListeners() {
-	// var showDebugCheckBox = document.getElementById("show-debug");
-	// showDebugCheckBox.addEventListener('change', _onShowDebugCheckBoxChanged)
-
 	var usernameForm = document.getElementById("username-form");
 	usernameForm.addEventListener('submit', _onSubmitUsername);
 }

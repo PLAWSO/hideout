@@ -73,6 +73,7 @@ async function save(client: typeof MongoClient, body: any) {
 		return false;
 	}
 
+	let parsedUsername = username.substring(0, 20).trim();
 
   try {
     await client.connect();
@@ -80,13 +81,13 @@ async function save(client: typeof MongoClient, body: any) {
       .db("hideout")
       .collection("runs")
       .insertOne({
-				username,
+				parsedUsername,
 				score: parsedScore,
 				completed: false,
 				doneOn: new Date()
 			})
 		
-		console.log(`saved run for ${username} with score ${parsedScore}`);
+		console.log(`saved run for ${parsedUsername} with score ${parsedScore}`);
 
     return runs;
   } finally {
