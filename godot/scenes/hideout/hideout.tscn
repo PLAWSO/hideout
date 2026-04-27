@@ -139,13 +139,13 @@ reflected_light_source = 1
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7c5n"]
-size = Vector2(759.5, 611.5)
+size = Vector2(773.5, 396)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id51i"]
-size = Vector2(759.5, 611.5)
+size = Vector2(773.5, 396)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jr4o4"]
-size = Vector2(759.5, 1223)
+size = Vector2(773.5, 792)
 
 [node name="Hideout" type="Node3D" unique_id=1322130011 node_paths=PackedStringArray("cinna_cam", "transition")]
 script = ExtResource("1_ura2u")
@@ -166,7 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SecurityCamera" type="Camera3D" parent="." unique_id=1649804378]
-transform = Transform3D(0.6636129, -0.38310313, 0.64253396, 0, 0.85891527, 0.5121178, -0.74807614, -0.339848, 0.56998724, 3.9733453, 2.8558252, 2.1902392)
+transform = Transform3D(0.7084014, -0.17429854, 0.68394995, 0, 0.9690287, 0.2469483, -0.70580983, -0.17493851, 0.68646127, 4.220346, 2.0986362, 2.7679245)
 
 [node name="CameraController" type="Node3D" parent="." unique_id=893909451 node_paths=PackedStringArray("camera", "meta_paths")]
 script = ExtResource("3_ura2u")
@@ -370,17 +370,17 @@ grow_vertical = 2
 script = ExtResource("19_m7c5n")
 
 [node name="UpButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1849221357]
-position = Vector2(379.75, 305.75)
+position = Vector2(386.75, 198)
 shape = SubResource("RectangleShape2D_m7c5n")
 action = "up"
 
 [node name="DownButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=1769544559]
-position = Vector2(379.75, 917.25)
+position = Vector2(386.75, 594)
 shape = SubResource("RectangleShape2D_id51i")
 action = "down"
 
 [node name="ShootButton" type="TouchScreenButton" parent="GUI/VoidCaliburTouchScreenControls" unique_id=410783535]
-position = Vector2(1139.25, 611.5)
+position = Vector2(1160.25, 396)
 shape = SubResource("RectangleShape2D_jr4o4")
 action = "shoot"
 

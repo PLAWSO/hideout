@@ -1,6 +1,6 @@
 
 async function saveChat(username, url, message) {
-	fetch(`${window.location.origin}/api/chats`, {
+	return fetch(`${window.location.origin}/api/chats`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, url, message }),
@@ -15,7 +15,13 @@ function _onSubmitChat(event) {
 
 	if (!username || !message) return;
 
-	saveChat(username, url, message);
+	chatForm.reset();
+
+	saveChat(username, url, message).then(response => response.json()).then((chats) => {
+		console.log(chats)
+		currentPage = 0;
+		fillChatContainer(chats);
+	});
 }
 
 let currentPage = 0;
@@ -44,8 +50,10 @@ function fillChatContainer(chats) {
 	});
 }
 
-let chatContainer
+let chatContainer, chatForm;
 window.addEventListener('DOMContentLoaded', () => {
 	chatsContainer = document.getElementById("chats-container");
 	getChats().then(chats => fillChatContainer(chats));
+
+	chatForm = document.getElementById("chat-form");
 })

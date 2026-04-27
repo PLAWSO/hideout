@@ -1,12 +1,10 @@
 import "res://dialog/trees/intro.dialogue" as intro
 
 ~ start
-null: Welcome back!
-null: Would you like to rewatch the intro, or jump right back in?
-- REWATCH INTRO =>< intro/start
-- JUMP BACK IN => switch
+null: Welcome back!!
+- ENTER => switch
 => END
 
 ~ switch
-null: Switching you over....
+null: Patching you in....
 => END
