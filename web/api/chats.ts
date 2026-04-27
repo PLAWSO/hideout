@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const pageSize = 5;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
 	const uri = process.env.MONGODB_CONNECTION_STRING
@@ -26,7 +27,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 }
 
 export async function get(client: typeof MongoClient, page: number) {
-  const pageSize = 5;
   const skip = page * pageSize;
 	console.log(page)
 
@@ -56,7 +56,7 @@ async function save(client: typeof MongoClient, body: any) {
 
 	const parsedUsername = username.substring(0, 20).trim();
 	const parsedMessage = message.substring(0, 200).trim();
-	const parsedUrl = url.substring(0, 20).trim();
+	const parsedUrl = url.substring(0, 40).trim();
 
 	if (parsedUsername.length === 0 || parsedMessage.length === 0) {
 		return false;
@@ -64,19 +64,23 @@ async function save(client: typeof MongoClient, body: any) {
 
   try {
     await client.connect();
-    const runs = await client
-      .db("hideout")
-      .collection("chats")
-      .insertOne({
-				username: parsedUsername,
-				message: parsedMessage,
-				url: parsedUrl,
-				enteredOn: new Date()
-			})
+    const db = client.db("hideout").collection("chats");
+    await db.insertOne({
+			username: parsedUsername,
+			message: parsedMessage,
+			url: parsedUrl,
+			enteredOn: new Date()
+		})
 		
 		console.log(`${parsedUsername} said ${parsedMessage} with url ${parsedUrl}`);
 
-    return runs;
+    const chats = await db
+      .find({})
+      .sort({ enteredOn: -1 })
+      .limit(pageSize)
+      .toArray();
+
+    return chats;
   } finally {
 		await client.close();
   }
